@@ -1,0 +1,473 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A35AB8F2194EF1D3002BAF0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35AB8F1194EF1D3002BAF0D /* Foundation.framework */; };
+		A35AB8F4194EF1D3002BAF0D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35AB8F3194EF1D3002BAF0D /* CoreGraphics.framework */; };
+		A35AB8F6194EF1D3002BAF0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35AB8F5194EF1D3002BAF0D /* UIKit.framework */; };
+		A35AB8FC194EF1D3002BAF0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A35AB8FA194EF1D3002BAF0D /* InfoPlist.strings */; };
+		A35AB8FE194EF1D3002BAF0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A35AB8FD194EF1D3002BAF0D /* main.m */; };
+		A35AB902194EF1D3002BAF0D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A35AB901194EF1D3002BAF0D /* AppDelegate.m */; };
+		A35AB905194EF1D3002BAF0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A35AB903194EF1D3002BAF0D /* Main.storyboard */; };
+		A35AB908194EF1D3002BAF0D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A35AB907194EF1D3002BAF0D /* ViewController.m */; };
+		A35AB90A194EF1D3002BAF0D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A35AB909194EF1D3002BAF0D /* Images.xcassets */; };
+		A35AB911194EF1D3002BAF0D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35AB910194EF1D3002BAF0D /* XCTest.framework */; };
+		A35AB912194EF1D3002BAF0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35AB8F1194EF1D3002BAF0D /* Foundation.framework */; };
+		A35AB913194EF1D3002BAF0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35AB8F5194EF1D3002BAF0D /* UIKit.framework */; };
+		A35AB91B194EF1D3002BAF0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A35AB919194EF1D3002BAF0D /* InfoPlist.strings */; };
+		A35AB91D194EF1D3002BAF0D /* Delsy_TATests.m in Sources */ = {isa = PBXBuildFile; fileRef = A35AB91C194EF1D3002BAF0D /* Delsy_TATests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A35AB914194EF1D3002BAF0D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A35AB8E6194EF1D3002BAF0D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A35AB8ED194EF1D3002BAF0D;
+			remoteInfo = "Delsy TA";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A35AB8EE194EF1D3002BAF0D /* Delsy TA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Delsy TA.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A35AB8F1194EF1D3002BAF0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A35AB8F3194EF1D3002BAF0D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A35AB8F5194EF1D3002BAF0D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A35AB8F9194EF1D3002BAF0D /* Delsy TA-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Delsy TA-Info.plist"; sourceTree = "<group>"; };
+		A35AB8FB194EF1D3002BAF0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A35AB8FD194EF1D3002BAF0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A35AB8FF194EF1D3002BAF0D /* Delsy TA-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Delsy TA-Prefix.pch"; sourceTree = "<group>"; };
+		A35AB900194EF1D3002BAF0D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A35AB901194EF1D3002BAF0D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A35AB904194EF1D3002BAF0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A35AB906194EF1D3002BAF0D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A35AB907194EF1D3002BAF0D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A35AB909194EF1D3002BAF0D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A35AB90F194EF1D3002BAF0D /* Delsy TATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Delsy TATests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A35AB910194EF1D3002BAF0D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		A35AB918194EF1D3002BAF0D /* Delsy TATests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Delsy TATests-Info.plist"; sourceTree = "<group>"; };
+		A35AB91A194EF1D3002BAF0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A35AB91C194EF1D3002BAF0D /* Delsy_TATests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Delsy_TATests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A35AB8EB194EF1D3002BAF0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A35AB8F4194EF1D3002BAF0D /* CoreGraphics.framework in Frameworks */,
+				A35AB8F6194EF1D3002BAF0D /* UIKit.framework in Frameworks */,
+				A35AB8F2194EF1D3002BAF0D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A35AB90C194EF1D3002BAF0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A35AB911194EF1D3002BAF0D /* XCTest.framework in Frameworks */,
+				A35AB913194EF1D3002BAF0D /* UIKit.framework in Frameworks */,
+				A35AB912194EF1D3002BAF0D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A35AB8E5194EF1D3002BAF0D = {
+			isa = PBXGroup;
+			children = (
+				A35AB8F7194EF1D3002BAF0D /* Delsy TA */,
+				A35AB916194EF1D3002BAF0D /* Delsy TATests */,
+				A35AB8F0194EF1D3002BAF0D /* Frameworks */,
+				A35AB8EF194EF1D3002BAF0D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A35AB8EF194EF1D3002BAF0D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A35AB8EE194EF1D3002BAF0D /* Delsy TA.app */,
+				A35AB90F194EF1D3002BAF0D /* Delsy TATests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A35AB8F0194EF1D3002BAF0D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A35AB8F1194EF1D3002BAF0D /* Foundation.framework */,
+				A35AB8F3194EF1D3002BAF0D /* CoreGraphics.framework */,
+				A35AB8F5194EF1D3002BAF0D /* UIKit.framework */,
+				A35AB910194EF1D3002BAF0D /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A35AB8F7194EF1D3002BAF0D /* Delsy TA */ = {
+			isa = PBXGroup;
+			children = (
+				A35AB900194EF1D3002BAF0D /* AppDelegate.h */,
+				A35AB901194EF1D3002BAF0D /* AppDelegate.m */,
+				A35AB903194EF1D3002BAF0D /* Main.storyboard */,
+				A35AB906194EF1D3002BAF0D /* ViewController.h */,
+				A35AB907194EF1D3002BAF0D /* ViewController.m */,
+				A35AB909194EF1D3002BAF0D /* Images.xcassets */,
+				A35AB8F8194EF1D3002BAF0D /* Supporting Files */,
+			);
+			path = "Delsy TA";
+			sourceTree = "<group>";
+		};
+		A35AB8F8194EF1D3002BAF0D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A35AB8F9194EF1D3002BAF0D /* Delsy TA-Info.plist */,
+				A35AB8FA194EF1D3002BAF0D /* InfoPlist.strings */,
+				A35AB8FD194EF1D3002BAF0D /* main.m */,
+				A35AB8FF194EF1D3002BAF0D /* Delsy TA-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A35AB916194EF1D3002BAF0D /* Delsy TATests */ = {
+			isa = PBXGroup;
+			children = (
+				A35AB91C194EF1D3002BAF0D /* Delsy_TATests.m */,
+				A35AB917194EF1D3002BAF0D /* Supporting Files */,
+			);
+			path = "Delsy TATests";
+			sourceTree = "<group>";
+		};
+		A35AB917194EF1D3002BAF0D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A35AB918194EF1D3002BAF0D /* Delsy TATests-Info.plist */,
+				A35AB919194EF1D3002BAF0D /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A35AB8ED194EF1D3002BAF0D /* Delsy TA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A35AB920194EF1D3002BAF0D /* Build configuration list for PBXNativeTarget "Delsy TA" */;
+			buildPhases = (
+				A35AB8EA194EF1D3002BAF0D /* Sources */,
+				A35AB8EB194EF1D3002BAF0D /* Frameworks */,
+				A35AB8EC194EF1D3002BAF0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Delsy TA";
+			productName = "Delsy TA";
+			productReference = A35AB8EE194EF1D3002BAF0D /* Delsy TA.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A35AB90E194EF1D3002BAF0D /* Delsy TATests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A35AB923194EF1D3002BAF0D /* Build configuration list for PBXNativeTarget "Delsy TATests" */;
+			buildPhases = (
+				A35AB90B194EF1D3002BAF0D /* Sources */,
+				A35AB90C194EF1D3002BAF0D /* Frameworks */,
+				A35AB90D194EF1D3002BAF0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A35AB915194EF1D3002BAF0D /* PBXTargetDependency */,
+			);
+			name = "Delsy TATests";
+			productName = "Delsy TATests";
+			productReference = A35AB90F194EF1D3002BAF0D /* Delsy TATests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A35AB8E6194EF1D3002BAF0D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = bva;
+				TargetAttributes = {
+					A35AB90E194EF1D3002BAF0D = {
+						TestTargetID = A35AB8ED194EF1D3002BAF0D;
+					};
+				};
+			};
+			buildConfigurationList = A35AB8E9194EF1D3002BAF0D /* Build configuration list for PBXProject "Delsy TA" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A35AB8E5194EF1D3002BAF0D;
+			productRefGroup = A35AB8EF194EF1D3002BAF0D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A35AB8ED194EF1D3002BAF0D /* Delsy TA */,
+				A35AB90E194EF1D3002BAF0D /* Delsy TATests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A35AB8EC194EF1D3002BAF0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A35AB90A194EF1D3002BAF0D /* Images.xcassets in Resources */,
+				A35AB8FC194EF1D3002BAF0D /* InfoPlist.strings in Resources */,
+				A35AB905194EF1D3002BAF0D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A35AB90D194EF1D3002BAF0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A35AB91B194EF1D3002BAF0D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A35AB8EA194EF1D3002BAF0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A35AB908194EF1D3002BAF0D /* ViewController.m in Sources */,
+				A35AB902194EF1D3002BAF0D /* AppDelegate.m in Sources */,
+				A35AB8FE194EF1D3002BAF0D /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A35AB90B194EF1D3002BAF0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A35AB91D194EF1D3002BAF0D /* Delsy_TATests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A35AB915194EF1D3002BAF0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A35AB8ED194EF1D3002BAF0D /* Delsy TA */;
+			targetProxy = A35AB914194EF1D3002BAF0D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A35AB8FA194EF1D3002BAF0D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A35AB8FB194EF1D3002BAF0D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A35AB903194EF1D3002BAF0D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A35AB904194EF1D3002BAF0D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A35AB919194EF1D3002BAF0D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A35AB91A194EF1D3002BAF0D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A35AB91E194EF1D3002BAF0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		A35AB91F194EF1D3002BAF0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A35AB921194EF1D3002BAF0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Delsy TA/Delsy TA-Prefix.pch";
+				INFOPLIST_FILE = "Delsy TA/Delsy TA-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A35AB922194EF1D3002BAF0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Delsy TA/Delsy TA-Prefix.pch";
+				INFOPLIST_FILE = "Delsy TA/Delsy TA-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		A35AB924194EF1D3002BAF0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Delsy TA.app/Delsy TA";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Delsy TA/Delsy TA-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Delsy TATests/Delsy TATests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		A35AB925194EF1D3002BAF0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Delsy TA.app/Delsy TA";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Delsy TA/Delsy TA-Prefix.pch";
+				INFOPLIST_FILE = "Delsy TATests/Delsy TATests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A35AB8E9194EF1D3002BAF0D /* Build configuration list for PBXProject "Delsy TA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A35AB91E194EF1D3002BAF0D /* Debug */,
+				A35AB91F194EF1D3002BAF0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A35AB920194EF1D3002BAF0D /* Build configuration list for PBXNativeTarget "Delsy TA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A35AB921194EF1D3002BAF0D /* Debug */,
+				A35AB922194EF1D3002BAF0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A35AB923194EF1D3002BAF0D /* Build configuration list for PBXNativeTarget "Delsy TATests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A35AB924194EF1D3002BAF0D /* Debug */,
+				A35AB925194EF1D3002BAF0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A35AB8E6194EF1D3002BAF0D /* Project object */;
+}
