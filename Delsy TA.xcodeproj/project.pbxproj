@@ -378,6 +378,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Valeriy Buev (8W63WAKDQR)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Delsy TA/Delsy TA-Prefix.pch";
 				INFOPLIST_FILE = "Delsy TA/Delsy TA-Info.plist";
@@ -391,6 +393,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Delsy TA/Delsy TA-Prefix.pch";
 				INFOPLIST_FILE = "Delsy TA/Delsy TA-Info.plist";
@@ -458,6 +462,7 @@
 				A35AB922194EF1D3002BAF0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A35AB923194EF1D3002BAF0D /* Build configuration list for PBXNativeTarget "Delsy TATests" */ = {
 			isa = XCConfigurationList;
@@ -466,6 +471,7 @@
 				A35AB925194EF1D3002BAF0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
