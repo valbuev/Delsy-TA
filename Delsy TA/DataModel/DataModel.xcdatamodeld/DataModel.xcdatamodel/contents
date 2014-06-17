@@ -1,4 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C1021" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+    <entity name="Address" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address_id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="addresses" inverseEntity="Client" syncable="YES"/>
+    </entity>
+    <entity name="AppSettings" syncable="YES">
+        <attribute name="clientsListDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="clientsListLastUpdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="priceDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="priceLastUpdate" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="Client" syncable="YES">
+        <attribute name="cust_account" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sale" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="addresses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Address" inverseName="client" inverseEntity="Address" syncable="YES"/>
+        <relationship name="ta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TA" inverseName="clients" inverseEntity="TA" syncable="YES"/>
+    </entity>
+    <entity name="Fish" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="fish" inverseEntity="Item" syncable="YES"/>
+        <relationship name="productTypes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductType" inverseName="fishes" inverseEntity="ProductType" syncable="YES"/>
+    </entity>
+    <entity name="Item" syncable="YES">
+        <attribute name="annotation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="composition" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="hundredGrammsContains" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="itemID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="producer" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="promo" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="shelfLife" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="unitsInBox" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="fish" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Fish" inverseName="items" inverseEntity="Fish" syncable="YES"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="item" inverseEntity="Photo" syncable="YES"/>
+        <relationship name="productType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductType" inverseName="items" inverseEntity="ProductType" syncable="YES"/>
+        <relationship name="thesises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Thesis" inverseName="item" inverseEntity="Thesis" syncable="YES"/>
+    </entity>
+    <entity name="Photo" syncable="YES">
+        <attribute name="filepath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="photos" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <entity name="ProductType" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="fishes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Fish" inverseName="productTypes" inverseEntity="Fish" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="productType" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <entity name="TA" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="clients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Client" inverseName="ta" inverseEntity="Client" syncable="YES"/>
+    </entity>
+    <entity name="Thesis" syncable="YES">
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="thesises" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Address" positionX="180" positionY="146" width="90" height="88"/>
+        <element name="Client" positionX="-20" positionY="125" width="128" height="118"/>
+        <element name="TA" positionX="-144" positionY="155" width="83" height="88"/>
+        <element name="AppSettings" positionX="-18" positionY="-6" width="128" height="105"/>
+        <element name="ProductType" positionX="25" positionY="578" width="128" height="88"/>
+        <element name="Fish" positionX="207" positionY="488" width="128" height="88"/>
+        <element name="Item" positionX="-162" positionY="342" width="128" height="268"/>
+        <element name="Thesis" positionX="-371" positionY="450" width="128" height="73"/>
+        <element name="Photo" positionX="-335" positionY="344" width="128" height="88"/>
+    </elements>
 </model>
