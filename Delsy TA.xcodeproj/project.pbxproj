@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A35A06681952AA7200D99BE0 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06671952AA7200D99BE0 /* Item.m */; };
+		A35A066B1952B12300D99BE0 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066A1952B12300D99BE0 /* Client.m */; };
+		A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066D1952B12300D99BE0 /* AppSettings.m */; };
+		A35A06711952B12300D99BE0 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06701952B12300D99BE0 /* Address.m */; };
+		A35A06741952B12300D99BE0 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06731952B12300D99BE0 /* Photo.m */; };
+		A35A06771952B12400D99BE0 /* TA.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06761952B12400D99BE0 /* TA.m */; };
+		A35A067A1952B12400D99BE0 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06791952B12400D99BE0 /* Order.m */; };
+		A35A067D1952B12400D99BE0 /* OrderLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A067C1952B12400D99BE0 /* OrderLine.m */; };
+		A35A06801952B12400D99BE0 /* ProductType.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A067F1952B12400D99BE0 /* ProductType.m */; };
+		A35A06831952B12400D99BE0 /* Fish.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06821952B12400D99BE0 /* Fish.m */; };
+		A35A06861952B12400D99BE0 /* Thesis.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06851952B12400D99BE0 /* Thesis.m */; };
 		A35AB8F2194EF1D3002BAF0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35AB8F1194EF1D3002BAF0D /* Foundation.framework */; };
 		A35AB8F4194EF1D3002BAF0D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35AB8F3194EF1D3002BAF0D /* CoreGraphics.framework */; };
 		A35AB8F6194EF1D3002BAF0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35AB8F5194EF1D3002BAF0D /* UIKit.framework */; };
@@ -37,6 +48,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A35A06661952AA7200D99BE0 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = DataModel/Item.h; sourceTree = "<group>"; };
+		A35A06671952AA7200D99BE0 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = DataModel/Item.m; sourceTree = "<group>"; };
+		A35A06691952B12300D99BE0 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = DataModel/Client.h; sourceTree = "<group>"; };
+		A35A066A1952B12300D99BE0 /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Client.m; path = DataModel/Client.m; sourceTree = "<group>"; };
+		A35A066C1952B12300D99BE0 /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppSettings.h; path = DataModel/AppSettings.h; sourceTree = "<group>"; };
+		A35A066D1952B12300D99BE0 /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppSettings.m; path = DataModel/AppSettings.m; sourceTree = "<group>"; };
+		A35A066F1952B12300D99BE0 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Address.h; path = DataModel/Address.h; sourceTree = "<group>"; };
+		A35A06701952B12300D99BE0 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Address.m; path = DataModel/Address.m; sourceTree = "<group>"; };
+		A35A06721952B12300D99BE0 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = DataModel/Photo.h; sourceTree = "<group>"; };
+		A35A06731952B12300D99BE0 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Photo.m; path = DataModel/Photo.m; sourceTree = "<group>"; };
+		A35A06751952B12400D99BE0 /* TA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TA.h; path = DataModel/TA.h; sourceTree = "<group>"; };
+		A35A06761952B12400D99BE0 /* TA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TA.m; path = DataModel/TA.m; sourceTree = "<group>"; };
+		A35A06781952B12400D99BE0 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Order.h; path = DataModel/Order.h; sourceTree = "<group>"; };
+		A35A06791952B12400D99BE0 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Order.m; path = DataModel/Order.m; sourceTree = "<group>"; };
+		A35A067B1952B12400D99BE0 /* OrderLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderLine.h; path = DataModel/OrderLine.h; sourceTree = "<group>"; };
+		A35A067C1952B12400D99BE0 /* OrderLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderLine.m; path = DataModel/OrderLine.m; sourceTree = "<group>"; };
+		A35A067E1952B12400D99BE0 /* ProductType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductType.h; path = DataModel/ProductType.h; sourceTree = "<group>"; };
+		A35A067F1952B12400D99BE0 /* ProductType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductType.m; path = DataModel/ProductType.m; sourceTree = "<group>"; };
+		A35A06811952B12400D99BE0 /* Fish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fish.h; path = DataModel/Fish.h; sourceTree = "<group>"; };
+		A35A06821952B12400D99BE0 /* Fish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Fish.m; path = DataModel/Fish.m; sourceTree = "<group>"; };
+		A35A06841952B12400D99BE0 /* Thesis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Thesis.h; path = DataModel/Thesis.h; sourceTree = "<group>"; };
+		A35A06851952B12400D99BE0 /* Thesis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Thesis.m; path = DataModel/Thesis.m; sourceTree = "<group>"; };
 		A35AB8EE194EF1D3002BAF0D /* Delsy TA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Delsy TA.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A35AB8F1194EF1D3002BAF0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A35AB8F3194EF1D3002BAF0D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -87,6 +120,114 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A35A06871952B14200D99BE0 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				A35A06661952AA7200D99BE0 /* Item.h */,
+				A35A06671952AA7200D99BE0 /* Item.m */,
+			);
+			name = Item;
+			sourceTree = "<group>";
+		};
+		A35A06881952B15200D99BE0 /* Thesis */ = {
+			isa = PBXGroup;
+			children = (
+				A35A06841952B12400D99BE0 /* Thesis.h */,
+				A35A06851952B12400D99BE0 /* Thesis.m */,
+			);
+			name = Thesis;
+			sourceTree = "<group>";
+		};
+		A35A06891952B16300D99BE0 /* Fish */ = {
+			isa = PBXGroup;
+			children = (
+				A35A06811952B12400D99BE0 /* Fish.h */,
+				A35A06821952B12400D99BE0 /* Fish.m */,
+			);
+			name = Fish;
+			sourceTree = "<group>";
+		};
+		A35A068A1952B17B00D99BE0 /* ProductType */ = {
+			isa = PBXGroup;
+			children = (
+				A35A067E1952B12400D99BE0 /* ProductType.h */,
+				A35A067F1952B12400D99BE0 /* ProductType.m */,
+			);
+			name = ProductType;
+			sourceTree = "<group>";
+		};
+		A35A068B1952B27200D99BE0 /* OrderLine */ = {
+			isa = PBXGroup;
+			children = (
+				A35A067B1952B12400D99BE0 /* OrderLine.h */,
+				A35A067C1952B12400D99BE0 /* OrderLine.m */,
+			);
+			name = OrderLine;
+			sourceTree = "<group>";
+		};
+		A35A068C1952B28300D99BE0 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				A35A06781952B12400D99BE0 /* Order.h */,
+				A35A06791952B12400D99BE0 /* Order.m */,
+			);
+			name = Order;
+			sourceTree = "<group>";
+		};
+		A35A068D1952B29300D99BE0 /* TA */ = {
+			isa = PBXGroup;
+			children = (
+				A35A06751952B12400D99BE0 /* TA.h */,
+				A35A06761952B12400D99BE0 /* TA.m */,
+			);
+			name = TA;
+			sourceTree = "<group>";
+		};
+		A35A068E1952B2A400D99BE0 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				A35A06721952B12300D99BE0 /* Photo.h */,
+				A35A06731952B12300D99BE0 /* Photo.m */,
+			);
+			name = Photo;
+			sourceTree = "<group>";
+		};
+		A35A068F1952B2B000D99BE0 /* Address */ = {
+			isa = PBXGroup;
+			children = (
+				A35A066F1952B12300D99BE0 /* Address.h */,
+				A35A06701952B12300D99BE0 /* Address.m */,
+			);
+			name = Address;
+			sourceTree = "<group>";
+		};
+		A35A06901952B2CD00D99BE0 /* AppSettings */ = {
+			isa = PBXGroup;
+			children = (
+				A35A066C1952B12300D99BE0 /* AppSettings.h */,
+				A35A066D1952B12300D99BE0 /* AppSettings.m */,
+			);
+			name = AppSettings;
+			sourceTree = "<group>";
+		};
+		A35A06911952B2DD00D99BE0 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				A35A06691952B12300D99BE0 /* Client.h */,
+				A35A066A1952B12300D99BE0 /* Client.m */,
+			);
+			name = Client;
+			sourceTree = "<group>";
+		};
+		A35A06921952B2FA00D99BE0 /* NSNumber+NSNumberUnit */ = {
+			isa = PBXGroup;
+			children = (
+				A3AC3A4B19513B25004D1EE1 /* NSNumber+NSNumberUnit.h */,
+				A3AC3A4C19513B25004D1EE1 /* NSNumber+NSNumberUnit.m */,
+			);
+			name = "NSNumber+NSNumberUnit";
+			sourceTree = "<group>";
+		};
 		A35AB8E5194EF1D3002BAF0D = {
 			isa = PBXGroup;
 			children = (
@@ -165,9 +306,19 @@
 		A3F96CB5194FEB9600C0C66E /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				A35A068F1952B2B000D99BE0 /* Address */,
+				A35A06901952B2CD00D99BE0 /* AppSettings */,
+				A35A06911952B2DD00D99BE0 /* Client */,
+				A35A06891952B16300D99BE0 /* Fish */,
+				A35A06871952B14200D99BE0 /* Item */,
+				A35A06921952B2FA00D99BE0 /* NSNumber+NSNumberUnit */,
+				A35A068C1952B28300D99BE0 /* Order */,
+				A35A068B1952B27200D99BE0 /* OrderLine */,
+				A35A068E1952B2A400D99BE0 /* Photo */,
+				A35A068A1952B17B00D99BE0 /* ProductType */,
+				A35A068D1952B29300D99BE0 /* TA */,
+				A35A06881952B15200D99BE0 /* Thesis */,
 				A3F96CB2194FEB8A00C0C66E /* DataModel.xcdatamodeld */,
-				A3AC3A4B19513B25004D1EE1 /* NSNumber+NSNumberUnit.h */,
-				A3AC3A4C19513B25004D1EE1 /* NSNumber+NSNumberUnit.m */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -269,11 +420,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A35A06831952B12400D99BE0 /* Fish.m in Sources */,
+				A35A06711952B12300D99BE0 /* Address.m in Sources */,
+				A35A06681952AA7200D99BE0 /* Item.m in Sources */,
+				A35A06861952B12400D99BE0 /* Thesis.m in Sources */,
 				A3AC3A4D19513B25004D1EE1 /* NSNumber+NSNumberUnit.m in Sources */,
+				A35A06771952B12400D99BE0 /* TA.m in Sources */,
+				A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */,
 				A35AB908194EF1D3002BAF0D /* ViewController.m in Sources */,
+				A35A067A1952B12400D99BE0 /* Order.m in Sources */,
 				A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */,
+				A35A067D1952B12400D99BE0 /* OrderLine.m in Sources */,
+				A35A06801952B12400D99BE0 /* ProductType.m in Sources */,
 				A35AB902194EF1D3002BAF0D /* AppDelegate.m in Sources */,
 				A35AB8FE194EF1D3002BAF0D /* main.m in Sources */,
+				A35A06741952B12300D99BE0 /* Photo.m in Sources */,
+				A35A066B1952B12300D99BE0 /* Client.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
