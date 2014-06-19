@@ -26,7 +26,7 @@
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="fish" inverseEntity="Item" syncable="YES"/>
         <relationship name="productTypes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductType" inverseName="fishes" inverseEntity="ProductType" syncable="YES"/>
     </entity>
-    <entity name="Item" representedClassName="Item" syncable="YES">
+    <entity name="Item" representedClassName="" syncable="YES">
         <attribute name="annotation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="composition" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deleted" optional="YES" attributeType="Boolean" indexed="YES" syncable="YES"/>
@@ -95,7 +95,7 @@
         <element name="AppSettings" positionX="97" positionY="525" width="128" height="118"/>
         <element name="Client" positionX="-108" positionY="135" width="128" height="133"/>
         <element name="Fish" positionX="-479" positionY="126" width="128" height="88"/>
-        <element name="Item" positionX="-279" positionY="297" width="128" height="298"/>
+        <element name="Item" positionX="-279" positionY="297" width="128" height="300"/>
         <element name="Order" positionX="135" positionY="302" width="128" height="225"/>
         <element name="OrderLine" positionX="-110" positionY="500" width="128" height="163"/>
         <element name="Photo" positionX="-506" positionY="459" width="128" height="88"/>
