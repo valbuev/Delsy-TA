@@ -328,6 +328,73 @@
                     </view>
                     <navigationItem key="navigationItem" id="RZX-Y4-73g">
                         <nil key="title"/>
+                        <barButtonItem key="rightBarButtonItem" id="4pa-gl-bwN">
+                            <view key="customView" contentMode="scaleToFill" id="sCn-4z-gxW">
+                                <rect key="frame" x="496" y="5" width="256" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="63B-ZJ-kBH">
+                                        <rect key="frame" x="176" y="0.0" width="80" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0047751164180000003" green="0.66388313139999999" blue="0.041314852970000003" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="NPt-S4-5OI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <state key="normal" title="+">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cWW-8C-uD0">
+                                        <rect key="frame" x="88" y="0.0" width="80" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3tu-Ri-4W5">
+                                                <rect key="frame" x="29" y="6" width="22" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.14999999999999999" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="0zn-ct-wX2"/>
+                                            <constraint firstAttribute="centerX" secondItem="3tu-Ri-4W5" secondAttribute="centerX" id="MIp-fK-gqI"/>
+                                            <constraint firstAttribute="centerY" secondItem="3tu-Ri-4W5" secondAttribute="centerY" id="Q6I-MH-tDn"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lb1-oE-aqz">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.6739676339285714" green="0.0073132270667983622" blue="0.0" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="HVO-xu-lkq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <state key="normal" title="Mail">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="63B-ZJ-kBH" firstAttribute="leading" secondItem="cWW-8C-uD0" secondAttribute="trailing" constant="8" id="33W-fg-0bn"/>
+                                    <constraint firstAttribute="bottom" secondItem="63B-ZJ-kBH" secondAttribute="bottom" id="4Op-eK-GeX"/>
+                                    <constraint firstAttribute="bottom" secondItem="lb1-oE-aqz" secondAttribute="bottom" id="GdS-e7-eAh"/>
+                                    <constraint firstItem="lb1-oE-aqz" firstAttribute="top" secondItem="sCn-4z-gxW" secondAttribute="top" id="UJs-hs-kzq"/>
+                                    <constraint firstAttribute="bottom" secondItem="cWW-8C-uD0" secondAttribute="bottom" id="Vbs-Um-Gtj"/>
+                                    <constraint firstItem="lb1-oE-aqz" firstAttribute="leading" secondItem="sCn-4z-gxW" secondAttribute="leading" id="gC1-jQ-Fhv"/>
+                                    <constraint firstItem="cWW-8C-uD0" firstAttribute="top" secondItem="sCn-4z-gxW" secondAttribute="top" id="hkr-Eb-7Dr"/>
+                                    <constraint firstAttribute="trailing" secondItem="63B-ZJ-kBH" secondAttribute="trailing" id="kUC-uh-4hL"/>
+                                    <constraint firstItem="63B-ZJ-kBH" firstAttribute="top" secondItem="sCn-4z-gxW" secondAttribute="top" id="u7B-oe-zmw"/>
+                                    <constraint firstItem="cWW-8C-uD0" firstAttribute="leading" secondItem="lb1-oE-aqz" secondAttribute="trailing" constant="8" id="ucw-r4-ATf"/>
+                                </constraints>
+                            </view>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uUa-3c-dfg" userLabel="First Responder" sceneMemberID="firstResponder"/>
