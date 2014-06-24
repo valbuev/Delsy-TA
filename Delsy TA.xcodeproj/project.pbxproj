@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A341AFD41959661C001B7168 /* Downloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFD31959661C001B7168 /* Downloader.m */; };
 		A35A06681952AA7200D99BE0 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06671952AA7200D99BE0 /* Item.m */; };
 		A35A066B1952B12300D99BE0 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066A1952B12300D99BE0 /* Client.m */; };
 		A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066D1952B12300D99BE0 /* AppSettings.m */; };
@@ -60,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A341AFD21959661C001B7168 /* Downloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Downloader.h; sourceTree = "<group>"; };
+		A341AFD31959661C001B7168 /* Downloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Downloader.m; sourceTree = "<group>"; };
 		A35A06661952AA7200D99BE0 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = DataModel/Item.h; sourceTree = "<group>"; };
 		A35A06671952AA7200D99BE0 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = DataModel/Item.m; sourceTree = "<group>"; };
 		A35A06691952B12300D99BE0 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = DataModel/Client.h; sourceTree = "<group>"; };
@@ -330,6 +333,8 @@
 				A3ACB95F1958155F00D2C77A /* TableViewController.m */,
 				A35AB909194EF1D3002BAF0D /* Images.xcassets */,
 				A35AB8F8194EF1D3002BAF0D /* Supporting Files */,
+				A341AFD21959661C001B7168 /* Downloader.h */,
+				A341AFD31959661C001B7168 /* Downloader.m */,
 			);
 			path = "Delsy TA";
 			sourceTree = "<group>";
@@ -521,6 +526,7 @@
 				A35A067A1952B12400D99BE0 /* Order.m in Sources */,
 				A35A069E1952C99100D99BE0 /* Client+ClientCategory.m in Sources */,
 				A35A06A81952CA3800D99BE0 /* Order+OrderCategory.m in Sources */,
+				A341AFD41959661C001B7168 /* Downloader.m in Sources */,
 				A3ACB96C195948A300D2C77A /* SettingsView.m in Sources */,
 				A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */,
 				A35A067D1952B12400D99BE0 /* OrderLine.m in Sources */,

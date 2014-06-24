@@ -15,6 +15,8 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+@synthesize sessionCompletionHandler;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     return YES;
@@ -86,6 +88,18 @@
 
 - (NSURL *)applicationDocumentsDirectory{
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (void)application:(UIApplication *)application handleEventsForBackgroundURLSession:(NSString *)identifier completionHandler:(void (^)())completionHandler
+{
+    NSLog(@"handleEventsForBackgroundURLSession identifier: %@",identifier);
+    UILocalNotification *locNot = [[UILocalNotification alloc] init];
+    locNot.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    locNot.alertBody = [NSString stringWithFormat:@"still alive!"];
+    locNot.timeZone = [NSTimeZone defaultTimeZone];
+    [[UIApplication sharedApplication] scheduleLocalNotification:locNot];
+    
+    self.sessionCompletionHandler = completionHandler;
 }
 
 @end

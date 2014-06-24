@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Downloader.h"
 
-@interface SettingsView : UITableViewController
-
-
+@interface SettingsView : UITableViewController{
+    Downloader *downloader;
+}
 
 // Catalog section
 @property (weak, nonatomic) IBOutlet UIButton *btnUpdateClientList;

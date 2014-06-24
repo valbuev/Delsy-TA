@@ -27,7 +27,8 @@
 @synthesize progressViewUpdatingAllPhotos;
 
 - (IBAction)OnBtnUpdateClientListClick:(id)sender{
-    
+    downloader = [[Downloader alloc] init];
+    [downloader startDownload];
 }
 - (IBAction)OnBtnUpdatePriceListClick:(id)sender{
     
