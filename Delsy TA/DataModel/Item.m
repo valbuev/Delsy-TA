@@ -2,7 +2,7 @@
 //  Item.m
 //  Delsy TA
 //
-//  Created by Valeriy Buev on 18.06.14.
+//  Created by Valeriy Buev on 19.06.14.
 //  Copyright (c) 2014 bva. All rights reserved.
 //
 
@@ -21,9 +21,10 @@
 @dynamic producer;
 @dynamic promo;
 @dynamic shelfLife;
-@dynamic unitsInBox;
 @dynamic unit;
+@dynamic unitsInBox;
 @dynamic fish;
+@dynamic orderLines;
 @dynamic photos;
 @dynamic productType;
 @dynamic thesises;

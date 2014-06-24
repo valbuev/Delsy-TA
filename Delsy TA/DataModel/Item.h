@@ -2,13 +2,12 @@
 //  Item.h
 //  Delsy TA
 //
-//  Created by Valeriy Buev on 18.06.14.
+//  Created by Valeriy Buev on 19.06.14.
 //  Copyright (c) 2014 bva. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "NSNumber+NSNumberUnit.h"
 
 
 @interface Item : NSManagedObject
@@ -23,15 +22,21 @@
 @property (nonatomic, retain) NSString * producer;
 @property (nonatomic, retain) NSNumber * promo;
 @property (nonatomic, retain) NSNumber * shelfLife;
-@property (nonatomic, retain) NSNumber * unitsInBox;
 @property (nonatomic, retain) NSNumber * unit;
+@property (nonatomic, retain) NSNumber * unitsInBox;
 @property (nonatomic, retain) NSManagedObject *fish;
+@property (nonatomic, retain) NSSet *orderLines;
 @property (nonatomic, retain) NSSet *photos;
 @property (nonatomic, retain) NSManagedObject *productType;
 @property (nonatomic, retain) NSSet *thesises;
 @end
 
 @interface Item (CoreDataGeneratedAccessors)
+
+- (void)addOrderLinesObject:(NSManagedObject *)value;
+- (void)removeOrderLinesObject:(NSManagedObject *)value;
+- (void)addOrderLines:(NSSet *)values;
+- (void)removeOrderLines:(NSSet *)values;
 
 - (void)addPhotosObject:(NSManagedObject *)value;
 - (void)removePhotosObject:(NSManagedObject *)value;
