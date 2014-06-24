@@ -18,6 +18,17 @@
 		A35A06801952B12400D99BE0 /* ProductType.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A067F1952B12400D99BE0 /* ProductType.m */; };
 		A35A06831952B12400D99BE0 /* Fish.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06821952B12400D99BE0 /* Fish.m */; };
 		A35A06861952B12400D99BE0 /* Thesis.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06851952B12400D99BE0 /* Thesis.m */; };
+		A35A06951952B5CB00D99BE0 /* Address+AddressCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06941952B5CB00D99BE0 /* Address+AddressCategory.m */; };
+		A35A06981952B65100D99BE0 /* AppSettings+AppSettingsCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06971952B65100D99BE0 /* AppSettings+AppSettingsCategory.m */; };
+		A35A069E1952C99100D99BE0 /* Client+ClientCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A069D1952C99100D99BE0 /* Client+ClientCategory.m */; };
+		A35A06A11952C9B100D99BE0 /* Fish+FishCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06A01952C9B100D99BE0 /* Fish+FishCategory.m */; };
+		A35A06A41952C9F700D99BE0 /* Item+ItemCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06A31952C9F700D99BE0 /* Item+ItemCategory.m */; };
+		A35A06A81952CA3800D99BE0 /* Order+OrderCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06A71952CA3800D99BE0 /* Order+OrderCategory.m */; };
+		A35A06AB1952CA5000D99BE0 /* OrderLine+OrderLineCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06AA1952CA5000D99BE0 /* OrderLine+OrderLineCategory.m */; };
+		A35A06AE1952CA8300D99BE0 /* Photo+PhotoCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06AD1952CA8300D99BE0 /* Photo+PhotoCategory.m */; };
+		A35A06B11952CAA200D99BE0 /* ProductType+ProductTypeCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06B01952CAA200D99BE0 /* ProductType+ProductTypeCategory.m */; };
+		A35A06B41952CABE00D99BE0 /* TA+TACategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06B31952CABE00D99BE0 /* TA+TACategory.m */; };
+		A35A06B71952CAF500D99BE0 /* Thesis+ThesisCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06B61952CAF500D99BE0 /* Thesis+ThesisCategory.m */; };
 		A35AB8F2194EF1D3002BAF0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35AB8F1194EF1D3002BAF0D /* Foundation.framework */; };
 		A35AB8F4194EF1D3002BAF0D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35AB8F3194EF1D3002BAF0D /* CoreGraphics.framework */; };
 		A35AB8F6194EF1D3002BAF0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A35AB8F5194EF1D3002BAF0D /* UIKit.framework */; };
@@ -70,6 +81,28 @@
 		A35A06821952B12400D99BE0 /* Fish.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Fish.m; path = DataModel/Fish.m; sourceTree = "<group>"; };
 		A35A06841952B12400D99BE0 /* Thesis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Thesis.h; path = DataModel/Thesis.h; sourceTree = "<group>"; };
 		A35A06851952B12400D99BE0 /* Thesis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Thesis.m; path = DataModel/Thesis.m; sourceTree = "<group>"; };
+		A35A06931952B5CB00D99BE0 /* Address+AddressCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Address+AddressCategory.h"; path = "DataModel/Address+AddressCategory.h"; sourceTree = "<group>"; };
+		A35A06941952B5CB00D99BE0 /* Address+AddressCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Address+AddressCategory.m"; path = "DataModel/Address+AddressCategory.m"; sourceTree = "<group>"; };
+		A35A06961952B65100D99BE0 /* AppSettings+AppSettingsCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AppSettings+AppSettingsCategory.h"; path = "DataModel/AppSettings+AppSettingsCategory.h"; sourceTree = "<group>"; };
+		A35A06971952B65100D99BE0 /* AppSettings+AppSettingsCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AppSettings+AppSettingsCategory.m"; path = "DataModel/AppSettings+AppSettingsCategory.m"; sourceTree = "<group>"; };
+		A35A069C1952C99100D99BE0 /* Client+ClientCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Client+ClientCategory.h"; path = "DataModel/Client+ClientCategory.h"; sourceTree = "<group>"; };
+		A35A069D1952C99100D99BE0 /* Client+ClientCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Client+ClientCategory.m"; path = "DataModel/Client+ClientCategory.m"; sourceTree = "<group>"; };
+		A35A069F1952C9B100D99BE0 /* Fish+FishCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Fish+FishCategory.h"; path = "DataModel/Fish+FishCategory.h"; sourceTree = "<group>"; };
+		A35A06A01952C9B100D99BE0 /* Fish+FishCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Fish+FishCategory.m"; path = "DataModel/Fish+FishCategory.m"; sourceTree = "<group>"; };
+		A35A06A21952C9F700D99BE0 /* Item+ItemCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Item+ItemCategory.h"; path = "DataModel/Item+ItemCategory.h"; sourceTree = "<group>"; };
+		A35A06A31952C9F700D99BE0 /* Item+ItemCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Item+ItemCategory.m"; path = "DataModel/Item+ItemCategory.m"; sourceTree = "<group>"; };
+		A35A06A61952CA3800D99BE0 /* Order+OrderCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Order+OrderCategory.h"; path = "DataModel/Order+OrderCategory.h"; sourceTree = "<group>"; };
+		A35A06A71952CA3800D99BE0 /* Order+OrderCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Order+OrderCategory.m"; path = "DataModel/Order+OrderCategory.m"; sourceTree = "<group>"; };
+		A35A06A91952CA5000D99BE0 /* OrderLine+OrderLineCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "OrderLine+OrderLineCategory.h"; path = "DataModel/OrderLine+OrderLineCategory.h"; sourceTree = "<group>"; };
+		A35A06AA1952CA5000D99BE0 /* OrderLine+OrderLineCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "OrderLine+OrderLineCategory.m"; path = "DataModel/OrderLine+OrderLineCategory.m"; sourceTree = "<group>"; };
+		A35A06AC1952CA8300D99BE0 /* Photo+PhotoCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Photo+PhotoCategory.h"; path = "DataModel/Photo+PhotoCategory.h"; sourceTree = "<group>"; };
+		A35A06AD1952CA8300D99BE0 /* Photo+PhotoCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Photo+PhotoCategory.m"; path = "DataModel/Photo+PhotoCategory.m"; sourceTree = "<group>"; };
+		A35A06AF1952CAA200D99BE0 /* ProductType+ProductTypeCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ProductType+ProductTypeCategory.h"; path = "DataModel/ProductType+ProductTypeCategory.h"; sourceTree = "<group>"; };
+		A35A06B01952CAA200D99BE0 /* ProductType+ProductTypeCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ProductType+ProductTypeCategory.m"; path = "DataModel/ProductType+ProductTypeCategory.m"; sourceTree = "<group>"; };
+		A35A06B21952CABE00D99BE0 /* TA+TACategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TA+TACategory.h"; path = "DataModel/TA+TACategory.h"; sourceTree = "<group>"; };
+		A35A06B31952CABE00D99BE0 /* TA+TACategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TA+TACategory.m"; path = "DataModel/TA+TACategory.m"; sourceTree = "<group>"; };
+		A35A06B51952CAF500D99BE0 /* Thesis+ThesisCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Thesis+ThesisCategory.h"; path = "DataModel/Thesis+ThesisCategory.h"; sourceTree = "<group>"; };
+		A35A06B61952CAF500D99BE0 /* Thesis+ThesisCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Thesis+ThesisCategory.m"; path = "DataModel/Thesis+ThesisCategory.m"; sourceTree = "<group>"; };
 		A35AB8EE194EF1D3002BAF0D /* Delsy TA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Delsy TA.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A35AB8F1194EF1D3002BAF0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A35AB8F3194EF1D3002BAF0D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -125,6 +158,8 @@
 			children = (
 				A35A06661952AA7200D99BE0 /* Item.h */,
 				A35A06671952AA7200D99BE0 /* Item.m */,
+				A35A06A21952C9F700D99BE0 /* Item+ItemCategory.h */,
+				A35A06A31952C9F700D99BE0 /* Item+ItemCategory.m */,
 			);
 			name = Item;
 			sourceTree = "<group>";
@@ -134,6 +169,8 @@
 			children = (
 				A35A06841952B12400D99BE0 /* Thesis.h */,
 				A35A06851952B12400D99BE0 /* Thesis.m */,
+				A35A06B51952CAF500D99BE0 /* Thesis+ThesisCategory.h */,
+				A35A06B61952CAF500D99BE0 /* Thesis+ThesisCategory.m */,
 			);
 			name = Thesis;
 			sourceTree = "<group>";
@@ -143,6 +180,8 @@
 			children = (
 				A35A06811952B12400D99BE0 /* Fish.h */,
 				A35A06821952B12400D99BE0 /* Fish.m */,
+				A35A069F1952C9B100D99BE0 /* Fish+FishCategory.h */,
+				A35A06A01952C9B100D99BE0 /* Fish+FishCategory.m */,
 			);
 			name = Fish;
 			sourceTree = "<group>";
@@ -152,6 +191,8 @@
 			children = (
 				A35A067E1952B12400D99BE0 /* ProductType.h */,
 				A35A067F1952B12400D99BE0 /* ProductType.m */,
+				A35A06AF1952CAA200D99BE0 /* ProductType+ProductTypeCategory.h */,
+				A35A06B01952CAA200D99BE0 /* ProductType+ProductTypeCategory.m */,
 			);
 			name = ProductType;
 			sourceTree = "<group>";
@@ -161,6 +202,8 @@
 			children = (
 				A35A067B1952B12400D99BE0 /* OrderLine.h */,
 				A35A067C1952B12400D99BE0 /* OrderLine.m */,
+				A35A06A91952CA5000D99BE0 /* OrderLine+OrderLineCategory.h */,
+				A35A06AA1952CA5000D99BE0 /* OrderLine+OrderLineCategory.m */,
 			);
 			name = OrderLine;
 			sourceTree = "<group>";
@@ -170,6 +213,8 @@
 			children = (
 				A35A06781952B12400D99BE0 /* Order.h */,
 				A35A06791952B12400D99BE0 /* Order.m */,
+				A35A06A61952CA3800D99BE0 /* Order+OrderCategory.h */,
+				A35A06A71952CA3800D99BE0 /* Order+OrderCategory.m */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -179,6 +224,8 @@
 			children = (
 				A35A06751952B12400D99BE0 /* TA.h */,
 				A35A06761952B12400D99BE0 /* TA.m */,
+				A35A06B21952CABE00D99BE0 /* TA+TACategory.h */,
+				A35A06B31952CABE00D99BE0 /* TA+TACategory.m */,
 			);
 			name = TA;
 			sourceTree = "<group>";
@@ -188,6 +235,8 @@
 			children = (
 				A35A06721952B12300D99BE0 /* Photo.h */,
 				A35A06731952B12300D99BE0 /* Photo.m */,
+				A35A06AC1952CA8300D99BE0 /* Photo+PhotoCategory.h */,
+				A35A06AD1952CA8300D99BE0 /* Photo+PhotoCategory.m */,
 			);
 			name = Photo;
 			sourceTree = "<group>";
@@ -197,6 +246,8 @@
 			children = (
 				A35A066F1952B12300D99BE0 /* Address.h */,
 				A35A06701952B12300D99BE0 /* Address.m */,
+				A35A06931952B5CB00D99BE0 /* Address+AddressCategory.h */,
+				A35A06941952B5CB00D99BE0 /* Address+AddressCategory.m */,
 			);
 			name = Address;
 			sourceTree = "<group>";
@@ -206,6 +257,8 @@
 			children = (
 				A35A066C1952B12300D99BE0 /* AppSettings.h */,
 				A35A066D1952B12300D99BE0 /* AppSettings.m */,
+				A35A06961952B65100D99BE0 /* AppSettings+AppSettingsCategory.h */,
+				A35A06971952B65100D99BE0 /* AppSettings+AppSettingsCategory.m */,
 			);
 			name = AppSettings;
 			sourceTree = "<group>";
@@ -215,6 +268,8 @@
 			children = (
 				A35A06691952B12300D99BE0 /* Client.h */,
 				A35A066A1952B12300D99BE0 /* Client.m */,
+				A35A069C1952C99100D99BE0 /* Client+ClientCategory.h */,
+				A35A069D1952C99100D99BE0 /* Client+ClientCategory.m */,
 			);
 			name = Client;
 			sourceTree = "<group>";
@@ -423,19 +478,30 @@
 				A35A06831952B12400D99BE0 /* Fish.m in Sources */,
 				A35A06711952B12300D99BE0 /* Address.m in Sources */,
 				A35A06681952AA7200D99BE0 /* Item.m in Sources */,
+				A35A06B41952CABE00D99BE0 /* TA+TACategory.m in Sources */,
+				A35A06A11952C9B100D99BE0 /* Fish+FishCategory.m in Sources */,
+				A35A06B71952CAF500D99BE0 /* Thesis+ThesisCategory.m in Sources */,
 				A35A06861952B12400D99BE0 /* Thesis.m in Sources */,
 				A3AC3A4D19513B25004D1EE1 /* NSNumber+NSNumberUnit.m in Sources */,
 				A35A06771952B12400D99BE0 /* TA.m in Sources */,
 				A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */,
 				A35AB908194EF1D3002BAF0D /* ViewController.m in Sources */,
 				A35A067A1952B12400D99BE0 /* Order.m in Sources */,
+				A35A069E1952C99100D99BE0 /* Client+ClientCategory.m in Sources */,
+				A35A06A81952CA3800D99BE0 /* Order+OrderCategory.m in Sources */,
 				A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */,
 				A35A067D1952B12400D99BE0 /* OrderLine.m in Sources */,
+				A35A06B11952CAA200D99BE0 /* ProductType+ProductTypeCategory.m in Sources */,
+				A35A06981952B65100D99BE0 /* AppSettings+AppSettingsCategory.m in Sources */,
 				A35A06801952B12400D99BE0 /* ProductType.m in Sources */,
 				A35AB902194EF1D3002BAF0D /* AppDelegate.m in Sources */,
 				A35AB8FE194EF1D3002BAF0D /* main.m in Sources */,
+				A35A06AB1952CA5000D99BE0 /* OrderLine+OrderLineCategory.m in Sources */,
 				A35A06741952B12300D99BE0 /* Photo.m in Sources */,
+				A35A06951952B5CB00D99BE0 /* Address+AddressCategory.m in Sources */,
+				A35A06AE1952CA8300D99BE0 /* Photo+PhotoCategory.m in Sources */,
 				A35A066B1952B12300D99BE0 /* Client.m in Sources */,
+				A35A06A41952C9F700D99BE0 /* Item+ItemCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
