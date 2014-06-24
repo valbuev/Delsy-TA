@@ -28,5 +28,6 @@
 @dynamic photos;
 @dynamic productType;
 @dynamic thesises;
+@dynamic lineColor;
 
 @end

@@ -29,6 +29,7 @@
 @property (nonatomic, retain) NSSet *photos;
 @property (nonatomic, retain) NSManagedObject *productType;
 @property (nonatomic, retain) NSSet *thesises;
+@property (nonatomic, retain) NSNumber *lineColor;
 @end
 
 @interface Item (CoreDataGeneratedAccessors)

@@ -43,7 +43,7 @@
 		A35AB91B194EF1D3002BAF0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A35AB919194EF1D3002BAF0D /* InfoPlist.strings */; };
 		A35AB91D194EF1D3002BAF0D /* Delsy_TATests.m in Sources */ = {isa = PBXBuildFile; fileRef = A35AB91C194EF1D3002BAF0D /* Delsy_TATests.m */; };
 		A3AC3A4D19513B25004D1EE1 /* NSNumber+NSNumberUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC3A4C19513B25004D1EE1 /* NSNumber+NSNumberUnit.m */; };
-		A3ACB9601958155F00D2C77A /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ACB95F1958155F00D2C77A /* TableViewController.m */; };
+		A3ACB96719593CBA00D2C77A /* NSNumber+bvaLineColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ACB96619593CBA00D2C77A /* NSNumber+bvaLineColor.m */; };
 		A3F96CB1194FEAE000C0C66E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3F96CB0194FEAE000C0C66E /* CoreData.framework */; };
 		A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3F96CB2194FEB8A00C0C66E /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -124,6 +124,8 @@
 		A3AC3A4C19513B25004D1EE1 /* NSNumber+NSNumberUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+NSNumberUnit.m"; path = "DataModel/NSNumber+NSNumberUnit.m"; sourceTree = "<group>"; };
 		A3ACB95E1958155F00D2C77A /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		A3ACB95F1958155F00D2C77A /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		A3ACB96519593CBA00D2C77A /* NSNumber+bvaLineColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+bvaLineColor.h"; path = "DataModel/NSNumber+bvaLineColor.h"; sourceTree = "<group>"; };
+		A3ACB96619593CBA00D2C77A /* NSNumber+bvaLineColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+bvaLineColor.m"; path = "DataModel/NSNumber+bvaLineColor.m"; sourceTree = "<group>"; };
 		A3F96CB0194FEAE000C0C66E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A3F96CB3194FEB8A00C0C66E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -358,6 +360,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A3ACB96419593C6700D2C77A /* NSNumber+bvaLineColor */ = {
+			isa = PBXGroup;
+			children = (
+				A3ACB96519593CBA00D2C77A /* NSNumber+bvaLineColor.h */,
+				A3ACB96619593CBA00D2C77A /* NSNumber+bvaLineColor.m */,
+			);
+			name = "NSNumber+bvaLineColor";
+			sourceTree = "<group>";
+		};
 		A3F96CB5194FEB9600C0C66E /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +377,7 @@
 				A35A06911952B2DD00D99BE0 /* Client */,
 				A35A06891952B16300D99BE0 /* Fish */,
 				A35A06871952B14200D99BE0 /* Item */,
+				A3ACB96419593C6700D2C77A /* NSNumber+bvaLineColor */,
 				A35A06921952B2FA00D99BE0 /* NSNumber+NSNumberUnit */,
 				A35A068C1952B28300D99BE0 /* Order */,
 				A35A068B1952B27200D99BE0 /* OrderLine */,
@@ -485,7 +497,6 @@
 				A3AC3A4D19513B25004D1EE1 /* NSNumber+NSNumberUnit.m in Sources */,
 				A35A06771952B12400D99BE0 /* TA.m in Sources */,
 				A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */,
-				A35AB908194EF1D3002BAF0D /* ViewController.m in Sources */,
 				A35A067A1952B12400D99BE0 /* Order.m in Sources */,
 				A35A069E1952C99100D99BE0 /* Client+ClientCategory.m in Sources */,
 				A35A06A81952CA3800D99BE0 /* Order+OrderCategory.m in Sources */,
@@ -500,6 +511,7 @@
 				A35A06741952B12300D99BE0 /* Photo.m in Sources */,
 				A35A06951952B5CB00D99BE0 /* Address+AddressCategory.m in Sources */,
 				A35A06AE1952CA8300D99BE0 /* Photo+PhotoCategory.m in Sources */,
+				A3ACB96719593CBA00D2C77A /* NSNumber+bvaLineColor.m in Sources */,
 				A35A066B1952B12300D99BE0 /* Client.m in Sources */,
 				A35A06A41952C9F700D99BE0 /* Item+ItemCategory.m in Sources */,
 			);
