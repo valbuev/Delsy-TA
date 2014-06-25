@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A341AFDA195A6472001B7168 /* BVAFileDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFD9195A6472001B7168 /* BVAFileDownloader.m */; };
 		A35A06681952AA7200D99BE0 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06671952AA7200D99BE0 /* Item.m */; };
 		A35A066B1952B12300D99BE0 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066A1952B12300D99BE0 /* Client.m */; };
 		A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066D1952B12300D99BE0 /* AppSettings.m */; };
@@ -60,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A341AFD8195A6472001B7168 /* BVAFileDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BVAFileDownloader.h; path = Updaters/BVAFileDownloader.h; sourceTree = "<group>"; };
+		A341AFD9195A6472001B7168 /* BVAFileDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BVAFileDownloader.m; path = Updaters/BVAFileDownloader.m; sourceTree = "<group>"; };
 		A35A06661952AA7200D99BE0 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = DataModel/Item.h; sourceTree = "<group>"; };
 		A35A06671952AA7200D99BE0 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = DataModel/Item.m; sourceTree = "<group>"; };
 		A35A06691952B12300D99BE0 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = DataModel/Client.h; sourceTree = "<group>"; };
@@ -158,6 +161,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A341AFD5195A62EC001B7168 /* Updaters */ = {
+			isa = PBXGroup;
+			children = (
+				A341AFD7195A632D001B7168 /* FileDownloader */,
+				A341AFD6195A6302001B7168 /* ClientListUpdater */,
+			);
+			name = Updaters;
+			sourceTree = "<group>";
+		};
+		A341AFD6195A6302001B7168 /* ClientListUpdater */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ClientListUpdater;
+			sourceTree = "<group>";
+		};
+		A341AFD7195A632D001B7168 /* FileDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				A341AFD8195A6472001B7168 /* BVAFileDownloader.h */,
+				A341AFD9195A6472001B7168 /* BVAFileDownloader.m */,
+			);
+			name = FileDownloader;
+			sourceTree = "<group>";
+		};
 		A35A06871952B14200D99BE0 /* Item */ = {
 			isa = PBXGroup;
 			children = (
@@ -322,6 +350,7 @@
 		A35AB8F7194EF1D3002BAF0D /* Delsy TA */ = {
 			isa = PBXGroup;
 			children = (
+				A341AFD5195A62EC001B7168 /* Updaters */,
 				A3ACB9681959481A00D2C77A /* Interface */,
 				A3F96CB5194FEB9600C0C66E /* DataModel */,
 				A35AB900194EF1D3002BAF0D /* AppDelegate.h */,
@@ -535,6 +564,7 @@
 				A35A06AE1952CA8300D99BE0 /* Photo+PhotoCategory.m in Sources */,
 				A3ACB96719593CBA00D2C77A /* NSNumber+bvaLineColor.m in Sources */,
 				A35A066B1952B12300D99BE0 /* Client.m in Sources */,
+				A341AFDA195A6472001B7168 /* BVAFileDownloader.m in Sources */,
 				A35A06A41952C9F700D99BE0 /* Item+ItemCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
