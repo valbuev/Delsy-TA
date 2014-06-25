@@ -16,12 +16,12 @@
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     config.timeoutIntervalForRequest = 10;
     config.timeoutIntervalForResource = 10;
-    session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
+    mySession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
 }
 
 // начинает скачивание
 -(void) startDownload{
-    [[session downloadTaskWithURL:url] resume];
+    [[mySession downloadTaskWithURL:url] resume];
 }
 
 // Этот метод вызывается url-сессией. Говорит о завершении скачивания, передавая локальный URL скачанного файла.
@@ -50,6 +50,7 @@
             [delegate BVAFileDownloader:self didFinishWithError:fileManagerError];
         }
     }
+    mySession = nil;
 }
 
 // Этот метод вызывается url-сессией. Говорит о завершении скачивания. В случае ошибок error != nil.
@@ -62,6 +63,7 @@
             [delegate BVAFileDownloader:self didFinishWithError:error];
         }
     }
+    mySession = nil;
 }
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite{

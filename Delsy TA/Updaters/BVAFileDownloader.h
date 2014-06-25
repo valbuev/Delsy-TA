@@ -23,9 +23,12 @@
 <NSURLSessionDelegate, NSURLSessionTaskDelegate,NSURLSessionDownloadDelegate>
 {
     NSURL *url;
-    NSURLSession *session;
+    NSURLSession *mySession;
 }
 
 @property (weak) id <BVAFileDownloaderDelegate> delegate;
+
+- (void) initWithUrl: (NSURL *) Url;
+-(void) startDownload;
 
 @end
