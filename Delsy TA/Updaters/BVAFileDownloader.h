@@ -9,5 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface BVAFileDownloader : NSObject
+<NSURLSessionDelegate, NSURLSessionTaskDelegate,NSURLSessionDownloadDelegate>
+{
+    NSURL *url;
+    NSURLSession *session;
+}
 
 @end

@@ -9,6 +9,19 @@
 #import "BVAFileDownloader.h"
 
 @implementation BVAFileDownloader
-<NSURLSessionDelegate, NSURLSessionDataDelegate,NSURLSessionDownloadDelegate>
+
+- (void) initWithUrl: (NSURL *) Url{
+    url = Url;
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
+}
+
+-(void) startDownload{
+    [[session downloadTaskWithURL:url] resume];
+}
+
+-(void) URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location{
+    
+}
 
 @end
