@@ -15,5 +15,6 @@
 // Ищет ТА с id = taID, если находит, то возвращает, иначе, создает новый.
 +(TA *) getTAbyID:(NSString *) taID withMOC:(NSManagedObjectContext *) managedObjectContext;
 +(void) setAllTADeleted:(Boolean) deleted InManagedObjectContext:(NSManagedObjectContext *) managedObjectContext;
++(NSArray *)getAllTA:(NSManagedObjectContext *) context;
 
 @end

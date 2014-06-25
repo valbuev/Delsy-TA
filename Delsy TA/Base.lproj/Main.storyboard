@@ -286,7 +286,7 @@
         <!--TA-list-->
         <scene sceneID="fxS-6j-esA">
             <objects>
-                <tableViewController id="mIv-vs-qhQ" userLabel="TA-list" sceneMemberID="viewController">
+                <tableViewController id="mIv-vs-qhQ" userLabel="TA-list" customClass="TAListView" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="JDd-mN-uNW">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1596,7 +1596,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4UR-TL-PV3">
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4UR-TL-PV3">
                                                     <rect key="frame" x="640" y="12" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </activityIndicatorView>
@@ -1765,7 +1765,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="mIv-vs-qhQ" kind="push" id="4Mc-lt-gf0"/>
+                                            <segue destination="mIv-vs-qhQ" kind="push" identifier="TAListView" id="4Mc-lt-gf0"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>

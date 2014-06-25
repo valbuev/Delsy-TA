@@ -12,6 +12,7 @@
 		A341AFE1195A8B08001B7168 /* BVAClientListParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFE0195A8B08001B7168 /* BVAClientListParser.m */; };
 		A341AFE9195AA4FE001B7168 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFE8195AA4FE001B7168 /* XMLDictionary.m */; };
 		A341AFEC195AAAEE001B7168 /* TA.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFEB195AAAEE001B7168 /* TA.m */; };
+		A341AFF0195AB932001B7168 /* TAListView.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFEF195AB932001B7168 /* TAListView.m */; };
 		A35A06681952AA7200D99BE0 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06671952AA7200D99BE0 /* Item.m */; };
 		A35A066B1952B12300D99BE0 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066A1952B12300D99BE0 /* Client.m */; };
 		A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066D1952B12300D99BE0 /* AppSettings.m */; };
@@ -74,6 +75,8 @@
 		A341AFE8195AA4FE001B7168 /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		A341AFEA195AAAEE001B7168 /* TA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TA.h; path = DataModel/TA.h; sourceTree = "<group>"; };
 		A341AFEB195AAAEE001B7168 /* TA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TA.m; path = DataModel/TA.m; sourceTree = "<group>"; };
+		A341AFEE195AB932001B7168 /* TAListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TAListView.h; path = Interface/TAListView.h; sourceTree = "<group>"; };
+		A341AFEF195AB932001B7168 /* TAListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAListView.m; path = Interface/TAListView.m; sourceTree = "<group>"; };
 		A35A06661952AA7200D99BE0 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = DataModel/Item.h; sourceTree = "<group>"; };
 		A35A06671952AA7200D99BE0 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = DataModel/Item.m; sourceTree = "<group>"; };
 		A35A06691952B12300D99BE0 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = DataModel/Client.h; sourceTree = "<group>"; };
@@ -215,6 +218,15 @@
 				A341AFE8195AA4FE001B7168 /* XMLDictionary.m */,
 			);
 			path = XMLDictionary;
+			sourceTree = "<group>";
+		};
+		A341AFED195AB900001B7168 /* TAListView */ = {
+			isa = PBXGroup;
+			children = (
+				A341AFEE195AB932001B7168 /* TAListView.h */,
+				A341AFEF195AB932001B7168 /* TAListView.m */,
+			);
+			name = TAListView;
 			sourceTree = "<group>";
 		};
 		A35A06871952B14200D99BE0 /* Item */ = {
@@ -435,6 +447,7 @@
 		A3ACB9681959481A00D2C77A /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				A341AFED195AB900001B7168 /* TAListView */,
 				A35AB903194EF1D3002BAF0D /* Main.storyboard */,
 				A3ACB9691959483500D2C77A /* SettingsView */,
 			);
@@ -572,6 +585,7 @@
 				A35A06711952B12300D99BE0 /* Address.m in Sources */,
 				A35A06681952AA7200D99BE0 /* Item.m in Sources */,
 				A35A06B41952CABE00D99BE0 /* TA+TACategory.m in Sources */,
+				A341AFF0195AB932001B7168 /* TAListView.m in Sources */,
 				A35A06A11952C9B100D99BE0 /* Fish+FishCategory.m in Sources */,
 				A35A06B71952CAF500D99BE0 /* Thesis+ThesisCategory.m in Sources */,
 				A35A06861952B12400D99BE0 /* Thesis.m in Sources */,

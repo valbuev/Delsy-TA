@@ -12,7 +12,7 @@
 #import "BVAFileDownloader.h"
 
 @class BVAClientListUpdater;
-@protocol BVAClientListUpdater
+@protocol BVAClientListUpdaterDelegate
 -(void) BVAClientListUpdater:(BVAClientListUpdater *) updater didFinishUpdatingWithErrors:(NSArray*) errors;
 -(void) BVAClientListUpdater:(BVAClientListUpdater *)updater didStopUpdatingWithErrors:(NSArray *)errors;
 -(void) BVAClientListUpdaterDidStartUpdating:(BVAClientListUpdater *)updater;
@@ -25,7 +25,7 @@
     NSDictionary *parseResults;
 }
 
-@property (nonatomic, weak) id <BVAClientListUpdater> delegate;
+@property (nonatomic, weak) id <BVAClientListUpdaterDelegate> delegate;
 @property (nonatomic, weak) NSManagedObjectContext *managedObjectContext;
 
 -(void) startUpdating;

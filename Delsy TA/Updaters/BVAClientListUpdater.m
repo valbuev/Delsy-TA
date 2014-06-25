@@ -20,12 +20,15 @@
 -(void)startUpdating{
     errors = [NSMutableArray array];
     fileDownloader = [[BVAFileDownloader alloc] init];
-    [fileDownloader initWithUrl:[NSURL URLWithString:@"http://195.112.235.1/Invent/Clients.xml"]];
+    [fileDownloader initWithUrl:[NSURL URLWithString:@"http://195.112.235.1/Invent/Clients_test.xml"]];
     fileDownloader.delegate = self;
     [fileDownloader startDownload];
+    if(delegate)
+        [delegate BVAClientListUpdaterDidStartUpdating:self];
 }
 
 -(void) BVAFileDownloader:(BVAFileDownloader *)downloader didFinishDownloadingToURL:(NSURL *)location{
+    NSLog(@"done");
     NSError *error;
     NSString *str = [NSString stringWithContentsOfURL:location encoding:NSWindowsCP1251StringEncoding error:&error];
     //str = [str stringByReplacingOccurrencesOfString:@"encoding=\"windows-1251\"" withString:@""];
@@ -61,14 +64,14 @@
         NSDictionary *TAdict = [TAdicts objectAtIndex:ta_dict_number];
         NSArray *TAdictKeys = TAdict.allKeys;
         // Если нет каких-либо ключей, переходим к следующему ТА
-        if( ![TAdictKeys containsObject:@"name"]
-           || ![TAdictKeys containsObject:@"id"]
+        if( ![TAdictKeys containsObject:@"_name"]
+           || ![TAdictKeys containsObject:@"_id"]
            || ![TAdictKeys containsObject:@"client"] ){
             [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9998 userInfo:[NSDictionary dictionaryWithObject:@"TAdict dont contain any keys" forKey:@"info"]]];
             continue;
         }
-        NSString *TAname = [TAdict objectForKey:@"name"];
-        NSString *TAid = [TAdict objectForKey:@"id"];
+        NSString *TAname = [TAdict objectForKey:@"_name"];
+        NSString *TAid = [TAdict objectForKey:@"_id"];
         NSArray *clientDicts = [TAdict objectForKey:@"client"];
         // Если какие-либо из объектов словаря пусты, переходим к следующему ТА
         if( [TAname isEqualToString:@""]
@@ -82,6 +85,9 @@
         ta.name = TAname;
         ta.deleted = NO;
     }
+    if(delegate)
+        [delegate BVAClientListUpdater:self didFinishUpdatingWithErrors:errors];
+    NSLog(@"done");
 }
 
 -(void) saveErrorAndSayDelegateAboutError:(NSError *)error{

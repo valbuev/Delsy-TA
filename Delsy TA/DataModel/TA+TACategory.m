@@ -31,6 +31,8 @@
     else{
         if( array.count == 0 ){
             ta = [[TA alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
+            ta.id = taID;
+            //NSLog(@"init ta id = %@",ta.id);
         }
         else{
             ta = [array objectAtIndex:0];
@@ -57,6 +59,26 @@
     else for(ta in TAlist){
         ta.deleted = [NSNumber numberWithBool:deleted];
     }
+}
+
++(NSArray *)getAllTA:(NSManagedObjectContext *) context{
+    NSArray *TAlist;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"TA"
+                                              inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    NSError *error = nil;
+    TAlist = [context executeFetchRequest:request error:&error];
+    
+    if (TAlist == nil){
+        NSLog(@"Exception while getting TA`s array . Error: %@",error.localizedDescription);
+        //return nil;
+    }
+    return TAlist;
 }
 
 @end

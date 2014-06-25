@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BVAClientListUpdater.h"
 
 @interface SettingsView : UITableViewController
-
-
+<BVAClientListUpdaterDelegate>
+{
+    BVAClientListUpdater *clientListUpdater;
+}
 
 // Catalog section
 @property (weak, nonatomic) IBOutlet UIButton *btnUpdateClientList;
@@ -33,5 +36,7 @@
 // History section
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellRemoveAllHistory;
 
+// managedObjectContext
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "SettingsView.h"
+#import "TAListView.h"
+#import "AppDelegate.h"
 
 @interface SettingsView ()
 
@@ -25,9 +27,24 @@
 @synthesize labelTAName;
 @synthesize cellRemoveAllHistory;
 @synthesize progressViewUpdatingAllPhotos;
+@synthesize managedObjectContext = _managedObjectContext;
+
+- (NSManagedObjectContext *)managedObjectContext {
+    if(_managedObjectContext != nil){
+        return _managedObjectContext;
+    }
+    
+    id appDelegate = [[UIApplication sharedApplication] delegate];
+    _managedObjectContext = [appDelegate managedObjectContext];
+    
+    return _managedObjectContext;
+}
 
 - (IBAction)OnBtnUpdateClientListClick:(id)sender{
-    
+    clientListUpdater = [[BVAClientListUpdater alloc] init];
+    clientListUpdater.managedObjectContext = self.managedObjectContext;
+    clientListUpdater.delegate = self;
+    [clientListUpdater startUpdating];
 }
 - (IBAction)OnBtnUpdatePriceListClick:(id)sender{
     
@@ -127,7 +144,15 @@
 }
 */
 
-/*
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if(cell != self.cellRemoveAllHistory){
+        ;
+    }
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -135,15 +160,31 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-}
-*/
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if(cell != self.cellRemoveAllHistory){
-        ;
+    if([segue.identifier isEqualToString:@"TAListView"]){
+        TAListView *taListView = segue.destinationViewController;
+        taListView.managedObjectContext = self.managedObjectContext;
     }
+}
+
+#pragma mark - BVAClientListUpdater
+
+-(void)BVAClientListUpdater:(BVAClientListUpdater *)updater didFinishUpdatingWithErrors:(NSArray *)errors{
+    NSLog(@"stop");
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [self.activityIndicatorClientList stopAnimating];
+    }];
+}
+
+- (void)BVAClientListUpdater:(BVAClientListUpdater *)updater didStopUpdatingWithErrors:(NSArray *)errors{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [self.activityIndicatorClientList stopAnimating];
+    }];
+}
+
+-(void)BVAClientListUpdaterDidStartUpdating:(BVAClientListUpdater *)updater{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [self.activityIndicatorClientList startAnimating];
+    }];
 }
 
 @end
