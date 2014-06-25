@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A341AFDA195A6472001B7168 /* BVAFileDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFD9195A6472001B7168 /* BVAFileDownloader.m */; };
+		A341AFDD195A8596001B7168 /* BVAClientListUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFDC195A8596001B7168 /* BVAClientListUpdater.m */; };
+		A341AFE1195A8B08001B7168 /* BVAClientListParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFE0195A8B08001B7168 /* BVAClientListParser.m */; };
 		A35A06681952AA7200D99BE0 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06671952AA7200D99BE0 /* Item.m */; };
 		A35A066B1952B12300D99BE0 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066A1952B12300D99BE0 /* Client.m */; };
 		A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066D1952B12300D99BE0 /* AppSettings.m */; };
@@ -63,6 +65,10 @@
 /* Begin PBXFileReference section */
 		A341AFD8195A6472001B7168 /* BVAFileDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BVAFileDownloader.h; path = Updaters/BVAFileDownloader.h; sourceTree = "<group>"; };
 		A341AFD9195A6472001B7168 /* BVAFileDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BVAFileDownloader.m; path = Updaters/BVAFileDownloader.m; sourceTree = "<group>"; };
+		A341AFDB195A8596001B7168 /* BVAClientListUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BVAClientListUpdater.h; path = Updaters/BVAClientListUpdater.h; sourceTree = "<group>"; };
+		A341AFDC195A8596001B7168 /* BVAClientListUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BVAClientListUpdater.m; path = Updaters/BVAClientListUpdater.m; sourceTree = "<group>"; };
+		A341AFDF195A8B08001B7168 /* BVAClientListParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BVAClientListParser.h; path = Updaters/BVAClientListParser.h; sourceTree = "<group>"; };
+		A341AFE0195A8B08001B7168 /* BVAClientListParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BVAClientListParser.m; path = Updaters/BVAClientListParser.m; sourceTree = "<group>"; };
 		A35A06661952AA7200D99BE0 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = DataModel/Item.h; sourceTree = "<group>"; };
 		A35A06671952AA7200D99BE0 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = DataModel/Item.m; sourceTree = "<group>"; };
 		A35A06691952B12300D99BE0 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = DataModel/Client.h; sourceTree = "<group>"; };
@@ -173,6 +179,9 @@
 		A341AFD6195A6302001B7168 /* ClientListUpdater */ = {
 			isa = PBXGroup;
 			children = (
+				A341AFDE195A8AE4001B7168 /* ClientListParser */,
+				A341AFDB195A8596001B7168 /* BVAClientListUpdater.h */,
+				A341AFDC195A8596001B7168 /* BVAClientListUpdater.m */,
 			);
 			name = ClientListUpdater;
 			sourceTree = "<group>";
@@ -184,6 +193,15 @@
 				A341AFD9195A6472001B7168 /* BVAFileDownloader.m */,
 			);
 			name = FileDownloader;
+			sourceTree = "<group>";
+		};
+		A341AFDE195A8AE4001B7168 /* ClientListParser */ = {
+			isa = PBXGroup;
+			children = (
+				A341AFDF195A8B08001B7168 /* BVAClientListParser.h */,
+				A341AFE0195A8B08001B7168 /* BVAClientListParser.m */,
+			);
+			name = ClientListParser;
 			sourceTree = "<group>";
 		};
 		A35A06871952B14200D99BE0 /* Item */ = {
@@ -561,11 +579,13 @@
 				A35A06AB1952CA5000D99BE0 /* OrderLine+OrderLineCategory.m in Sources */,
 				A35A06741952B12300D99BE0 /* Photo.m in Sources */,
 				A35A06951952B5CB00D99BE0 /* Address+AddressCategory.m in Sources */,
+				A341AFDD195A8596001B7168 /* BVAClientListUpdater.m in Sources */,
 				A35A06AE1952CA8300D99BE0 /* Photo+PhotoCategory.m in Sources */,
 				A3ACB96719593CBA00D2C77A /* NSNumber+bvaLineColor.m in Sources */,
 				A35A066B1952B12300D99BE0 /* Client.m in Sources */,
 				A341AFDA195A6472001B7168 /* BVAFileDownloader.m in Sources */,
 				A35A06A41952C9F700D99BE0 /* Item+ItemCategory.m in Sources */,
+				A341AFE1195A8B08001B7168 /* BVAClientListParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
