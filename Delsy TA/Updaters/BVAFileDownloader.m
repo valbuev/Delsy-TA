@@ -14,8 +14,8 @@
 - (void) initWithUrl: (NSURL *) Url{
     url = Url;
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    config.timeoutIntervalForRequest = 10;
-    config.timeoutIntervalForResource = 10;
+    config.timeoutIntervalForRequest = 30;
+    config.timeoutIntervalForResource = 30;
     mySession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
 }
 
@@ -38,7 +38,7 @@
     [fileManager removeItemAtURL:destinationUrl error:NULL];
     
     [fileManager copyItemAtURL:location toURL:destinationUrl error:&fileManagerError];
-    if(fileManagerError != nil){
+    if(fileManagerError == nil){
         id delegate = self.delegate;
         if(delegate != nil){
             [delegate BVAFileDownloader:self didFinishDownloadingToURL:destinationUrl];
@@ -73,5 +73,18 @@
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didResumeAtOffset:(int64_t)fileOffset expectedTotalBytes:(int64_t)expectedTotalBytes{
     // Этот метод вызывается url-сессией. Метод оповещает о том, сколько будет весить скачиваемый файл. Можно использовать для проверки на максимальный размер, например.
 }
+
+/*
+ -(void)BVAFileDownloader:(BVAFileDownloader *)downloader didFinishDownloadingToURL:(NSURL *)location{
+ NSError *error;
+ NSString *str = [NSString stringWithContentsOfURL:location encoding:NSWindowsCP1251StringEncoding error:&error];
+ str = [str stringByReplacingOccurrencesOfString:@"encoding=\"windows-1251\"" withString:@""];
+ //NSData *data = [str dataUsingEncoding:NSUTF8StringEncoding];
+ //str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+ self.labelText.text = str;
+ NSLog(@"str = %@",str);
+ NSLog(@"encoding error = %@",error);
+ }
+ */
 
 @end
