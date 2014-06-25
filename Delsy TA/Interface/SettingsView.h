@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BVAClientListUpdater.h"
 
 @interface SettingsView : UITableViewController
-
+{
+    BVAClientListUpdater *bvaUpdater;
+}
 
 
 // Catalog section
@@ -22,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelClientListLastUpdate;
 @property (weak, nonatomic) IBOutlet UILabel *labelPriceListLastUpdate;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressViewUpdatingAllPhotos;
+@property (weak, nonatomic) IBOutlet UILabel *labelText;
 
 - (IBAction)OnBtnUpdateClientListClick:(id)sender;
 - (IBAction)OnBtnUpdatePriceListClick:(id)sender;

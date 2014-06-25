@@ -25,8 +25,12 @@
 @synthesize labelTAName;
 @synthesize cellRemoveAllHistory;
 @synthesize progressViewUpdatingAllPhotos;
+@synthesize labelText;
 
 - (IBAction)OnBtnUpdateClientListClick:(id)sender{
+    bvaUpdater = [[BVAClientListUpdater alloc] init];
+    bvaUpdater.labelText = labelText;
+    [bvaUpdater startUpdating];
     
 }
 - (IBAction)OnBtnUpdatePriceListClick:(id)sender{

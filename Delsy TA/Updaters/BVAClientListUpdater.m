@@ -11,6 +11,7 @@
 @implementation BVAClientListUpdater
 @synthesize managedObjectContext;
 @synthesize delegate;
+@synthesize labelText;
 
 -(void)startUpdating{
     errors = [NSMutableArray array];
@@ -29,15 +30,29 @@
         [self sayDelegateAboutErrors];
     }
     else{
-        ;
+        NSDate *date1 = [NSDate date];
+        XMLDictionaryParser *parser = [[XMLDictionaryParser alloc] init];
+        NSDictionary *dict = [parser dictionaryWithString:str];
+        //NSLog(@"%@",dict);
+        NSDate *date2 = [NSDate date];
+        NSArray *array = [dict objectForKey:@"TA"];
+        dict = [array objectAtIndex:0];
+        array = [dict objectForKey:@"client"];
+        dict = [array objectAtIndex:0];
+        labelText.text = [NSString stringWithFormat:@"%@", [dict objectForKey:@"address"]];
+        NSLog(@"%@", [dict objectForKey:@"address"]);
+        NSLog(@"1: %f",[date1 timeIntervalSince1970]);
+        NSLog(@"2: %f",[date2 timeIntervalSince1970]);
     }
     fileDownloader = nil;
+    NSLog(@"finish");
 }
 
 -(void) BVAFileDownloader:(BVAFileDownloader *)downloader didFinishWithError:(NSError *)error{
     [errors addObject:[error copy]];
     [self sayDelegateAboutErrors];
     fileDownloader = nil;
+    NSLog(@"error");
 }
 
 -(void) sayDelegateAboutErrors{

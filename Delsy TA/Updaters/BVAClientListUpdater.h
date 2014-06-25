@@ -10,6 +10,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BVAFileDownloader.h"
+#import "XMLDictionary.h"
 
 @class BVAClientListUpdater;
 @protocol BVAClientListUpdater
@@ -26,6 +27,7 @@
 
 @property (nonatomic, weak) id <BVAClientListUpdater> delegate;
 @property (nonatomic, weak) NSManagedObjectContext *managedObjectContext;
+@property (weak, nonatomic) IBOutlet UILabel *labelText;
 
 -(void) startUpdating;
 

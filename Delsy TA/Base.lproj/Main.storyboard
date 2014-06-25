@@ -1811,6 +1811,32 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="История" id="gCS-B6-3zX">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="3500" id="NYn-jL-EiR">
+                                        <rect key="frame" x="0.0" y="463" width="768" height="3500"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NYn-jL-EiR" id="1zY-lV-bcj">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="3499"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="768" translatesAutoresizingMaskIntoConstraints="NO" id="8GN-At-ULA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="768" height="3499"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="8GN-At-ULA" secondAttribute="trailing" id="EGg-Ss-5k4"/>
+                                                <constraint firstItem="8GN-At-ULA" firstAttribute="top" secondItem="1zY-lV-bcj" secondAttribute="top" id="SJd-Va-cTW"/>
+                                                <constraint firstAttribute="bottom" secondItem="8GN-At-ULA" secondAttribute="bottom" id="Utq-2m-wuD"/>
+                                                <constraint firstItem="8GN-At-ULA" firstAttribute="leading" secondItem="1zY-lV-bcj" secondAttribute="leading" id="pEY-P4-Gih"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="wh8-Lz-zdy" id="1xf-dB-kRG"/>
@@ -1835,6 +1861,7 @@
                         <outlet property="labelClientListLastUpdate" destination="NOT-cg-58G" id="j5h-8I-fr8"/>
                         <outlet property="labelPriceListLastUpdate" destination="ps5-JL-5ki" id="6HU-GI-52V"/>
                         <outlet property="labelTAName" destination="OSY-6y-Ula" id="VXq-f0-kbo"/>
+                        <outlet property="labelText" destination="8GN-At-ULA" id="oPf-6G-khg"/>
                         <outlet property="progressViewUpdatingAllPhotos" destination="YEf-PQ-Sgg" id="k43-Zj-Zf9"/>
                     </connections>
                 </tableViewController>

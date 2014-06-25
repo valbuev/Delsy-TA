@@ -22,6 +22,7 @@
 // начинает скачивание
 -(void) startDownload{
     [[mySession downloadTaskWithURL:url] resume];
+    NSLog(@"start");
 }
 
 // Этот метод вызывается url-сессией. Говорит о завершении скачивания, передавая локальный URL скачанного файла.

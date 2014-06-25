@@ -10,6 +10,7 @@
 		A341AFDA195A6472001B7168 /* BVAFileDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFD9195A6472001B7168 /* BVAFileDownloader.m */; };
 		A341AFDD195A8596001B7168 /* BVAClientListUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFDC195A8596001B7168 /* BVAClientListUpdater.m */; };
 		A341AFE1195A8B08001B7168 /* BVAClientListParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFE0195A8B08001B7168 /* BVAClientListParser.m */; };
+		A341AFE5195A9225001B7168 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFE4195A9225001B7168 /* XMLDictionary.m */; };
 		A35A06681952AA7200D99BE0 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06671952AA7200D99BE0 /* Item.m */; };
 		A35A066B1952B12300D99BE0 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066A1952B12300D99BE0 /* Client.m */; };
 		A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066D1952B12300D99BE0 /* AppSettings.m */; };
@@ -69,6 +70,8 @@
 		A341AFDC195A8596001B7168 /* BVAClientListUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BVAClientListUpdater.m; path = Updaters/BVAClientListUpdater.m; sourceTree = "<group>"; };
 		A341AFDF195A8B08001B7168 /* BVAClientListParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BVAClientListParser.h; path = Updaters/BVAClientListParser.h; sourceTree = "<group>"; };
 		A341AFE0195A8B08001B7168 /* BVAClientListParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BVAClientListParser.m; path = Updaters/BVAClientListParser.m; sourceTree = "<group>"; };
+		A341AFE3195A9225001B7168 /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
+		A341AFE4195A9225001B7168 /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		A35A06661952AA7200D99BE0 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = DataModel/Item.h; sourceTree = "<group>"; };
 		A35A06671952AA7200D99BE0 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = DataModel/Item.m; sourceTree = "<group>"; };
 		A35A06691952B12300D99BE0 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = DataModel/Client.h; sourceTree = "<group>"; };
@@ -202,6 +205,15 @@
 				A341AFE0195A8B08001B7168 /* BVAClientListParser.m */,
 			);
 			name = ClientListParser;
+			sourceTree = "<group>";
+		};
+		A341AFE2195A9225001B7168 /* XMLDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				A341AFE3195A9225001B7168 /* XMLDictionary.h */,
+				A341AFE4195A9225001B7168 /* XMLDictionary.m */,
+			);
+			path = XMLDictionary;
 			sourceTree = "<group>";
 		};
 		A35A06871952B14200D99BE0 /* Item */ = {
@@ -368,6 +380,7 @@
 		A35AB8F7194EF1D3002BAF0D /* Delsy TA */ = {
 			isa = PBXGroup;
 			children = (
+				A341AFE2195A9225001B7168 /* XMLDictionary */,
 				A341AFD5195A62EC001B7168 /* Updaters */,
 				A3ACB9681959481A00D2C77A /* Interface */,
 				A3F96CB5194FEB9600C0C66E /* DataModel */,
@@ -572,6 +585,7 @@
 				A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */,
 				A35A067D1952B12400D99BE0 /* OrderLine.m in Sources */,
 				A35A06B11952CAA200D99BE0 /* ProductType+ProductTypeCategory.m in Sources */,
+				A341AFE5195A9225001B7168 /* XMLDictionary.m in Sources */,
 				A35A06981952B65100D99BE0 /* AppSettings+AppSettingsCategory.m in Sources */,
 				A35A06801952B12400D99BE0 /* ProductType.m in Sources */,
 				A35AB902194EF1D3002BAF0D /* AppDelegate.m in Sources */,
