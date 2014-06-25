@@ -81,7 +81,8 @@
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="productType" inverseEntity="Item" syncable="YES"/>
     </entity>
     <entity name="TA" representedClassName="TA" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="clients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Client" inverseName="ta" inverseEntity="Client" syncable="YES"/>
         <relationship name="orders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Order" inverseName="ta" inverseEntity="Order" syncable="YES"/>
@@ -101,7 +102,7 @@
         <element name="OrderLine" positionX="-110" positionY="500" width="128" height="165"/>
         <element name="Photo" positionX="-506" positionY="459" width="128" height="90"/>
         <element name="ProductType" positionX="-497" positionY="308" width="128" height="90"/>
-        <element name="TA" positionX="-108" positionY="369" width="83" height="120"/>
+        <element name="TA" positionX="-108" positionY="369" width="83" height="135"/>
         <element name="Thesis" positionX="-504" positionY="567" width="128" height="75"/>
     </elements>
 </model>

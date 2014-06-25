@@ -22,6 +22,7 @@
 <BVAFileDownloaderDelegate>{
     BVAFileDownloader *fileDownloader;
     NSMutableArray *errors;
+    NSDictionary *parseResults;
 }
 
 @property (nonatomic, weak) id <BVAClientListUpdater> delegate;
