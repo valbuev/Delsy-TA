@@ -27,6 +27,7 @@
         [delegate BVAClientListUpdaterDidStartUpdating:self];
 }
 
+// Скачивание завершено, меняем кодировку, парсим xml в NSDictionary и отправляем его на обработку сохранение
 -(void) BVAFileDownloader:(BVAFileDownloader *)downloader didFinishDownloadingToURL:(NSURL *)location{
     NSLog(@"done");
     NSError *error;
@@ -44,6 +45,7 @@
     fileDownloader = nil;
 }
 
+// Переводим данные из словаря в CoreData
 -(void) saveParsedDictionaryIntoCoreData{
     NSError *error = [NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9999 userInfo:[NSDictionary dictionaryWithObject:@"Incorrect data" forKey:@"info"]];
     if(![parseResults.allKeys containsObject:@"TA"]){
@@ -85,6 +87,8 @@
         ta.name = TAname;
         ta.deleted = NO;
     }
+    AppSettings *appSettings = [AppSettings getInstance:self.managedObjectContext];
+    appSettings.clientsListLastUpdate = [NSDate date];
     if(delegate)
         [delegate BVAClientListUpdater:self didFinishUpdatingWithErrors:errors];
     NSLog(@"done");
@@ -95,12 +99,14 @@
     [self sayDelegateAboutErrors];
 }
 
+// не удалось скачать файл - заканчиваем и сообщаем делегату
 -(void) BVAFileDownloader:(BVAFileDownloader *)downloader didFinishWithError:(NSError *)error{
     [errors addObject:[error copy]];
     [self sayDelegateAboutErrors];
     fileDownloader = nil;
 }
 
+// Завершаем обновление с ошибкой и сообщаем об этом делегату
 -(void) sayDelegateAboutErrors{
     id delegate_buf = delegate;
     if(delegate_buf != nil){

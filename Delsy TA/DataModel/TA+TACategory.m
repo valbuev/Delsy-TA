@@ -10,8 +10,10 @@
 
 @implementation TA (TACategory)
 
+// Ищет ТА с id = taID, если находит, то возвращает, иначе, создает новый.
 +(TA *) getTAbyID:(NSString *) taID withMOC:(NSManagedObjectContext *) managedObjectContext{
     
+    // Ищем ТА с id = taID, если не нашли, то создаем нового, если получаем ошибку, то возвращаем nil
     TA *ta;
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"TA"
                                               inManagedObjectContext:managedObjectContext];
@@ -41,7 +43,10 @@
     return ta;
 }
 
+// Помечает все имеющиеся в базе ТА как удаленные
 +(void) setAllTADeleted:(Boolean) deleted InManagedObjectContext:(NSManagedObjectContext *) managedObjectContext{
+    
+    // Получаем всех ТА
     TA *ta;
     NSArray *TAlist;
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"TA"
@@ -52,6 +57,7 @@
     NSError *error = nil;
     TAlist = [managedObjectContext executeFetchRequest:request error:&error];
     
+    // Если нет ошибок, то проходим по списку и помечаем каждый как удаленный
     if (TAlist == nil){
         NSLog(@"Exception while getting TA`s array for set those deleted %d. Error: %@",deleted,error.localizedDescription);
         return;
@@ -61,6 +67,7 @@
     }
 }
 
+// Возвращает все ТА (и удаленные и неудаленные)
 +(NSArray *)getAllTA:(NSManagedObjectContext *) context{
     NSArray *TAlist;
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"TA"

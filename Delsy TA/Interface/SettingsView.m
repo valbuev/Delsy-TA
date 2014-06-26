@@ -9,6 +9,8 @@
 #import "SettingsView.h"
 #import "TAListView.h"
 #import "AppDelegate.h"
+#import "AppSettings+AppSettingsCategory.h"
+#import "TA+TACategory.h"
 
 @interface SettingsView ()
 
@@ -29,6 +31,7 @@
 @synthesize progressViewUpdatingAllPhotos;
 @synthesize managedObjectContext = _managedObjectContext;
 
+// Инициализация свойства managedObjectContext из AppDelegate
 - (NSManagedObjectContext *)managedObjectContext {
     if(_managedObjectContext != nil){
         return _managedObjectContext;
@@ -40,19 +43,42 @@
     return _managedObjectContext;
 }
 
+// Инициализация свойства appSettings из managedObjectContext
+-(AppSettings *) appSettings{
+    if(_appSettings != nil)
+        return _appSettings;
+    _appSettings = [AppSettings getInstance:self.managedObjectContext];
+    return _appSettings;
+}
+
+// Нажата кнопка обновления Списка клиентов,
+// создаем updater, отдаем ему контекст, записываемся в делегаты и стартуем обновление
 - (IBAction)OnBtnUpdateClientListClick:(id)sender{
+    // Если сейчас идет обновление, то запрещаем действия
+    if(isManagedObjectContextUpdating)
+        return;
     clientListUpdater = [[BVAClientListUpdater alloc] init];
     clientListUpdater.managedObjectContext = self.managedObjectContext;
     clientListUpdater.delegate = self;
     [clientListUpdater startUpdating];
 }
+
+// Нажата кнопка обновления Каталога,
+// создаем updater, отдаем ему контекст, записываемся в делегаты и стартуем обновление
 - (IBAction)OnBtnUpdatePriceListClick:(id)sender{
+    // Если сейчас идет обновление, то запрещаем действия
+    if(isManagedObjectContextUpdating)
+        return;
     
 }
 - (IBAction)OnBtnUpdateAllPhotosClick:(id)sender{
+    // Если сейчас идет обновление, то запрещаем действия
+    if(isManagedObjectContextUpdating)
+        return;
     
 }
 
+// Автогенерированная функция
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -65,12 +91,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    isManagedObjectContextUpdating = NO;
+    [self addObserversForAppSettings];
+    [self setLabelsTexts];
+}
+
+//
+-(void) setLabelsTexts{
+    [self updateLabelClientListLastUpdate];
+    [self updateLabelPriceListLastUpdate];
+    [self updateLabelTAName];
+}
+
+// По выходу производим нужные действия, например, зануляем ссылки, или удаляем обсерверов
+-(void)dealloc{
+    [self removeObserversForAppSettings];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,70 +114,47 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+#pragma mark Updating Labels
+
+//Обновляем даты во время первого запуска, по таймеру, или по сообщению обсервера
+-(void) updateLabelClientListLastUpdate{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        self.labelClientListLastUpdate.text =
+            [self dateFormaterForLastUpdateLabels:self.appSettings.clientsListLastUpdate];
+    }];
+}
+-(void) updateLabelPriceListLastUpdate{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        self.labelPriceListLastUpdate.text =
+            [self dateFormaterForLastUpdateLabels:self.appSettings.priceLastUpdate];
+    }];
+}
+-(NSString *) dateFormaterForLastUpdateLabels: (NSDate *) lastUpdate{
+    if(!lastUpdate)
+        return @"Никогда не обновлялось";
+    NSDate *now = [NSDate date];
+    if([now compare:lastUpdate] == NSOrderedAscending )
+        return @"Ошибка в дате обновления";
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"Обновлено: dd MMM в hh:mm"];
+    return [formatter stringFromDate:lastUpdate];
+}
+-(void) updateLabelTAName{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        TA *currentTA = (TA *) self.appSettings.currentTA;
+        if(!currentTA)
+            self.labelTAName.text = @"";
+        else{
+            self.labelTAName.text = currentTA.name;
+        }
+    }];
+}
+
+
 #pragma mark - Table view data source
 
-/*- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}*/
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+/**********     Все ячейки - статичны, поэтому функции кол-ва секций, ячеек в секции, редактирования ячеек и генерирования ячеек не реализуем     *********/
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -158,33 +170,76 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     if([segue.identifier isEqualToString:@"TAListView"]){
         TAListView *taListView = segue.destinationViewController;
         taListView.managedObjectContext = self.managedObjectContext;
     }
 }
 
+// Отменяем переход на другие view, если требуется
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    // Если сейчас идет обновление, то запрещаем действия
+    if(isManagedObjectContextUpdating)
+        return NO;
+    return YES;
+}
+
 #pragma mark - BVAClientListUpdater
 
 -(void)BVAClientListUpdater:(BVAClientListUpdater *)updater didFinishUpdatingWithErrors:(NSArray *)errors{
-    NSLog(@"stop");
+    // Выставляем флаг
+    isManagedObjectContextUpdating = NO;
+    // Посылаем в основной поток, чтобы сразу изменения сразу вступили в силу
+    // останавливаем анимацию
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         [self.activityIndicatorClientList stopAnimating];
     }];
 }
 
 - (void)BVAClientListUpdater:(BVAClientListUpdater *)updater didStopUpdatingWithErrors:(NSArray *)errors{
+    // Выставляем флаг
+    isManagedObjectContextUpdating = NO;
+    // останавливаем анимацию
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         [self.activityIndicatorClientList stopAnimating];
     }];
 }
 
 -(void)BVAClientListUpdaterDidStartUpdating:(BVAClientListUpdater *)updater{
+    // Выставляем флаг
+    isManagedObjectContextUpdating = YES;
+    // запускаем анимацию
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         [self.activityIndicatorClientList startAnimating];
     }];
+}
+
+#pragma mark Observing
+
+// Устанавливаем "прослушку" за объектом appSettings, чтобы быть в курсе изменений
+-(void) addObserversForAppSettings{
+    [self.appSettings addObserver:self forKeyPath:@"clientsListLastUpdate" options:NSKeyValueObservingOptionNew context:nil];
+    [self.appSettings addObserver:self forKeyPath:@"priceLastUpdate" options:NSKeyValueObservingOptionNew context:nil];
+    [self.appSettings addObserver:self forKeyPath:@"currentTA" options:NSKeyValueObservingOptionNew context:nil];
+}
+
+// Убираем "прослушку" за объектом appSettings
+-(void) removeObserversForAppSettings{
+    [self.appSettings removeObserver:self forKeyPath:@"clientsListLastUpdate"];
+    [self.appSettings removeObserver:self forKeyPath:@"priceLastUpdate"];
+    [self.appSettings removeObserver:self forKeyPath:@"currentTA"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if([keyPath isEqualToString:@"clientsListLastUpdate"]){
+        [self updateLabelClientListLastUpdate];
+    }
+    else if([keyPath isEqualToString:@"priceLastUpdate"]){
+        [self updateLabelPriceListLastUpdate];
+    }
+    else if([keyPath isEqualToString:@"currentTA"]){
+        [self updateLabelTAName];
+    }
 }
 
 @end
