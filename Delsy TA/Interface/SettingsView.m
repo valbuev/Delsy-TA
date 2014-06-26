@@ -106,6 +106,7 @@
 // По выходу производим нужные действия, например, зануляем ссылки, или удаляем обсерверов
 -(void)dealloc{
     [self removeObserversForAppSettings];
+    self.managedObjectContext = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -181,6 +182,14 @@
     // Если сейчас идет обновление, то запрещаем действия
     if(isManagedObjectContextUpdating)
         return NO;
+    if(
+            ( [identifier isEqualToString:@"ClientListForNewOrder"]
+                || [identifier isEqualToString:@"ClientListForWatchHistory"] )
+                && !self.appSettings.currentTA
+       )
+        {
+            return NO;
+        }
     return YES;
 }
 

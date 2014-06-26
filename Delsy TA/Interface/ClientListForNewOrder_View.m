@@ -1,20 +1,38 @@
 //
-//  TAListView.m
+//  ClientListForNewOrder_View.m
 //  Delsy TA
 //
-//  Created by Valeriy Buev on 25.06.14.
+//  Created by Valeriy Buev on 26.06.14.
 //  Copyright (c) 2014 bva. All rights reserved.
 //
 
-#import "TAListView.h"
-#import "TA+TACategory.h"
-#import "AppSettings+AppSettingsCategory.h"
+#import "ClientListForNewOrder_View.h"
+#import "Address+AddressCategory.h"
 
-@interface TAListView ()
+@interface ClientListForNewOrder_View (){
+    
+}
+//AddressCell
+//ClientNameCell
+
+@property (strong, nonatomic) NSFetchedResultsController *fetchedController;
 
 @end
 
-@implementation TAListView
+@implementation ClientListForNewOrder_View
+
+@synthesize fetchedController = _fetchedController;
+
+-(NSFetchedResultsController *)fetchedController{
+    if( !_fetchedController )
+        return _fetchedController;
+    _fetchedController = [Address getFetchedResultsController:nil managedObjectContext:self.managedObjectContext delegate:self];
+    NSError *error;
+    [_fetchedController performFetch:&error];
+    if(error)
+        NSLog(@"error with performing fetchedResultsController in ClientListForNewOrder_View \n Error: %@",error.localizedDescription);
+    return _fetchedController;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -28,12 +46,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if(self.managedObjectContext){
-        taList = [TA getAllTA:self.managedObjectContext];
-    }
-    else{
-        taList = [NSArray array];
-    }
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -51,30 +64,33 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return self.fetchedController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return taList.count;
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedController.sections objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
 }
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TACell" forIndexPath:indexPath];
+    static NSString *cellIdentifier = @"AddressCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
-    TA *ta = [taList objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"name = %@ id = %@ deleted = %d",ta.name,ta.id,[ta.deleted boolValue]];
+    Address *address = (Address *) [self.fetchedController objectAtIndexPath:indexPath];
+    cell.textLabel.text = address.address;
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    AppSettings *appSettings = [AppSettings getInstance:self.managedObjectContext];
-    TA *ta = [taList objectAtIndex:indexPath.row];
-    appSettings.currentTA = ta;
-#warning You must save context after updating !!!
-#warning You must add  predicate " deleted = NO" !!!
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    static NSString *cellIdentifier = @"ClientNameCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedController.sections objectAtIndex:section];
+    cell.textLabel.text = [sectionInfo name];
+    return cell;
 }
 
 /*

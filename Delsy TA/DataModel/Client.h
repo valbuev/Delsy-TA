@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class TA;
 
 @interface Client : NSManagedObject
 
@@ -17,7 +18,7 @@
 @property (nonatomic, retain) NSNumber * sale;
 @property (nonatomic, retain) NSSet *addresses;
 @property (nonatomic, retain) NSSet *orders;
-@property (nonatomic, retain) NSManagedObject *ta;
+@property (nonatomic, retain) TA *ta;
 @property (nonatomic, retain) NSNumber *deleted;
 @end
 

@@ -7,7 +7,7 @@
         <!--Choose client for looking order-list-->
         <scene sceneID="ghx-LF-DJn">
             <objects>
-                <tableViewController id="Eup-uy-tKg" userLabel="Choose client for looking order-list" customClass="TableViewController" sceneMemberID="viewController">
+                <tableViewController id="Eup-uy-tKg" userLabel="Choose client for looking order-list" customClass="ClientListForNewOrder_View" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="UIA-Vs-oOR">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1789,7 +1789,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="At4-Eg-aGP" kind="push" id="cvI-bN-maZ"/>
+                                            <segue destination="At4-Eg-aGP" kind="push" identifier="ClientListForWatchHistory" id="cvI-bN-maZ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="RC9-8i-DaL" style="IBUITableViewCellStyleDefault" id="TWQ-cm-kAi">
@@ -1820,7 +1820,7 @@
                     <navigationItem key="navigationItem" title="Настройки" id="pjA-vp-fCs">
                         <barButtonItem key="rightBarButtonItem" title="Новый заказ" id="tQT-Sv-Ec8">
                             <connections>
-                                <segue destination="Eup-uy-tKg" kind="push" id="l30-SC-ehx"/>
+                                <segue destination="Eup-uy-tKg" kind="push" identifier="ClientListForNewOrder" id="l30-SC-ehx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1868,7 +1868,7 @@
         <!--Choose client for create new order-->
         <scene sceneID="Htn-PN-1yR">
             <objects>
-                <tableViewController id="At4-Eg-aGP" userLabel="Choose client for create new order" customClass="TableViewController" sceneMemberID="viewController">
+                <tableViewController id="At4-Eg-aGP" userLabel="Choose client for create new order" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="psr-Y9-GPj">
                         <rect key="frame" x="0.0" y="64" width="768" height="960"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

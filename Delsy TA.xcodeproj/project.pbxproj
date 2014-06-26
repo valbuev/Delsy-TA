@@ -50,6 +50,7 @@
 		A3AC3A4D19513B25004D1EE1 /* NSNumber+NSNumberUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC3A4C19513B25004D1EE1 /* NSNumber+NSNumberUnit.m */; };
 		A3ACB96719593CBA00D2C77A /* NSNumber+bvaLineColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ACB96619593CBA00D2C77A /* NSNumber+bvaLineColor.m */; };
 		A3ACB96C195948A300D2C77A /* SettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ACB96B195948A300D2C77A /* SettingsView.m */; };
+		A3C04E22195C336A00DAFB32 /* ClientListForNewOrder_View.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */; };
 		A3F96CB1194FEAE000C0C66E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3F96CB0194FEAE000C0C66E /* CoreData.framework */; };
 		A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3F96CB2194FEB8A00C0C66E /* DataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -144,6 +145,8 @@
 		A3ACB96619593CBA00D2C77A /* NSNumber+bvaLineColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+bvaLineColor.m"; path = "DataModel/NSNumber+bvaLineColor.m"; sourceTree = "<group>"; };
 		A3ACB96A195948A300D2C77A /* SettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsView.h; path = Interface/SettingsView.h; sourceTree = "<group>"; };
 		A3ACB96B195948A300D2C77A /* SettingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsView.m; path = Interface/SettingsView.m; sourceTree = "<group>"; };
+		A3C04E20195C336A00DAFB32 /* ClientListForNewOrder_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientListForNewOrder_View.h; path = Interface/ClientListForNewOrder_View.h; sourceTree = "<group>"; };
+		A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientListForNewOrder_View.m; path = Interface/ClientListForNewOrder_View.m; sourceTree = "<group>"; };
 		A3F96CB0194FEAE000C0C66E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		A3F96CB3194FEB8A00C0C66E /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -447,6 +450,7 @@
 		A3ACB9681959481A00D2C77A /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				A3C04E1F195C332800DAFB32 /* ClientListForNewOrder_View */,
 				A341AFED195AB900001B7168 /* TAListView */,
 				A35AB903194EF1D3002BAF0D /* Main.storyboard */,
 				A3ACB9691959483500D2C77A /* SettingsView */,
@@ -461,6 +465,15 @@
 				A3ACB96B195948A300D2C77A /* SettingsView.m */,
 			);
 			name = SettingsView;
+			sourceTree = "<group>";
+		};
+		A3C04E1F195C332800DAFB32 /* ClientListForNewOrder_View */ = {
+			isa = PBXGroup;
+			children = (
+				A3C04E20195C336A00DAFB32 /* ClientListForNewOrder_View.h */,
+				A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */,
+			);
+			name = ClientListForNewOrder_View;
 			sourceTree = "<group>";
 		};
 		A3F96CB5194FEB9600C0C66E /* DataModel */ = {
@@ -612,6 +625,7 @@
 				A3ACB96719593CBA00D2C77A /* NSNumber+bvaLineColor.m in Sources */,
 				A35A066B1952B12300D99BE0 /* Client.m in Sources */,
 				A341AFDA195A6472001B7168 /* BVAFileDownloader.m in Sources */,
+				A3C04E22195C336A00DAFB32 /* ClientListForNewOrder_View.m in Sources */,
 				A35A06A41952C9F700D99BE0 /* Item+ItemCategory.m in Sources */,
 				A341AFE1195A8B08001B7168 /* BVAClientListParser.m in Sources */,
 			);

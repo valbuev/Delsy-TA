@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class TA;
 
 @interface AppSettings : NSManagedObject
 
@@ -16,6 +17,6 @@
 @property (nonatomic, retain) NSDate * clientsListLastUpdate;
 @property (nonatomic, retain) NSDate * priceDate;
 @property (nonatomic, retain) NSDate * priceLastUpdate;
-@property (nonatomic, retain) NSManagedObject *currentTA;
+@property (nonatomic, retain) TA *currentTA;
 
 @end

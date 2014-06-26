@@ -7,7 +7,7 @@
 //
 
 #import "AppSettings.h"
-
+#import "TA.h"
 
 @implementation AppSettings
 

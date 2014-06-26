@@ -7,6 +7,7 @@
 //
 
 #import "Client.h"
+#import "TA.h"
 
 
 @implementation Client
