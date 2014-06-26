@@ -61,9 +61,10 @@
     }
     // Помечаем все ТА-managedObject-ы как deleted
     [TA setAllTADeleted:YES InManagedObjectContext:self.managedObjectContext];
+    // Помечаем все Client & Address-managedObject-ы как deleted
+    [Address setAllAddressesDeleted:YES InManagedObjectContext:self.managedObjectContext];
     // проходим по всем словарям
-    for(int ta_dict_number = 0; ta_dict_number < TAdicts.count; ta_dict_number++){
-        NSDictionary *TAdict = [TAdicts objectAtIndex:ta_dict_number];
+    for( NSDictionary *TAdict in TAdicts ){
         NSArray *TAdictKeys = TAdict.allKeys;
         // Если нет каких-либо ключей, переходим к следующему ТА
         if( ![TAdictKeys containsObject:@"_name"]
@@ -74,24 +75,64 @@
         }
         NSString *TAname = [TAdict objectForKey:@"_name"];
         NSString *TAid = [TAdict objectForKey:@"_id"];
-        NSArray *clientDicts = [TAdict objectForKey:@"client"];
+        NSArray *addressDicts = [TAdict objectForKey:@"client"];
         // Если какие-либо из объектов словаря пусты, переходим к следующему ТА
         if( [TAname isEqualToString:@""]
            || [TAid isEqualToString:@""]
-           || clientDicts.count == 0 ){
+           || addressDicts.count == 0 ){
             [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9998 userInfo:[NSDictionary dictionaryWithObject:@"TAdict dont contain any keys" forKey:@"info"]]];
             continue;
         }
-        // Запрашиваем managedObject с id = TAid
+        // Запрашиваем managedObject с id = TAid и устанавливаем значения
         TA *ta = [TA getTAbyID:TAid withMOC:self.managedObjectContext];
         ta.name = TAname;
         ta.deleted = NO;
+        // проходим по всем адресам
+        // На самом деле в xml они записаны как <client>, но записаны там АДРЕСА с информацией о клиенте
+        for( NSDictionary *adrDict in addressDicts ){
+            NSArray *addressDictKeys = [adrDict allKeys];
+            // Если нет каких-либо ключей, переходим к следующему Address
+            if( ![addressDictKeys containsObject:@"name"]
+               || ![addressDictKeys containsObject:@"custAccount"]
+               || ![addressDictKeys containsObject:@"address"]
+               || ![addressDictKeys containsObject:@"addressId"]
+               || ![addressDictKeys containsObject:@"sale"]){
+                [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9997 userInfo:[NSDictionary dictionaryWithObject:@"<client> tag dont contain any keys" forKey:@"info"]]];
+                continue;
+            }
+            NSString *clientName = [adrDict objectForKey:@"name"];
+            NSString *custAccount = [adrDict objectForKey:@"custAccount"];
+            NSString *addressName = [adrDict objectForKey:@"address"];
+            NSString *addressId = [adrDict objectForKey:@"addressId"];
+            NSNumber *clientSale = [NSNumber numberWithInt:[[adrDict objectForKey:@"sale"] floatValue]];
+            // Если какие-либо значения не верны, переходим к следующему Address
+            if( [clientName isEqualToString:@""]
+               || [custAccount isEqualToString:@""]
+               || [addressName isEqualToString:@""]
+               || [addressId isEqualToString:@""]
+               || clientSale.floatValue > 99
+               || clientSale.floatValue < 0 ){
+                [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9997 userInfo:[NSDictionary dictionaryWithObject:@"<client> tag contain any wrong values" forKey:@"info"]]];
+            }
+            
+            // Запрашиваем managedObject с id = addressId и устанавливаем значения
+            Address *address = [Address getAddressByAddressId:addressId withMOC:self.managedObjectContext];
+            // Запрашиваем managedObject с id = custAccount и устанавливаем значения
+            Client *client = [Client getClientByCustAccount:custAccount withMOC:self.managedObjectContext];
+            client.name = clientName;
+            client.sale = clientSale;
+            client.deleted = NO;
+            address.address = addressName;
+            address.deleted = NO;
+            address.client = client;
+        }
     }
     AppSettings *appSettings = [AppSettings getInstance:self.managedObjectContext];
     appSettings.clientsListLastUpdate = [NSDate date];
     if(delegate)
         [delegate BVAClientListUpdater:self didFinishUpdatingWithErrors:errors];
     NSLog(@"done");
+#warning You must save context after updating !!!
 }
 
 -(void) saveErrorAndSayDelegateAboutError:(NSError *)error{

@@ -10,4 +10,11 @@
 
 @interface Address (AddressCategory)
 
+// помечаем все адреса как удаленные
++ (void) setAllAddressesDeleted:(Boolean)isDeleted InManagedObjectContext: (NSManagedObjectContext *) context;
+
+// Ищет Address с self.addressId = addressId, если находит, то возвращает, иначе, создает новый.
++(Address *) getAddressByAddressId:(NSString *) addressId withMOC:(NSManagedObjectContext *) managedObjectContext;
+
+
 @end

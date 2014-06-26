@@ -10,4 +10,57 @@
 
 @implementation Client (ClientCategory)
 
++(void)setAllClientsDeleted:(Boolean)isDeleted InManagedObjectContext:(NSManagedObjectContext *)context{
+    
+    // Получаем все Clients
+    Client *client;
+    NSArray *ClientList;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Client"
+                                              inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSError *error = nil;
+    ClientList = [context executeFetchRequest:request error:&error];
+    
+    // Если нет ошибок, то проходим по списку и помечаем каждый как удаленный
+    if (ClientList == nil){
+        NSLog(@"Exception while getting TA`s array for set those deleted %d. Error: %@",isDeleted,error.localizedDescription);
+        return;
+    }
+    else for(client in ClientList){
+        client.deleted = [NSNumber numberWithBool:isDeleted];
+    }
+}
+
+// Ищет Client с self.custAccount = custAccount, если находит, то возвращает, иначе, создает новый.
++(Client *) getClientByCustAccount:(NSString *) custAccount withMOC:(NSManagedObjectContext *) managedObjectContext{
+    Client *client;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Client"
+                                              inManagedObjectContext:managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"cust_account == %@",custAccount];
+    [request setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (array == nil){
+        NSLog(@"Exception while getting Client`s array by cust_account. Error: %@",error.localizedDescription);
+        client = nil;
+    }
+    else{
+        if( array.count == 0 ){
+            client = [[Client alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
+            client.cust_account = custAccount;
+        }
+        else{
+            client = [array objectAtIndex:0];
+        }
+    }
+    return client;
+}
+
 @end

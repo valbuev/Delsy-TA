@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) NSString * address;
 @property (nonatomic, retain) NSString * address_id;
+@property (nonatomic, retain) NSNumber * deleted;
 @property (nonatomic, retain) Client *client;
 @property (nonatomic, retain) NSSet *orders;
 @end

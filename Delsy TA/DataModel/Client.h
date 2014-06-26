@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSSet *addresses;
 @property (nonatomic, retain) NSSet *orders;
 @property (nonatomic, retain) NSManagedObject *ta;
+@property (nonatomic, retain) NSNumber *deleted;
 @end
 
 @interface Client (CoreDataGeneratedAccessors)

@@ -17,5 +17,6 @@
 @dynamic addresses;
 @dynamic orders;
 @dynamic ta;
+@dynamic deleted;
 
 @end

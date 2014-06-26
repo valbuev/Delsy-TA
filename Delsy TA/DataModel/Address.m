@@ -16,5 +16,6 @@
 @dynamic address_id;
 @dynamic client;
 @dynamic orders;
+@dynamic deleted;
 
 @end
