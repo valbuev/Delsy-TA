@@ -75,6 +75,7 @@
     appSettings.currentTA = ta;
 #warning You must save context after updating !!!
 #warning You must add  predicate " deleted = NO" !!!
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

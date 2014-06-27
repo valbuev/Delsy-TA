@@ -29,7 +29,7 @@
 
 // Скачивание завершено, меняем кодировку, парсим xml в NSDictionary и отправляем его на обработку сохранение
 -(void) BVAFileDownloader:(BVAFileDownloader *)downloader didFinishDownloadingToURL:(NSURL *)location{
-    NSLog(@"done");
+    NSLog(@"\n\n\ndone\n\n\n");
     NSError *error;
     NSString *str = [NSString stringWithContentsOfURL:location encoding:NSWindowsCP1251StringEncoding error:&error];
     //str = [str stringByReplacingOccurrencesOfString:@"encoding=\"windows-1251\"" withString:@""];
@@ -40,7 +40,10 @@
     else{
         XMLDictionaryParser *parser = [[XMLDictionaryParser alloc] init];
         parseResults = [parser dictionaryWithString:str];
-        [self saveParsedDictionaryIntoCoreData];
+        // Запускаем в главном потоке, чтобы избежать ошибок CoreData
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+            [self saveParsedDictionaryIntoCoreData];
+        }];
     }
     fileDownloader = nil;
 }
@@ -79,7 +82,7 @@
             appSettings.currentTA = nil;
     if(delegate)
         [delegate BVAClientListUpdater:self didFinishUpdatingWithErrors:errors];
-    NSLog(@"done");
+    NSLog(@"\n\n\ndone\n\n\n");
 #warning You must save context after updating !!!
 }
 
@@ -112,54 +115,88 @@
         ta.name = TAname;
         ta.deleted = NO;
         
+        // Сохраняем клиентов и адреса текущего ТА
         [self saveAddressListIntoCoreData:addressDicts forTA:ta];
+#pragma mark managedObjectContext save
+        [managedObjectContext save:nil];
+        //NSLog(@"\nTA: %@ \n%@",ta.name,addressDicts);
     }
 }
 
--(void) saveAddressListIntoCoreData: (NSArray *) addressDicts forTA: (TA *) ta {
-        // проходим по всем адресам
+-(void) saveAddressListIntoCoreData: (NSObject *) addressDicts forTA: (TA *) ta {
+        // Если получили на вход словарь, то для этого агента один клиент, поэтому сразу посылаем в обработку
+        // Если - список, то проходим по всем элементам списка - словарям с  адресами
         // На самом деле в xml они записаны как <client>, но записаны там АДРЕСА с информацией о клиенте
-    for( NSDictionary *adrDict in addressDicts ){
-        NSArray *addressDictKeys = [adrDict allKeys];
-            // Если нет каких-либо ключей, переходим к следующему Address
-        if( ![addressDictKeys containsObject:@"name"]
-           || ![addressDictKeys containsObject:@"custAccount"]
-           || ![addressDictKeys containsObject:@"address"]
-           || ![addressDictKeys containsObject:@"addressId"]
-           || ![addressDictKeys containsObject:@"sale"]){
-            [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9997
-                                              userInfo:[NSDictionary dictionaryWithObject:@"<client> tag dont contain any keys" forKey:@"info"]]];
-            continue;
+    if( [addressDicts isKindOfClass:[NSDictionary class]] ){
+        [self saveAddressIntoCoreData:(NSDictionary *)addressDicts forTA:ta];
+    }
+    else if( [addressDicts isKindOfClass:[NSArray class]] ){
+        int i=0;
+        for( NSDictionary *adrDict in (NSArray *)addressDicts){
+            [self saveAddressIntoCoreData:adrDict forTA:ta];
+            i++;
+            if(i>20){
+#pragma mark managedObjectContext save
+                [managedObjectContext save:nil];
+                i=0;
+            }
         }
-        NSString *clientName = [adrDict objectForKey:@"name"];
-        NSString *custAccount = [adrDict objectForKey:@"custAccount"];
-        NSString *addressName = [adrDict objectForKey:@"address"];
-        NSString *addressId = [adrDict objectForKey:@"addressId"];
-        NSNumber *clientSale = [NSNumber numberWithInt:[[adrDict objectForKey:@"sale"] floatValue]];
-            // Если какие-либо значения не верны, переходим к следующему Address
-        if( [clientName isEqualToString:@""]
-           || [custAccount isEqualToString:@""]
-           || [addressName isEqualToString:@""]
-           || [addressId isEqualToString:@""]
-           || clientSale.floatValue > 99
-           || clientSale.floatValue < 0 ){
-            [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9997
-                                              userInfo:[NSDictionary dictionaryWithObject:@"<client> tag contain any wrong values" forKey:@"info"]]];
-        }
-        
-            // Запрашиваем managedObject с id = addressId и устанавливаем значения
-        Address *address = [Address getAddressByAddressId:addressId withMOC:self.managedObjectContext];
-            // Запрашиваем managedObject с id = custAccount и устанавливаем значения
-        Client *client = [Client getClientByCustAccount:custAccount withMOC:self.managedObjectContext];
-        
+    }
+}
+
+-(void) saveAddressIntoCoreData: (NSDictionary *) adrDict forTA:(TA *) ta{
+    if(![adrDict isKindOfClass:[NSDictionary class]]){
+        NSLog(@"\n adrDict is not a kind of NSDictionary-class: \n%@ \n TA: %@",adrDict,ta.name);
+        [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9996
+                                          userInfo:[NSDictionary dictionaryWithObject:@"adrDict is not a kind of NSDictionary-class" forKey:@"info"]]];
+        return;
+    }
+    NSArray *addressDictKeys = [adrDict allKeys];
+    // Если нет каких-либо ключей, переходим к следующему Address
+    if( ![addressDictKeys containsObject:@"name"]
+       || ![addressDictKeys containsObject:@"custAccount"]
+       || ![addressDictKeys containsObject:@"address"]
+       || ![addressDictKeys containsObject:@"addressId"]
+       || ![addressDictKeys containsObject:@"sale"]){
+        [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9997
+                                          userInfo:[NSDictionary dictionaryWithObject:@"<client> tag dont contain any keys" forKey:@"info"]]];
+        return;
+    }
+    NSString *clientName = [adrDict objectForKey:@"name"];
+    NSString *custAccount = [adrDict objectForKey:@"custAccount"];
+    NSString *addressName = [adrDict objectForKey:@"address"];
+    NSString *addressId = [adrDict objectForKey:@"addressId"];
+    NSNumber *clientSale = [NSNumber numberWithInt:[[adrDict objectForKey:@"sale"] floatValue]];
+    // Если какие-либо значения не верны, переходим к следующему Address
+    if( [clientName isEqualToString:@""]
+       || [custAccount isEqualToString:@""]
+       || [addressName isEqualToString:@""]
+       || [addressId isEqualToString:@""]
+       || clientSale.floatValue > 99
+       || clientSale.floatValue < 0 ){
+        [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9997
+                                          userInfo:[NSDictionary dictionaryWithObject:@"<client> tag contain any wrong values" forKey:@"info"]]];
+        return;
+    }
+
+    // Запрашиваем managedObject с id = custAccount и устанавливаем значения
+    //NSLog(@"\nTA: %@\n1 %@ %@ %@",ta.name,custAccount,clientName,clientSale);
+    Client *client = [Client getClientByCustAccount:custAccount withMOC:self.managedObjectContext];
+    // Запрашиваем managedObject с id = addressId и устанавливаем значения
+    //NSLog(@"\nTA: %@\n%@ %@",ta.name,addressId,addressName);
+    Address *address = [Address getAddressByAddressId:addressId withMOC:self.managedObjectContext];
+    
+    //NSLog(@"\nTA: %@\n2 %@ %@ %@",ta.name,custAccount,clientName,clientSale);
+    if(client.deleted){
         client.name = clientName;
         client.sale = clientSale;
         client.deleted = NO;
         client.ta = ta;
-        address.address = addressName;
-        address.deleted = NO;
-        address.client = client;
     }
+    address.address = addressName;
+    address.deleted = NO;
+    address.client = client;
+    //NSLog(@"\nTA: %@\n3 %@ %@ %@",ta.name,custAccount,clientName,clientSale);
 }
 
 -(void) saveErrorAndSayDelegateAboutError:(NSError *)error{

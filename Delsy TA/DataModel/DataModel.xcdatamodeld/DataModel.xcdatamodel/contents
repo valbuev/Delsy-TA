@@ -2,7 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C1021" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Address" representedClassName="Address" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="address_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="address_id" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="addresses" inverseEntity="Client" syncable="YES"/>
         <relationship name="orders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Order" inverseName="address" inverseEntity="Order" syncable="YES"/>
@@ -15,7 +15,7 @@
         <relationship name="currentTA" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TA" inverseName="settings" inverseEntity="TA" syncable="YES"/>
     </entity>
     <entity name="Client" representedClassName="Client" syncable="YES">
-        <attribute name="cust_account" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cust_account" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sale" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
@@ -97,7 +97,7 @@
     <elements>
         <element name="Address" positionX="180" positionY="146" width="90" height="118"/>
         <element name="AppSettings" positionX="97" positionY="525" width="128" height="120"/>
-        <element name="Client" positionX="-108" positionY="135" width="128" height="150"/>
+        <element name="Client" positionX="-108" positionY="135" width="128" height="148"/>
         <element name="Fish" positionX="-479" positionY="126" width="128" height="90"/>
         <element name="Item" positionX="-279" positionY="297" width="128" height="313"/>
         <element name="Order" positionX="135" positionY="302" width="128" height="225"/>

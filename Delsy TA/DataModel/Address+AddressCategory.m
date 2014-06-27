@@ -34,18 +34,61 @@
     }
 }
 
-// Ищет Address с self.addressId = addressId, если находит, то возвращает, иначе, создает новый.
+ //Ищет Address с self.addressId = addressId, если находит, то возвращает, иначе, создает новый.
 +(Address *) getAddressByAddressId:(NSString *) addressId withMOC:(NSManagedObjectContext *) managedObjectContext{
     Address *address;
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Address"
                                               inManagedObjectContext:managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setFetchLimit:1];
     [request setEntity:entity];
-    
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"address_id == %@",addressId];
     [request setPredicate:predicate];
     
     NSError *error = nil;
+    //NSLog(@"get address by addressId: %@",addressId);
+    NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (array == nil){
+        NSLog(@"Exception while getting Address`s array by address_id. Error: %@",error.localizedDescription);
+        address = nil;
+    }
+    else{
+        if( array.count == 0 ){
+            address = [[Address alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
+            address.address_id = addressId;
+        }
+        else{
+            address = [array objectAtIndex:0];
+        }
+    }
+    return address;
+}
+
+//+(Address *) getAddressByAddressId:(NSString *) addressId withMOC:(NSManagedObjectContext *) managedObjectContext{
+//    Address *address;
+//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Address"
+//                                              inManagedObjectContext:managedObjectContext];
+//            address = [[Address alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
+//            address.address_id = addressId;
+//    return address;
+//}
+
+// Ищет Address с self.addressId = addressId and self.ta = ta, если находит, то возвращает, иначе, создает новый.
++(Address *) getAddressByAddressId:(NSString *) addressId client:(NSManagedObject *) client withMOC:(NSManagedObjectContext *) managedObjectContext{
+    Address *address;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Address"
+                                              inManagedObjectContext:managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setFetchLimit:1];
+    [request setEntity:entity];
+    //[request setFetchBatchSize:50];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"address_id == %@ AND client = %@",addressId,client];
+    [request setPredicate:predicate];
+    
+    NSError *error = nil;
+    //NSLog(@"get address by addressId: %@",addressId);
     NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
     
     if (array == nil){

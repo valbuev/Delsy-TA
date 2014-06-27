@@ -39,12 +39,15 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Client"
                                               inManagedObjectContext:managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setFetchLimit:1];
     [request setEntity:entity];
+    //[request setFetchBatchSize:50];
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"cust_account == %@",custAccount];
     [request setPredicate:predicate];
     
     NSError *error = nil;
+    //NSLog(@"get client by custAccount: %@",custAccount);
     NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
     
     if (array == nil){
@@ -62,5 +65,14 @@
     }
     return client;
 }
+
+//+(Client *) getClientByCustAccount:(NSString *) custAccount withMOC:(NSManagedObjectContext *) managedObjectContext{
+//    Client *client;
+//    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Client"
+//                                              inManagedObjectContext:managedObjectContext];
+//            client = [[Client alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
+//            client.cust_account = custAccount;
+//    return client;
+//}
 
 @end
