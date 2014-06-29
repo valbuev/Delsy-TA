@@ -1741,28 +1741,40 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Торговые представители" id="1Pr-2I-XAq">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="OSY-6y-Ula" detailTextLabel="q9z-kT-bvb" style="IBUITableViewCellStyleValue1" id="LNT-wn-LS8">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="LNT-wn-LS8">
                                         <rect key="frame" x="0.0" y="235" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LNT-wn-LS8" id="LK5-gC-xFE">
                                             <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OSY-6y-Ula">
-                                                    <rect key="frame" x="15" y="11" width="34" height="22"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FsW-9J-DHV">
+                                                    <rect key="frame" x="20" y="0.0" width="581" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Выбрать" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q9z-kT-bvb">
-                                                    <rect key="frame" x="662" y="12" width="71" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выбрать" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieH-eD-bu4">
+                                                    <rect key="frame" x="609" y="0.0" width="126" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="126" id="D4K-ti-47g"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="ieH-eD-bu4" secondAttribute="bottom" id="Dgh-zu-tgA"/>
+                                                <constraint firstAttribute="trailing" secondItem="ieH-eD-bu4" secondAttribute="trailing" id="N1K-lv-4Ig"/>
+                                                <constraint firstAttribute="bottom" secondItem="FsW-9J-DHV" secondAttribute="bottom" id="WcC-aB-bp2"/>
+                                                <constraint firstItem="FsW-9J-DHV" firstAttribute="top" secondItem="LK5-gC-xFE" secondAttribute="top" id="bVb-yg-nVT"/>
+                                                <constraint firstItem="FsW-9J-DHV" firstAttribute="leading" secondItem="LK5-gC-xFE" secondAttribute="leading" constant="20" id="nxd-L0-DH6"/>
+                                                <constraint firstItem="ieH-eD-bu4" firstAttribute="top" secondItem="LK5-gC-xFE" secondAttribute="top" id="pV0-cm-lCz"/>
+                                                <constraint firstItem="ieH-eD-bu4" firstAttribute="leading" secondItem="FsW-9J-DHV" secondAttribute="trailing" constant="8" id="uof-io-TQd"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="mIv-vs-qhQ" kind="push" identifier="TAListView" id="4Mc-lt-gf0"/>
@@ -1834,7 +1846,7 @@
                         <outlet property="cellRemoveAllHistory" destination="TWQ-cm-kAi" id="8EX-lH-U0p"/>
                         <outlet property="labelClientListLastUpdate" destination="NOT-cg-58G" id="j5h-8I-fr8"/>
                         <outlet property="labelPriceListLastUpdate" destination="ps5-JL-5ki" id="6HU-GI-52V"/>
-                        <outlet property="labelTAName" destination="OSY-6y-Ula" id="VXq-f0-kbo"/>
+                        <outlet property="labelTAName" destination="FsW-9J-DHV" id="d9F-rO-l0x"/>
                         <outlet property="progressViewUpdatingAllPhotos" destination="YEf-PQ-Sgg" id="k43-Zj-Zf9"/>
                     </connections>
                 </tableViewController>

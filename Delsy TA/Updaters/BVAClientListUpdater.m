@@ -27,6 +27,23 @@
         [delegate BVAClientListUpdaterDidStartUpdating:self];
 }
 
+-(Boolean) saveManageObjectContext{
+    if(self.managedObjectContext == nil){
+        [errors addObject:[NSError errorWithDomain:@"savingMOC" code:9998
+                                          userInfo:[NSDictionary dictionaryWithObject:@"clientListUpdater.moc = nil" forKey:@"info"]]];
+        return NO;
+    }
+    else{
+        NSError *error;
+        [self.managedObjectContext save:&error];
+        if(error){
+            [errors addObject:error];
+            return NO;
+        }
+        return YES;
+    }
+}
+
 // Скачивание завершено, меняем кодировку, парсим xml в NSDictionary и отправляем его на обработку сохранение
 -(void) BVAFileDownloader:(BVAFileDownloader *)downloader didFinishDownloadingToURL:(NSURL *)location{
     NSLog(@"\n\n\ndone\n\n\n");
@@ -80,10 +97,10 @@
     if( currentTA )
         if( currentTA.deleted.boolValue == YES )
             appSettings.currentTA = nil;
+    [self saveManageObjectContext];
     if(delegate)
         [delegate BVAClientListUpdater:self didFinishUpdatingWithErrors:errors];
     NSLog(@"\n\n\ndone\n\n\n");
-#warning You must save context after updating !!!
 }
 
 -(void) saveTAListIntoCoreData: (NSArray *) TAdicts
@@ -117,8 +134,7 @@
         
         // Сохраняем клиентов и адреса текущего ТА
         [self saveAddressListIntoCoreData:addressDicts forTA:ta];
-#pragma mark managedObjectContext save
-        [managedObjectContext save:nil];
+        [self saveManageObjectContext];
         //NSLog(@"\nTA: %@ \n%@",ta.name,addressDicts);
     }
 }
@@ -136,8 +152,7 @@
             [self saveAddressIntoCoreData:adrDict forTA:ta];
             i++;
             if(i>20){
-#pragma mark managedObjectContext save
-                [managedObjectContext save:nil];
+                [self saveManageObjectContext];
                 i=0;
             }
         }

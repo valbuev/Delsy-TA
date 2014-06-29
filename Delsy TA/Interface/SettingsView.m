@@ -141,6 +141,7 @@
     [formatter setDateFormat:@"Обновлено: dd MMM в hh:mm"];
     return [formatter stringFromDate:lastUpdate];
 }
+// Обновляем текст лейбла с именем текущего ТА
 -(void) updateLabelTAName{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         TA *currentTA = (TA *) self.appSettings.currentTA;
@@ -155,7 +156,7 @@
 
 #pragma mark - Table view data source
 
-/**********     Все ячейки - статичны, поэтому функции кол-ва секций, ячеек в секции, редактирования ячеек и генерирования ячеек не реализуем     *********/
+/**********     Все ячейки статичны, поэтому функции кол-ва секций, ячеек в секции, редактирования ячеек и генерирования ячеек не реализуем     *********/
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -248,7 +249,6 @@
     }
     else if([keyPath isEqualToString:@"currentTA"]){
         [self updateLabelTAName];
-        NSLog(@"[keyPath isEqualToString:currentTA]");
     }
 }
 
