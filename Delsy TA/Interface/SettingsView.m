@@ -248,6 +248,7 @@
     }
     else if([keyPath isEqualToString:@"currentTA"]){
         [self updateLabelTAName];
+        NSLog(@"[keyPath isEqualToString:currentTA]");
     }
 }
 
