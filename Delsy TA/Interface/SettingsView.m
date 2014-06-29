@@ -53,6 +53,7 @@
     return _appSettings;
 }
 
+#pragma mark buttons's clicks
 // Нажата кнопка обновления Списка клиентов,
 // создаем updater, отдаем ему контекст, записываемся в делегаты и стартуем обновление
 - (IBAction)OnBtnUpdateClientListClick:(id)sender{
@@ -71,13 +72,18 @@
     // Если сейчас идет обновление, то запрещаем действия
     if(isManagedObjectContextUpdating)
         return;
-    
+    priceUpdater = [[BVAPriceUpdater alloc] init];
+    priceUpdater.managedObjectContext = self.managedObjectContext;
+    priceUpdater.delegate = self;
+    [priceUpdater startUpdating];
 }
 - (IBAction)OnBtnUpdateAllPhotosClick:(id)sender{
     // Если сейчас идет обновление, то запрещаем действия
     if(isManagedObjectContextUpdating)
         return;
 }
+
+#pragma mark init
 
 // Автогенерированная функция
 - (id)initWithStyle:(UITableViewStyle)style
@@ -212,6 +218,7 @@
     if([errors count] > 0){
         [self showCustomIOS7AlertViewWithMessages:errors title:@"В ходе обновления возникли ошибки:"];
     }
+    clientListUpdater = nil;
 }
 
 - (void)BVAClientListUpdater:(BVAClientListUpdater *)updater didStopUpdatingWithErrors:(NSArray *)errors{
@@ -222,6 +229,7 @@
         [self.activityIndicatorClientList stopAnimating];
     }];
     [self showCustomIOS7AlertViewWithMessages:errors title:@"Обновление остановлено из-за следующих ошибок:"];
+    clientListUpdater = nil;
 }
 
 -(void)BVAClientListUpdaterDidStartUpdating:(BVAClientListUpdater *)updater{
@@ -230,6 +238,42 @@
     // запускаем анимацию
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         [self.activityIndicatorClientList startAnimating];
+    }];
+}
+
+#pragma mark - BVAPriceUpdater
+
+-(void)BVAPriceUpdater:(BVAPriceUpdater *)updater didFinishUpdatingWithErrors:(NSArray *)errors{
+    // Выставляем флаг
+    isManagedObjectContextUpdating = NO;
+    // Посылаем в основной поток, чтобы сразу изменения вступили в силу
+    // останавливаем анимацию
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [self.activityIndicatorPriceList stopAnimating];
+    }];
+    if([errors count] > 0){
+        [self showCustomIOS7AlertViewWithMessages:errors title:@"В ходе обновления возникли ошибки:"];
+    }
+    priceUpdater = nil;
+}
+
+- (void)BVAPriceUpdater:(BVAPriceUpdater *)updater didStopUpdatingWithErrors:(NSArray *)errors{
+    // Выставляем флаг
+    isManagedObjectContextUpdating = NO;
+    // останавливаем анимацию
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [self.activityIndicatorPriceList stopAnimating];
+    }];
+    [self showCustomIOS7AlertViewWithMessages:errors title:@"Обновление остановлено из-за следующих ошибок:"];
+    priceUpdater = nil;
+}
+
+-(void)BVAPriceUpdaterDidStartUpdating:(BVAPriceUpdater *)updater{
+    // Выставляем флаг
+    isManagedObjectContextUpdating = YES;
+    // запускаем анимацию
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        [self.activityIndicatorPriceList startAnimating];
     }];
 }
 

@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "BVAClientListUpdater.h"
+#import "BVAPriceUpdater.h"
 
 @class AppSettings;
 
 @interface SettingsView : UITableViewController
-<BVAClientListUpdaterDelegate>
+<BVAClientListUpdaterDelegate, BVAPriceUpdaterDelegate>
 {
     BVAClientListUpdater *clientListUpdater;
+    BVAPriceUpdater *priceUpdater;
     Boolean isManagedObjectContextUpdating;
 }
 
