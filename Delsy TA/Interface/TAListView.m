@@ -16,6 +16,21 @@
 
 @implementation TAListView
 
+-(void) saveManageObjectContext{
+    if(self.managedObjectContext == nil){
+        NSLog(@"TAListView.managedObjectContext = nil");
+        abort();
+    }
+    else{
+        NSError *error;
+        [self.managedObjectContext save:&error];
+        if(error){
+            NSLog(@"TAListView.managedObjectContext = nil");
+            abort();
+        }
+    }
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -29,7 +44,7 @@
 {
     [super viewDidLoad];
     if(self.managedObjectContext){
-        taList = [TA getAllTA:self.managedObjectContext];
+        taList = [TA getAllNonDeletedTA:self.managedObjectContext];
     }
     else{
         taList = [NSArray array];
@@ -64,7 +79,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TACell" forIndexPath:indexPath];
     
     TA *ta = [taList objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"name = %@ id = %@ deleted = %d",ta.name,ta.id,[ta.deleted boolValue]];
+    cell.textLabel.text = ta.name;
     
     return cell;
 }
@@ -73,8 +88,7 @@
     AppSettings *appSettings = [AppSettings getInstance:self.managedObjectContext];
     TA *ta = [taList objectAtIndex:indexPath.row];
     appSettings.currentTA = ta;
-#warning You must save context after updating !!!
-#warning You must add  predicate " deleted = NO" !!!
+    [self saveManageObjectContext];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

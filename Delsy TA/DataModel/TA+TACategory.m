@@ -88,4 +88,28 @@
     return TAlist;
 }
 
+// Возвращает все ТА (неудаленные)
++(NSArray *)getAllNonDeletedTA:(NSManagedObjectContext *) context{
+    NSArray *TAlist;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"TA"
+                                              inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted = %@",NO];
+    [request setPredicate:predicate];
+    
+    NSError *error = nil;
+    TAlist = [context executeFetchRequest:request error:&error];
+    
+    if (TAlist == nil){
+        NSLog(@"Exception while getting TA`s array . Error: %@",error.localizedDescription);
+        //return nil;
+    }
+    return TAlist;
+}
+
 @end

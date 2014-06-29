@@ -18,5 +18,7 @@
 +(void) setAllTADeleted:(Boolean) deleted InManagedObjectContext:(NSManagedObjectContext *) managedObjectContext;
 // Возвращает все ТА (и удаленные и неудаленные)
 +(NSArray *)getAllTA:(NSManagedObjectContext *) context;
+// Возвращает все ТА (неудаленные)
++(NSArray *)getAllNonDeletedTA:(NSManagedObjectContext *) context ;
 
 @end

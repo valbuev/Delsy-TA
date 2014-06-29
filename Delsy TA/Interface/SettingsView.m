@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "AppSettings+AppSettingsCategory.h"
 #import "TA+TACategory.h"
+#import "CustomIOS7AlertView.h"
 
 @interface SettingsView ()
 
@@ -75,7 +76,6 @@
     // Если сейчас идет обновление, то запрещаем действия
     if(isManagedObjectContextUpdating)
         return;
-    
 }
 
 // Автогенерированная функция
@@ -199,11 +199,14 @@
 -(void)BVAClientListUpdater:(BVAClientListUpdater *)updater didFinishUpdatingWithErrors:(NSArray *)errors{
     // Выставляем флаг
     isManagedObjectContextUpdating = NO;
-    // Посылаем в основной поток, чтобы сразу изменения сразу вступили в силу
+    // Посылаем в основной поток, чтобы сразу изменения вступили в силу
     // останавливаем анимацию
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         [self.activityIndicatorClientList stopAnimating];
     }];
+    if([errors count] > 0){
+        [self showCustomIOS7AlertViewWithMessages:errors title:@"В ходе обновления возникли ошибки:"];
+    }
 }
 
 - (void)BVAClientListUpdater:(BVAClientListUpdater *)updater didStopUpdatingWithErrors:(NSArray *)errors{
@@ -213,6 +216,7 @@
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         [self.activityIndicatorClientList stopAnimating];
     }];
+    [self showCustomIOS7AlertViewWithMessages:errors title:@"Обновление остановлено из-за следующих ошибок:"];
 }
 
 -(void)BVAClientListUpdaterDidStartUpdating:(BVAClientListUpdater *)updater{
@@ -250,6 +254,46 @@
     else if([keyPath isEqualToString:@"currentTA"]){
         [self updateLabelTAName];
     }
+}
+
+#pragma mark CustomAlertView
+
+// Показываем алерт на основе списка ошибок или сообщений
+-(void) showCustomIOS7AlertViewWithMessages:(NSArray *) messages title:(NSString *) title
+{
+    NSString *text = [NSString string];
+    for(int i=0;i<messages.count;i++)
+    {
+        NSObject *message = [messages objectAtIndex:i];
+        if( [message isMemberOfClass:[NSError class]] )
+            text = [text stringByAppendingFormat:@"\n%@",[(NSError *) message localizedDescription]];
+        else {
+            text = [text stringByAppendingFormat:@"\n%@",message];
+        }
+    }
+    CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] init];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 600, 660)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 590, 50)];
+    //UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 590, 50)];
+    UILabel *title_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 600, 50)];
+    title_label.text = title;
+    title_label.textAlignment = NSTextAlignmentCenter;
+    title_label.textColor = [UIColor colorWithRed:0.5f green:0.1f blue:0.1f alpha:1.0f];
+    title_label.font = [UIFont systemFontOfSize:22.0f];
+    UIFont *font = [UIFont systemFontOfSize:10.0f];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, 600, 600)];
+    scrollView.scrollEnabled = YES;
+    [label setFont:font];
+    
+    [view addSubview:title_label];
+    [view addSubview:scrollView];
+    [scrollView addSubview:label];
+    [label setNumberOfLines:0];
+    label.text = text;
+    [label sizeToFit];
+    scrollView.contentSize = [label frame].size;
+    [alertView setContainerView:view];
+    [alertView show];
 }
 
 @end
