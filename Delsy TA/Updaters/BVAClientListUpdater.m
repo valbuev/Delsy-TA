@@ -174,7 +174,7 @@
        || ![addressDictKeys containsObject:@"addressId"]
        || ![addressDictKeys containsObject:@"sale"]){
         [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9997
-                                          userInfo:[NSDictionary dictionaryWithObject:@"<client> tag dont contain any keys" forKey:@"info"]]];
+                                          userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"<client> tag dont contain any keys, keys: %@",addressDictKeys] forKey:@"info"]]];
         return;
     }
     NSString *clientName = [adrDict objectForKey:@"name"];
@@ -190,7 +190,7 @@
        || clientSale.floatValue > 99
        || clientSale.floatValue < 0 ){
         [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9997
-                                          userInfo:[NSDictionary dictionaryWithObject:@"<client> tag contain any wrong values" forKey:@"info"]]];
+                                          userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"<client> tag contain any wrong values: clientName:%@ custAccount:%@ addressName:%@ addressId:%@ clientSale:%f",clientName,custAccount,addressName,addressId,clientSale.floatValue] forKey:@"info"]]];
         return;
     }
 

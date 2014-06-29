@@ -107,8 +107,8 @@
     return address;
 }
 
-// создает и возвращает NSFetchedResultsController. Если deleted == nil , то не учитывая свойство deleted. Если не nil, то учитывает. НЕ ЗАПУСКАЕТ ЕГО!!!
-+ (NSFetchedResultsController *) getFetchedResultsController: (NSNumber *) deleted managedObjectContext:(NSManagedObjectContext *) context delegate: (id <NSFetchedResultsControllerDelegate>) delegate{
+// создает и возвращает NSFetchedResultsController для конкретного ТА. Если deleted == nil , то не учитывая свойство deleted. Если не nil, то учитывает. НЕ ЗАПУСКАЕТ ЕГО!!!
++ (NSFetchedResultsController *) getFetchedResultsControllerForTA: (NSManagedObject *) ta deleted: (NSNumber *) deleted managedObjectContext:(NSManagedObjectContext *) context delegate: (id <NSFetchedResultsControllerDelegate>) delegate{
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Address"
                                               inManagedObjectContext:context];
@@ -117,7 +117,42 @@
     
     if(deleted)
     {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@" ( deleted == %@ ) AND ( client.deleted == %@ ) ",deleted,deleted];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(client.ta == %@) AND ( deleted == %@ ) AND ( client.deleted == %@ ) ",ta,deleted,deleted];
+        [request setPredicate:predicate];
+    }
+    else{
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(client.ta == %@)",ta];
+        [request setPredicate:predicate];
+    }
+    
+    NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"client.name" ascending:YES];
+    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"address" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor1, sortDescriptor2, nil];
+    [request setSortDescriptors:sortDescriptors];
+    
+    NSFetchedResultsController *controller = [[NSFetchedResultsController alloc]
+                                              initWithFetchRequest:request
+                                              managedObjectContext:context
+                                              sectionNameKeyPath:@"client.name"
+                                              cacheName:@"ru.bva.DelsyTA.fetchedResultsControllerForClientList"];
+    return controller;
+}
+
+// создает и возвращает NSFetchedResultsController для конкретного ТА. Если deleted == nil , то не учитывая свойство deleted. Если не nil, то учитывает. Использует фильтр по клиентам и адресам в нижнем регистре. НЕ ЗАПУСКАЕТ ЕГО!!!
++ (NSFetchedResultsController *) getFetchedResultsControllerForTA: (NSManagedObject *) ta deleted: (NSNumber *) deleted filter:(NSString *) filter managedObjectContext:(NSManagedObjectContext *) context delegate: (id <NSFetchedResultsControllerDelegate>) delegate{
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Address"
+                                              inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    if(deleted)
+    {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(client.ta == %@) AND (address contains[cd] %@ OR client.name contains[cd] %@) AND ( deleted == %@ ) AND ( client.deleted == %@ ) ",ta,filter,filter,deleted,deleted];
+        [request setPredicate:predicate];
+    }
+    else{
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(client.ta == %@) AND (address contains[cd] %@ OR client.name contains[cd] %@)",ta,filter,filter];
         [request setPredicate:predicate];
     }
     

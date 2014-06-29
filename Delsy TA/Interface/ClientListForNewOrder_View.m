@@ -8,6 +8,8 @@
 
 #import "ClientListForNewOrder_View.h"
 #import "Address+AddressCategory.h"
+#import "Client+ClientCategory.h"
+#import "AppSettings+AppSettingsCategory.h"
 
 @interface ClientListForNewOrder_View (){
     
@@ -16,17 +18,22 @@
 //ClientNameCell
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedController;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedControllerWithFilter;
 
 @end
 
 @implementation ClientListForNewOrder_View
 
 @synthesize fetchedController = _fetchedController;
+@synthesize fetchedControllerWithFilter;
 
 -(NSFetchedResultsController *)fetchedController{
-    if( !_fetchedController )
+    if( _fetchedController )
         return _fetchedController;
-    _fetchedController = [Address getFetchedResultsController:nil managedObjectContext:self.managedObjectContext delegate:self];
+    
+    AppSettings *settings = [AppSettings getInstance:self.managedObjectContext];
+    
+    _fetchedController = [Address getFetchedResultsControllerForTA: (NSManagedObject *) settings.currentTA deleted:NO managedObjectContext:self.managedObjectContext delegate:self];
     NSError *error;
     [_fetchedController performFetch:&error];
     if(error)
@@ -43,15 +50,11 @@
     return self;
 }
 
+#warning create search section index (like 'a', 'b' and i.e.)
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,72 +67,92 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.fetchedController.sections.count;
+    if(self.tableView == tableView )
+        return self.fetchedController.sections.count;
+    if(self.fetchedControllerWithFilter)
+        return self.fetchedControllerWithFilter.sections.count;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedController.sections objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
+    if(self.tableView == tableView){
+        id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedController.sections objectAtIndex:section];
+        return [sectionInfo numberOfObjects];
+    }
+    else if (self.fetchedControllerWithFilter){
+        id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedControllerWithFilter.sections objectAtIndex:section];
+        return [sectionInfo numberOfObjects];
+    }
+    return 0;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"AddressCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell;
     
-    Address *address = (Address *) [self.fetchedController objectAtIndexPath:indexPath];
-    cell.textLabel.text = address.address;
+    Address *address;
+    if(self.tableView == tableView){
+        cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+        address = (Address *) [self.fetchedController objectAtIndexPath:indexPath];
+    }
+    else {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        address = (Address *) [self.fetchedControllerWithFilter objectAtIndexPath:indexPath];
+    }
+    cell.textLabel.text =[NSString stringWithFormat:@"%@", address.address];
     
     return cell;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    static NSString *cellIdentifier = @"ClientNameCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedController.sections objectAtIndex:section];
-    cell.textLabel.text = [sectionInfo name];
-    return cell;
+    if(self.tableView == tableView){
+        static NSString *cellIdentifier = @"ClientNameCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedController.sections objectAtIndex:section];
+        cell.textLabel.text = [sectionInfo name];
+        cell.backgroundColor = [UIColor clearColor];
+        return cell;
+    }
+    else {
+        static NSString *cellIdentifier = @"ClientNameCell";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedControllerWithFilter.sections objectAtIndex:section];
+        cell.textLabel.text = [sectionInfo name];
+        cell.backgroundColor = [UIColor clearColor];
+        return cell;
+    }
+    return nil;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 44;
+}
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    if(self.tableView != tableView){
+        if(self.fetchedControllerWithFilter){
+            id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedControllerWithFilter.sections objectAtIndex:section];
+            return [sectionInfo name];
+        }
+    }
+    return @"";
+}
+
+#pragma mark search diaplay controller
+
+- (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
+    AppSettings *settings = [AppSettings getInstance:self.managedObjectContext];
+    self.fetchedControllerWithFilter = [Address getFetchedResultsControllerForTA:(NSManagedObject *)settings.currentTA deleted:NO filter:searchString managedObjectContext:self.managedObjectContext delegate:self];
+    NSError *error;
+    [self.fetchedControllerWithFilter performFetch:&error];
+    if(error)
+        NSLog(@"error with performing fetchedResultsController in ClientListForNewOrder_View \n Error: %@",error.localizedDescription);
+    //NSLog(@"creating fetchedresultController with filter: %@",searchString);
+    //[controller.searchResultsTableView reloadData];
     return YES;
 }
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation

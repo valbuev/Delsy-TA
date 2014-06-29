@@ -12,6 +12,7 @@
 #import "AppSettings+AppSettingsCategory.h"
 #import "TA+TACategory.h"
 #import "CustomIOS7AlertView.h"
+#import "ClientListForNewOrder_View.h"
 
 @interface SettingsView ()
 
@@ -176,6 +177,10 @@
         TAListView *taListView = segue.destinationViewController;
         taListView.managedObjectContext = self.managedObjectContext;
     }
+    else if([segue.identifier isEqualToString:@"ClientListForNewOrder"]){
+        ClientListForNewOrder_View *clientListView = segue.destinationViewController;
+        clientListView.managedObjectContext = self.managedObjectContext;
+    }
 }
 
 // Отменяем переход на другие view, если требуется
@@ -266,7 +271,7 @@
     {
         NSObject *message = [messages objectAtIndex:i];
         if( [message isMemberOfClass:[NSError class]] )
-            text = [text stringByAppendingFormat:@"\n%@",[(NSError *) message localizedDescription]];
+            text = [text stringByAppendingFormat:@"\n%@ userInfo: %@",[(NSError *) message localizedDescription],[(NSError *) message userInfo]];
         else {
             text = [text stringByAppendingFormat:@"\n%@",message];
         }

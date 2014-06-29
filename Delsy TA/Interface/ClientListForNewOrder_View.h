@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 
 @interface ClientListForNewOrder_View : UITableViewController
-<NSFetchedResultsControllerDelegate>
+<NSFetchedResultsControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 

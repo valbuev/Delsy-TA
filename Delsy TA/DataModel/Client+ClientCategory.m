@@ -58,6 +58,7 @@
         if( array.count == 0 ){
             client = [[Client alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
             client.cust_account = custAccount;
+            client.deleted = [NSNumber numberWithBool:YES];
         }
         else{
             client = [array objectAtIndex:0];
