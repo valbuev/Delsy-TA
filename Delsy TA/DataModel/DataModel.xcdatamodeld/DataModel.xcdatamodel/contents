@@ -33,7 +33,7 @@
         <attribute name="composition" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deleted" optional="YES" attributeType="Boolean" indexed="YES" syncable="YES"/>
         <attribute name="hundredGrammsContains" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="itemID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="itemID" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="lineColor" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -60,7 +60,7 @@
         <relationship name="address" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Address" inverseName="orders" inverseEntity="Address" syncable="YES"/>
         <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="orders" inverseEntity="Client" syncable="YES"/>
         <relationship name="orderLines" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="OrderLine" inverseName="order" inverseEntity="OrderLine" syncable="YES"/>
-        <relationship name="ta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TA" inverseName="orders" inverseEntity="TA" syncable="YES"/>
+        <relationship name="productType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TA" inverseName="orders" inverseEntity="TA" syncable="YES"/>
     </entity>
     <entity name="OrderLine" representedClassName="OrderLine" syncable="YES">
         <attribute name="amount" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -87,7 +87,7 @@
         <attribute name="id" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="clients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Client" inverseName="ta" inverseEntity="Client" syncable="YES"/>
-        <relationship name="orders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Order" inverseName="ta" inverseEntity="Order" syncable="YES"/>
+        <relationship name="orders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Order" inverseName="productType" inverseEntity="Order" syncable="YES"/>
         <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppSettings" inverseName="currentTA" inverseEntity="AppSettings" syncable="YES"/>
     </entity>
     <entity name="Thesis" representedClassName="Thesis" syncable="YES">
@@ -95,16 +95,16 @@
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="thesises" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Address" positionX="180" positionY="146" width="90" height="118"/>
-        <element name="AppSettings" positionX="97" positionY="525" width="128" height="120"/>
-        <element name="Client" positionX="-108" positionY="135" width="128" height="148"/>
-        <element name="Fish" positionX="-479" positionY="126" width="128" height="90"/>
-        <element name="Item" positionX="-279" positionY="297" width="128" height="313"/>
-        <element name="Order" positionX="135" positionY="302" width="128" height="225"/>
-        <element name="OrderLine" positionX="-110" positionY="500" width="128" height="165"/>
-        <element name="Photo" positionX="-506" positionY="459" width="128" height="90"/>
-        <element name="ProductType" positionX="-497" positionY="308" width="128" height="90"/>
-        <element name="TA" positionX="-108" positionY="369" width="83" height="135"/>
-        <element name="Thesis" positionX="-504" positionY="567" width="128" height="75"/>
+        <element name="Address" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AppSettings" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Client" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Fish" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Item" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Order" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="OrderLine" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Photo" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ProductType" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="TA" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Thesis" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

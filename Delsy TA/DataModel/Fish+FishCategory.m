@@ -10,4 +10,61 @@
 
 @implementation Fish (FishCategory)
 
+// Ищет Fish с fishName = fishName, если находит, то возвращает, иначе, создает новый.
++(Fish *) getFishByName:(NSString *) fishName withMOC:(NSManagedObjectContext *) managedObjectContext{
+    
+    // Ищем Fish с name = fishName, если не нашли, то создаем нового, если получаем ошибку, то возвращаем nil
+    Fish *fish;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Fish"
+                                              inManagedObjectContext:managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name like %@",fishName];
+    [request setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (array == nil){
+        NSLog(@"Exception while getting Fish`s array by fishName. Error: %@",error.localizedDescription);
+        fish = nil;
+    }
+    else{
+        if( array.count == 0 ){
+            fish = [[Fish alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
+            fish.name = fishName;
+            //NSLog(@"init ta id = %@",ta.id);
+        }
+        else{
+            fish = [array objectAtIndex:0];
+        }
+    }
+    return fish;
+}
+
+// Удаляет во всех Fish все связи с ProductType
++(void) removeAllProductTypesRelationShipsFromAllFishes_InManagedObjectContext:(NSManagedObjectContext *) managedObjectContext{
+    
+    // Получаем все Fishes
+    Fish *fish;
+    NSArray *fishList;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Fish"
+                                              inManagedObjectContext:managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSError *error = nil;
+    fishList = [managedObjectContext executeFetchRequest:request error:&error];
+    
+    // Если нет ошибок, то проходим по списку и удаляем все связи с ProductType
+    if (fishList == nil){
+        NSLog(@"Exception while getting Fishes array for remove all those relationShips with ProductTypes. Error: %@",error.localizedDescription);
+        return;
+    }
+    else for(fish in fishList){
+        [fish removeProductTypes:fish.productTypes];
+    }
+}
+
 @end

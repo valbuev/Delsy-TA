@@ -10,4 +10,7 @@
 
 @interface ProductType (ProductTypeCategory)
 
+// Ищет ProductType с name = name, если находит, то возвращает, иначе, создает новый.
++(ProductType *) getProductTypeByName:(NSString *) name withMOC:(NSManagedObjectContext *) managedObjectContext;
+
 @end

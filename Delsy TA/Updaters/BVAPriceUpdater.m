@@ -11,6 +11,10 @@
 #import "BVAPriceUpdater.h"
 #import "AppSettings+AppSettingsCategory.h"
 #import "XMLDictionary.h"
+#import "Item+ItemCategory.h"
+#import "Thesis+ThesisCategory.h"
+#import "ProductType+ProductTypeCategory.h"
+#import "Fish+FishCategory.h"
 
 @implementation BVAPriceUpdater
 @synthesize managedObjectContext;
@@ -83,80 +87,83 @@
         return;
     }
     
-    // Помечаем все ProuctType-managedObject-ы как deleted
-    //[TA setAllTADeleted:YES InManagedObjectContext:self.managedObjectContext];
-    [TA setAllTADeleted:YES InManagedObjectContext:self.managedObjectContext];
+    // Помечаем все Item-managedObject-ы как deleted
+    [Item setAllItemsDeleted:YES InManagedObjectContext:self.managedObjectContext];
+#pragma mark saveManagedObjectContext
+    //[self saveManageObjectContext];
     
-    // Помечаем все Client & Address-managedObject-ы как deleted
-    [Address setAllAddressesDeleted:YES InManagedObjectContext:self.managedObjectContext];
+    // Удаляем все тезисы
+    [Thesis removeAllThesisesFromManagedObjectContext:self.managedObjectContext];
+#pragma mark saveManagedObjectContext
+    //[self saveManageObjectContext];
+    
+    // Удаляем все связи Fish-ProductType, чтобы потом было проще выводить вложенный список
+    [Fish removeAllProductTypesRelationShipsFromAllFishes_InManagedObjectContext:self.managedObjectContext];
+#pragma mark saveManagedObjectContext
+    //[self saveManageObjectContext];
     
     // сохраняем
-    [self saveTAListIntoCoreData:ProductTypeDicts];
+    [self saveProductTypeListIntoCoreData:ProductTypeDicts];
     //NSLog(@"\n%@",TAdicts);
     
     AppSettings *appSettings = [AppSettings getInstance:self.managedObjectContext];
-    appSettings.clientsListLastUpdate = [NSDate date];
-    TA *currentTA = appSettings.currentTA;
-    if( currentTA )
-        if( currentTA.deleted.boolValue == YES )
-            appSettings.currentTA = nil;
-    [self saveManageObjectContext];
+    appSettings.priceLastUpdate = [NSDate date];
+#pragma mark saveManagedObjectContext
+    //[self saveManageObjectContext];
     if(delegate)
-        [delegate BVAClientListUpdater:self didFinishUpdatingWithErrors:errors];
+        [delegate BVAPriceUpdater:self didFinishUpdatingWithErrors:errors];
     NSLog(@"\n\n\ndone\n\n\n");
 }
 
-/*
 
--(void) saveTAListIntoCoreData: (NSArray *) TAdicts
+
+-(void) saveProductTypeListIntoCoreData: (NSArray *) ProductTypeDicts
 {
     //проходим по всем словарям
-    for( NSDictionary *TAdict in TAdicts ){
-        NSArray *TAdictKeys = TAdict.allKeys;
-        // Если нет каких-либо ключей, переходим к следующему ТА
-        if( ![TAdictKeys containsObject:@"_name"]
-           || ![TAdictKeys containsObject:@"_id"]
-           || ![TAdictKeys containsObject:@"client"] ){
+    //NSLog(@"%@",ProductTypeDicts);
+    for( NSDictionary *ProductTypeDict in ProductTypeDicts ){
+        NSArray *ProductTypeDictKeys = ProductTypeDict.allKeys;
+        // Если нет каких-либо ключей, переходим к следующему ProductType
+        if( ![ProductTypeDictKeys containsObject:@"_title"]
+           || ![ProductTypeDictKeys containsObject:@"item"] ){
             [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9998
-                                              userInfo:[NSDictionary dictionaryWithObject:@"TAdict dont contain any keys" forKey:@"info"]]];
+                                              userInfo:[NSDictionary dictionaryWithObject:@"ProductTypeDict dont contain any keys" forKey:@"info"]]];
             continue;
         }
-        NSString *TAname = [TAdict objectForKey:@"_name"];
-        NSString *TAid = [TAdict objectForKey:@"_id"];
-        NSArray *addressDicts = [TAdict objectForKey:@"client"];
-        // Если какие-либо из объектов словаря пусты, переходим к следующему ТА
-        if( [TAname isEqualToString:@""]
-           || [TAid isEqualToString:@""]
-           || addressDicts.count == 0 ){
+        NSString *productTypeName = [ProductTypeDict objectForKey:@"_title"];
+        NSArray *itemsDicts = [ProductTypeDict objectForKey:@"client"];
+        // Если какие-либо из объектов словаря пусты, переходим к следующему ProductType
+        if( [productTypeName isEqualToString:@""]
+           || itemsDicts.count == 0 ){
             [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9998
-                                              userInfo:[NSDictionary dictionaryWithObject:@"TAdict dont contain any keys" forKey:@"info"]]];
+                                              userInfo:[NSDictionary dictionaryWithObject:@"productTypeDict dont contain any values" forKey:@"info"]]];
             continue;
         }
-        // Запрашиваем managedObject с id = TAid и устанавливаем значения
-        TA *ta = [TA getTAbyID:TAid withMOC:self.managedObjectContext];
-        ta.name = TAname;
-        ta.deleted = NO;
+        // Запрашиваем managedObject с name = productTypeName и устанавливаем значения
+        ProductType *productType = [ProductType getProductTypeByName:productTypeName withMOC:self.managedObjectContext];
         
-        // Сохраняем клиентов и адреса текущего ТА
-        [self saveAddressListIntoCoreData:addressDicts forTA:ta];
+        // Сохраняем items and fishes текущего productType
+        [self saveItemListIntoCoreData:itemsDicts forProductType:productType];
+#pragma mark saveManagedObjectContext
         [self saveManageObjectContext];
         //NSLog(@"\nTA: %@ \n%@",ta.name,addressDicts);
     }
 }
 
--(void) saveAddressListIntoCoreData: (NSObject *) addressDicts forTA: (TA *) ta {
-    // Если получили на вход словарь, то для этого агента один клиент, поэтому сразу посылаем в обработку
-    // Если - список, то проходим по всем элементам списка - словарям с  адресами
-    // На самом деле в xml они записаны как <client>, но записаны там АДРЕСА с информацией о клиенте
-    if( [addressDicts isKindOfClass:[NSDictionary class]] ){
-        [self saveAddressIntoCoreData:(NSDictionary *)addressDicts forTA:ta];
+-(void) saveItemListIntoCoreData: (NSObject *) itemDicts forProductType: (ProductType *) productType {
+    // Если получили на вход словарь, то для этого productType один item, поэтому сразу посылаем в обработку
+    // Если - список, то проходим по всем элементам списка - словарям с продуктами
+    // Вид рыбы записан как атрибут тега <item>
+    if( [itemDicts isKindOfClass:[NSDictionary class]] ){
+        [self saveItemIntoCoreData:(NSDictionary *)itemDicts forProductType:productType];
     }
-    else if( [addressDicts isKindOfClass:[NSArray class]] ){
+    else if( [itemDicts isKindOfClass:[NSArray class]] ){
         int i=0;
-        for( NSDictionary *adrDict in (NSArray *)addressDicts){
-            [self saveAddressIntoCoreData:adrDict forTA:ta];
+        for( NSDictionary *itemDict in (NSArray *)itemDicts){
+            [self saveItemIntoCoreData:itemDict forProductType:productType];
             i++;
-            if(i>20){
+            if(i>5){
+#pragma mark saveManagedObjectContext
                 [self saveManageObjectContext];
                 i=0;
             }
@@ -164,61 +171,88 @@
     }
 }
 
--(void) saveAddressIntoCoreData: (NSDictionary *) adrDict forTA:(TA *) ta{
-    if(![adrDict isKindOfClass:[NSDictionary class]]){
-        NSLog(@"\n adrDict is not a kind of NSDictionary-class: \n%@ \n TA: %@",adrDict,ta.name);
+
+-(void) saveItemIntoCoreData: (NSDictionary *) itemDict forProductType:(ProductType *) productType{
+    if(![itemDict isKindOfClass:[NSDictionary class]]){
+        NSLog(@"\n itemDict is not a kind of NSDictionary-class: \n%@ \n ProductType: %@",itemDict,productType.name);
         [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9996
-                                          userInfo:[NSDictionary dictionaryWithObject:@"adrDict is not a kind of NSDictionary-class" forKey:@"info"]]];
+                                          userInfo:[NSDictionary dictionaryWithObject:@"itemDict is not a kind of NSDictionary-class" forKey:@"info"]]];
         return;
     }
-    NSArray *addressDictKeys = [adrDict allKeys];
-    // Если нет каких-либо ключей, переходим к следующему Address
-    if( ![addressDictKeys containsObject:@"name"]
-       || ![addressDictKeys containsObject:@"custAccount"]
-       || ![addressDictKeys containsObject:@"address"]
-       || ![addressDictKeys containsObject:@"addressId"]
-       || ![addressDictKeys containsObject:@"sale"]){
+    NSArray *itemDictKeys = [itemDict allKeys];
+    // Если нет каких-либо ключей, переходим к следующему Item
+    if( ![itemDictKeys containsObject:@"_fishType"]
+       || ![itemDictKeys containsObject:@"_title"]
+       || ![itemDictKeys containsObject:@"itemname"]
+       || ![itemDictKeys containsObject:@"_price"]
+       || ![itemDictKeys containsObject:@"_unit"]
+       || ![itemDictKeys containsObject:@"_unitsInBox"]){
         [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9997
-                                          userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"<client> tag dont contain any keys, keys: %@",addressDictKeys] forKey:@"info"]]];
+                                          userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"<item> tag dont contain any keys, keys: %@",itemDictKeys] forKey:@"info"]]];
         return;
     }
-    NSString *clientName = [adrDict objectForKey:@"name"];
-    NSString *custAccount = [adrDict objectForKey:@"custAccount"];
-    NSString *addressName = [adrDict objectForKey:@"address"];
-    NSString *addressId = [adrDict objectForKey:@"addressId"];
-    NSNumber *clientSale = [NSNumber numberWithInt:[[adrDict objectForKey:@"sale"] floatValue]];
-    // Если какие-либо значения не верны, переходим к следующему Address
-    if( [clientName isEqualToString:@""]
-       || [custAccount isEqualToString:@""]
-       || [addressName isEqualToString:@""]
-       || [addressId isEqualToString:@""]
-       || clientSale.floatValue > 99
-       || clientSale.floatValue < 0 ){
+    NSString *itemName = [itemDict objectForKey:@"itemname"];
+    NSString *itemID = [itemDict objectForKey:@"_title"];
+    NSNumber *itemPrice = [NSNumber numberWithFloat: [[itemDict objectForKey:@"_price"] floatValue]];
+    NSString *itemUnit = [itemDict objectForKey:@"_unit"];
+    NSNumber *itemUnitsInBox = [NSNumber numberWithFloat:[[itemDict objectForKey:@"_unitsInBox"] floatValue] ];
+    NSString *fishName = [itemDict objectForKey:@"_fishType"];
+    // Если какие-либо значения не верны, переходим к следующему Item
+    if( [itemName isEqualToString:@""]
+       || [itemID isEqualToString:@""]
+       || !(itemPrice.floatValue > 0)
+       || [itemUnit isEqualToString:@""]
+       || !( [itemUnit isEqualToString:@"шт"] || [itemUnit isEqualToString:@"кг"] )
+       || !(itemUnitsInBox.floatValue >0)
+       || [fishName isEqualToString:@""] ){
         [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9997
-                                          userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"<client> tag contain any wrong values: clientName:%@ custAccount:%@ addressName:%@ addressId:%@ clientSale:%f",clientName,custAccount,addressName,addressId,clientSale.floatValue] forKey:@"info"]]];
+                                          userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"<item> tag contain any wrong values: itemName:%@ itemID:%@ itemPrice:%@ itemUnit:%@ itemUnitsInBox:%@ fishName:%@",itemName,itemID,itemPrice,itemUnit,itemUnitsInBox,fishName] forKey:@"info"]]];
         return;
     }
     
-    // Запрашиваем managedObject с id = custAccount и устанавливаем значения
+    // Запрашиваем managedObject с name = fishName
     //NSLog(@"\nTA: %@\n1 %@ %@ %@",ta.name,custAccount,clientName,clientSale);
-    Client *client = [Client getClientByCustAccount:custAccount withMOC:self.managedObjectContext];
-    // Запрашиваем managedObject с id = addressId и устанавливаем значения
+    Fish *fish = [Fish getFishByName:fishName withMOC:self.managedObjectContext];
+    // Запрашиваем managedObject с itemID = itemID и устанавливаем значения
     //NSLog(@"\nTA: %@\n%@ %@",ta.name,addressId,addressName);
-    Address *address = [Address getAddressByAddressId:addressId withMOC:self.managedObjectContext];
+    Item *item = [Item getItemByItemID:itemID withMOC:self.managedObjectContext];
     
-    //NSLog(@"\nTA: %@\n2 %@ %@ %@",ta.name,custAccount,clientName,clientSale);
-    if(client.deleted){
-        client.name = clientName;
-        client.sale = clientSale;
-        client.deleted = NO;
-        client.ta = ta;
+    [fish addProductTypesObject:productType];
+    item.fish = fish;
+    item.productType = productType;
+    item.name = itemName;
+    item.price = itemPrice;
+    item.unit = [NSNumber numberWithUnit:[itemUnit isEqualToString:@"кг"] ? kg : piece ];
+    item.unitsInBox = itemUnitsInBox;
+    NSString *ABCvalue = [itemDict objectForKey:@"ABCvalue"];
+    if(!ABCvalue){
+        item.lineColor = [NSNumber numberWithLineColor:defaultColor];
     }
-    address.address = addressName;
-    address.deleted = NO;
-    address.client = client;
-    //NSLog(@"\nTA: %@\n3 %@ %@ %@",ta.name,custAccount,clientName,clientSale);
+    else if([ABCvalue isEqualToString:@"Empty"]){
+        item.lineColor = [NSNumber numberWithLineColor:defaultColor];
+    }
+    else if ([ABCvalue isEqualToString:@"A"]){
+        item.lineColor = [NSNumber numberWithLineColor:red];
+    }
+    else if ([ABCvalue isEqualToString:@"B"]){
+        item.lineColor = [NSNumber numberWithLineColor:green];
+    }
+    else if ([ABCvalue isEqualToString:@"C"]){
+        item.lineColor = [NSNumber numberWithLineColor:blue];
+    }
+    else{
+        item.lineColor = [NSNumber numberWithLineColor:defaultColor];
+    }
+    item.producer = [NSString stringWithFormat:@"%@",[itemDict objectForKey:@"_company"]];
+    NSString *isAction = [itemDict objectForKey:@"_isAction"];
+    if(!isAction){
+        item.promo = [NSNumber numberWithBool:NO];
+    } else {
+        item.promo = [NSNumber numberWithBool:isAction.boolValue];
+    }
+    
 }
-*/
+
  
 -(void) saveErrorAndSayDelegateAboutError:(NSError *)error{
     [errors addObject:error];

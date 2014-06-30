@@ -19,7 +19,7 @@
 }
 
 // Возвращает новый объект NSNumber, несущий значение unit
-+ (NSNumber *)numberWithEnum:(LineColor)lineColor {
++ (NSNumber *)numberWithLineColor:(LineColor)lineColor {
     return [NSNumber numberWithInt:(int)lineColor];
 }
 

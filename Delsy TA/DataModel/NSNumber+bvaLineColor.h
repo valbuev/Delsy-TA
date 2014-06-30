@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 // перечисляемый тип LineColor. Т.е. единица измерения
-typedef enum {
+typedef enum{
     defaultColor = 1,
     blue = 2,
     red = 3,
@@ -18,7 +18,7 @@ typedef enum {
 
 @interface NSNumber (bvaLineColor)
 
-+ (NSNumber *)numberWithEnum:(LineColor)lineColor;
++ (NSNumber *)numberWithLineColor:(LineColor)lineColor;
 - (LineColor)lineColorValue;
 
 @end

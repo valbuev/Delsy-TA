@@ -10,4 +10,7 @@
 
 @interface Thesis (ThesisCategory)
 
+// Помечает все имеющиеся в базе Items как удаленные
++(void) removeAllThesisesFromManagedObjectContext:(NSManagedObjectContext *) managedObjectContext;
+
 @end

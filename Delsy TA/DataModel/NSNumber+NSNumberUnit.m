@@ -19,7 +19,7 @@
 }
 
 // Возвращает новый объект NSNumber, несущий значение unit
-+ (NSNumber *)numberWithEnum:(Unit)unit {
++ (NSNumber *)numberWithUnit:(Unit)unit {
     return [NSNumber numberWithInt:(int)unit];
 }
 

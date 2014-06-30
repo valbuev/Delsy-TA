@@ -20,7 +20,7 @@ typedef enum {
 
 @interface NSNumber (NSNumberUnit)
 
-+ (NSNumber *)numberWithEnum:(Unit)unit;
++ (NSNumber *)numberWithUnit:(Unit)unit;
 - (Unit)unitValue;
 
 @end

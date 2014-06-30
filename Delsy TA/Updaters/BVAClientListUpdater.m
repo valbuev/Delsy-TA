@@ -181,7 +181,8 @@
     NSString *custAccount = [adrDict objectForKey:@"custAccount"];
     NSString *addressName = [adrDict objectForKey:@"address"];
     NSString *addressId = [adrDict objectForKey:@"addressId"];
-    NSNumber *clientSale = [NSNumber numberWithInt:[[adrDict objectForKey:@"sale"] floatValue]];
+    NSString *clientSale_str = [[adrDict objectForKey:@"sale"] stringByReplacingOccurrencesOfString:@"%%" withString:@""];
+    NSNumber *clientSale = [NSNumber numberWithInt:[clientSale_str floatValue]];
     // Если какие-либо значения не верны, переходим к следующему Address
     if( [clientName isEqualToString:@""]
        || [custAccount isEqualToString:@""]

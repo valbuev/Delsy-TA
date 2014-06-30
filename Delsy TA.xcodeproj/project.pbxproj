@@ -49,7 +49,6 @@
 		A35AB91B194EF1D3002BAF0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A35AB919194EF1D3002BAF0D /* InfoPlist.strings */; };
 		A35AB91D194EF1D3002BAF0D /* Delsy_TATests.m in Sources */ = {isa = PBXBuildFile; fileRef = A35AB91C194EF1D3002BAF0D /* Delsy_TATests.m */; };
 		A39123A91960556B0003828B /* BVAPriceUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = A39123A81960556B0003828B /* BVAPriceUpdater.m */; };
-		A39123AB196060FC0003828B /* Price.xml in Resources */ = {isa = PBXBuildFile; fileRef = A39123AA196060FC0003828B /* Price.xml */; };
 		A3AC3A4D19513B25004D1EE1 /* NSNumber+NSNumberUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC3A4C19513B25004D1EE1 /* NSNumber+NSNumberUnit.m */; };
 		A3ACB96719593CBA00D2C77A /* NSNumber+bvaLineColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ACB96619593CBA00D2C77A /* NSNumber+bvaLineColor.m */; };
 		A3ACB96C195948A300D2C77A /* SettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ACB96B195948A300D2C77A /* SettingsView.m */; };
@@ -144,7 +143,6 @@
 		A35AB91C194EF1D3002BAF0D /* Delsy_TATests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Delsy_TATests.m; sourceTree = "<group>"; };
 		A39123A71960556B0003828B /* BVAPriceUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BVAPriceUpdater.h; path = Updaters/BVAPriceUpdater.h; sourceTree = "<group>"; };
 		A39123A81960556B0003828B /* BVAPriceUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BVAPriceUpdater.m; path = Updaters/BVAPriceUpdater.m; sourceTree = "<group>"; };
-		A39123AA196060FC0003828B /* Price.xml */ = {isa = PBXFileReference; fileEncoding = 11; lastKnownFileType = text.xml; lineEnding = 2; name = Price.xml; path = ../../../../../Users/bva/Desktop/Price.xml; sourceTree = "<group>"; };
 		A3AC3A4B19513B25004D1EE1 /* NSNumber+NSNumberUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+NSNumberUnit.h"; path = "DataModel/NSNumber+NSNumberUnit.h"; sourceTree = "<group>"; };
 		A3AC3A4C19513B25004D1EE1 /* NSNumber+NSNumberUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+NSNumberUnit.m"; path = "DataModel/NSNumber+NSNumberUnit.m"; sourceTree = "<group>"; };
 		A3ACB95E1958155F00D2C77A /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
@@ -430,7 +428,6 @@
 		A35AB8F8194EF1D3002BAF0D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A39123AA196060FC0003828B /* Price.xml */,
 				A35AB8F9194EF1D3002BAF0D /* Delsy TA-Info.plist */,
 				A35AB8FA194EF1D3002BAF0D /* InfoPlist.strings */,
 				A35AB8FD194EF1D3002BAF0D /* main.m */,
@@ -605,7 +602,6 @@
 				A35AB90A194EF1D3002BAF0D /* Images.xcassets in Resources */,
 				A35AB8FC194EF1D3002BAF0D /* InfoPlist.strings in Resources */,
 				A35AB905194EF1D3002BAF0D /* Main.storyboard in Resources */,
-				A39123AB196060FC0003828B /* Price.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
