@@ -29,5 +29,6 @@
 @dynamic productType;
 @dynamic thesises;
 @dynamic lineColor;
+@dynamic unitsInBigBox;
 
 @end

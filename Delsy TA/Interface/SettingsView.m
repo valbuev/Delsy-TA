@@ -248,6 +248,7 @@
     isManagedObjectContextUpdating = NO;
     // Посылаем в основной поток, чтобы сразу изменения вступили в силу
     // останавливаем анимацию
+    NSLog(@"BVAPriceUpdater:(BVAPriceUpdater *)updater didFinishUpdatingWithErrors:(NSArray *)errors{");
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         [self.activityIndicatorPriceList stopAnimating];
     }];

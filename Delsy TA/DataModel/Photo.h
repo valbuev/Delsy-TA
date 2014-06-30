@@ -15,6 +15,8 @@
 
 @property (nonatomic, retain) NSString * filepath;
 @property (nonatomic, retain) NSString * url;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * deleted;
 @property (nonatomic, retain) Item *item;
 
 @end

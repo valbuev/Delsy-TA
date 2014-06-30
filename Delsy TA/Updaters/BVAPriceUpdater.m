@@ -15,6 +15,7 @@
 #import "Thesis+ThesisCategory.h"
 #import "ProductType+ProductTypeCategory.h"
 #import "Fish+FishCategory.h"
+#import "Photo+PhotoCategory.h"
 
 @implementation BVAPriceUpdater
 @synthesize managedObjectContext;
@@ -63,8 +64,8 @@
         parseResults = [parser dictionaryWithString:str];
         // Запускаем в главном потоке, чтобы избежать ошибок CoreData
         [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-            //[self saveParsedDictionaryIntoCoreData];
-            NSLog(@"%@",parseResults);
+            [self saveParsedDictionaryIntoCoreData];
+            //NSLog(@"%@",parseResults);
         }];
     }
     fileDownloader = nil;
@@ -102,17 +103,25 @@
 #pragma mark saveManagedObjectContext
     //[self saveManageObjectContext];
     
+    // Помечаем все фото как удаленные. Найденные в ходе импорта будут помечены как неудаленные.
+    // Для новых будут созданы соответствующие классы, а все старые в конце импорта будут удалены.
+    [Photo setAllPhotosDeleted:YES InManagedObjectContext:self.managedObjectContext];
+#pragma mark saveManagedObjectContext
+    //[self saveManageObjectContext];
+    
     // сохраняем
     [self saveProductTypeListIntoCoreData:ProductTypeDicts];
-    //NSLog(@"\n%@",TAdicts);
+    //NSLog(@"\n%@",ProductTypeDicts);
     
     AppSettings *appSettings = [AppSettings getInstance:self.managedObjectContext];
     appSettings.priceLastUpdate = [NSDate date];
 #pragma mark saveManagedObjectContext
     //[self saveManageObjectContext];
-    if(delegate)
+    if(delegate){
         [delegate BVAPriceUpdater:self didFinishUpdatingWithErrors:errors];
+    }
     NSLog(@"\n\n\ndone\n\n\n");
+#warning REMOVE ALL photos, marked as deleted!
 }
 
 
@@ -186,7 +195,8 @@
        || ![itemDictKeys containsObject:@"itemname"]
        || ![itemDictKeys containsObject:@"_price"]
        || ![itemDictKeys containsObject:@"_unit"]
-       || ![itemDictKeys containsObject:@"_unitsInBox"]){
+       || ![itemDictKeys containsObject:@"_unitsInBox"]
+       || ![itemDictKeys containsObject:@"_unitsInBigBox"]){
         [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9997
                                           userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"<item> tag dont contain any keys, keys: %@",itemDictKeys] forKey:@"info"]]];
         return;
@@ -196,6 +206,7 @@
     NSNumber *itemPrice = [NSNumber numberWithFloat: [[itemDict objectForKey:@"_price"] floatValue]];
     NSString *itemUnit = [itemDict objectForKey:@"_unit"];
     NSNumber *itemUnitsInBox = [NSNumber numberWithFloat:[[itemDict objectForKey:@"_unitsInBox"] floatValue] ];
+    NSNumber *itemUnitsInBigBox = [NSNumber numberWithFloat:[[itemDict objectForKey:@"_unitsInBigBox"] floatValue] ];
     NSString *fishName = [itemDict objectForKey:@"_fishType"];
     // Если какие-либо значения не верны, переходим к следующему Item
     if( [itemName isEqualToString:@""]
@@ -204,9 +215,10 @@
        || [itemUnit isEqualToString:@""]
        || !( [itemUnit isEqualToString:@"шт"] || [itemUnit isEqualToString:@"кг"] )
        || !(itemUnitsInBox.floatValue >0)
+       || !(itemUnitsInBigBox.floatValue >0)
        || [fishName isEqualToString:@""] ){
         [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9997
-                                          userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"<item> tag contain any wrong values: itemName:%@ itemID:%@ itemPrice:%@ itemUnit:%@ itemUnitsInBox:%@ fishName:%@",itemName,itemID,itemPrice,itemUnit,itemUnitsInBox,fishName] forKey:@"info"]]];
+                                          userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"<item> tag contain any wrong values: itemName:%@ itemID:%@ itemPrice:%@ itemUnit:%@ itemUnitsInBox:%@ itemUnitsInBigBox:%@ fishName:%@",itemName,itemID,itemPrice,itemUnit,itemUnitsInBox,itemUnitsInBigBox,fishName] forKey:@"info"]]];
         return;
     }
     
@@ -224,6 +236,7 @@
     item.price = itemPrice;
     item.unit = [NSNumber numberWithUnit:[itemUnit isEqualToString:@"кг"] ? kg : piece ];
     item.unitsInBox = itemUnitsInBox;
+    item.unitsInBigBox = itemUnitsInBigBox;
     NSString *ABCvalue = [itemDict objectForKey:@"ABCvalue"];
     if(!ABCvalue){
         item.lineColor = [NSNumber numberWithLineColor:defaultColor];
@@ -250,7 +263,55 @@
     } else {
         item.promo = [NSNumber numberWithBool:isAction.boolValue];
     }
+    NSString *itemShelfLife = [itemDict objectForKey:@"bestBefore"];
+    if(itemShelfLife){
+        if(itemShelfLife.intValue > 0){
+            item.shelfLife = [NSNumber numberWithInt:itemShelfLife.intValue];
+        }
+    }
+    NSString *itemComposition = [itemDict objectForKey:@"consist"];
+    if(itemComposition){
+        if(![itemComposition isEqualToString:@""]){
+            item.composition = itemComposition;
+        }
+    }
+    NSString *photo_main = [itemDict objectForKey:@"photo"];
+    [self addPhoto:photo_main ForItem:item];
+    NSString *photo_1 = [itemDict objectForKey:@"photo1"];
+    [self addPhoto:photo_1 ForItem:item];
+    NSString *photo_2 = [itemDict objectForKey:@"photo2"];
+    [self addPhoto:photo_2 ForItem:item];
+    NSString *photo_3 = [itemDict objectForKey:@"photo3"];
+    [self addPhoto:photo_3 ForItem:item];
+    NSString *photo_4 = [itemDict objectForKey:@"photo4"];
+    [self addPhoto:photo_4 ForItem:item];
     
+    NSString *stoGramm = [itemDict objectForKey:@"stoGramm"];
+    if(stoGramm){
+        if ( ![stoGramm isEqualToString:@""]) {
+            item.hundredGrammsContains = stoGramm;
+        }
+    }
+    
+#warning thesises creating
+}
+
+-(void) addPhoto: (NSString *) photoName ForItem: (Item *) item{
+    if(!photoName){
+        if(![photoName isEqualToString:@""]){
+            for(Photo *photo in item.photos){
+                if([photo.name isEqualToString:photoName])
+                {
+                    photo.deleted = NO;
+                    return;
+                }
+            }
+            Photo *photo = [Photo newPhotoInManObjContext:self.managedObjectContext];
+            photo.name = photoName;
+            photo.item = item;
+#warning photo must have an url or a filepath
+        }
+    }
 }
 
  

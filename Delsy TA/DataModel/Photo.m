@@ -15,5 +15,7 @@
 @dynamic filepath;
 @dynamic url;
 @dynamic item;
+@dynamic name;
+@dynamic deleted;
 
 @end

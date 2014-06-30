@@ -10,4 +10,38 @@
 
 @implementation Photo (PhotoCategory)
 
+// Помечает все имеющиеся в базе Photo как удаленные
++(void) setAllPhotosDeleted:(Boolean) deleted InManagedObjectContext:(NSManagedObjectContext *) managedObjectContext{
+    
+    // Получаем все Photos
+    Photo *photo;
+    NSArray *photoList;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Photo"
+                                              inManagedObjectContext:managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSError *error = nil;
+    photoList = [managedObjectContext executeFetchRequest:request error:&error];
+    
+    // Если нет ошибок, то проходим по списку и помечаем каждый как удаленный
+    if (photoList == nil){
+        NSLog(@"Exception while getting Photos array for mark those as deleted %d. Error: %@",deleted,error.localizedDescription);
+        return;
+    }
+    else for(photo in photoList){
+        photo.deleted = [NSNumber numberWithBool:deleted];
+    }
+}
+
+// Создает новый объект photo в managedObjectContext
++(Photo *) newPhotoInManObjContext:(NSManagedObjectContext *) managedObjectContext{
+    
+    Photo *photo;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Photo"
+                                              inManagedObjectContext:managedObjectContext];
+    photo = [[Photo alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
+    return photo;
+}
+
 @end

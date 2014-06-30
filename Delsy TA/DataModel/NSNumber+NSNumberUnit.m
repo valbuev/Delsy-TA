@@ -13,7 +13,7 @@
 // Возвращает значение NSNumber в виде Unit
 - (Unit)unitValue {
     int intValue = [self intValue];
-    NSAssert(intValue > 0 && intValue < 3,
+    NSAssert(intValue > 0 && intValue < 5,
              @"unsupported entity type");
     return (Unit)intValue;
 }

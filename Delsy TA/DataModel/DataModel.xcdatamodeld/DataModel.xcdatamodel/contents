@@ -41,6 +41,7 @@
         <attribute name="promo" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="shelfLife" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="unit" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="unitsInBigBox" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="unitsInBox" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="fish" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Fish" inverseName="items" inverseEntity="Fish" syncable="YES"/>
         <relationship name="orderLines" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OrderLine" inverseName="item" inverseEntity="OrderLine" syncable="YES"/>
@@ -73,7 +74,9 @@
         <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="orderLines" inverseEntity="Order" syncable="YES"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES">
+        <attribute name="deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="filepath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="photos" inverseEntity="Item" syncable="YES"/>
     </entity>
@@ -95,16 +98,16 @@
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="thesises" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Address" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="AppSettings" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Client" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Fish" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Item" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Order" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="OrderLine" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Photo" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="ProductType" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="TA" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Thesis" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Address" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="AppSettings" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="Client" positionX="0" positionY="0" width="128" height="150"/>
+        <element name="Fish" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="Item" positionX="0" positionY="0" width="128" height="330"/>
+        <element name="Order" positionX="0" positionY="0" width="128" height="225"/>
+        <element name="OrderLine" positionX="0" positionY="0" width="128" height="165"/>
+        <element name="Photo" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="ProductType" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="TA" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="Thesis" positionX="0" positionY="0" width="128" height="75"/>
     </elements>
 </model>

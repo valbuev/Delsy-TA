@@ -24,6 +24,7 @@
 @property (nonatomic, retain) NSNumber * shelfLife;
 @property (nonatomic, retain) NSNumber * unit;
 @property (nonatomic, retain) NSNumber * unitsInBox;
+@property (nonatomic, retain) NSNumber * unitsInBigBox;
 @property (nonatomic, retain) NSManagedObject *fish;
 @property (nonatomic, retain) NSSet *orderLines;
 @property (nonatomic, retain) NSSet *photos;
