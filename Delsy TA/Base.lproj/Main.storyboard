@@ -191,37 +191,24 @@
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19.35" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIp-9s-KpB">
-                                                    <rect key="frame" x="548" y="0.0" width="40" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="40" id="QJn-ez-coC"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Качемас охотоморский и новая шуба и оленина и семга и форель, все сместе (3.5кг) (в/у)" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="532" translatesAutoresizingMaskIntoConstraints="NO" id="BNh-Ni-QY9">
-                                                    <rect key="frame" x="8" y="0.0" width="532" height="43"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Качемас охотоморский и новая шуба и оленина и семга и форель, все сместе (3.5кг) (в/у)" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="580" translatesAutoresizingMaskIntoConstraints="NO" id="BNh-Ni-QY9">
+                                                    <rect key="frame" x="8" y="0.0" width="580" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="KIp-9s-KpB" firstAttribute="leading" secondItem="BNh-Ni-QY9" secondAttribute="trailing" constant="8" id="83s-4k-Spj"/>
                                                 <constraint firstAttribute="bottom" secondItem="msW-eW-Hmm" secondAttribute="bottom" id="8vO-lo-KuY"/>
                                                 <constraint firstItem="3Iv-Hm-6D3" firstAttribute="leading" secondItem="msW-eW-Hmm" secondAttribute="trailing" constant="8" id="CT8-oc-Uql"/>
-                                                <constraint firstItem="KIp-9s-KpB" firstAttribute="top" secondItem="D78-cs-qmg" secondAttribute="top" id="FDZ-Al-3bj"/>
-                                                <constraint firstAttribute="bottom" secondItem="KIp-9s-KpB" secondAttribute="bottom" id="Jdh-Gr-Sr9"/>
                                                 <constraint firstAttribute="bottom" secondItem="BNh-Ni-QY9" secondAttribute="bottom" id="N2o-AN-cco"/>
                                                 <constraint firstAttribute="trailing" secondItem="3Iv-Hm-6D3" secondAttribute="trailing" constant="4" id="PK9-Rc-erx"/>
                                                 <constraint firstAttribute="bottom" secondItem="3Iv-Hm-6D3" secondAttribute="bottom" id="RWh-BW-9wo"/>
                                                 <constraint firstItem="msW-eW-Hmm" firstAttribute="top" secondItem="D78-cs-qmg" secondAttribute="top" id="TA3-gc-KR3"/>
                                                 <constraint firstItem="3Iv-Hm-6D3" firstAttribute="top" secondItem="D78-cs-qmg" secondAttribute="top" id="XnS-HK-ena"/>
                                                 <constraint firstItem="BNh-Ni-QY9" firstAttribute="leading" secondItem="D78-cs-qmg" secondAttribute="leading" constant="8" id="brQ-B4-JhU"/>
-                                                <constraint firstItem="msW-eW-Hmm" firstAttribute="leading" secondItem="KIp-9s-KpB" secondAttribute="trailing" constant="8" id="cdE-Eg-aRq"/>
                                                 <constraint firstItem="BNh-Ni-QY9" firstAttribute="top" secondItem="D78-cs-qmg" secondAttribute="top" id="fJe-Mo-Thw"/>
+                                                <constraint firstItem="msW-eW-Hmm" firstAttribute="leading" secondItem="BNh-Ni-QY9" secondAttribute="trailing" constant="8" id="iJG-1q-ejY"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
