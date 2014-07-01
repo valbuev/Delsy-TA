@@ -34,4 +34,23 @@
     }
 }
 
+// Создает новый объект thesis в managedObjectContext, привязывает его к item
++(Thesis *) newThesisInManObjContext:(NSManagedObjectContext *) managedObjectContext text:(NSString *) text item:(Item *)item{
+    
+    if(!text)
+        return nil;
+    if([text isEqualToString:@""])
+        return nil;
+    
+    Thesis *thesis;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Thesis"
+                                              inManagedObjectContext:managedObjectContext];
+    thesis = [[Thesis alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
+    
+    thesis.title = text;
+    thesis.item = item;
+    
+    return thesis;
+}
+
 @end

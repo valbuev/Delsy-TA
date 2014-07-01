@@ -91,23 +91,23 @@
     // Помечаем все Item-managedObject-ы как deleted
     [Item setAllItemsDeleted:YES InManagedObjectContext:self.managedObjectContext];
 #pragma mark saveManagedObjectContext
-    //[self saveManageObjectContext];
+    [self saveManageObjectContext];
     
     // Удаляем все тезисы
     [Thesis removeAllThesisesFromManagedObjectContext:self.managedObjectContext];
 #pragma mark saveManagedObjectContext
-    //[self saveManageObjectContext];
+    [self saveManageObjectContext];
     
     // Удаляем все связи Fish-ProductType, чтобы потом было проще выводить вложенный список
     [Fish removeAllProductTypesRelationShipsFromAllFishes_InManagedObjectContext:self.managedObjectContext];
 #pragma mark saveManagedObjectContext
-    //[self saveManageObjectContext];
+    [self saveManageObjectContext];
     
     // Помечаем все фото как удаленные. Найденные в ходе импорта будут помечены как неудаленные.
     // Для новых будут созданы соответствующие классы, а все старые в конце импорта будут удалены.
     [Photo setAllPhotosDeleted:YES InManagedObjectContext:self.managedObjectContext];
 #pragma mark saveManagedObjectContext
-    //[self saveManageObjectContext];
+    [self saveManageObjectContext];
     
     // сохраняем
     [self saveProductTypeListIntoCoreData:ProductTypeDicts];
@@ -116,7 +116,7 @@
     AppSettings *appSettings = [AppSettings getInstance:self.managedObjectContext];
     appSettings.priceLastUpdate = [NSDate date];
 #pragma mark saveManagedObjectContext
-    //[self saveManageObjectContext];
+    [self saveManageObjectContext];
     if(delegate){
         [delegate BVAPriceUpdater:self didFinishUpdatingWithErrors:errors];
     }
@@ -136,16 +136,17 @@
         if( ![ProductTypeDictKeys containsObject:@"_title"]
            || ![ProductTypeDictKeys containsObject:@"item"] ){
             [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9998
-                                              userInfo:[NSDictionary dictionaryWithObject:@"ProductTypeDict dont contain any keys" forKey:@"info"]]];
+                                              userInfo:[NSDictionary dictionaryWithObject:@"ProductTypeDict don't contain any keys" forKey:@"info"]]];
             continue;
         }
         NSString *productTypeName = [ProductTypeDict objectForKey:@"_title"];
-        NSArray *itemsDicts = [ProductTypeDict objectForKey:@"client"];
+        NSArray *itemsDicts = [ProductTypeDict objectForKey:@"item"];
         // Если какие-либо из объектов словаря пусты, переходим к следующему ProductType
         if( [productTypeName isEqualToString:@""]
            || itemsDicts.count == 0 ){
             [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9998
-                                              userInfo:[NSDictionary dictionaryWithObject:@"productTypeDict dont contain any values" forKey:@"info"]]];
+                                              userInfo:[NSDictionary dictionaryWithObject:
+                                                        [NSString stringWithFormat:@"productTypeDict don't contain any values: title: %@ items-count: %d",productTypeName,itemsDicts.count] forKey:@"info"]]];
             continue;
         }
         // Запрашиваем managedObject с name = productTypeName и устанавливаем значения
@@ -293,7 +294,16 @@
         }
     }
     
-#warning thesises creating
+    NSString *thesis1 = [itemDict objectForKey:@"thesis1"];
+    [Thesis newThesisInManObjContext:self.managedObjectContext text:thesis1 item:item];
+    NSString *thesis2 = [itemDict objectForKey:@"thesis2"];
+    [Thesis newThesisInManObjContext:self.managedObjectContext text:thesis2 item:item];
+    NSString *thesis3 = [itemDict objectForKey:@"thesis3"];
+    [Thesis newThesisInManObjContext:self.managedObjectContext text:thesis3 item:item];
+    NSString *thesis4 = [itemDict objectForKey:@"thesis4"];
+    [Thesis newThesisInManObjContext:self.managedObjectContext text:thesis4 item:item];
+    
+#warning you must delete all photos marked as deleted
 }
 
 -(void) addPhoto: (NSString *) photoName ForItem: (Item *) item{

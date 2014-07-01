@@ -13,4 +13,7 @@
 // Помечает все имеющиеся в базе Items как удаленные
 +(void) removeAllThesisesFromManagedObjectContext:(NSManagedObjectContext *) managedObjectContext;
 
+// Создает новый объект thesis в managedObjectContext, привязывает его к item
++(Thesis *) newThesisInManObjContext:(NSManagedObjectContext *) managedObjectContext text:(NSString *) text item:(Item *)item;
+
 @end
