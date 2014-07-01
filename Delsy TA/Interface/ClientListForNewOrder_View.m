@@ -10,6 +10,7 @@
 #import "Address+AddressCategory.h"
 #import "Client+ClientCategory.h"
 #import "AppSettings+AppSettingsCategory.h"
+#import "OrderEditView.h"
 
 @interface ClientListForNewOrder_View (){
     
@@ -154,15 +155,24 @@
     return YES;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    Address *address;
+    if([self.searchDisplayController isActive]){
+        NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+        address = [self.fetchedControllerWithFilter objectAtIndexPath:indexPath];
+    } else {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        address = [self.fetchedController objectAtIndexPath:indexPath];
+    }
+    OrderEditView *orderEditView = segue.destinationViewController;
+    orderEditView.address = address;
+    orderEditView.context = self.managedObjectContext;
 }
-*/
+
 
 @end

@@ -14,6 +14,9 @@
 		A341AFEC195AAAEE001B7168 /* TA.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFEB195AAAEE001B7168 /* TA.m */; };
 		A341AFF0195AB932001B7168 /* TAListView.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFEF195AB932001B7168 /* TAListView.m */; };
 		A34CF0FE195FF75000329155 /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A34CF0FD195FF75000329155 /* CustomIOS7AlertView.m */; };
+		A34CF1021962624800329155 /* OrderEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = A34CF1011962624800329155 /* OrderEditView.m */; };
+		A34CF1061962791800329155 /* NSNumber+BVAFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A34CF1051962791800329155 /* NSNumber+BVAFormatter.m */; };
+		A34CF1091962B4C500329155 /* OrderLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A34CF1081962B4C500329155 /* OrderLineCell.m */; };
 		A35A06681952AA7200D99BE0 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06671952AA7200D99BE0 /* Item.m */; };
 		A35A066B1952B12300D99BE0 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066A1952B12300D99BE0 /* Client.m */; };
 		A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066D1952B12300D99BE0 /* AppSettings.m */; };
@@ -82,6 +85,12 @@
 		A341AFEF195AB932001B7168 /* TAListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TAListView.m; path = Interface/TAListView.m; sourceTree = "<group>"; };
 		A34CF0FC195FF75000329155 /* CustomIOS7AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomIOS7AlertView.h; path = Interface/CustomIOS7AlertView.h; sourceTree = "<group>"; };
 		A34CF0FD195FF75000329155 /* CustomIOS7AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomIOS7AlertView.m; path = Interface/CustomIOS7AlertView.m; sourceTree = "<group>"; };
+		A34CF1001962624800329155 /* OrderEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderEditView.h; path = Interface/OrderEditView.h; sourceTree = "<group>"; };
+		A34CF1011962624800329155 /* OrderEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderEditView.m; path = Interface/OrderEditView.m; sourceTree = "<group>"; };
+		A34CF1041962791800329155 /* NSNumber+BVAFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+BVAFormatter.h"; path = "Interface/NSNumber+BVAFormatter.h"; sourceTree = "<group>"; };
+		A34CF1051962791800329155 /* NSNumber+BVAFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+BVAFormatter.m"; path = "Interface/NSNumber+BVAFormatter.m"; sourceTree = "<group>"; };
+		A34CF1071962B4C500329155 /* OrderLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderLineCell.h; path = Interface/OrderLineCell.h; sourceTree = "<group>"; };
+		A34CF1081962B4C500329155 /* OrderLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderLineCell.m; path = Interface/OrderLineCell.m; sourceTree = "<group>"; };
 		A35A06661952AA7200D99BE0 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = DataModel/Item.h; sourceTree = "<group>"; };
 		A35A06671952AA7200D99BE0 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = DataModel/Item.m; sourceTree = "<group>"; };
 		A35A06691952B12300D99BE0 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = DataModel/Client.h; sourceTree = "<group>"; };
@@ -246,6 +255,26 @@
 				A34CF0FD195FF75000329155 /* CustomIOS7AlertView.m */,
 			);
 			name = CustomIOS7AlertView;
+			sourceTree = "<group>";
+		};
+		A34CF0FF1962621000329155 /* OrderEditView */ = {
+			isa = PBXGroup;
+			children = (
+				A34CF1001962624800329155 /* OrderEditView.h */,
+				A34CF1011962624800329155 /* OrderEditView.m */,
+				A34CF1071962B4C500329155 /* OrderLineCell.h */,
+				A34CF1081962B4C500329155 /* OrderLineCell.m */,
+			);
+			name = OrderEditView;
+			sourceTree = "<group>";
+		};
+		A34CF103196278A300329155 /* NSNumberFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				A34CF1041962791800329155 /* NSNumber+BVAFormatter.h */,
+				A34CF1051962791800329155 /* NSNumber+BVAFormatter.m */,
+			);
+			name = NSNumberFormatter;
 			sourceTree = "<group>";
 		};
 		A35A06871952B14200D99BE0 /* Item */ = {
@@ -475,11 +504,13 @@
 		A3ACB9681959481A00D2C77A /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				A34CF103196278A300329155 /* NSNumberFormatter */,
+				A34CF0FF1962621000329155 /* OrderEditView */,
 				A35AB903194EF1D3002BAF0D /* Main.storyboard */,
 				A34CF0FB195FF6D900329155 /* CustomIOS7AlertView */,
 				A3C04E1F195C332800DAFB32 /* ClientListForNewOrder_View */,
-				A341AFED195AB900001B7168 /* TAListView */,
 				A3ACB9691959483500D2C77A /* SettingsView */,
+				A341AFED195AB900001B7168 /* TAListView */,
 			);
 			name = Interface;
 			sourceTree = "<group>";
@@ -634,10 +665,12 @@
 				A35A069E1952C99100D99BE0 /* Client+ClientCategory.m in Sources */,
 				A35A06A81952CA3800D99BE0 /* Order+OrderCategory.m in Sources */,
 				A3ACB96C195948A300D2C77A /* SettingsView.m in Sources */,
+				A34CF1091962B4C500329155 /* OrderLineCell.m in Sources */,
 				A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */,
 				A35A067D1952B12400D99BE0 /* OrderLine.m in Sources */,
 				A35A06B11952CAA200D99BE0 /* ProductType+ProductTypeCategory.m in Sources */,
 				A341AFE9195AA4FE001B7168 /* XMLDictionary.m in Sources */,
+				A34CF1021962624800329155 /* OrderEditView.m in Sources */,
 				A35A06981952B65100D99BE0 /* AppSettings+AppSettingsCategory.m in Sources */,
 				A35A06801952B12400D99BE0 /* ProductType.m in Sources */,
 				A35AB902194EF1D3002BAF0D /* AppDelegate.m in Sources */,
@@ -649,6 +682,7 @@
 				A35A06951952B5CB00D99BE0 /* Address+AddressCategory.m in Sources */,
 				A341AFDD195A8596001B7168 /* BVAClientListUpdater.m in Sources */,
 				A35A06AE1952CA8300D99BE0 /* Photo+PhotoCategory.m in Sources */,
+				A34CF1061962791800329155 /* NSNumber+BVAFormatter.m in Sources */,
 				A3ACB96719593CBA00D2C77A /* NSNumber+bvaLineColor.m in Sources */,
 				A35A066B1952B12300D99BE0 /* Client.m in Sources */,
 				A341AFDA195A6472001B7168 /* BVAFileDownloader.m in Sources */,

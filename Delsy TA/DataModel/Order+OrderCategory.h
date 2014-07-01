@@ -10,4 +10,10 @@
 
 @interface Order (OrderCategory)
 
+// Создает и возвращает новый заказ. Вписывает в заказ текущего ТА, адрес, клиента.
++(Order *) newOrder: (NSManagedObjectContext *) context forAddress:(Address *) address;
+
+// Создает и возвращает NSFetchedResultsController для данного заказа
+-(NSFetchedResultsController *) newOrderController;
+
 @end
