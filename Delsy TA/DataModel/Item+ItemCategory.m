@@ -67,5 +67,28 @@
     return item;
 }
 
+// создает контроллер неудаленных items сгруппированных по названиям рыб
++(NSFetchedResultsController *) getControllerGroupByFish:(NSManagedObjectContext *) context forProductType:(NSManagedObject *) productType{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(deleted == %@) AND (productType == %@)",[NSNumber numberWithBool:NO],productType];
+    [request setPredicate:predicate];
+    
+    NSSortDescriptor *sort1 = [NSSortDescriptor sortDescriptorWithKey:@"fish.name" ascending:YES];
+    NSSortDescriptor *sort2 = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObjects:sort1,sort2, nil]];
+    
+    NSFetchedResultsController *controller =
+        [[NSFetchedResultsController alloc]
+            initWithFetchRequest:request
+         managedObjectContext:context
+         sectionNameKeyPath:@"fish.name"
+         cacheName:@"ru.bva.DelsyTA.fetchRequestForPriceMasterView"];
+    
+    return controller;
+}
+
 
 @end

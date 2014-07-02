@@ -18,4 +18,6 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+-(void) setNewRootViewController: (UIViewController *) newRootViewController withAnimation:(UIViewAnimationOptions) options;
+
 @end

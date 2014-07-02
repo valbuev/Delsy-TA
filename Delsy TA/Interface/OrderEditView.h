@@ -23,6 +23,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *orderTableView;
 @property (weak, nonatomic) IBOutlet UITableView *sumAndAddPositionTableView;
+
 - (IBAction)btnAddOrderLine:(id)sender;
+- (IBAction)btnMailClicked:(id)sender;
 
 @end

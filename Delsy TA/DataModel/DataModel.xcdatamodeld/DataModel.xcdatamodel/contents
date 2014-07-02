@@ -85,6 +85,10 @@
         <relationship name="fishes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Fish" inverseName="productTypes" inverseEntity="Fish" syncable="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="productType" inverseEntity="Item" syncable="YES"/>
     </entity>
+    <entity name="ProductTypeFishContainer" syncable="YES">
+        <relationship name="fish" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Fish" syncable="YES"/>
+        <relationship name="productType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductType" syncable="YES"/>
+    </entity>
     <entity name="TA" representedClassName="TA" syncable="YES">
         <attribute name="deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
@@ -101,13 +105,14 @@
         <element name="Address" positionX="-380" positionY="-201" width="128" height="120"/>
         <element name="AppSettings" positionX="-9" positionY="-135" width="128" height="120"/>
         <element name="Client" positionX="-191" positionY="63" width="128" height="150"/>
-        <element name="Fish" positionX="268" positionY="54" width="128" height="90"/>
+        <element name="Fish" positionX="268" positionY="54" width="128" height="88"/>
         <element name="Item" positionX="-99" positionY="225" width="128" height="330"/>
         <element name="Order" positionX="-441" positionY="-54" width="128" height="223"/>
         <element name="OrderLine" positionX="-603" positionY="69" width="128" height="165"/>
         <element name="Photo" positionX="279" positionY="177" width="128" height="120"/>
-        <element name="ProductType" positionX="241" positionY="-135" width="128" height="90"/>
+        <element name="ProductType" positionX="241" positionY="-135" width="128" height="88"/>
         <element name="TA" positionX="-180" positionY="-135" width="128" height="135"/>
         <element name="Thesis" positionX="-405" positionY="249" width="128" height="75"/>
+        <element name="ProductTypeFishContainer" positionX="-432" positionY="108" width="128" height="73"/>
     </elements>
 </model>

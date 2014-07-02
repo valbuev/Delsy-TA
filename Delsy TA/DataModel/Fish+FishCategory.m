@@ -67,4 +67,28 @@
     }
 }
 
+/*// Возвращает созданный контроллер. Секции - типы продукта, ячейки - виды рыб. Фильтр - имеется хотся бы один не удаленный товар из этой категории.
++(NSFetchedResultsController *) getControllerOfFishesWithoutDeletedItemsAndGroupedByProductType: (NSManagedObjectContext *) context{
+    NSFetchedResultsController *controller;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Fish" inManagedObjectContext:context];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY items.deleted == 0"];
+    [request setPredicate:predicate];
+    
+    //NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"productTypes.name" ascending:YES];
+    NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor2, nil]];
+    
+    controller = [[NSFetchedResultsController alloc]
+                  initWithFetchRequest:request
+                  managedObjectContext:context
+                  sectionNameKeyPath:@"productTypes.name"
+                  cacheName:@"ru.bva.DelsyTA.fetchRequestForPriceMasterView"];
+    
+    return controller;
+}*/
+
 @end

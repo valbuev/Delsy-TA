@@ -91,7 +91,7 @@
         <!--Price-Master-->
         <scene sceneID="2gB-Js-GXh">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="m0j-t0-baE" userLabel="Price-Master" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="m0j-t0-baE" userLabel="Price-Master" customClass="PriceMasterView" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="yYy-zz-tVZ">
                         <rect key="frame" x="0.0" y="64" width="320" height="704"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -140,7 +140,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Прайс-лист" id="2ot-LT-I7c">
-                        <barButtonItem key="rightBarButtonItem" title="Готово" id="rfR-R7-BLt"/>
+                        <barButtonItem key="rightBarButtonItem" title="Готово" id="rfR-R7-BLt">
+                            <connections>
+                                <action selector="btnDone:" destination="m0j-t0-baE" id="KJr-Mk-3BU"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
@@ -151,7 +155,7 @@
         <!--Price-Detail-->
         <scene sceneID="v9R-Vb-Hu9">
             <objects>
-                <viewController id="JyC-48-a96" userLabel="Price-Detail" sceneMemberID="viewController">
+                <viewController id="JyC-48-a96" userLabel="Price-Detail" customClass="PriceDetailView" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4pv-sn-AeR"/>
                         <viewControllerLayoutGuide type="bottom" id="isG-PA-ghA"/>
@@ -316,7 +320,7 @@
         <!--Price Split-->
         <scene sceneID="GaN-UA-I92">
             <objects>
-                <splitViewController storyboardIdentifier="PriceList" id="JQQ-aJ-T5R" userLabel="Price Split" sceneMemberID="viewController">
+                <splitViewController storyboardIdentifier="PriceList" id="JQQ-aJ-T5R" userLabel="Price Split" customClass="PriceSplitView" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
@@ -714,7 +718,7 @@
                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Sum" id="2Wb-SE-gKO">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Sum" id="2Wb-SE-gKO">
                                         <rect key="frame" x="0.0" y="23" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Wb-SE-gKO" id="SWU-m2-gCL">
@@ -806,9 +810,6 @@
                                         </state>
                                         <connections>
                                             <action selector="btnAddOrderLine:" destination="Ua6-2W-b8s" eventType="touchUpInside" id="8R5-ue-iQx"/>
-                                            <segue destination="4Ug-n5-l3H" kind="popover" popoverAnchorView="63B-ZJ-kBH" id="VAf-TS-WFw">
-                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                            </segue>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cWW-8C-uD0">
@@ -849,6 +850,9 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="btnMailClicked:" destination="Ua6-2W-b8s" eventType="touchUpInside" id="sW7-bE-o87"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

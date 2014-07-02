@@ -17,6 +17,9 @@
 		A34CF1021962624800329155 /* OrderEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = A34CF1011962624800329155 /* OrderEditView.m */; };
 		A34CF1061962791800329155 /* NSNumber+BVAFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = A34CF1051962791800329155 /* NSNumber+BVAFormatter.m */; };
 		A34CF1091962B4C500329155 /* OrderLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A34CF1081962B4C500329155 /* OrderLineCell.m */; };
+		A34CF10E1963C6A300329155 /* PriceMasterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A34CF10D1963C6A300329155 /* PriceMasterView.m */; };
+		A34CF1111963C6F100329155 /* PriceDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = A34CF1101963C6F100329155 /* PriceDetailView.m */; };
+		A34CF1161963E03C00329155 /* PriceSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = A34CF1151963E03C00329155 /* PriceSplitView.m */; };
 		A35A06681952AA7200D99BE0 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06671952AA7200D99BE0 /* Item.m */; };
 		A35A066B1952B12300D99BE0 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066A1952B12300D99BE0 /* Client.m */; };
 		A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066D1952B12300D99BE0 /* AppSettings.m */; };
@@ -91,6 +94,12 @@
 		A34CF1051962791800329155 /* NSNumber+BVAFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+BVAFormatter.m"; path = "Interface/NSNumber+BVAFormatter.m"; sourceTree = "<group>"; };
 		A34CF1071962B4C500329155 /* OrderLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderLineCell.h; path = Interface/OrderLineCell.h; sourceTree = "<group>"; };
 		A34CF1081962B4C500329155 /* OrderLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderLineCell.m; path = Interface/OrderLineCell.m; sourceTree = "<group>"; };
+		A34CF10C1963C6A300329155 /* PriceMasterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PriceMasterView.h; path = Interface/PriceMasterView.h; sourceTree = "<group>"; };
+		A34CF10D1963C6A300329155 /* PriceMasterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PriceMasterView.m; path = Interface/PriceMasterView.m; sourceTree = "<group>"; };
+		A34CF10F1963C6F100329155 /* PriceDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PriceDetailView.h; path = Interface/PriceDetailView.h; sourceTree = "<group>"; };
+		A34CF1101963C6F100329155 /* PriceDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PriceDetailView.m; path = Interface/PriceDetailView.m; sourceTree = "<group>"; };
+		A34CF1141963E03C00329155 /* PriceSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PriceSplitView.h; path = Interface/PriceSplitView.h; sourceTree = "<group>"; };
+		A34CF1151963E03C00329155 /* PriceSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PriceSplitView.m; path = Interface/PriceSplitView.m; sourceTree = "<group>"; };
 		A35A06661952AA7200D99BE0 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = DataModel/Item.h; sourceTree = "<group>"; };
 		A35A06671952AA7200D99BE0 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = DataModel/Item.m; sourceTree = "<group>"; };
 		A35A06691952B12300D99BE0 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = DataModel/Client.h; sourceTree = "<group>"; };
@@ -275,6 +284,43 @@
 				A34CF1051962791800329155 /* NSNumber+BVAFormatter.m */,
 			);
 			name = NSNumberFormatter;
+			sourceTree = "<group>";
+		};
+		A34CF10A1963C65100329155 /* PriceMasterView */ = {
+			isa = PBXGroup;
+			children = (
+				A34CF10C1963C6A300329155 /* PriceMasterView.h */,
+				A34CF10D1963C6A300329155 /* PriceMasterView.m */,
+			);
+			name = PriceMasterView;
+			sourceTree = "<group>";
+		};
+		A34CF10B1963C66500329155 /* PriceDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				A34CF10F1963C6F100329155 /* PriceDetailView.h */,
+				A34CF1101963C6F100329155 /* PriceDetailView.m */,
+			);
+			name = PriceDetailView;
+			sourceTree = "<group>";
+		};
+		A34CF1121963DFF500329155 /* Price */ = {
+			isa = PBXGroup;
+			children = (
+				A34CF1131963E00400329155 /* PriceSplitView */,
+				A34CF10A1963C65100329155 /* PriceMasterView */,
+				A34CF10B1963C66500329155 /* PriceDetailView */,
+			);
+			name = Price;
+			sourceTree = "<group>";
+		};
+		A34CF1131963E00400329155 /* PriceSplitView */ = {
+			isa = PBXGroup;
+			children = (
+				A34CF1141963E03C00329155 /* PriceSplitView.h */,
+				A34CF1151963E03C00329155 /* PriceSplitView.m */,
+			);
+			name = PriceSplitView;
 			sourceTree = "<group>";
 		};
 		A35A06871952B14200D99BE0 /* Item */ = {
@@ -504,6 +550,7 @@
 		A3ACB9681959481A00D2C77A /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				A34CF1121963DFF500329155 /* Price */,
 				A34CF103196278A300329155 /* NSNumberFormatter */,
 				A34CF0FF1962621000329155 /* OrderEditView */,
 				A35AB903194EF1D3002BAF0D /* Main.storyboard */,
@@ -666,6 +713,7 @@
 				A35A06A81952CA3800D99BE0 /* Order+OrderCategory.m in Sources */,
 				A3ACB96C195948A300D2C77A /* SettingsView.m in Sources */,
 				A34CF1091962B4C500329155 /* OrderLineCell.m in Sources */,
+				A34CF1161963E03C00329155 /* PriceSplitView.m in Sources */,
 				A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */,
 				A35A067D1952B12400D99BE0 /* OrderLine.m in Sources */,
 				A35A06B11952CAA200D99BE0 /* ProductType+ProductTypeCategory.m in Sources */,
@@ -673,6 +721,7 @@
 				A34CF1021962624800329155 /* OrderEditView.m in Sources */,
 				A35A06981952B65100D99BE0 /* AppSettings+AppSettingsCategory.m in Sources */,
 				A35A06801952B12400D99BE0 /* ProductType.m in Sources */,
+				A34CF10E1963C6A300329155 /* PriceMasterView.m in Sources */,
 				A35AB902194EF1D3002BAF0D /* AppDelegate.m in Sources */,
 				A341AFEC195AAAEE001B7168 /* TA.m in Sources */,
 				A35AB8FE194EF1D3002BAF0D /* main.m in Sources */,
@@ -689,6 +738,7 @@
 				A3C04E22195C336A00DAFB32 /* ClientListForNewOrder_View.m in Sources */,
 				A35A06A41952C9F700D99BE0 /* Item+ItemCategory.m in Sources */,
 				A34CF0FE195FF75000329155 /* CustomIOS7AlertView.m in Sources */,
+				A34CF1111963C6F100329155 /* PriceDetailView.m in Sources */,
 				A341AFE1195A8B08001B7168 /* BVAClientListParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

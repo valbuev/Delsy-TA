@@ -229,6 +229,7 @@
     // Запрашиваем managedObject с itemID = itemID и устанавливаем значения
     //NSLog(@"\nTA: %@\n%@ %@",ta.name,addressId,addressName);
     Item *item = [Item getItemByItemID:itemID withMOC:self.managedObjectContext];
+    item.deleted = [NSNumber numberWithBool:NO];
     
     [fish addProductTypesObject:productType];
     item.fish = fish;

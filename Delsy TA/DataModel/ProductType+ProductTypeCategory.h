@@ -13,4 +13,7 @@
 // Ищет ProductType с name = name, если находит, то возвращает, иначе, создает новый.
 +(ProductType *) getProductTypeByName:(NSString *) name withMOC:(NSManagedObjectContext *) managedObjectContext;
 
+// Возвращает созданный request. Фильтр - имеется хотся бы один не удаленный товар из этой категории.
++(NSFetchRequest *) getRequestWithoutDeletedItems: (NSManagedObjectContext *) context;
+
 @end

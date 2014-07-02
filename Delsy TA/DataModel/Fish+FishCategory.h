@@ -15,5 +15,7 @@
 
 // Удаляет во всех Fish все связи с ProductType
 +(void) removeAllProductTypesRelationShipsFromAllFishes_InManagedObjectContext:(NSManagedObjectContext *) managedObjectContext;
+/*// Возвращает созданный контроллер. Секции - типы продукта, ячейки - виды рыб. Фильтр - имеется хотся бы один не удаленный товар из этой категории.
++(NSFetchedResultsController *) getControllerOfFishesWithoutDeletedItemsAndGroupedByProductType: (NSManagedObjectContext *) context;*/
 
 @end

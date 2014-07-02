@@ -87,4 +87,12 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+-(void) setNewRootViewController: (UIViewController *) newRootViewController withAnimation:(UIViewAnimationOptions) options{
+    [UIView transitionWithView:self.window
+                      duration:0.8
+                       options:options
+                    animations:^{ self.window.rootViewController = newRootViewController; }
+                    completion:nil];
+}
+
 @end
