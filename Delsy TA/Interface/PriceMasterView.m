@@ -39,8 +39,10 @@
         return _controller;
     ProductType *productType = [productTypes objectAtIndex:activeSection];
     _controller = [Item getControllerGroupByFish:self.context forProductType:productType];
-    _controller.delegate = self;
+    //_controller.delegate = self;
     [_controller performFetch:nil];
+    self.priceDetailView.section = -1;
+    self.priceDetailView.controller = _controller;
     return _controller;
 }
 
@@ -87,6 +89,64 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(IBAction)sectionViewPressed:(UIButton *)btn{
+    int section = btn.tag - 1;
+    if(section == activeSection){
+        if(isActiveSectionOpened == YES){
+            isActiveSectionOpened = NO;
+            if(self.priceDetailView.section != -1){
+                self.priceDetailView.section = -1;
+                [self.priceDetailView.tableView reloadData];
+            }
+            NSMutableArray *array = [NSMutableArray array];
+            for(int i=0;i<self.controller.sections.count;i++){
+                [array addObject:[NSIndexPath indexPathForRow:i inSection:activeSection]];
+            }
+            [self.tableView deleteRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationRight];
+        }
+        else{
+            isActiveSectionOpened = YES;
+            NSMutableArray *array = [NSMutableArray array];
+            for(int i=0;i<self.controller.sections.count;i++){
+                [array addObject:[NSIndexPath indexPathForRow:i inSection:activeSection]];
+            }
+            [self.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationRight];
+        }
+    }
+    else{
+        if(isActiveSectionOpened == YES){
+            isActiveSectionOpened = NO;
+            /*NSMutableArray *array = [NSMutableArray array];
+            for(int i=0;i<self.controller.sections.count;i++){
+                [array addObject:[NSIndexPath indexPathForRow:i inSection:activeSection]];
+            }
+            [self.tableView deleteRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationRight];*/
+            
+        }
+        int prevActiveSection = activeSection;
+        activeSection = section;
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:prevActiveSection]
+                      withRowAnimation:UITableViewRowAnimationFade];
+        isActiveSectionOpened = YES;
+        ProductType *productType = [productTypes objectAtIndex:section];
+        [NSFetchedResultsController deleteCacheWithName:@"ru.bva.DelsyTA.fetchRequestForPriceMasterView"];
+        [self.controller.fetchRequest setPredicate:
+             [NSPredicate predicateWithFormat:@"(deleted == %@) AND (productType == %@)",
+              [NSNumber numberWithBool:NO],productType]];
+        [self.controller performFetch:nil];
+        
+//        NSMutableArray *array = [NSMutableArray array];
+//        for(int i=0;i<self.controller.sections.count;i++){
+//            [array addObject:[NSIndexPath indexPathForRow:i inSection:section]];
+//        }
+//        [self.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationRight];
+        self.priceDetailView.section = -1;
+        [self.priceDetailView.tableView reloadData];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:activeSection]
+                      withRowAnimation:UITableViewRowAnimationRight];
+    }
+}
+
 #pragma mark UISplitViewControllerDelegate
 
 - (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation{
@@ -117,8 +177,15 @@
     
     //Fish *fish = [controller objectAtIndexPath:indexPath];
     if(indexPath.section == activeSection && isActiveSectionOpened == YES){
+        // Устанавливаем текст, причем делаем увеличенные пробелы между буквами
         id <NSFetchedResultsSectionInfo> sectionInfo = [self.controller.sections objectAtIndex:indexPath.row];
-        cell.textLabel.text = [sectionInfo name];
+        NSString *text = [NSString stringWithFormat:@"%@ (%d)", [sectionInfo name], [sectionInfo numberOfObjects]];
+        NSAttributedString *attributedText =
+        [[NSAttributedString alloc]
+         initWithString:text
+         attributes: @{ NSKernAttributeName : @(1.3f) }];
+        cell.textLabel.attributedText = attributedText;
+        // цвет выделения ячейки
         UIView *bgColorView = [[UIView alloc] init];
         bgColorView.backgroundColor = [UIColor colorWithRed:(150.0/255.0) green:(210.0/255.0) blue:(255.0/255.0) alpha:1.0]; // perfect color suggested by @mohamadHafez
         bgColorView.layer.masksToBounds = YES;
@@ -140,19 +207,22 @@
         cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2];
     }
     //id <NSFetchedResultsSectionInfo> sectionInfo = [controller.sections objectAtIndex:section];
+    UIButton *btn = (UIButton *) [cell viewWithTag:1];
+    UILabel *label =  (UILabel *) [cell viewWithTag:2];
     ProductType *productType = [productTypes objectAtIndex:section];
-    cell.textLabel.text = productType.name;
+    label.text = productType.name;
+    // чтобы лейбл пропускал события типа нажатия делаем след.:
+    label.userInteractionEnabled = NO;
+    //cell.userInteractionEnabled = NO;
+    //вешаем на кнопку функцию по нажатию.
+    [btn addTarget:self action:@selector(sectionViewPressed:) forControlEvents:UIControlEventTouchUpInside];
     //cell.backgroundColor = cell.viewForBaselineLayout.backgroundColor;
     if(section == activeSection){
-        cell.selected = YES;
-        UIView *bgColorView = [[UIView alloc] init];
-        bgColorView.backgroundColor = [UIColor colorWithRed:(170.0/255.0) green:(220.0/255.0) blue:(255.0/255.0) alpha:1.0]; // perfect color suggested by @mohamadHafez
-        bgColorView.layer.masksToBounds = YES;
-        cell.selectedBackgroundView = bgColorView;
+         cell.contentView.backgroundColor = [UIColor colorWithRed:(170.0/255.0) green:(220.0/255.0) blue:(255.0/255.0) alpha:1.0];
     }
-    cell.tag = section + 1;
-    UIButton *btn;
-    return cell;
+    
+    btn.tag = section + 1;
+    return cell.contentView;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -162,7 +232,12 @@
 
 // в ios7 эту функцию для кастомного хедера нужно реализовывать обязательно, даже если в storyboard или nib-е указана высота header-а. Иначе нумерация групп будет с 1.
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 35;
+    return 40;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    self.priceDetailView.section = indexPath.row;
+    [self.priceDetailView.tableView reloadData];
 }
 
 /*

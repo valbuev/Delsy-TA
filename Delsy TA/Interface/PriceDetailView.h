@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 bva. All rights reserved.
 //
 
+
+// Все построено по такому принципу: когда в мастер-вью нажимается секция, то в этот вью (detail) передается индекс секции (если выбран вид рыбы) или -1 (если просто была нажата секция). Если -1, то отображаем все виды рыб в одной таблице. Разбиваем на секции, соответственно, по рыбам. Если номер был передан, то отображаем только эту секцию.
+
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
@@ -14,10 +17,13 @@
 @class Fish;
 
 @interface PriceDetailView : UIViewController
+<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic,retain) NSManagedObjectContext *context;
 @property (nonatomic,retain) Order *order;
-@property (nonatomic,retain) ProductType *productType;
-@property (nonatomic,retain) Fish *fish;
+@property (nonatomic,weak) NSFetchedResultsController *controller;
+@property (nonatomic) NSInteger section;
+
+@property (nonatomic,weak) IBOutlet UITableView *tableView;
 
 @end
