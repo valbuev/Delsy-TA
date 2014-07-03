@@ -119,20 +119,51 @@
     if(indexPath.section == activeSection && isActiveSectionOpened == YES){
         id <NSFetchedResultsSectionInfo> sectionInfo = [self.controller.sections objectAtIndex:indexPath.row];
         cell.textLabel.text = [sectionInfo name];
+        UIView *bgColorView = [[UIView alloc] init];
+        bgColorView.backgroundColor = [UIColor colorWithRed:(150.0/255.0) green:(210.0/255.0) blue:(255.0/255.0) alpha:1.0]; // perfect color suggested by @mohamadHafez
+        bgColorView.layer.masksToBounds = YES;
+        cell.selectedBackgroundView = bgColorView;
     }
     
     return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    static NSString *cellIdentifier = @"ProductType";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    static NSString *cellIdentifier1 = @"ProductType1";
+    static NSString *cellIdentifier2 = @"ProductType2";
+    UITableViewCell *cell;
+    //четные с одним цветом, нечетные - с другим.
+    if(section % 2){
+        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier1];
+    }
+    else{
+        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2];
+    }
     //id <NSFetchedResultsSectionInfo> sectionInfo = [controller.sections objectAtIndex:section];
     ProductType *productType = [productTypes objectAtIndex:section];
     cell.textLabel.text = productType.name;
+    //cell.backgroundColor = cell.viewForBaselineLayout.backgroundColor;
+    if(section == activeSection){
+        cell.selected = YES;
+        UIView *bgColorView = [[UIView alloc] init];
+        bgColorView.backgroundColor = [UIColor colorWithRed:(170.0/255.0) green:(220.0/255.0) blue:(255.0/255.0) alpha:1.0]; // perfect color suggested by @mohamadHafez
+        bgColorView.layer.masksToBounds = YES;
+        cell.selectedBackgroundView = bgColorView;
+    }
+    cell.tag = section + 1;
+    UIButton *btn;
     return cell;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return CGFLOAT_MIN;
+}
+
+
+// в ios7 эту функцию для кастомного хедера нужно реализовывать обязательно, даже если в storyboard или nib-е указана высота header-а. Иначе нумерация групп будет с 1.
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 35;
+}
 
 /*
 // Override to support conditional editing of the table view.
