@@ -7,6 +7,7 @@
 //
 
 #import "Client+ClientCategory.h"
+#import "Item+ItemCategory.h"
 
 @implementation Client (ClientCategory)
 
@@ -65,6 +66,11 @@
         }
     }
     return client;
+}
+
+// Возвращает скидку по продукту для данного клиента
+- (NSNumber *) getSaleByItem:(Item *) item{
+    return self.sale;
 }
 
 //+(Client *) getClientByCustAccount:(NSString *) custAccount withMOC:(NSManagedObjectContext *) managedObjectContext{

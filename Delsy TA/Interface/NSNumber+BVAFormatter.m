@@ -22,5 +22,11 @@
         return [NSString stringWithFormat:@"%.2f",value];
     return self.stringValue;
 }
+- (NSString *) floatValueFrac2or0{
+    float value = self.floatValue;
+    if( ((int) value) < value )
+        return [NSString stringWithFormat:@"%.2f",value];
+    return self.stringValue;
+}
 
 @end

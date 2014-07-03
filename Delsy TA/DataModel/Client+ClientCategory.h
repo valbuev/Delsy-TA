@@ -8,6 +8,8 @@
 
 #import "Client.h"
 
+@class Item;
+
 @interface Client (ClientCategory)
 
 // ПОмечает всех Клиентов, как удаленные
@@ -15,5 +17,8 @@
 
 // Ищет Client с self.custAccount = custAccount, если находит, то возвращает, иначе, создает новый.
 +(Client *) getClientByCustAccount:(NSString *) custAccount withMOC:(NSManagedObjectContext *) managedObjectContext;
+
+// Возвращает скидку по продукту для данного клиента
+- (NSNumber *) getSaleByItem:(Item *) item;
 
 @end

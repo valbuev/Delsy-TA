@@ -10,10 +10,15 @@
 #import "Order+OrderCategory.h"
 #import "Client+ClientCategory.h"
 #import "Item+ItemCategory.h"
+#import "PriceDetailViewTableCell.h"
+#import "NSNumber+BVAFormatter.h"
+#import "QtySetterView.h"
 
 @interface PriceDetailView (){
     Client * client;
 }
+
+@property (nonatomic,retain) UIPopoverController *popoverController;
 
 @end
 
@@ -24,6 +29,7 @@
 @synthesize controller;
 @synthesize section;
 @synthesize tableView;
+@synthesize popoverController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -84,12 +90,26 @@
         sectionNum = self.section;
     }
     NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:sectionNum];
-    static NSString *cellIdentifier = @"Item";
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     Item *item = [controller objectAtIndexPath:newIndexPath];
-    UILabel *labelName = (UILabel *) [cell viewWithTag:1];
-    labelName.text = item.name;
+    
+    static NSString *cellIdentifier = @"Item";
+    PriceDetailViewTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    [self configureCell:cell item:item];
+    
+    // цвет выделения ячейки
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [UIColor colorWithRed:(180.0/255.0) green:(220.0/255.0) blue:(255.0/255.0) alpha:1.0];
+    bgColorView.layer.masksToBounds = YES;
+    cell.selectedBackgroundView = bgColorView;
+    
     return cell;
+}
+
+- (void) configureCell:(PriceDetailViewTableCell *) cell item:(Item *) item{
+    
+    cell.labelName.text = item.name;
+    cell.labelUnit.text = [item.unit unitValueToString];
+    cell.labelPrice.text = [[NSNumber numberWithFloat:(item.price.floatValue * (100.0 - [client getSaleByItem:item].floatValue)/100)] floatValueFrac2or0];
 }
 
 
@@ -100,6 +120,31 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 2;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    int sectionNum = indexPath.section;
+    if(self.section != -1){
+        sectionNum = self.section;
+    }
+    
+    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:sectionNum];
+    
+    Item *item = [controller objectAtIndexPath:newIndexPath];
+    
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    QtySetterView *qtySetter = [self.storyboard instantiateViewControllerWithIdentifier:@"QtySetter"];
+    qtySetter.item = item;
+    
+    popoverController = [[UIPopoverController alloc] initWithContentViewController:qtySetter];
+    
+    //self.popoverController.popoverContentSize = CGSizeMake(320, 416);
+    [self.popoverController presentPopoverFromRect:cell.bounds inView:cell.contentView
+                          permittedArrowDirections:UIPopoverArrowDirectionAny
+                                          animated:YES];
+    
 }
 
 /*-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section1{

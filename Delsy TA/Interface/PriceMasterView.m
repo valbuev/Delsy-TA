@@ -218,7 +218,7 @@
     [btn addTarget:self action:@selector(sectionViewPressed:) forControlEvents:UIControlEventTouchUpInside];
     //cell.backgroundColor = cell.viewForBaselineLayout.backgroundColor;
     if(section == activeSection){
-         cell.contentView.backgroundColor = [UIColor colorWithRed:(170.0/255.0) green:(220.0/255.0) blue:(255.0/255.0) alpha:1.0];
+         cell.contentView.backgroundColor = [UIColor colorWithRed:(130.0/255.0) green:(190.0/255.0) blue:(240.0/255.0) alpha:1.0];
     }
     
     btn.tag = section + 1;

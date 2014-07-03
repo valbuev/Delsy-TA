@@ -24,5 +24,6 @@ typedef enum {
 
 + (NSNumber *)numberWithUnit:(Unit)unit;
 - (Unit)unitValue;
+- (NSString *)unitValueToString;
 
 @end
