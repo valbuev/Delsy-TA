@@ -46,7 +46,6 @@
     NSNumber * baseUnitQty = [NSNumber numberWithInt:1];
     NSNumber * boxQty = self.item.unitsInBox;
     NSNumber * bigBoxQty = self.item.unitsInBigBox;
-    NSLog(@"%@ %@ %@",baseUnitQty,boxQty,bigBoxQty);
     if(boxQty.floatValue == bigBoxQty.floatValue){
         if(boxQty.floatValue == baseUnitQty.floatValue){
             units = [NSArray arrayWithObject:item.unit];
@@ -87,6 +86,7 @@
         [self.segmentsUnit insertSegmentWithTitle:((NSNumber *)[unitQtys objectAtIndex:2]).stringValue atIndex:2 animated:NO];
         [self.segmentsUnit setSelectedSegmentIndex:1];
     }
+#warning доделать qtysetter. Учесть возможность поштучной продажи
 }
 
 -(void) updateLabelQtyInBaseUnits{
@@ -172,6 +172,7 @@
 }
 
 - (IBAction)btnOKClicked:(id)sender {
+    [self.delegate qtySetterView:self didFinishSettingQty:[NSNumber numberWithFloat:self.textFieldQty.text.floatValue] unit:[[units objectAtIndex:self.segmentsUnit.selectedSegmentIndex] unitValue]];
 }
 
 - (IBAction)segmentsUnitChange:(id)sender {

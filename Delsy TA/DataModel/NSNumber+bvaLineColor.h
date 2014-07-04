@@ -20,5 +20,6 @@ typedef enum{
 
 + (NSNumber *)numberWithLineColor:(LineColor)lineColor;
 - (LineColor)lineColorValue;
+- (UIColor *) lineColor:(UIColor *) defaultLineColor;
 
 @end

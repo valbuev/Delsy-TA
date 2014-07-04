@@ -13,12 +13,15 @@
 #import "PriceDetailViewTableCell.h"
 #import "NSNumber+BVAFormatter.h"
 #import "QtySetterView.h"
+#import "NSNumber+bvaLineColor.h"
 
-@interface PriceDetailView (){
+@interface PriceDetailView()
+<QtySetterViewDelegate>
+{
     Client * client;
 }
 
-@property (nonatomic,retain) UIPopoverController *popoverController;
+@property (nonatomic,retain) UIPopoverController *localPopoverController;
 
 @end
 
@@ -29,7 +32,9 @@
 @synthesize controller;
 @synthesize section;
 @synthesize tableView;
-@synthesize popoverController;
+@synthesize localPopoverController;
+
+#pragma mark initialization and basic ui actions
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -106,10 +111,12 @@
 }
 
 - (void) configureCell:(PriceDetailViewTableCell *) cell item:(Item *) item{
-    
     cell.labelName.text = item.name;
     cell.labelUnit.text = [item.unit unitValueToString];
     cell.labelPrice.text = [[NSNumber numberWithFloat:(item.price.floatValue * (100.0 - [client getSaleByItem:item].floatValue)/100)] floatValueFrac2or0];
+    cell.backgroundColor = [item.lineColor lineColor:[UIColor whiteColor]];
+    if(item.promo.boolValue == YES)
+        cell.labelPrice.textColor = [UIColor redColor];
 }
 
 
@@ -133,18 +140,32 @@
     
     Item *item = [controller objectAtIndexPath:newIndexPath];
     
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    PriceDetailViewTableCell *cell = (PriceDetailViewTableCell *) [self.tableView cellForRowAtIndexPath:indexPath];
     
     QtySetterView *qtySetter = [self.storyboard instantiateViewControllerWithIdentifier:@"QtySetter"];
     qtySetter.item = item;
+    qtySetter.delegate = self;
     
-    popoverController = [[UIPopoverController alloc] initWithContentViewController:qtySetter];
+    self.localPopoverController = [[UIPopoverController alloc] initWithContentViewController:qtySetter];
+    self.localPopoverController.delegate = self;
     
-    //self.popoverController.popoverContentSize = CGSizeMake(320, 416);
-    [self.popoverController presentPopoverFromRect:cell.bounds inView:cell.contentView
-                          permittedArrowDirections:UIPopoverArrowDirectionAny
-                                          animated:YES];
+    [self.localPopoverController presentPopoverFromRect:cell.labelName.bounds inView:cell.labelName
+                          permittedArrowDirections:UIPopoverArrowDirectionLeft
+                                          animated:NO];
     
+}
+
+#pragma mark popoverDelegate
+
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController{
+    [self.localPopoverController dismissPopoverAnimated:NO];
+    return NO;
+}
+
+#pragma mark QtySetterDelegate
+
+- (void)qtySetterView:(QtySetterView *)qtySetterView didFinishSettingQty:(NSNumber *)qty unit:(Unit)unit{
+    [self.localPopoverController dismissPopoverAnimated:NO];
 }
 
 /*-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section1{

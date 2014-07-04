@@ -17,7 +17,8 @@
 @class Fish;
 
 @interface PriceDetailView : UIViewController
-<UITableViewDataSource,UITableViewDelegate>
+<UITableViewDataSource,UITableViewDelegate,
+UIPopoverControllerDelegate>
 
 @property (nonatomic,retain) NSManagedObjectContext *context;
 @property (nonatomic,retain) Order *order;
