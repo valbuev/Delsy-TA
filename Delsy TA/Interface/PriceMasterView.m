@@ -90,7 +90,7 @@
 }
 
 -(IBAction)sectionViewPressed:(UIButton *)btn{
-    int section = btn.tag - 1;
+    long section = btn.tag - 1;
     if(section == activeSection){
         if(isActiveSectionOpened == YES){
             isActiveSectionOpened = NO;
@@ -123,7 +123,7 @@
             [self.tableView deleteRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationRight];*/
             
         }
-        int prevActiveSection = activeSection;
+        long prevActiveSection = activeSection;
         activeSection = section;
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:prevActiveSection]
                       withRowAnimation:UITableViewRowAnimationFade];
@@ -179,7 +179,7 @@
     if(indexPath.section == activeSection && isActiveSectionOpened == YES){
         // Устанавливаем текст, причем делаем увеличенные пробелы между буквами
         id <NSFetchedResultsSectionInfo> sectionInfo = [self.controller.sections objectAtIndex:indexPath.row];
-        NSString *text = [NSString stringWithFormat:@"%@ (%d)", [sectionInfo name], [sectionInfo numberOfObjects]];
+        NSString *text = [NSString stringWithFormat:@"%@ (%lu)", [sectionInfo name], (unsigned long)[sectionInfo numberOfObjects]];
         NSAttributedString *attributedText =
         [[NSAttributedString alloc]
          initWithString:text

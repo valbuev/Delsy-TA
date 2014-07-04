@@ -14,10 +14,10 @@
 
 // перечисляемый тип Unit. Т.е. единица измерения
 typedef enum {
-    kg = 1,
-    piece = 2,
-    box = 3,
-    bigBox = 4
+    unitKG = 1,
+    unitPiece = 2,
+    unitBox = 3,
+    unitBigBox = 4
 } Unit;
 
 @interface NSNumber (NSNumberUnit)

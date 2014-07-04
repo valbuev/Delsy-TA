@@ -11,6 +11,9 @@
 #import "Address+AddressCategory.h"
 #import "AppSettings+AppSettingsCategory.h"
 #import "TA+TACategory.h"
+#import "OrderLine+OrderLineCategory.h"
+#import "NSNumber+NSNumberUnit.h"
+#import "Item+ItemCategory.h"
 
 @implementation Order (OrderCategory)
 
@@ -57,10 +60,47 @@
     controller = [[NSFetchedResultsController alloc]
                                               initWithFetchRequest:request
                                               managedObjectContext:context
-                                              sectionNameKeyPath:@"item.produstType.name"
+                                              sectionNameKeyPath:@"item.productType.name"
                                               cacheName:@"ru.bva.DelsyTA.fetchedResultsControllerForOrderForEdit"];
     
     return controller;
 }
+
+//Добавляет позицию в текущий заказ. Если позиция с таким продуктом уже есть, то она заменяется.
+- (void) addItem:(Item *) item qty:(NSNumber *) qty unit:(Unit) unit{
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"item == %@",item];
+    NSMutableSet *mutableOrderLines = [self.orderLines mutableCopy];
+    [mutableOrderLines filterUsingPredicate:predicate];
+    OrderLine *orderLine;
+    if(mutableOrderLines.count >0){
+        for(OrderLine *orderLineIndex in mutableOrderLines){
+            orderLine = orderLineIndex;
+            break;
+        }
+    }
+    else{
+        orderLine = [OrderLine newOrderLine:self.managedObjectContext forItem:item forOrder:self];
+    }
+    orderLine.qty = qty;
+    orderLine.unit = [NSNumber numberWithUnit:unit];
+    float localQty;
+    if(unit == unitBox){
+        localQty = item.unitsInBox.floatValue;
+    }
+    else if(unit == unitBigBox){
+        localQty = item.unitsInBigBox.floatValue;
+    }
+    else{
+        localQty = 1;
+    }
+    
+    float localSale = [self.client getSaleByItem:item].floatValue;
+    float localPrice = (item.price.floatValue * (100.0 - localSale) / 100.0);
+    orderLine.price = [NSNumber numberWithFloat:localPrice];
+    orderLine.amount = [NSNumber numberWithFloat:(localPrice*localQty)];
+    NSLog(@"orderlines: %d",[self.orderLines count]);
+}
+
 
 @end

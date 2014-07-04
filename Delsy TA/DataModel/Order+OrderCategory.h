@@ -7,6 +7,9 @@
 //
 
 #import "Order.h"
+#import "NSNumber+NSNumberUnit.h"
+
+@class Item;
 
 @interface Order (OrderCategory)
 
@@ -15,5 +18,8 @@
 
 // Создает и возвращает NSFetchedResultsController для данного заказа
 -(NSFetchedResultsController *) newOrderController;
+
+//Добавляет позицию в текущий заказ. Если позиция с таким продуктом уже есть, то она заменяется.
+- (void) addItem:(Item *) item qty:(NSNumber *) qty unit:(Unit) unit;
 
 @end

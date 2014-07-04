@@ -57,6 +57,7 @@
     NSLog(@"OrderEditView viewDidLoad");
     orderController = [order newOrderController];
     orderController.delegate = self;
+    [orderController performFetch:nil];
 #warning add observer for order
 }
 
@@ -121,6 +122,7 @@
     if( tableView == self.orderTableView ){
         if(orderController){
             id<NSFetchedResultsSectionInfo> sectionInfo = [orderController.sections objectAtIndex:section];
+            NSLog(@"section count: %d",[sectionInfo numberOfObjects]);
             return [sectionInfo numberOfObjects];
         }
         return 0;
@@ -203,7 +205,8 @@
         }
         else if (indexPath.row == 1) // addItem-cell
         {
-            [self showPrice];
+            //[self showPrice];
+            [self.orderTableView reloadData];
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:NO];

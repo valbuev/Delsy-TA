@@ -8,6 +8,11 @@
 
 #import "OrderLine.h"
 
+@class Item;
+@class Order;
 @interface OrderLine (OrderLineCategory)
+
+// Создает и возвращает новую позицию.
++ (OrderLine *) newOrderLine:(NSManagedObjectContext *) context forItem:(Item *) item forOrder:(Order *) order;
 
 @end

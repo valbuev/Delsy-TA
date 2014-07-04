@@ -30,16 +30,16 @@
     static NSString* strBOX = @"кор";
     static NSString* strBIGBOX = @"б.кор";
     switch (self.unitValue) {
-        case kg:
+        case unitKG:
             return strKG;
             break;
-        case piece:
+        case unitPiece:
             return strPIECE;
             break;
-        case box:
+        case unitBox:
             return strBOX;
             break;
-        case bigBox:
+        case unitBigBox:
             return strBIGBOX;
             break;
         default:

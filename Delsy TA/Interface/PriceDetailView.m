@@ -90,7 +90,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    int sectionNum = indexPath.section;
+    long sectionNum = indexPath.section;
     if(self.section != -1){
         sectionNum = self.section;
     }
@@ -131,7 +131,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int sectionNum = indexPath.section;
+    long sectionNum = indexPath.section;
     if(self.section != -1){
         sectionNum = self.section;
     }
@@ -164,8 +164,9 @@
 
 #pragma mark QtySetterDelegate
 
-- (void)qtySetterView:(QtySetterView *)qtySetterView didFinishSettingQty:(NSNumber *)qty unit:(Unit)unit{
+- (void)qtySetterView:(QtySetterView *)qtySetterView didFinishSettingQty:(NSNumber *)qty unit:(Unit)unit forItem:(Item *)item{
     [self.localPopoverController dismissPopoverAnimated:NO];
+    [order addItem:item qty:qty unit:unit];
 }
 
 /*-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section1{

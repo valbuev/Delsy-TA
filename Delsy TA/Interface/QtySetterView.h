@@ -15,7 +15,7 @@
 
 @protocol QtySetterViewDelegate
 
--(void) qtySetterView:(QtySetterView *) qtySetterView didFinishSettingQty:(NSNumber *) qty unit:(Unit) unit;
+-(void) qtySetterView:(QtySetterView *) qtySetterView didFinishSettingQty:(NSNumber *) qty unit:(Unit) unit forItem:(Item *) item;
 
 @end
 
@@ -42,6 +42,7 @@
 
 @property (nonatomic,retain) Item *item;
 @property (nonatomic) Unit startWithUnit;
+@property (nonatomic,retain) NSNumber *startWithQty;
 
 @property (nonatomic,weak) id<QtySetterViewDelegate> delegate;
 

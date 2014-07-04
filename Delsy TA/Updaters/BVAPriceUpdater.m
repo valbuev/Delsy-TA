@@ -236,7 +236,7 @@
     item.productType = productType;
     item.name = itemName;
     item.price = itemPrice;
-    item.unit = [NSNumber numberWithUnit:[itemUnit isEqualToString:@"кг"] ? kg : piece ];
+    item.unit = [NSNumber numberWithUnit:[itemUnit isEqualToString:@"кг"] ? unitKG : unitPiece ];
     item.unitsInBox = itemUnitsInBox;
     item.unitsInBigBox = itemUnitsInBigBox;
     NSString *ABCvalue = [itemDict objectForKey:@"ABCvalue"];

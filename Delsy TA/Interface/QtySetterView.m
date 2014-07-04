@@ -25,6 +25,7 @@
 @synthesize textFieldQty;
 @synthesize segmentsUnit;
 @synthesize startWithUnit;
+@synthesize startWithQty;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,20 +53,20 @@
             unitQtys = [NSArray arrayWithObject:baseUnitQty];
         }
         else{
-            units = [NSArray arrayWithObjects:item.unit,[NSNumber numberWithUnit:box],nil];
+            units = [NSArray arrayWithObjects:item.unit,[NSNumber numberWithUnit:unitBox],nil];
             unitQtys =  [NSArray arrayWithObjects:baseUnitQty,boxQty,nil];
         }
     }
     else if (boxQty.floatValue == baseUnitQty.floatValue){
-        units = [NSArray arrayWithObjects:item.unit,[NSNumber numberWithUnit:bigBox],nil];
+        units = [NSArray arrayWithObjects:item.unit,[NSNumber numberWithUnit:unitBigBox],nil];
         unitQtys =  [NSArray arrayWithObjects:baseUnitQty,bigBoxQty,nil];
     }
     else if(bigBoxQty.floatValue == baseUnitQty.floatValue){
-        units = [NSArray arrayWithObjects:item.unit,[NSNumber numberWithUnit:box],nil];
+        units = [NSArray arrayWithObjects:item.unit,[NSNumber numberWithUnit:unitBox],nil];
         unitQtys =  [NSArray arrayWithObjects:baseUnitQty,boxQty,nil];
     }
     else{
-        units = [NSArray arrayWithObjects:item.unit,[NSNumber numberWithUnit:box],[NSNumber numberWithUnit:bigBox],nil];
+        units = [NSArray arrayWithObjects:item.unit,[NSNumber numberWithUnit:unitBox],[NSNumber numberWithUnit:unitBigBox],nil];
         unitQtys =  [NSArray arrayWithObjects:baseUnitQty,boxQty,bigBoxQty,nil];
     }
     
@@ -172,7 +173,7 @@
 }
 
 - (IBAction)btnOKClicked:(id)sender {
-    [self.delegate qtySetterView:self didFinishSettingQty:[NSNumber numberWithFloat:self.textFieldQty.text.floatValue] unit:[[units objectAtIndex:self.segmentsUnit.selectedSegmentIndex] unitValue]];
+    [self.delegate qtySetterView:self didFinishSettingQty:[NSNumber numberWithFloat:self.textFieldQty.text.floatValue] unit:[[units objectAtIndex:self.segmentsUnit.selectedSegmentIndex] unitValue] forItem:self.item];
 }
 
 - (IBAction)segmentsUnitChange:(id)sender {
