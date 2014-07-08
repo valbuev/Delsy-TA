@@ -69,17 +69,14 @@
 //Добавляет позицию в текущий заказ. Если позиция с таким продуктом уже есть, то она заменяется.
 - (void) addItem:(Item *) item qty:(NSNumber *) qty unit:(Unit) unit{
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"item == %@",item];
-    NSMutableSet *mutableOrderLines = [self.orderLines mutableCopy];
-    [mutableOrderLines filterUsingPredicate:predicate];
     OrderLine *orderLine;
-    if(mutableOrderLines.count >0){
-        for(OrderLine *orderLineIndex in mutableOrderLines){
+    for(OrderLine *orderLineIndex in self.orderLines){
+        if(orderLineIndex.item == item){
             orderLine = orderLineIndex;
             break;
         }
     }
-    else{
+    if( !orderLine ){
         orderLine = [OrderLine newOrderLine:self.managedObjectContext forItem:item forOrder:self];
     }
     orderLine.qty = qty;
@@ -97,9 +94,10 @@
     
     float localSale = [self.client getSaleByItem:item].floatValue;
     float localPrice = (item.price.floatValue * (100.0 - localSale) / 100.0);
+    orderLine.baseUnitQty = [NSNumber numberWithFloat: localQty * qty.floatValue ];
     orderLine.price = [NSNumber numberWithFloat:localPrice];
     orderLine.amount = [NSNumber numberWithFloat:(localPrice*localQty)];
-    NSLog(@"orderlines: %d",[self.orderLines count]);
+
 }
 
 

@@ -21,5 +21,6 @@
 @dynamic unit;
 @dynamic item;
 @dynamic order;
+@dynamic baseUnitQty;
 
 @end

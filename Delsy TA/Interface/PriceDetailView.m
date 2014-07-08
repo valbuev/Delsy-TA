@@ -58,6 +58,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) saveManageObjectContext{
+    if(self.context == nil){
+        NSLog(@"PriceDetailView.managedObjectContext = nil");
+        abort();
+    }
+    else{
+        NSError *error;
+        [self.context save:&error];
+        if(error){
+            NSLog(@"PriceDetailView.managedObjectContext error while saving: %@",error.localizedDescription);
+            abort();
+        }
+    }
+}
+
 #pragma mark uitableViewDelegate, DataSource
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -167,6 +182,7 @@
 - (void)qtySetterView:(QtySetterView *)qtySetterView didFinishSettingQty:(NSNumber *)qty unit:(Unit)unit forItem:(Item *)item{
     [self.localPopoverController dismissPopoverAnimated:NO];
     [order addItem:item qty:qty unit:unit];
+    [self saveManageObjectContext];
 }
 
 /*-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section1{

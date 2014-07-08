@@ -19,9 +19,11 @@
 #import "AppDelegate.h"
 #import "PriceSplitView.h"
 
-@interface OrderEditView (){
+@interface OrderEditView ()
+<PriceViewDelegate>{
     NSFetchedResultsController *orderController;
     PriceSplitView *priceSplitView;
+    Boolean isThatWindowShowing;
 }
 
 @end
@@ -45,10 +47,26 @@
     return self;
 }
 
+-(void) saveManageObjectContext{
+    if(self.context == nil){
+        NSLog(@"OrderEditView.managedObjectContext = nil");
+        abort();
+    }
+    else{
+        NSError *error;
+        [self.context save:&error];
+        if(error){
+            NSLog(@"OrderEditView.managedObjectContext error while saving: %@",error.localizedDescription);
+            abort();
+        }
+    }
+}
+
 // Заполняем заголовок окна, создаем новый заказ, создаем на основе заказа контроллер, чтобы отслеживать изменения и применять их к таблице
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    isThatWindowShowing = YES;
     priceSplitView = nil;
     self.navigationItem.title = [NSString stringWithFormat:@"%@ (%@%%)",address.client.name,[address.client.sale floatValueSimpleMaxFrac2]];
     if(!self.order){
@@ -58,7 +76,6 @@
     orderController = [order newOrderController];
     orderController.delegate = self;
     [orderController performFetch:nil];
-#warning add observer for order
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,6 +131,11 @@
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     //[appDelegate setNewRootViewController:splitViewController withAnimation:UIViewAnimationOptionLayoutSubviews];
     appDelegate.window.rootViewController = priceSplitView;
+    
+    //подписываемся на PriceMasterView, чтобы знать, когда он закроется.
+    // Выставляем флаг, что мы в фоне.
+    priceMasterView.delegate = self;
+    isThatWindowShowing = NO;
 }
 
 #pragma mark table-view delegating and datasourcing
@@ -122,7 +144,6 @@
     if( tableView == self.orderTableView ){
         if(orderController){
             id<NSFetchedResultsSectionInfo> sectionInfo = [orderController.sections objectAtIndex:section];
-            NSLog(@"section count: %d",[sectionInfo numberOfObjects]);
             return [sectionInfo numberOfObjects];
         }
         return 0;
@@ -150,7 +171,14 @@
 -(void) configureCell:(OrderLineCell *) orderLineCell atIndexPath: (NSIndexPath *) indexPath{
     OrderLine *orderLine = [orderController objectAtIndexPath:indexPath];
     orderLineCell.labelName.text = orderLine.itemName;
-#warning complete to configure cells
+    orderLineCell.labelUnit.text = [orderLine.unit unitValueToString];
+    orderLineCell.labelAmount.text = [orderLine.amount floatValueFrac2or0];
+    orderLineCell.labelPrice.text = [orderLine.price floatValueFrac2or0];
+    orderLineCell.labelCurrentUnitQty.text = [orderLine.qty floatValueSimpleMaxFrac3];
+    orderLineCell.labelBaseUnitQty.text = [NSString stringWithFormat:@"%@ %@",[orderLine.baseUnitQty floatValueSimpleMaxFrac3],[orderLine.item.unit unitValueToString]];
+    if(orderLine.item.promo.boolValue == YES)
+        orderLineCell.labelPrice.textColor = [UIColor redColor];
+    orderLineCell.backgroundColor = [orderLine.item.lineColor lineColor:[UIColor whiteColor]];
 }
 
 // Для таблицы с суммой и кнопкой добавления позиции заполняем ячейки вручную.
@@ -172,7 +200,7 @@
             cell = [tableView dequeueReusableCellWithIdentifier:cellIdsum forIndexPath:indexPath];
             UILabel *sumLabel = (UILabel *) [cell.contentView viewWithTag:1];
             NSNumber *amount = self.order.amount;
-            sumLabel.text = [NSString stringWithFormat:@"Сумма: %@ руб.",[amount floatValueSimpleMaxFrac2]];
+            sumLabel.text = [NSString stringWithFormat:@"%@ руб.", [amount floatValueSimpleMaxFrac2]];
         }
         else { // AddItem
             cell = [tableView dequeueReusableCellWithIdentifier: cellIdAddItem forIndexPath: indexPath];
@@ -205,35 +233,67 @@
         }
         else if (indexPath.row == 1) // addItem-cell
         {
-            //[self showPrice];
-            [self.orderTableView reloadData];
+            [self showPrice];
+            //[self.orderTableView reloadData];
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(tableView == self.orderTableView)
+        return YES;
+    else
+        return NO;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(tableView == self.orderTableView){
+        switch (editingStyle) {
+            case UITableViewCellEditingStyleDelete:
+                [self.context deleteObject:[orderController objectAtIndexPath:indexPath]];
+                [self saveManageObjectContext];
+                break;
+                
+            default:
+                break;
+        }
+    }
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(tableView == self.orderTableView){
+        return UITableViewCellEditingStyleDelete;
+    }
+    return UITableViewCellEditingStyleNone;
+}
 
 #pragma mark NSFetchResultsControllerDelegate
 
 //все стандартно
 
 -(void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
-    [self.orderTableView beginUpdates];
+    if( isThatWindowShowing == YES )
+        [self.orderTableView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
-    
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [self.orderTableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                          withRowAnimation:UITableViewRowAnimationNone];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.orderTableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                          withRowAnimation:UITableViewRowAnimationFade];
-            break;
+    //Если не в фоне, то показываем изменения
+    if( isThatWindowShowing == YES ){
+        switch(type) {
+            case NSFetchedResultsChangeInsert:
+                [self.orderTableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                                   withRowAnimation:UITableViewRowAnimationNone];
+                break;
+                
+            case NSFetchedResultsChangeDelete:
+                [self.orderTableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                                   withRowAnimation:UITableViewRowAnimationLeft];
+                break;
+        }
+        // Обновляем таблицу с кнопкой и суммой, чтобы отобразить корректно сумму
+        [self.sumAndAddPositionTableView reloadData];
     }
 }
 
@@ -243,35 +303,55 @@
     
     UITableView *tableView = self.orderTableView;
     
-    switch(type) {
-            
-        case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-                             withRowAnimation:UITableViewRowAnimationNone];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                             withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self configureCell: (OrderLineCell*) [tableView cellForRowAtIndexPath:indexPath]
-                    atIndexPath:indexPath];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                             withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-                             withRowAnimation:UITableViewRowAnimationFade];
-            break;
+    //Если не в фоне, то показываем изменения
+    if( isThatWindowShowing == YES ){
+        switch(type) {
+                
+            case NSFetchedResultsChangeInsert:
+                [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                                 withRowAnimation:UITableViewRowAnimationNone];
+                break;
+                
+            case NSFetchedResultsChangeDelete:
+                [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                 withRowAnimation:UITableViewRowAnimationLeft];
+                break;
+                
+            case NSFetchedResultsChangeUpdate:
+                [self configureCell: (OrderLineCell*) [tableView cellForRowAtIndexPath:indexPath]
+                        atIndexPath:indexPath];
+                break;
+                
+            case NSFetchedResultsChangeMove:
+                [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                                 withRowAnimation:UITableViewRowAnimationFade];
+                [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                                 withRowAnimation:UITableViewRowAnimationFade];
+                break;
+        }
+        // Обновляем таблицу с кнопкой и суммой, чтобы отобразить корректно сумму
+        [self.sumAndAddPositionTableView reloadData];
     }
 }
 
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [self.orderTableView endUpdates];
+    if( isThatWindowShowing == YES )
+        [self.orderTableView endUpdates];
+}
+
+#pragma mark PriceViewDelegate
+
+- (void)priceViewWillFinishShowing{
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        // ставим обратно флаг, что мы не в фоне
+        isThatWindowShowing = YES;
+        // Обновляем таблицу, так как она не содержит обновления
+        [self.orderTableView reloadData];
+        // Обновляем таблицу с кнопкой и суммой, чтобы отобразить корректно сумму
+        [self.sumAndAddPositionTableView reloadData];
+    }];
 }
 
 

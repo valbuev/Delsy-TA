@@ -51,6 +51,9 @@
     [appDelegate setNewRootViewController:self.mainNavigationController withAnimation:UIViewAnimationOptionTransitionNone];
     // Обязательно зануляем ссылку, так как она сильная. Иначе будет циклическая ссылка, так как в OrderEditView хранится обратная ссылка. Объекты никогда не освободятся из памяти.
     self.mainNavigationController = nil;
+    if(self.delegate){
+        [self.delegate priceViewWillFinishShowing];
+    }
 }
 
 - (id)initWithStyle:(UITableViewStyle)style

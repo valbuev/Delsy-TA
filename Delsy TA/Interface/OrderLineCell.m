@@ -10,6 +10,11 @@
 
 @implementation OrderLineCell
 @synthesize labelName;
+@synthesize labelAmount;
+@synthesize labelBaseUnitQty;
+@synthesize labelCurrentUnitQty;
+@synthesize labelPrice;
+@synthesize labelUnit;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

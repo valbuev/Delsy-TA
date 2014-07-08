@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 
 @class PriceDetailView;
+@protocol PriceViewDelegate;
 @interface PriceMasterView : UITableViewController
 <UISplitViewControllerDelegate, NSFetchedResultsControllerDelegate>
 
@@ -17,5 +18,14 @@
 @property (nonatomic,strong) UINavigationController *mainNavigationController;
 @property (nonatomic,weak) PriceDetailView *priceDetailView;
 - (IBAction)btnDone:(id)sender;
+
+@property (nonatomic,weak) id <PriceViewDelegate> delegate;
+
+@end
+
+// написан для того, чтобы OrderEditView знало, когда нужно обновиться.
+@protocol PriceViewDelegate
+
+-(void) priceViewWillFinishShowing;
 
 @end

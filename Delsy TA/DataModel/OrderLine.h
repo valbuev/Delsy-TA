@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSNumber * promo;
 @property (nonatomic, retain) NSNumber * qty;
 @property (nonatomic, retain) NSNumber * unit;
+@property (nonatomic, retain) NSNumber * baseUnitQty;
 @property (nonatomic, retain) Item *item;
 @property (nonatomic, retain) Order *order;
 
