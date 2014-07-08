@@ -19,12 +19,25 @@
 
 -(void)startUpdating{
     errors = [NSMutableArray array];
-    fileDownloader = [[BVAFileDownloader alloc] init];
-    [fileDownloader initWithUrl:[NSURL URLWithString:@"http://195.112.235.1/Invent/Clients_test.xml"]];
-    fileDownloader.delegate = self;
-    [fileDownloader startDownload];
+    [self startUpdatingPriceGroupsAndLineSales];
     if(delegate)
         [delegate BVAClientListUpdaterDidStartUpdating:self];
+}
+
+//обновляем сначала ценовые группы и скидки по строке, потом список клиентов
+-(void) startUpdatingClientList{
+    clientListDownloader = [[BVAFileDownloader alloc] init];
+    [clientListDownloader initWithUrl:[NSURL URLWithString:@"http://195.112.235.1/Invent/Clients.xml"]];
+    clientListDownloader.delegate = self;
+    [clientListDownloader startDownload];
+}
+
+//обновляем сначала ценовые группы и скидки по строке, потом список клиентов
+-(void) startUpdatingPriceGroupsAndLineSales{
+    PriceGroupsAndLineSalesDownloader = [[BVAFileDownloader alloc] init];
+    [PriceGroupsAndLineSalesDownloader initWithUrl:[NSURL URLWithString:@"http://195.112.235.1/Invent/PriceGroupsAndLineSales.xml"]];
+    PriceGroupsAndLineSalesDownloader.delegate = self;
+    [PriceGroupsAndLineSalesDownloader startDownload];
 }
 
 -(Boolean) saveManageObjectContext{
@@ -59,14 +72,21 @@
         parseResults = [parser dictionaryWithString:str];
         // Запускаем в главном потоке, чтобы избежать ошибок CoreData
         [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-            [self saveParsedDictionaryIntoCoreData];
+            if(downloader == clientListDownloader)
+                [self saveParsedClientsDictionaryIntoCoreData];
+            else if (downloader == PriceGroupsAndLineSalesDownloader)
+                ;
+#warning
         }];
     }
-    fileDownloader = nil;
+    if(downloader == clientListDownloader)
+        clientListDownloader = nil;
+    else if (downloader == PriceGroupsAndLineSalesDownloader)
+        PriceGroupsAndLineSalesDownloader = nil;
 }
 
 // Переводим данные из словаря в CoreData
--(void) saveParsedDictionaryIntoCoreData{
+-(void) saveParsedClientsDictionaryIntoCoreData{
     NSError *error = [NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9999
                                      userInfo:[NSDictionary dictionaryWithObject:@"Incorrect data" forKey:@"info"]];
     if(![parseResults.allKeys containsObject:@"TA"]){
@@ -224,7 +244,7 @@
 -(void) BVAFileDownloader:(BVAFileDownloader *)downloader didFinishWithError:(NSError *)error{
     [errors addObject:[error copy]];
     [self sayDelegateAboutErrors];
-    fileDownloader = nil;
+    clientListDownloader = nil;
 }
 
 // Завершаем обновление с ошибкой и сообщаем об этом делегату

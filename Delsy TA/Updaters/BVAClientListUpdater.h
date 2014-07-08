@@ -20,7 +20,8 @@
 
 @interface BVAClientListUpdater : NSObject
 <BVAFileDownloaderDelegate>{
-    BVAFileDownloader *fileDownloader;
+    BVAFileDownloader *clientListDownloader;
+    BVAFileDownloader *PriceGroupsAndLineSalesDownloader;
     NSMutableArray *errors;
     NSDictionary *parseResults;
 }
