@@ -25,12 +25,20 @@
     ThesisList = [managedObjectContext executeFetchRequest:request error:&error];
     
     // Если нет ошибок, то проходим по списку и удаляем каждый
+    int n=0;
     if (ThesisList == nil){
         NSLog(@"Exception while getting Thesises array for delete them. Error: %@",error.localizedDescription);
         return;
     }
     else for(thesis in ThesisList){
         [managedObjectContext deleteObject:thesis];
+        n++;
+        if(n==20){
+            if(![managedObjectContext save:&error]){
+                NSLog(@"Exception while deleting Thesises Error: %@",error.localizedDescription);
+            }
+            n=0;
+        }
     }
 }
 

@@ -25,12 +25,20 @@
     ClientList = [context executeFetchRequest:request error:&error];
     
     // Если нет ошибок, то проходим по списку и помечаем каждый как удаленный
+    int n=0;
     if (ClientList == nil){
-        NSLog(@"Exception while getting TA`s array for set those deleted %d. Error: %@",isDeleted,error.localizedDescription);
+        NSLog(@"Exception while getting Client`s array for set those deleted %d. Error: %@",isDeleted,error.localizedDescription);
         return;
     }
     else for(client in ClientList){
         client.deleted = [NSNumber numberWithBool:isDeleted];
+        n++;
+        if(n==20){
+            if(![context save:&error]){
+                NSLog(@"Exception while setting Client`s array deleted %d. Error: %@",isDeleted,error.localizedDescription);
+            }
+            n=0;
+        }
     }
 }
 
@@ -70,7 +78,9 @@
 
 // Возвращает скидку по продукту для данного клиента
 - (NSNumber *) getSaleByItem:(Item *) item{
-    return self.sale;
+    //return self.sale;
+#warning
+    return 0;
 }
 
 //+(Client *) getClientByCustAccount:(NSString *) custAccount withMOC:(NSManagedObjectContext *) managedObjectContext{

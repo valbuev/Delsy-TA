@@ -25,12 +25,20 @@
     Addresslist = [context executeFetchRequest:request error:&error];
     
     // Если нет ошибок, то проходим по списку и помечаем каждый как удаленный
+    int n=0;
     if (Addresslist == nil){
         NSLog(@"Exception while getting TA`s array for set those deleted %d. Error: %@",isDeleted,error.localizedDescription);
         return;
     }
     else for(address in Addresslist){
         address.deleted = [NSNumber numberWithBool:isDeleted];
+        n++;
+        if(n==20){
+            if(![context save:&error]){
+                NSLog(@"Exception while setting Address`s array deleted %d. Error: %@",isDeleted,error.localizedDescription);
+            }
+            n=0;
+        }
     }
 }
 

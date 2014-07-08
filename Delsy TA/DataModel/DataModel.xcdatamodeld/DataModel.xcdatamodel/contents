@@ -52,13 +52,13 @@
         <relationship name="productType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductType" inverseName="items" inverseEntity="ProductType" syncable="YES"/>
         <relationship name="thesises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Thesis" inverseName="item" inverseEntity="Thesis" syncable="YES"/>
     </entity>
-    <entity name="LineSale" syncable="YES">
+    <entity name="LineSale" representedClassName="LineSale" syncable="YES">
         <attribute name="allSale" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <relationship name="clients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Client" inverseName="lineSale" inverseEntity="Client" syncable="YES"/>
         <relationship name="lineSaleLines" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LineSaleLine" inverseName="lineSale" inverseEntity="LineSaleLine" syncable="YES"/>
     </entity>
-    <entity name="LineSaleLine" syncable="YES">
+    <entity name="LineSaleLine" representedClassName="LineSaleLine" syncable="YES">
         <attribute name="sale" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="lineSaleLines" inverseEntity="Item" syncable="YES"/>
         <relationship name="lineSale" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LineSale" inverseName="lineSaleLines" inverseEntity="LineSale" syncable="YES"/>
@@ -95,12 +95,12 @@
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="photos" inverseEntity="Item" syncable="YES"/>
     </entity>
-    <entity name="PriceGroup" syncable="YES">
+    <entity name="PriceGroup" representedClassName="PriceGroup" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <relationship name="clients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Client" inverseName="priceGroup" inverseEntity="Client" syncable="YES"/>
         <relationship name="priceGroupLines" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PriceGroupLine" inverseName="priceGroup" inverseEntity="PriceGroupLine" syncable="YES"/>
     </entity>
-    <entity name="PriceGroupLine" syncable="YES">
+    <entity name="PriceGroupLine" representedClassName="PriceGroupLine" syncable="YES">
         <attribute name="plusable" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="priceGroupLines" inverseEntity="Item" syncable="YES"/>

@@ -60,6 +60,14 @@
 		A3AC3A4D19513B25004D1EE1 /* NSNumber+NSNumberUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC3A4C19513B25004D1EE1 /* NSNumber+NSNumberUnit.m */; };
 		A3ACB96719593CBA00D2C77A /* NSNumber+bvaLineColor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ACB96619593CBA00D2C77A /* NSNumber+bvaLineColor.m */; };
 		A3ACB96C195948A300D2C77A /* SettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3ACB96B195948A300D2C77A /* SettingsView.m */; };
+		A3BBE131196BDE9200F490EE /* LineSale.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE130196BDE9200F490EE /* LineSale.m */; };
+		A3BBE134196BDE9200F490EE /* PriceGroupLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE133196BDE9200F490EE /* PriceGroupLine.m */; };
+		A3BBE137196BDE9200F490EE /* LineSaleLine.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE136196BDE9200F490EE /* LineSaleLine.m */; };
+		A3BBE13A196BDE9200F490EE /* PriceGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE139196BDE9200F490EE /* PriceGroup.m */; };
+		A3BBE144196BDF9B00F490EE /* PriceGroup+PriceGroupCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE143196BDF9B00F490EE /* PriceGroup+PriceGroupCategory.m */; };
+		A3BBE147196BDFB400F490EE /* PriceGroupLine+PriceGroupLineCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE146196BDFB400F490EE /* PriceGroupLine+PriceGroupLineCategory.m */; };
+		A3BBE14A196BE0DF00F490EE /* LineSale+LineSaleCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE149196BE0DF00F490EE /* LineSale+LineSaleCategory.m */; };
+		A3BBE14D196BE10300F490EE /* LineSaleLine+LineSaleLineCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE14C196BE10300F490EE /* LineSaleLine+LineSaleLineCategory.m */; };
 		A3C04E22195C336A00DAFB32 /* ClientListForNewOrder_View.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */; };
 		A3F96CB1194FEAE000C0C66E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3F96CB0194FEAE000C0C66E /* CoreData.framework */; };
 		A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3F96CB2194FEB8A00C0C66E /* DataModel.xcdatamodeld */; };
@@ -173,6 +181,22 @@
 		A3ACB96619593CBA00D2C77A /* NSNumber+bvaLineColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+bvaLineColor.m"; path = "DataModel/NSNumber+bvaLineColor.m"; sourceTree = "<group>"; };
 		A3ACB96A195948A300D2C77A /* SettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsView.h; path = Interface/SettingsView.h; sourceTree = "<group>"; };
 		A3ACB96B195948A300D2C77A /* SettingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsView.m; path = Interface/SettingsView.m; sourceTree = "<group>"; };
+		A3BBE12F196BDE9200F490EE /* LineSale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LineSale.h; path = DataModel/LineSale.h; sourceTree = "<group>"; };
+		A3BBE130196BDE9200F490EE /* LineSale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LineSale.m; path = DataModel/LineSale.m; sourceTree = "<group>"; };
+		A3BBE132196BDE9200F490EE /* PriceGroupLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PriceGroupLine.h; path = DataModel/PriceGroupLine.h; sourceTree = "<group>"; };
+		A3BBE133196BDE9200F490EE /* PriceGroupLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PriceGroupLine.m; path = DataModel/PriceGroupLine.m; sourceTree = "<group>"; };
+		A3BBE135196BDE9200F490EE /* LineSaleLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LineSaleLine.h; path = DataModel/LineSaleLine.h; sourceTree = "<group>"; };
+		A3BBE136196BDE9200F490EE /* LineSaleLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LineSaleLine.m; path = DataModel/LineSaleLine.m; sourceTree = "<group>"; };
+		A3BBE138196BDE9200F490EE /* PriceGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PriceGroup.h; path = DataModel/PriceGroup.h; sourceTree = "<group>"; };
+		A3BBE139196BDE9200F490EE /* PriceGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PriceGroup.m; path = DataModel/PriceGroup.m; sourceTree = "<group>"; };
+		A3BBE142196BDF9B00F490EE /* PriceGroup+PriceGroupCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PriceGroup+PriceGroupCategory.h"; path = "DataModel/PriceGroup+PriceGroupCategory.h"; sourceTree = "<group>"; };
+		A3BBE143196BDF9B00F490EE /* PriceGroup+PriceGroupCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PriceGroup+PriceGroupCategory.m"; path = "DataModel/PriceGroup+PriceGroupCategory.m"; sourceTree = "<group>"; };
+		A3BBE145196BDFB400F490EE /* PriceGroupLine+PriceGroupLineCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PriceGroupLine+PriceGroupLineCategory.h"; path = "DataModel/PriceGroupLine+PriceGroupLineCategory.h"; sourceTree = "<group>"; };
+		A3BBE146196BDFB400F490EE /* PriceGroupLine+PriceGroupLineCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PriceGroupLine+PriceGroupLineCategory.m"; path = "DataModel/PriceGroupLine+PriceGroupLineCategory.m"; sourceTree = "<group>"; };
+		A3BBE148196BE0DF00F490EE /* LineSale+LineSaleCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LineSale+LineSaleCategory.h"; path = "DataModel/LineSale+LineSaleCategory.h"; sourceTree = "<group>"; };
+		A3BBE149196BE0DF00F490EE /* LineSale+LineSaleCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LineSale+LineSaleCategory.m"; path = "DataModel/LineSale+LineSaleCategory.m"; sourceTree = "<group>"; };
+		A3BBE14B196BE10300F490EE /* LineSaleLine+LineSaleLineCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LineSaleLine+LineSaleLineCategory.h"; path = "DataModel/LineSaleLine+LineSaleLineCategory.h"; sourceTree = "<group>"; };
+		A3BBE14C196BE10300F490EE /* LineSaleLine+LineSaleLineCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LineSaleLine+LineSaleLineCategory.m"; path = "DataModel/LineSaleLine+LineSaleLineCategory.m"; sourceTree = "<group>"; };
 		A3C04E20195C336A00DAFB32 /* ClientListForNewOrder_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientListForNewOrder_View.h; path = Interface/ClientListForNewOrder_View.h; sourceTree = "<group>"; };
 		A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientListForNewOrder_View.m; path = Interface/ClientListForNewOrder_View.m; sourceTree = "<group>"; };
 		A3F96CB0194FEAE000C0C66E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -341,6 +365,10 @@
 		A35A06871952B14200D99BE0 /* Item */ = {
 			isa = PBXGroup;
 			children = (
+				A35A06891952B16300D99BE0 /* Fish */,
+				A35A068E1952B2A400D99BE0 /* Photo */,
+				A35A068A1952B17B00D99BE0 /* ProductType */,
+				A35A06881952B15200D99BE0 /* Thesis */,
 				A35A06661952AA7200D99BE0 /* Item.h */,
 				A35A06671952AA7200D99BE0 /* Item.m */,
 				A35A06A21952C9F700D99BE0 /* Item+ItemCategory.h */,
@@ -396,6 +424,7 @@
 		A35A068C1952B28300D99BE0 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				A35A068B1952B27200D99BE0 /* OrderLine */,
 				A35A06781952B12400D99BE0 /* Order.h */,
 				A35A06791952B12400D99BE0 /* Order.m */,
 				A35A06A61952CA3800D99BE0 /* Order+OrderCategory.h */,
@@ -451,10 +480,14 @@
 		A35A06911952B2DD00D99BE0 /* Client */ = {
 			isa = PBXGroup;
 			children = (
-				A35A06691952B12300D99BE0 /* Client.h */,
-				A35A066A1952B12300D99BE0 /* Client.m */,
+				A35A068F1952B2B000D99BE0 /* Address */,
+				A3BBE13E196BDF1C00F490EE /* LineSale */,
+				A3BBE140196BDF4A00F490EE /* PriceGroup */,
+				A35A068D1952B29300D99BE0 /* TA */,
 				A35A069C1952C99100D99BE0 /* Client+ClientCategory.h */,
 				A35A069D1952C99100D99BE0 /* Client+ClientCategory.m */,
+				A35A06691952B12300D99BE0 /* Client.h */,
+				A35A066A1952B12300D99BE0 /* Client.m */,
 			);
 			name = Client;
 			sourceTree = "<group>";
@@ -505,6 +538,7 @@
 				A341AFD5195A62EC001B7168 /* Updaters */,
 				A3ACB9681959481A00D2C77A /* Interface */,
 				A3F96CB5194FEB9600C0C66E /* DataModel */,
+				A3F96CB2194FEB8A00C0C66E /* DataModel.xcdatamodeld */,
 				A35AB900194EF1D3002BAF0D /* AppDelegate.h */,
 				A35AB901194EF1D3002BAF0D /* AppDelegate.m */,
 				A35AB909194EF1D3002BAF0D /* Images.xcassets */,
@@ -585,6 +619,52 @@
 			name = SettingsView;
 			sourceTree = "<group>";
 		};
+		A3BBE13E196BDF1C00F490EE /* LineSale */ = {
+			isa = PBXGroup;
+			children = (
+				A3BBE13F196BDF2300F490EE /* LineSaleLine */,
+				A3BBE12F196BDE9200F490EE /* LineSale.h */,
+				A3BBE130196BDE9200F490EE /* LineSale.m */,
+				A3BBE148196BE0DF00F490EE /* LineSale+LineSaleCategory.h */,
+				A3BBE149196BE0DF00F490EE /* LineSale+LineSaleCategory.m */,
+			);
+			name = LineSale;
+			sourceTree = "<group>";
+		};
+		A3BBE13F196BDF2300F490EE /* LineSaleLine */ = {
+			isa = PBXGroup;
+			children = (
+				A3BBE135196BDE9200F490EE /* LineSaleLine.h */,
+				A3BBE136196BDE9200F490EE /* LineSaleLine.m */,
+				A3BBE14B196BE10300F490EE /* LineSaleLine+LineSaleLineCategory.h */,
+				A3BBE14C196BE10300F490EE /* LineSaleLine+LineSaleLineCategory.m */,
+			);
+			name = LineSaleLine;
+			sourceTree = "<group>";
+		};
+		A3BBE140196BDF4A00F490EE /* PriceGroup */ = {
+			isa = PBXGroup;
+			children = (
+				A3BBE141196BDF5200F490EE /* PriceGroupLine */,
+				A3BBE138196BDE9200F490EE /* PriceGroup.h */,
+				A3BBE139196BDE9200F490EE /* PriceGroup.m */,
+				A3BBE142196BDF9B00F490EE /* PriceGroup+PriceGroupCategory.h */,
+				A3BBE143196BDF9B00F490EE /* PriceGroup+PriceGroupCategory.m */,
+			);
+			name = PriceGroup;
+			sourceTree = "<group>";
+		};
+		A3BBE141196BDF5200F490EE /* PriceGroupLine */ = {
+			isa = PBXGroup;
+			children = (
+				A3BBE132196BDE9200F490EE /* PriceGroupLine.h */,
+				A3BBE133196BDE9200F490EE /* PriceGroupLine.m */,
+				A3BBE145196BDFB400F490EE /* PriceGroupLine+PriceGroupLineCategory.h */,
+				A3BBE146196BDFB400F490EE /* PriceGroupLine+PriceGroupLineCategory.m */,
+			);
+			name = PriceGroupLine;
+			sourceTree = "<group>";
+		};
 		A3C04E1F195C332800DAFB32 /* ClientListForNewOrder_View */ = {
 			isa = PBXGroup;
 			children = (
@@ -597,20 +677,12 @@
 		A3F96CB5194FEB9600C0C66E /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				A35A068F1952B2B000D99BE0 /* Address */,
 				A35A06901952B2CD00D99BE0 /* AppSettings */,
 				A35A06911952B2DD00D99BE0 /* Client */,
-				A35A06891952B16300D99BE0 /* Fish */,
 				A35A06871952B14200D99BE0 /* Item */,
 				A3ACB96419593C6700D2C77A /* NSNumber+bvaLineColor */,
 				A35A06921952B2FA00D99BE0 /* NSNumber+NSNumberUnit */,
 				A35A068C1952B28300D99BE0 /* Order */,
-				A35A068B1952B27200D99BE0 /* OrderLine */,
-				A35A068E1952B2A400D99BE0 /* Photo */,
-				A35A068A1952B17B00D99BE0 /* ProductType */,
-				A35A068D1952B29300D99BE0 /* TA */,
-				A35A06881952B15200D99BE0 /* Thesis */,
-				A3F96CB2194FEB8A00C0C66E /* DataModel.xcdatamodeld */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -720,10 +792,12 @@
 				A35A06A11952C9B100D99BE0 /* Fish+FishCategory.m in Sources */,
 				A35A06B71952CAF500D99BE0 /* Thesis+ThesisCategory.m in Sources */,
 				A35A06861952B12400D99BE0 /* Thesis.m in Sources */,
+				A3BBE134196BDE9200F490EE /* PriceGroupLine.m in Sources */,
 				A3AC3A4D19513B25004D1EE1 /* NSNumber+NSNumberUnit.m in Sources */,
 				A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */,
 				A35A067A1952B12400D99BE0 /* Order.m in Sources */,
 				A35A069E1952C99100D99BE0 /* Client+ClientCategory.m in Sources */,
+				A3BBE137196BDE9200F490EE /* LineSaleLine.m in Sources */,
 				A35A06A81952CA3800D99BE0 /* Order+OrderCategory.m in Sources */,
 				A3ACB96C195948A300D2C77A /* SettingsView.m in Sources */,
 				A34CF1091962B4C500329155 /* OrderLineCell.m in Sources */,
@@ -735,9 +809,11 @@
 				A34CF1021962624800329155 /* OrderEditView.m in Sources */,
 				A35A06981952B65100D99BE0 /* AppSettings+AppSettingsCategory.m in Sources */,
 				A34CF1191965554000329155 /* PriceDetailViewTableCell.m in Sources */,
+				A3BBE144196BDF9B00F490EE /* PriceGroup+PriceGroupCategory.m in Sources */,
 				A35A06801952B12400D99BE0 /* ProductType.m in Sources */,
 				A34CF10E1963C6A300329155 /* PriceMasterView.m in Sources */,
 				A35AB902194EF1D3002BAF0D /* AppDelegate.m in Sources */,
+				A3BBE147196BDFB400F490EE /* PriceGroupLine+PriceGroupLineCategory.m in Sources */,
 				A341AFEC195AAAEE001B7168 /* TA.m in Sources */,
 				A35AB8FE194EF1D3002BAF0D /* main.m in Sources */,
 				A35A06AB1952CA5000D99BE0 /* OrderLine+OrderLineCategory.m in Sources */,
@@ -746,14 +822,18 @@
 				A39123A91960556B0003828B /* BVAPriceUpdater.m in Sources */,
 				A35A06951952B5CB00D99BE0 /* Address+AddressCategory.m in Sources */,
 				A341AFDD195A8596001B7168 /* BVAClientListUpdater.m in Sources */,
+				A3BBE13A196BDE9200F490EE /* PriceGroup.m in Sources */,
 				A35A06AE1952CA8300D99BE0 /* Photo+PhotoCategory.m in Sources */,
 				A34CF1061962791800329155 /* NSNumber+BVAFormatter.m in Sources */,
+				A3BBE14D196BE10300F490EE /* LineSaleLine+LineSaleLineCategory.m in Sources */,
 				A3ACB96719593CBA00D2C77A /* NSNumber+bvaLineColor.m in Sources */,
+				A3BBE131196BDE9200F490EE /* LineSale.m in Sources */,
 				A35A066B1952B12300D99BE0 /* Client.m in Sources */,
 				A341AFDA195A6472001B7168 /* BVAFileDownloader.m in Sources */,
 				A3C04E22195C336A00DAFB32 /* ClientListForNewOrder_View.m in Sources */,
 				A35A06A41952C9F700D99BE0 /* Item+ItemCategory.m in Sources */,
 				A34CF0FE195FF75000329155 /* CustomIOS7AlertView.m in Sources */,
+				A3BBE14A196BE0DF00F490EE /* LineSale+LineSaleCategory.m in Sources */,
 				A34CF1111963C6F100329155 /* PriceDetailView.m in Sources */,
 				A341AFE1195A8B08001B7168 /* BVAClientListParser.m in Sources */,
 			);

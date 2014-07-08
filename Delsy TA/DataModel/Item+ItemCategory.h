@@ -16,7 +16,7 @@
 +(void) setAllItemsDeleted:(Boolean) deleted InManagedObjectContext:(NSManagedObjectContext *) managedObjectContext;
 
 // Ищет Item с itemID = itemID, если находит, то возвращает, иначе, создает новый.
-+(Item *) getItemByItemID:(NSString *) itemID withMOC:(NSManagedObjectContext *) managedObjectContext;
++(Item *) getOrCreateItemByItemID:(NSString *) itemID withMOC:(NSManagedObjectContext *) managedObjectContext;
 
 // создает контроллер неудаленных items сгруппированных по названиям рыб
 +(NSFetchedResultsController *) getControllerGroupByFish:(NSManagedObjectContext *) context forProductType:(NSManagedObject *) productType;

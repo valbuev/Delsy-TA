@@ -34,7 +34,8 @@
     order.custName = client.name.copy;
     order.taName = ta.name.copy;
     order.date = [NSDate date];
-    order.sale = client.sale.copy;
+#warning
+    order.sale = 0;//client.sale.copy;
     
     return order;
 }

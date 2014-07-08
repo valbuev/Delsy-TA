@@ -25,12 +25,20 @@
     photoList = [managedObjectContext executeFetchRequest:request error:&error];
     
     // Если нет ошибок, то проходим по списку и помечаем каждый как удаленный
+    int n=0;
     if (photoList == nil){
         NSLog(@"Exception while getting Photos array for mark those as deleted %d. Error: %@",deleted,error.localizedDescription);
         return;
     }
     else for(photo in photoList){
         photo.deleted = [NSNumber numberWithBool:deleted];
+        n++;
+        if(n==20){
+            if(![managedObjectContext save:&error]){
+                NSLog(@"Exception while setting Photo`s array deleted %d. Error: %@",deleted,error.localizedDescription);
+            }
+            n=0;
+        }
     }
 }
 
