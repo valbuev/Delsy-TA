@@ -16,5 +16,6 @@
 @dynamic price;
 @dynamic item;
 @dynamic priceGroup;
+@dynamic itemID;
 
 @end

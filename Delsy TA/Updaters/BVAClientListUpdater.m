@@ -29,6 +29,8 @@
     [self startUpdatingPriceGroupsAndLineSales];
     if(delegate)
         [delegate BVAClientListUpdaterDidStartUpdating:self];
+    lineSales = [NSMutableArray array];
+    priceGroups = [NSMutableArray array];
 }
 
 //обновляем сначала ценовые группы и скидки по строке, потом список клиентов
@@ -86,7 +88,7 @@
             }];
         }
         else if (downloader == PriceGroupsAndLineSalesDownloader){
-            NSLog(@"saveParsedPriceGroupsAndLineSalesDictionaryIntoCoreData");
+            //NSLog(@"saveParsedPriceGroupsAndLineSalesDictionaryIntoCoreData");
             [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
                 [self saveParsedPriceGroupsAndLineSalesDictionaryIntoCoreData];
             }];
@@ -124,7 +126,7 @@
 
 // Переводим данные из словаря в CoreData
 -(void) saveParsedClientsDictionaryIntoCoreData{
-    NSLog(@"\n\nstart updating Clientlist\n\n");
+    //NSLog(@"\n\nstart updating Clientlist\n\n");
     NSError *error = [NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9999
                                      userInfo:[NSDictionary dictionaryWithObject:@"Incorrect data" forKey:@"info"]];
     if(![parseResults.allKeys containsObject:@"TA"]){
@@ -157,7 +159,7 @@
             appSettings.currentTA = nil;
     [self saveManageObjectContext];
     
-    NSLog(@"\n\ndone updating Clientlist\n\n");
+    //NSLog(@"\n\ndone updating Clientlist\n\n");
     
     if(delegate)
         [delegate BVAClientListUpdater:self didFinishUpdatingWithErrors:errors];
@@ -263,18 +265,8 @@
     //NSLog(@"\nTA: %@\n2 %@ %@ %@",ta.name,custAccount,clientName,clientSale);
     if(client.deleted){
 
-        if(!priceGroup_str)
-            client.priceGroup = nil;
-        else if( [priceGroup_str isEqualToString:@""] )
-            client.priceGroup = nil;
-        else
-            client.priceGroup = [PriceGroup getPriceGroupByName:priceGroup_str withMOC:self.managedObjectContext];
-        if(!lineSale_str)
-            client.lineSale = nil;
-        else if( [lineSale_str isEqualToString:@""] )
-            client.lineSale = nil;
-        else
-            client.lineSale = [LineSale getLineSaleByName:lineSale_str withMOC:self.managedObjectContext];
+        client.priceGroup = (PriceGroup *)[self priceGroupFromMutableArrayByName:priceGroup_str];
+        client.lineSale = (LineSale *)[self lineSaleFromMutableArrayByName:lineSale_str];
         client.name = clientName;
         client.deleted = NO;
         client.ta = ta;
@@ -285,11 +277,37 @@
     //NSLog(@"\nTA: %@\n3 %@ %@ %@",ta.name,custAccount,clientName,clientSale);
 }
 
+- (NSObject *) priceGroupFromMutableArrayByName:(NSString *) name{
+    if(!name)
+        return nil;
+    else if( [name isEqualToString:@""] )
+        return nil;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = %@",name];
+    NSArray *array = [priceGroups filteredArrayUsingPredicate:predicate];
+    if( array.count == 0 )
+        return nil;
+    else
+        return [array objectAtIndex:0];
+}
+
+- (NSObject *) lineSaleFromMutableArrayByName:(NSString *) name{
+    if(!name)
+        return nil;
+    else if( [name isEqualToString:@""] )
+        return nil;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name = %@",name];
+    NSArray *array = [lineSales filteredArrayUsingPredicate:predicate];
+    if( array.count == 0 )
+        return nil;
+    else
+        return [array objectAtIndex:0];
+}
+
 #pragma mark priceGroupsAndLineSales-dictionary to coreData
 
 // Переводим данные из словаря в CoreData
 -(void) saveParsedPriceGroupsAndLineSalesDictionaryIntoCoreData{
-    NSLog(@"saveParsedPriceGroupsAndLineSalesDictionaryIntoCoreData");
+    //NSLog(@"saveParsedPriceGroupsAndLineSalesDictionaryIntoCoreData");
     NSError *error = [NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9999
                                      userInfo:[NSDictionary dictionaryWithObject:@"Incorrect data" forKey:@"info"]];
     if(![parseResults.allKeys containsObject:@"PriceGroups"]){
@@ -304,17 +322,17 @@
     [LineSale removeLineSalesFromManagedObjectContext:self.managedObjectContext];
     [self saveManageObjectContext];
     
-    NSLog(@"\n\nstart updating priceGroups\n\n");
+    //NSLog(@"\n\nstart updating priceGroups\n\n");
     NSDictionary *priceGroupsDict = [parseResults objectForKey:@"PriceGroups"];
     [self savePriceGroupsIntoCoreData:priceGroupsDict];
     [self saveManageObjectContext];
-    NSLog(@"\n\ndone updating priceGroups\n\n");
+    //NSLog(@"\n\ndone updating priceGroups\n\n");
     
-    NSLog(@"\n\nstart updating lineSales\n\n");
+    //NSLog(@"\n\nstart updating lineSales\n\n");
     NSDictionary *LineSalesDict = [parseResults objectForKey:@"LineSales"];
     [self saveLineSalesIntoCoreData:LineSalesDict];
     [self saveManageObjectContext];
-    NSLog(@"\n\ndone updating lineSales \n\n");
+    //NSLog(@"\n\ndone updating lineSales \n\n");
     
     [self startUpdatingClientList];
 }
@@ -322,14 +340,14 @@
 - (void) saveLineSalesIntoCoreData:(NSDictionary *) lineSalesDict{
     if( lineSalesDict.allKeys.count == 0 )
         return;
-    NSArray *lineSales;
+    NSArray *lineSaleDicts;
     if( [[lineSalesDict objectForKey:@"LineSale"] isKindOfClass:[NSArray class]] ){
-        lineSales = [lineSalesDict objectForKey:@"LineSale"];
+        lineSaleDicts = [lineSalesDict objectForKey:@"LineSale"];
     }
     else{
-        lineSales = [NSArray arrayWithObject:[lineSalesDict objectForKey:@"LineSale"]];
+        lineSaleDicts = [NSArray arrayWithObject:[lineSalesDict objectForKey:@"LineSale"]];
     }
-    for(NSDictionary *lineSale in lineSales){
+    for(NSDictionary *lineSale in lineSaleDicts){
         [self saveLineSaleIntoCoreData:lineSale];
         [self saveManageObjectContext];
     }
@@ -388,6 +406,8 @@
             [self saveManageObjectContext];
         }
     }
+    //записываем в список, для последующего быстрого доступа и поиска
+    [lineSales addObject:lineSale];
 }
 
 - (void) saveLineSaleLineIntoCoreData:(NSDictionary *) lineSaleLineDict lineSale:(LineSale *) lineSale{
@@ -405,31 +425,32 @@
         sale2 = @"";
     
     LineSaleLine *lineSaleLine = [LineSaleLine newLineSaleLineInManObjContext:self.managedObjectContext];
-    Item *item = [Item getItemByItemID:itemId withMOC:self.managedObjectContext];
     
     lineSaleLine.sale1 = [NSNumber numberWithFloat: sale1.floatValue];
     lineSaleLine.sale2 = [NSNumber numberWithFloat: sale2.floatValue];
-    lineSaleLine.item = item;
+    lineSaleLine.itemID = itemId;
     lineSaleLine.lineSale = lineSale;
 }
 
-- (void) savePriceGroupsIntoCoreData:(NSDictionary *) priceGroupDict{
-    if([priceGroupDict allKeys].count == 0 )
+- (void) savePriceGroupsIntoCoreData:(NSDictionary *) priceGroupsDict{
+    if([priceGroupsDict allKeys].count == 0 )
         return;
-    NSArray *priceGroups;
-    if(![[priceGroupDict objectForKey:@"PriceGroup"] isKindOfClass:[NSArray class]]){
-        priceGroups = [NSArray arrayWithObject:[priceGroupDict objectForKey:@"PriceGroup"]];
+    NSArray *priceGroupDicts;
+    if(![[priceGroupsDict objectForKey:@"PriceGroup"] isKindOfClass:[NSArray class]]){
+        priceGroupDicts = [NSArray arrayWithObject:[priceGroupsDict objectForKey:@"PriceGroup"]];
     }
     else{
-        priceGroups = [priceGroupDict objectForKey:@"PriceGroup"];
+        priceGroupDicts = [priceGroupsDict objectForKey:@"PriceGroup"];
     }
-    for(NSDictionary *priceGroup in priceGroups){
+    for(NSDictionary *priceGroup in priceGroupDicts){
+        //NSLog(@"\n\nstart updating priceGroup\n\n");
         [self savePriceGroupIntoCoreData:priceGroup];
         [self saveManageObjectContext];
+        //NSLog(@"\n\ndone updating priceGroup\n\n");
     }
 }
 
-- (void) savePriceGroupIntoCoreData:(NSDictionary *) priceGroupDict{
+- (void) savePriceGroupIntoCoreData:(NSDictionary *) priceGroupDict {
     if([priceGroupDict objectForKey:@"_id"] == nil){
         [errors addObject:[NSError errorWithDomain:@"savePriceGroupIntoCoreData" code:9997
                                           userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"priceGroup-tag dont contain id-attribute"] forKey:@"info"]]];
@@ -450,17 +471,22 @@
         itemDicts = [NSArray arrayWithObject:[priceGroupDict objectForKey:@"item"]];
     }
     int n=0;
+    //NSLog(@"start saving PriceGroupLines into Core Data");
     for (NSDictionary *priceGroupLineDict in itemDicts) {
         [self savePriceGroupLineIntoCoreData:priceGroupLineDict priceGroup:priceGroup];
         n++;
-        if(n==5){
+        if(n==10){
+            //NSLog(@"saving context in saving PriceGroupLines into Core Data");
             [self saveManageObjectContext];
+            //NSLog(@"end of saving context in saving PriceGroupLines into Core Data");
             n=0;
         }
     }
+    //записываем в список, для последующего быстрого доступа и поиска
+    [priceGroups addObject:priceGroup];
 }
 
-- (void) savePriceGroupLineIntoCoreData:(NSDictionary *) priceGroupLineDict priceGroup:(PriceGroup *) priceGroup{
+- (void) savePriceGroupLineIntoCoreData:(NSDictionary *) priceGroupLineDict priceGroup:(PriceGroup *) priceGroup {
     NSNumber *price;
     NSString *itemId;
     NSNumber *plusable;
@@ -489,9 +515,8 @@
     else{
         plusable = [NSNumber numberWithBool:NO];
     }
-    Item *item = [Item getItemByItemID:itemId withMOC:self.managedObjectContext];
     PriceGroupLine *priceGroupLine = [PriceGroupLine newPriceGroupLineInManObjContext:self.managedObjectContext];
-    priceGroupLine.item = item;
+    priceGroupLine.itemID = itemId;
     priceGroupLine.priceGroup = priceGroup;
     priceGroupLine.plusable = plusable;
     priceGroupLine.price = price;

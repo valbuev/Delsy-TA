@@ -13,4 +13,6 @@
 // Создает новый объект LineSaleLine в managedObjectContext
 +(LineSaleLine *) newLineSaleLineInManObjContext:(NSManagedObjectContext *) managedObjectContext;
 
++ (NSArray *) getAllLineSaleLines: (NSManagedObjectContext *) context;
+
 @end

@@ -34,8 +34,8 @@
     order.custName = client.name.copy;
     order.taName = ta.name.copy;
     order.date = [NSDate date];
-#warning
-    order.sale = 0;//client.sale.copy;
+
+    //order.sale = 0;//client.sale.copy;
     
     return order;
 }
@@ -93,8 +93,7 @@
         localQty = 1;
     }
     
-    float localSale = [self.client getSaleByItem:item].floatValue;
-    float localPrice = (item.price.floatValue * (100.0 - localSale) / 100.0);
+    float localPrice = [self.client getPriceByItem:item].floatValue;
     orderLine.baseUnitQty = [NSNumber numberWithFloat: localQty * qty.floatValue ];
     orderLine.price = [NSNumber numberWithFloat:localPrice];
     orderLine.amount = [NSNumber numberWithFloat:(localPrice*localQty)];

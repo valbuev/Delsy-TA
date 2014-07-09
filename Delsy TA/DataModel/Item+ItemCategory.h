@@ -24,4 +24,6 @@
 // создает контроллер неудаленных items сгруппированных по названиям рыб
 +(NSFetchedResultsController *) getControllerGroupByFish:(NSManagedObjectContext *) context forProductType:(NSManagedObject *) productType;
 
++ (NSArray *) getAllItems: (NSManagedObjectContext *) context;
+
 @end

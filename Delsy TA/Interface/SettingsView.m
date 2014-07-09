@@ -21,13 +21,10 @@
 @implementation SettingsView
 
 @synthesize btnUpdateAllPhotos;
-@synthesize btnUpdateClientList;
-@synthesize btnUpdatePriceList;
+@synthesize btnUpdateData;
 @synthesize activityIndicatorAllPhotos;
-@synthesize activityIndicatorClientList;
-@synthesize activityIndicatorPriceList;
-@synthesize labelClientListLastUpdate;
-@synthesize labelPriceListLastUpdate;
+@synthesize activityIndicatorUpdatingData;
+@synthesize labelDataLastUpdate;
 @synthesize labelTAName;
 @synthesize cellRemoveAllHistory;
 @synthesize progressViewUpdatingAllPhotos;
@@ -54,9 +51,9 @@
 }
 
 #pragma mark buttons's clicks
-// Нажата кнопка обновления Списка клиентов,
-// создаем updater, отдаем ему контекст, записываемся в делегаты и стартуем обновление
-- (IBAction)OnBtnUpdateClientListClick:(id)sender{
+// Нажата кнопка обновления Данных,
+// создаем updater для клиентов, отдаем ему контекст, записываемся в делегаты и стартуем обновление
+- (IBAction)OnBtnUpdateDataClick:(id)sender{
     // Если сейчас идет обновление, то запрещаем действия
     if(isManagedObjectContextUpdating)
         return;
@@ -66,12 +63,8 @@
     [clientListUpdater startUpdating];
 }
 
-// Нажата кнопка обновления Каталога,
-// создаем updater, отдаем ему контекст, записываемся в делегаты и стартуем обновление
-- (IBAction)OnBtnUpdatePriceListClick:(id)sender{
-    // Если сейчас идет обновление, то запрещаем действия
-    if(isManagedObjectContextUpdating)
-        return;
+// после обноавления списка клиентов и скидок запускаем обновление каталога
+- (void) UpdatePriceList{
     priceUpdater = [[BVAPriceUpdater alloc] init];
     priceUpdater.managedObjectContext = self.managedObjectContext;
     priceUpdater.delegate = self;
@@ -105,8 +98,7 @@
 
 //
 -(void) setLabelsTexts{
-    [self updateLabelClientListLastUpdate];
-    [self updateLabelPriceListLastUpdate];
+    [self updateLabelDataLastUpdate];
     [self updateLabelTAName];
 }
 
@@ -126,18 +118,21 @@
 #pragma mark Updating Labels
 
 //Обновляем даты во время первого запуска, по таймеру, или по сообщению обсервера
--(void) updateLabelClientListLastUpdate{
+-(void) updateLabelDataLastUpdate{
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        self.labelClientListLastUpdate.text =
-            [self dateFormaterForLastUpdateLabels:self.appSettings.clientsListLastUpdate];
+        NSDate *date1 = self.appSettings.clientsListLastUpdate;
+        NSDate *date2 = self.appSettings.priceLastUpdate;
+        NSDate *date;
+        //Выбираем самую давнюю дату
+        if( [date1 compare:date2] == NSOrderedDescending)
+            date = date2;
+        else
+            date = date1;
+        self.labelDataLastUpdate.text =
+            [self dateFormaterForLastUpdateLabels:date];
     }];
 }
--(void) updateLabelPriceListLastUpdate{
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        self.labelPriceListLastUpdate.text =
-            [self dateFormaterForLastUpdateLabels:self.appSettings.priceLastUpdate];
-    }];
-}
+
 -(NSString *) dateFormaterForLastUpdateLabels: (NSDate *) lastUpdate{
     if(!lastUpdate)
         return @"Никогда не обновлялось";
@@ -208,28 +203,17 @@
 #pragma mark - BVAClientListUpdater
 
 -(void)BVAClientListUpdater:(BVAClientListUpdater *)updater didFinishUpdatingWithErrors:(NSArray *)errors{
-    // Выставляем флаг
-    isManagedObjectContextUpdating = NO;
-    // Посылаем в основной поток, чтобы сразу изменения вступили в силу
-    // останавливаем анимацию
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        [self.activityIndicatorClientList stopAnimating];
-    }];
     if([errors count] > 0){
-        [self showCustomIOS7AlertViewWithMessages:errors title:@"В ходе обновления возникли ошибки:"];
+        [self showCustomIOS7AlertViewWithMessages:errors title:@"В ходе обновления списка клиентов возникли ошибки:"];
     }
     clientListUpdater = nil;
+    [self UpdatePriceList];
 }
 
 - (void)BVAClientListUpdater:(BVAClientListUpdater *)updater didStopUpdatingWithErrors:(NSArray *)errors{
-    // Выставляем флаг
-    isManagedObjectContextUpdating = NO;
-    // останавливаем анимацию
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        [self.activityIndicatorClientList stopAnimating];
-    }];
-    [self showCustomIOS7AlertViewWithMessages:errors title:@"Обновление остановлено из-за следующих ошибок:"];
+    [self showCustomIOS7AlertViewWithMessages:errors title:@"Обновление списка клиентов остановлено из-за следующих ошибок:"];
     clientListUpdater = nil;
+    [self UpdatePriceList];
 }
 
 -(void)BVAClientListUpdaterDidStartUpdating:(BVAClientListUpdater *)updater{
@@ -237,7 +221,8 @@
     isManagedObjectContextUpdating = YES;
     // запускаем анимацию
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        [self.activityIndicatorClientList startAnimating];
+        [self.activityIndicatorUpdatingData startAnimating];
+        self.labelDataLastUpdate.text = @"Обновляем список клиентов...";
     }];
 }
 
@@ -248,9 +233,8 @@
     isManagedObjectContextUpdating = NO;
     // Посылаем в основной поток, чтобы сразу изменения вступили в силу
     // останавливаем анимацию
-    NSLog(@"BVAPriceUpdater:(BVAPriceUpdater *)updater didFinishUpdatingWithErrors:(NSArray *)errors{");
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        [self.activityIndicatorPriceList stopAnimating];
+        [self.activityIndicatorUpdatingData stopAnimating];
     }];
     if([errors count] > 0){
         [self showCustomIOS7AlertViewWithMessages:errors title:@"В ходе обновления возникли ошибки:"];
@@ -263,18 +247,15 @@
     isManagedObjectContextUpdating = NO;
     // останавливаем анимацию
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        [self.activityIndicatorPriceList stopAnimating];
+        [self.activityIndicatorUpdatingData stopAnimating];
     }];
-    [self showCustomIOS7AlertViewWithMessages:errors title:@"Обновление остановлено из-за следующих ошибок:"];
+    [self showCustomIOS7AlertViewWithMessages:errors title:@"Обновление каталога остановлено из-за следующих ошибок:"];
     priceUpdater = nil;
 }
 
 -(void)BVAPriceUpdaterDidStartUpdating:(BVAPriceUpdater *)updater{
-    // Выставляем флаг
-    isManagedObjectContextUpdating = YES;
-    // запускаем анимацию
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
-        [self.activityIndicatorPriceList startAnimating];
+        self.labelDataLastUpdate.text = @"Обновляем каталог...";
     }];
 }
 
@@ -296,10 +277,10 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if([keyPath isEqualToString:@"clientsListLastUpdate"]){
-        [self updateLabelClientListLastUpdate];
+        [self updateLabelDataLastUpdate];
     }
     else if([keyPath isEqualToString:@"priceLastUpdate"]){
-        [self updateLabelPriceListLastUpdate];
+        [self updateLabelDataLastUpdate];
     }
     else if([keyPath isEqualToString:@"currentTA"]){
         [self updateLabelTAName];

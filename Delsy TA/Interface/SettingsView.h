@@ -22,21 +22,17 @@
 
 // Catalog section
 // кнопки обновления
-@property (weak, nonatomic) IBOutlet UIButton *btnUpdateClientList;
-@property (weak, nonatomic) IBOutlet UIButton *btnUpdatePriceList;
+@property (weak, nonatomic) IBOutlet UIButton *btnUpdateData;
 @property (weak, nonatomic) IBOutlet UIButton *btnUpdateAllPhotos;
 // индикаторы обновления
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorClientList;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorPriceList;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorUpdatingData;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorAllPhotos;
 // Даты последнего обновления
-@property (weak, nonatomic) IBOutlet UILabel *labelClientListLastUpdate;
-@property (weak, nonatomic) IBOutlet UILabel *labelPriceListLastUpdate;
+@property (weak, nonatomic) IBOutlet UILabel *labelDataLastUpdate;
 // Отображение процесса обновления фотографий
 @property (weak, nonatomic) IBOutlet UIProgressView *progressViewUpdatingAllPhotos;
 
-- (IBAction)OnBtnUpdateClientListClick:(id)sender;
-- (IBAction)OnBtnUpdatePriceListClick:(id)sender;
+- (IBAction)OnBtnUpdateDataClick:(id)sender;
 - (IBAction)OnBtnUpdateAllPhotosClick:(id)sender;
 
 // TA section

@@ -128,7 +128,7 @@
 - (void) configureCell:(PriceDetailViewTableCell *) cell item:(Item *) item{
     cell.labelName.text = item.name;
     cell.labelUnit.text = [item.unit unitValueToString];
-    cell.labelPrice.text = [[NSNumber numberWithFloat:(item.price.floatValue * (100.0 - [client getSaleByItem:item].floatValue)/100)] floatValueFrac2or0];
+    cell.labelPrice.text = [[client getPriceByItem:item] floatValueFrac2or0];
     cell.backgroundColor = [item.lineColor lineColor:[UIColor whiteColor]];
     if(item.promo.boolValue == YES)
         cell.labelPrice.textColor = [UIColor redColor];

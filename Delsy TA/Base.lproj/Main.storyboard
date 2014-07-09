@@ -1732,10 +1732,10 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="OnBtnUpdateClientListClick:" destination="wh8-Lz-zdy" eventType="touchUpInside" id="BUO-zJ-Jb2"/>
+                                                        <action selector="OnBtnUpdateDataClick:" destination="wh8-Lz-zdy" eventType="touchUpInside" id="x0T-LV-HyT"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Список клиентов и торговых представителей" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="615-dg-8dX">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Каталог и список клиентов" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="615-dg-8dX">
                                                     <rect key="frame" x="20" y="0.0" width="431" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -1772,66 +1772,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wB1-h0-3ig">
-                                        <rect key="frame" x="0.0" y="99" width="768" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wB1-h0-3ig" id="ccE-FF-Bje">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZCC-u0-7qR">
-                                                    <rect key="frame" x="668" y="0.0" width="80" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="FUQ-Bx-gAe"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <state key="normal" title="Обновить">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="OnBtnUpdatePriceListClick:" destination="wh8-Lz-zdy" eventType="touchUpInside" id="fuI-qq-DKl"/>
-                                                    </connections>
-                                                </button>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Каталог" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="naQ-dS-B01">
-                                                    <rect key="frame" x="20" y="0.0" width="431" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6EK-fS-uXf">
-                                                    <rect key="frame" x="640" y="12" width="20" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </activityIndicatorView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Обновлено: 1 день назад" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ps5-JL-5ki">
-                                                    <rect key="frame" x="459" y="0.0" width="173" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="173" id="wWT-gW-6hA"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="centerY" secondItem="6EK-fS-uXf" secondAttribute="centerY" id="36z-Gx-Kq1"/>
-                                                <constraint firstItem="naQ-dS-B01" firstAttribute="top" secondItem="ccE-FF-Bje" secondAttribute="top" id="9fm-4U-z8n"/>
-                                                <constraint firstItem="ps5-JL-5ki" firstAttribute="leading" secondItem="naQ-dS-B01" secondAttribute="trailing" constant="8" id="DT4-eg-3CY"/>
-                                                <constraint firstAttribute="bottom" secondItem="ps5-JL-5ki" secondAttribute="bottom" id="Gnb-2y-azP"/>
-                                                <constraint firstItem="ZCC-u0-7qR" firstAttribute="top" secondItem="ccE-FF-Bje" secondAttribute="top" id="HpC-OQ-kEA"/>
-                                                <constraint firstItem="ZCC-u0-7qR" firstAttribute="leading" secondItem="6EK-fS-uXf" secondAttribute="trailing" constant="8" id="Reg-a4-v5P"/>
-                                                <constraint firstItem="naQ-dS-B01" firstAttribute="leading" secondItem="ccE-FF-Bje" secondAttribute="leading" constant="20" id="Uxr-Vt-r9n"/>
-                                                <constraint firstAttribute="trailing" secondItem="ZCC-u0-7qR" secondAttribute="trailing" constant="20" id="cL2-3Y-8Xh"/>
-                                                <constraint firstItem="6EK-fS-uXf" firstAttribute="leading" secondItem="ps5-JL-5ki" secondAttribute="trailing" constant="8" id="cg1-GN-T6l"/>
-                                                <constraint firstAttribute="bottom" secondItem="naQ-dS-B01" secondAttribute="bottom" id="et7-q3-bEa"/>
-                                                <constraint firstAttribute="bottom" secondItem="ZCC-u0-7qR" secondAttribute="bottom" id="hVn-bx-G3B"/>
-                                                <constraint firstItem="ps5-JL-5ki" firstAttribute="top" secondItem="ccE-FF-Bje" secondAttribute="top" id="kkn-SV-mTn"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="hXZ-sl-JaO">
-                                        <rect key="frame" x="0.0" y="143" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="99" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hXZ-sl-JaO" id="CKg-O4-Yzb">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
@@ -1887,7 +1829,7 @@
                             <tableViewSection headerTitle="Торговые представители" id="1Pr-2I-XAq">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="LNT-wn-LS8">
-                                        <rect key="frame" x="0.0" y="235" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="191" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LNT-wn-LS8" id="LK5-gC-xFE">
                                             <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
@@ -1930,7 +1872,7 @@
                             <tableViewSection headerTitle="История" id="Zxt-Fa-g7m">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="DlH-39-ExI" style="IBUITableViewCellStyleDefault" id="yxk-fa-c8p">
-                                        <rect key="frame" x="0.0" y="327" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="283" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yxk-fa-c8p" id="U9q-oe-4rO">
                                             <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
@@ -1950,7 +1892,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="RC9-8i-DaL" style="IBUITableViewCellStyleDefault" id="TWQ-cm-kAi">
-                                        <rect key="frame" x="0.0" y="371" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="327" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TWQ-cm-kAi" id="gKd-AE-eLY">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
@@ -1971,7 +1913,7 @@
                             <tableViewSection headerTitle="История" id="kam-xV-4Ox">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Lw0-jN-Co3">
-                                        <rect key="frame" x="0.0" y="463" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="419" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Lw0-jN-Co3" id="r2o-Nh-hzm">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
@@ -2006,14 +1948,11 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicatorAllPhotos" destination="W9n-r1-h87" id="0XI-G1-cTG"/>
-                        <outlet property="activityIndicatorClientList" destination="4UR-TL-PV3" id="57P-VX-1dt"/>
-                        <outlet property="activityIndicatorPriceList" destination="6EK-fS-uXf" id="eIs-GF-Ba4"/>
+                        <outlet property="activityIndicatorUpdatingData" destination="4UR-TL-PV3" id="L2h-DI-mzr"/>
                         <outlet property="btnUpdateAllPhotos" destination="VWe-Rt-WPf" id="wWY-Ph-qnc"/>
-                        <outlet property="btnUpdateClientList" destination="Nwz-oN-ggg" id="z09-K9-AGF"/>
-                        <outlet property="btnUpdatePriceList" destination="ZCC-u0-7qR" id="kFM-TC-S8D"/>
+                        <outlet property="btnUpdateData" destination="Nwz-oN-ggg" id="x07-7e-s5K"/>
                         <outlet property="cellRemoveAllHistory" destination="TWQ-cm-kAi" id="8EX-lH-U0p"/>
-                        <outlet property="labelClientListLastUpdate" destination="NOT-cg-58G" id="j5h-8I-fr8"/>
-                        <outlet property="labelPriceListLastUpdate" destination="ps5-JL-5ki" id="6HU-GI-52V"/>
+                        <outlet property="labelDataLastUpdate" destination="NOT-cg-58G" id="qjV-97-LcD"/>
                         <outlet property="labelTAName" destination="FsW-9J-DHV" id="d9F-rO-l0x"/>
                         <outlet property="progressViewUpdatingAllPhotos" destination="YEf-PQ-Sgg" id="k43-Zj-Zf9"/>
                     </connections>

@@ -24,6 +24,9 @@
     BVAFileDownloader *PriceGroupsAndLineSalesDownloader;
     NSMutableArray *errors;
     NSDictionary *parseResults;
+    // массивы для хранения ссылок на объекты. Для быстрого доступа и поиска при обновлении списка клиентов.
+    NSMutableArray *priceGroups;
+    NSMutableArray *lineSales;
 }
 
 @property (nonatomic, weak) id <BVAClientListUpdaterDelegate> delegate;

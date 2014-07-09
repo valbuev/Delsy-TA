@@ -16,12 +16,16 @@
 #import "ProductType+ProductTypeCategory.h"
 #import "Fish+FishCategory.h"
 #import "Photo+PhotoCategory.h"
+#import "LineSaleLine+LineSaleLineCategory.h"
+#import "PriceGroupLine+PriceGroupLineCategory.h"
 
 @implementation BVAPriceUpdater
 @synthesize managedObjectContext;
 @synthesize delegate;
 
 -(void)startUpdating{
+    priceGroupLines = [NSMutableArray arrayWithArray:[PriceGroupLine getAllPriceGroupLines:self.managedObjectContext]];
+    lineSaleLines = [NSMutableArray arrayWithArray:[LineSaleLine getAllLineSaleLines:self.managedObjectContext]];
     errors = [NSMutableArray array];
     fileDownloader = [[BVAFileDownloader alloc] init];
     [fileDownloader initWithUrl:[NSURL URLWithString:@"http://195.112.235.1/Invent/Price.xml"]];
@@ -146,7 +150,7 @@
            || itemsDicts.count == 0 ){
             [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9998
                                               userInfo:[NSDictionary dictionaryWithObject:
-                                                        [NSString stringWithFormat:@"productTypeDict don't contain any values: title: %@ items-count: %lu",productTypeName,itemsDicts.count] forKey:@"info"]]];
+                                                        [NSString stringWithFormat:@"productTypeDict don't contain any values: title: %@ items-count: %d",productTypeName,(int)itemsDicts.count] forKey:@"info"]]];
             continue;
         }
         // Запрашиваем managedObject с name = productTypeName и устанавливаем значения
@@ -303,6 +307,29 @@
     [Thesis newThesisInManObjContext:self.managedObjectContext text:thesis3 item:item];
     NSString *thesis4 = [itemDict objectForKey:@"thesis4"];
     [Thesis newThesisInManObjContext:self.managedObjectContext text:thesis4 item:item];
+    //NSLog(@"start of updating priceGroups-items references");
+    // Заполняем "Группы ценников" и "скидки по строке". Ищем по itemID и оставляем на себя ссылку.
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"itemID = %@",itemID];
+    NSArray *array = [priceGroupLines filteredArrayUsingPredicate:predicate];
+    int n = 0;
+    for( PriceGroupLine *priceGroupLine in array ){
+        priceGroupLine.item = item;
+        n++;
+        if(n == 10){
+            n=0;
+            [self saveManageObjectContext];
+        }
+    }
+    array = [lineSaleLines filteredArrayUsingPredicate:predicate];
+    for( LineSaleLine *lineSaleLine in array ){
+        lineSaleLine.item = item;
+        n++;
+        if(n == 10){
+            n=0;
+            [self saveManageObjectContext];
+        }
+    }
+    //NSLog(@"end of updating priceGroups-items references");
     
 #warning you must delete all photos marked as deleted
 }

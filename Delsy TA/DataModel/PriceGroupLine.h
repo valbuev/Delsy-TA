@@ -17,5 +17,6 @@
 @property (nonatomic, retain) NSNumber * price;
 @property (nonatomic, retain) Item *item;
 @property (nonatomic, retain) NSManagedObject *priceGroup;
+@property (nonatomic, retain) NSString * itemID;
 
 @end

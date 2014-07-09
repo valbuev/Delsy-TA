@@ -60,6 +60,7 @@
         <relationship name="lineSaleLines" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LineSaleLine" inverseName="lineSale" inverseEntity="LineSaleLine" syncable="YES"/>
     </entity>
     <entity name="LineSaleLine" representedClassName="LineSaleLine" syncable="YES">
+        <attribute name="itemID" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="sale1" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="sale2" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="lineSaleLines" inverseEntity="Item" syncable="YES"/>
@@ -72,7 +73,6 @@
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="deliveryDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="isSent" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="sale" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="taName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="address" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Address" inverseName="orders" inverseEntity="Address" syncable="YES"/>
         <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="orders" inverseEntity="Client" syncable="YES"/>
@@ -103,6 +103,7 @@
         <relationship name="priceGroupLines" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="PriceGroupLine" inverseName="priceGroup" inverseEntity="PriceGroupLine" syncable="YES"/>
     </entity>
     <entity name="PriceGroupLine" representedClassName="PriceGroupLine" syncable="YES">
+        <attribute name="itemID" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="plusable" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="priceGroupLines" inverseEntity="Item" syncable="YES"/>
@@ -126,20 +127,20 @@
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="thesises" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Address" positionX="-380" positionY="-201" width="128" height="120"/>
-        <element name="AppSettings" positionX="-9" positionY="-135" width="128" height="120"/>
-        <element name="Client" positionX="-191" positionY="63" width="128" height="163"/>
-        <element name="Fish" positionX="268" positionY="54" width="128" height="88"/>
-        <element name="Item" positionX="-99" positionY="225" width="128" height="358"/>
-        <element name="Order" positionX="-441" positionY="-54" width="128" height="223"/>
-        <element name="OrderLine" positionX="-603" positionY="69" width="128" height="180"/>
-        <element name="Photo" positionX="279" positionY="177" width="128" height="120"/>
-        <element name="ProductType" positionX="241" positionY="-135" width="128" height="88"/>
-        <element name="TA" positionX="-180" positionY="-135" width="128" height="135"/>
-        <element name="Thesis" positionX="-405" positionY="249" width="128" height="75"/>
-        <element name="PriceGroup" positionX="-405" positionY="-54" width="128" height="88"/>
-        <element name="LineSale" positionX="-396" positionY="-45" width="128" height="118"/>
-        <element name="PriceGroupLine" positionX="-387" positionY="-36" width="128" height="103"/>
-        <element name="LineSaleLine" positionX="-378" positionY="-27" width="128" height="103"/>
+        <element name="Address" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="AppSettings" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="Client" positionX="0" positionY="0" width="128" height="165"/>
+        <element name="Fish" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="Item" positionX="0" positionY="0" width="128" height="360"/>
+        <element name="LineSale" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="LineSaleLine" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="Order" positionX="0" positionY="0" width="128" height="210"/>
+        <element name="OrderLine" positionX="0" positionY="0" width="128" height="180"/>
+        <element name="Photo" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="PriceGroup" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="PriceGroupLine" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="ProductType" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="TA" positionX="0" positionY="0" width="128" height="135"/>
+        <element name="Thesis" positionX="0" positionY="0" width="128" height="75"/>
     </elements>
 </model>

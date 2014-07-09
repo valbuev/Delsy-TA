@@ -19,7 +19,6 @@
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSDate * deliveryDate;
 @property (nonatomic, retain) NSNumber * isSent;
-@property (nonatomic, retain) NSNumber * sale;
 @property (nonatomic, retain) NSString * taName;
 @property (nonatomic, retain) Address *address;
 @property (nonatomic, retain) Client *client;

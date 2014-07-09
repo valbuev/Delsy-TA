@@ -8,6 +8,10 @@
 
 #import "Client+ClientCategory.h"
 #import "Item+ItemCategory.h"
+#import "PriceGroup+PriceGroupCategory.h"
+#import "PriceGroupLine+PriceGroupLineCategory.h"
+#import "LineSaleLine+LineSaleLineCategory.h"
+#import "LineSale+LineSaleCategory.h"
 
 @implementation Client (ClientCategory)
 
@@ -79,8 +83,41 @@
 // Возвращает скидку по продукту для данного клиента
 - (NSNumber *) getSaleByItem:(Item *) item{
     //return self.sale;
-#warning
+//#warning
     return 0;
+}
+
+// Возвращает цену продукта для данного клиента с учетом ценовых соглашений и скидок по строке
+- (NSNumber *) getPriceByItem:(Item *) item{
+    NSNumber *price = item.price;
+    Boolean plusable = YES;
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"item == %@",item];
+    if(self.priceGroup){
+        if(self.priceGroup.priceGroupLines.count > 0){
+            NSMutableSet *priceGroupLines = [self.priceGroup.priceGroupLines mutableCopy];
+            NSSet *set = [priceGroupLines filteredSetUsingPredicate:predicate];
+            for (PriceGroupLine *priceGroupLine in set) {
+                price = priceGroupLine.price;
+                plusable = priceGroupLine.plusable.boolValue;
+                break;
+            }
+        }
+    }
+    if(plusable){
+        if(self.lineSale){
+            NSMutableSet *lineSaleLines = [self.lineSale.lineSaleLines mutableCopy];
+            NSSet *set = [lineSaleLines filteredSetUsingPredicate:predicate];
+            if(set.count >0){
+                for ( LineSaleLine *line in set ){
+                    price = [NSNumber numberWithFloat: price.floatValue * (100 - line.sale1.floatValue) / 100.0 * (100 - line.sale2.floatValue) / 100.0 ];
+                }
+            }
+            else{
+                price = [NSNumber numberWithFloat: price.floatValue * (100 - self.lineSale.allSale1.floatValue) / 100.0 * (100 - self.lineSale.allSale2.floatValue) / 100.0 ];
+            }
+        }
+    }
+    return price;
 }
 
 //+(Client *) getClientByCustAccount:(NSString *) custAccount withMOC:(NSManagedObjectContext *) managedObjectContext{

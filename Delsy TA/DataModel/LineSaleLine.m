@@ -17,5 +17,6 @@
 @dynamic sale2;
 @dynamic lineSale;
 @dynamic item;
+@dynamic itemID;
 
 @end

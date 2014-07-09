@@ -69,8 +69,7 @@
     [super viewDidLoad];
     isThatWindowShowing = YES;
     priceSplitView = nil;
-    self.navigationItem.title = [NSString stringWithFormat:@"%@ (%@%%%@%%)",address.client.name,[address.client.lineSale.allSale1 floatValueSimpleMaxFrac2],[address.client.lineSale.allSale2 floatValueSimpleMaxFrac2]];
-    self.navigationItem.title = [NSString stringWithFormat:@"%@ (%@%%)",address.client.name,[[NSNumber numberWithFloat:0] floatValueSimpleMaxFrac2]];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@ (%@%% %@%%)",address.client.name,[address.client.lineSale.allSale1 floatValueSimpleMaxFrac2],[address.client.lineSale.allSale2 floatValueSimpleMaxFrac2]];
     if(!self.order){
         self.order = [Order newOrder:context forAddress:address];
     }

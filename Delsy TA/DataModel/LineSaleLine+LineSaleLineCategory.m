@@ -20,4 +20,19 @@
     return lineSaleLine;
 }
 
++ (NSArray *) getAllLineSaleLines: (NSManagedObjectContext *) context{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"LineSaleLine" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *array = [context executeFetchRequest:request error:&error];
+    
+    if (array == nil){
+        NSLog(@"Exception while getting LineSaleLine`s array. Error: %@",error.localizedDescription);
+    }
+    return array;
+}
+
+
 @end

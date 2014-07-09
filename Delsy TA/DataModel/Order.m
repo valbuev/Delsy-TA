@@ -20,7 +20,6 @@
 @dynamic date;
 @dynamic deliveryDate;
 @dynamic isSent;
-@dynamic sale;
 @dynamic taName;
 @dynamic address;
 @dynamic client;

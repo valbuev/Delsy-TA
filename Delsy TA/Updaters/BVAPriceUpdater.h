@@ -23,6 +23,8 @@
     BVAFileDownloader *fileDownloader;
     NSMutableArray *errors;
     NSDictionary *parseResults;
+    NSMutableArray *priceGroupLines;
+    NSMutableArray *lineSaleLines;
 }
 
 @property (nonatomic, weak) id <BVAPriceUpdaterDelegate> delegate;

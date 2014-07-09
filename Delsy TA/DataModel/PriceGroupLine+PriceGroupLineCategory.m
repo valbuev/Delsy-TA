@@ -20,4 +20,19 @@
     return priceGroupLine;
 }
 
++ (NSArray *) getAllPriceGroupLines: (NSManagedObjectContext *) context{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"PriceGroupLine" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *array = [context executeFetchRequest:request error:&error];
+    
+    if (array == nil){
+        NSLog(@"Exception while getting PriceGroupLine`s array. Error: %@",error.localizedDescription);
+    }
+    return array;
+}
+
+
 @end
