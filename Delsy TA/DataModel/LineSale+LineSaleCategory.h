@@ -16,4 +16,7 @@
 // Создает новый объект LineSale в managedObjectContext
 +(LineSale *) newLineSaleInManObjContext:(NSManagedObjectContext *) managedObjectContext;
 
+// Ищет LineSale с self.name = name, если находит, то возвращает, иначе, return nil.
++(LineSale *) getLineSaleByName:(NSString *) name withMOC:(NSManagedObjectContext *) managedObjectContext;
+
 @end

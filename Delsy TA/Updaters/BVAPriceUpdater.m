@@ -146,7 +146,7 @@
            || itemsDicts.count == 0 ){
             [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9998
                                               userInfo:[NSDictionary dictionaryWithObject:
-                                                        [NSString stringWithFormat:@"productTypeDict don't contain any values: title: %@ items-count: %d",productTypeName,itemsDicts.count] forKey:@"info"]]];
+                                                        [NSString stringWithFormat:@"productTypeDict don't contain any values: title: %@ items-count: %lu",productTypeName,itemsDicts.count] forKey:@"info"]]];
             continue;
         }
         // Запрашиваем managedObject с name = productTypeName и устанавливаем значения

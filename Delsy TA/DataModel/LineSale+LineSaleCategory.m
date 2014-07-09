@@ -52,4 +52,34 @@
     return lineSale;
 }
 
+// Ищет LineSale с self.name = name, если находит, то возвращает, иначе, return nil.
++(LineSale *) getLineSaleByName:(NSString *) name withMOC:(NSManagedObjectContext *) managedObjectContext{
+    LineSale *lineSale;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"LineSale"
+                                              inManagedObjectContext:managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setFetchLimit:1];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@",name];
+    [request setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (array == nil){
+        NSLog(@"Exception while getting LineSale`s array by name. Error: %@",error.localizedDescription);
+        lineSale = nil;
+    }
+    else{
+        if( array.count == 0 ){
+            lineSale = nil;
+        }
+        else{
+            lineSale = [array objectAtIndex:0];
+        }
+    }
+    return lineSale;
+}
+
 @end

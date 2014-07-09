@@ -10,4 +10,14 @@
 
 @implementation LineSaleLine (LineSaleLineCategory)
 
+// Создает новый объект LineSaleLine в managedObjectContext
++(LineSaleLine *) newLineSaleLineInManObjContext:(NSManagedObjectContext *) managedObjectContext{
+    
+    LineSaleLine *lineSaleLine;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"LineSaleLine"
+                                              inManagedObjectContext:managedObjectContext];
+    lineSaleLine = [[LineSaleLine alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
+    return lineSaleLine;
+}
+
 @end

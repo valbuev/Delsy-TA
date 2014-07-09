@@ -53,13 +53,15 @@
         <relationship name="thesises" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Thesis" inverseName="item" inverseEntity="Thesis" syncable="YES"/>
     </entity>
     <entity name="LineSale" representedClassName="LineSale" syncable="YES">
-        <attribute name="allSale" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="allSale1" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="allSale2" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <relationship name="clients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Client" inverseName="lineSale" inverseEntity="Client" syncable="YES"/>
         <relationship name="lineSaleLines" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="LineSaleLine" inverseName="lineSale" inverseEntity="LineSaleLine" syncable="YES"/>
     </entity>
     <entity name="LineSaleLine" representedClassName="LineSaleLine" syncable="YES">
-        <attribute name="sale" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="sale1" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="sale2" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="lineSaleLines" inverseEntity="Item" syncable="YES"/>
         <relationship name="lineSale" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LineSale" inverseName="lineSaleLines" inverseEntity="LineSale" syncable="YES"/>
     </entity>
@@ -136,8 +138,8 @@
         <element name="TA" positionX="-180" positionY="-135" width="128" height="135"/>
         <element name="Thesis" positionX="-405" positionY="249" width="128" height="75"/>
         <element name="PriceGroup" positionX="-405" positionY="-54" width="128" height="88"/>
-        <element name="LineSale" positionX="-396" positionY="-45" width="128" height="103"/>
+        <element name="LineSale" positionX="-396" positionY="-45" width="128" height="118"/>
         <element name="PriceGroupLine" positionX="-387" positionY="-36" width="128" height="103"/>
-        <element name="LineSaleLine" positionX="-378" positionY="-27" width="128" height="88"/>
+        <element name="LineSaleLine" positionX="-378" positionY="-27" width="128" height="103"/>
     </elements>
 </model>

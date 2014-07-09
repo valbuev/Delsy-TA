@@ -10,4 +10,7 @@
 
 @interface PriceGroupLine (PriceGroupLineCategory)
 
+// Создает новый объект PriceGroupLine в managedObjectContext
++(PriceGroupLine *) newPriceGroupLineInManObjContext:(NSManagedObjectContext *) managedObjectContext;
+
 @end

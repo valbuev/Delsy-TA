@@ -12,7 +12,8 @@
 
 @implementation LineSale
 
-@dynamic allSale;
+@dynamic allSale1;
+@dynamic allSale2;
 @dynamic name;
 @dynamic clients;
 @dynamic lineSaleLines;

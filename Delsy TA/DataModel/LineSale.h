@@ -13,7 +13,8 @@
 
 @interface LineSale : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * allSale;
+@property (nonatomic, retain) NSNumber * allSale1;
+@property (nonatomic, retain) NSNumber * allSale2;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *clients;
 @property (nonatomic, retain) NSSet *lineSaleLines;

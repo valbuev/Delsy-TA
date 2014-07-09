@@ -10,4 +10,7 @@
 
 @interface LineSaleLine (LineSaleLineCategory)
 
+// Создает новый объект LineSaleLine в managedObjectContext
++(LineSaleLine *) newLineSaleLineInManObjContext:(NSManagedObjectContext *) managedObjectContext;
+
 @end

@@ -13,7 +13,8 @@
 
 @implementation LineSaleLine
 
-@dynamic sale;
+@dynamic sale1;
+@dynamic sale2;
 @dynamic lineSale;
 @dynamic item;
 

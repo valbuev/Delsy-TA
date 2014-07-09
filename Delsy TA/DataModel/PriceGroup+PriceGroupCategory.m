@@ -52,4 +52,34 @@
     return priceGroup;
 }
 
+// Ищет PriceGroup с self.name = name, если находит, то возвращает, иначе, return nil.
++(PriceGroup *) getPriceGroupByName:(NSString *) name withMOC:(NSManagedObjectContext *) managedObjectContext{
+    PriceGroup *priceGroup;
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"PriceGroup"
+                                              inManagedObjectContext:managedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setFetchLimit:1];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name == %@",name];
+    [request setPredicate:predicate];
+    
+    NSError *error = nil;
+    NSArray *array = [managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (array == nil){
+        NSLog(@"Exception while getting PriceGroup`s array by name. Error: %@",error.localizedDescription);
+        priceGroup = nil;
+    }
+    else{
+        if( array.count == 0 ){
+            priceGroup = nil;
+        }
+        else{
+            priceGroup = [array objectAtIndex:0];
+        }
+    }
+    return priceGroup;
+}
+
 @end

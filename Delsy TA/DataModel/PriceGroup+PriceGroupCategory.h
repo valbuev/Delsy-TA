@@ -16,4 +16,7 @@
 // Создает новый объект PriceGroup в managedObjectContext
 +(PriceGroup *) newPriceGroupInManObjContext:(NSManagedObjectContext *) managedObjectContext;
 
+// Ищет PriceGroup с self.name = name, если находит, то возвращает, иначе, return nil.
++(PriceGroup *) getPriceGroupByName:(NSString *) name withMOC:(NSManagedObjectContext *) managedObjectContext;
+
 @end
