@@ -69,6 +69,8 @@
 		A3BBE14A196BE0DF00F490EE /* LineSale+LineSaleCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE149196BE0DF00F490EE /* LineSale+LineSaleCategory.m */; };
 		A3BBE14D196BE10300F490EE /* LineSaleLine+LineSaleLineCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE14C196BE10300F490EE /* LineSaleLine+LineSaleLineCategory.m */; };
 		A3BBE151196E755E00F490EE /* OrderInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE150196E755E00F490EE /* OrderInfoView.m */; };
+		A3BBE155196E958200F490EE /* DeliveryDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE154196E958200F490EE /* DeliveryDateView.m */; };
+		A3BBE157196E9D7C00F490EE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3BBE156196E9D7C00F490EE /* MessageUI.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A3C04E22195C336A00DAFB32 /* ClientListForNewOrder_View.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */; };
 		A3F96CB1194FEAE000C0C66E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3F96CB0194FEAE000C0C66E /* CoreData.framework */; };
 		A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3F96CB2194FEB8A00C0C66E /* DataModel.xcdatamodeld */; };
@@ -200,6 +202,9 @@
 		A3BBE14C196BE10300F490EE /* LineSaleLine+LineSaleLineCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LineSaleLine+LineSaleLineCategory.m"; path = "DataModel/LineSaleLine+LineSaleLineCategory.m"; sourceTree = "<group>"; };
 		A3BBE14F196E755E00F490EE /* OrderInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderInfoView.h; path = Interface/OrderInfoView.h; sourceTree = "<group>"; };
 		A3BBE150196E755E00F490EE /* OrderInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderInfoView.m; path = Interface/OrderInfoView.m; sourceTree = "<group>"; };
+		A3BBE153196E958200F490EE /* DeliveryDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeliveryDateView.h; path = Interface/DeliveryDateView.h; sourceTree = "<group>"; };
+		A3BBE154196E958200F490EE /* DeliveryDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeliveryDateView.m; path = Interface/DeliveryDateView.m; sourceTree = "<group>"; };
+		A3BBE156196E9D7C00F490EE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		A3C04E20195C336A00DAFB32 /* ClientListForNewOrder_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientListForNewOrder_View.h; path = Interface/ClientListForNewOrder_View.h; sourceTree = "<group>"; };
 		A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientListForNewOrder_View.m; path = Interface/ClientListForNewOrder_View.m; sourceTree = "<group>"; };
 		A3F96CB0194FEAE000C0C66E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -211,6 +216,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3BBE157196E9D7C00F490EE /* MessageUI.framework in Frameworks */,
 				A3F96CB1194FEAE000C0C66E /* CoreData.framework in Frameworks */,
 				A35AB8F4194EF1D3002BAF0D /* CoreGraphics.framework in Frameworks */,
 				A35AB8F6194EF1D3002BAF0D /* UIKit.framework in Frameworks */,
@@ -300,6 +306,7 @@
 		A34CF0FF1962621000329155 /* OrderEditView */ = {
 			isa = PBXGroup;
 			children = (
+				A3BBE152196E952900F490EE /* DeliveryDateView */,
 				A34CF1001962624800329155 /* OrderEditView.h */,
 				A34CF1011962624800329155 /* OrderEditView.m */,
 				A34CF1071962B4C500329155 /* OrderLineCell.h */,
@@ -526,6 +533,7 @@
 		A35AB8F0194EF1D3002BAF0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A3BBE156196E9D7C00F490EE /* MessageUI.framework */,
 				A3F96CB0194FEAE000C0C66E /* CoreData.framework */,
 				A35AB8F1194EF1D3002BAF0D /* Foundation.framework */,
 				A35AB8F3194EF1D3002BAF0D /* CoreGraphics.framework */,
@@ -678,6 +686,15 @@
 			name = OrderInfoView;
 			sourceTree = "<group>";
 		};
+		A3BBE152196E952900F490EE /* DeliveryDateView */ = {
+			isa = PBXGroup;
+			children = (
+				A3BBE153196E958200F490EE /* DeliveryDateView.h */,
+				A3BBE154196E958200F490EE /* DeliveryDateView.m */,
+			);
+			name = DeliveryDateView;
+			sourceTree = "<group>";
+		};
 		A3C04E1F195C332800DAFB32 /* ClientListForNewOrder_View */ = {
 			isa = PBXGroup;
 			children = (
@@ -807,6 +824,7 @@
 				A35A06861952B12400D99BE0 /* Thesis.m in Sources */,
 				A3BBE134196BDE9200F490EE /* PriceGroupLine.m in Sources */,
 				A3AC3A4D19513B25004D1EE1 /* NSNumber+NSNumberUnit.m in Sources */,
+				A3BBE155196E958200F490EE /* DeliveryDateView.m in Sources */,
 				A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */,
 				A35A067A1952B12400D99BE0 /* Order.m in Sources */,
 				A35A069E1952C99100D99BE0 /* Client+ClientCategory.m in Sources */,

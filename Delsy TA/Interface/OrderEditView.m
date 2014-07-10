@@ -21,6 +21,7 @@
 #import "LineSale+LineSaleCategory.h"
 #import "QtySetterView.h"
 #import "OrderInfoView.h"
+#import "DeliveryDateView.h"
 
 @interface OrderEditView ()
 <PriceViewDelegate,QtySetterViewDelegate,UIPopoverControllerDelegate>{
@@ -95,8 +96,6 @@
 
 #pragma mark ui-actions and navigation
 
-#warning fill ui-actions and navigation code
-
 // Кнопка "добавить" в навигационной панели
 - (IBAction)btnAddOrderLine:(id)sender {
     [self showPrice];
@@ -109,6 +108,10 @@
     if([segue.identifier isEqualToString:@"Info"]){
         OrderEditView *orderEditView = (OrderEditView *) segue.destinationViewController;
         orderEditView.order = self.order;
+    }
+    if([segue.identifier isEqualToString:@"Mail"]){
+        DeliveryDateView *deliveryDateView = (DeliveryDateView *) segue.destinationViewController;
+        deliveryDateView.order = self.order;
     }
 }
 
