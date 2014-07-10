@@ -25,12 +25,12 @@
 # pragma mark initialization
 
 -(void)startUpdating{
+    lineSales = [NSMutableArray array];
+    priceGroups = [NSMutableArray array];
     errors = [NSMutableArray array];
     [self startUpdatingPriceGroupsAndLineSales];
     if(delegate)
         [delegate BVAClientListUpdaterDidStartUpdating:self];
-    lineSales = [NSMutableArray array];
-    priceGroups = [NSMutableArray array];
 }
 
 //обновляем сначала ценовые группы и скидки по строке, потом список клиентов
@@ -145,7 +145,20 @@
     [TA setAllTADeleted:YES InManagedObjectContext:self.managedObjectContext];
     
     // Помечаем все Client & Address-managedObject-ы как deleted
+    [Client setAllClientsDeleted:YES InManagedObjectContext:self.managedObjectContext];
     [Address setAllAddressesDeleted:YES InManagedObjectContext:self.managedObjectContext];
+    
+    /*for( PriceGroup *priceGroup in priceGroups){
+        NSLog(@"priceGroup: %@",priceGroup.name);
+    }
+    for( LineSale *lineSale in lineSales){
+        NSLog(@"lineSale: %@",lineSale.name);
+    }
+    
+    NSArray *array = [LineSale getAllLineSales:self.managedObjectContext];
+    for( LineSale *lineSale in array){
+        NSLog(@"lineSale: %@",lineSale.name);
+    }*/
     
     // сохраняем
     [self saveTAListIntoCoreData:TAdicts];
@@ -223,7 +236,7 @@
 
 -(void) saveAddressIntoCoreData: (NSDictionary *) adrDict forTA:(TA *) ta{
     if(![adrDict isKindOfClass:[NSDictionary class]]){
-        NSLog(@"\n adrDict is not a kind of NSDictionary-class: \n%@ \n TA: %@",adrDict,ta.name);
+        //NSLog(@"\n adrDict is not a kind of NSDictionary-class: \n%@ \n TA: %@",adrDict,ta.name);
         [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9996
                                           userInfo:[NSDictionary dictionaryWithObject:@"adrDict is not a kind of NSDictionary-class" forKey:@"info"]]];
         return;
@@ -267,6 +280,7 @@
 
         client.priceGroup = (PriceGroup *)[self priceGroupFromMutableArrayByName:priceGroup_str];
         client.lineSale = (LineSale *)[self lineSaleFromMutableArrayByName:lineSale_str];
+        //NSLog(@"\nclient: %@ ta: %@ \npriceGroup: %@, priceGroup_str: %@\n lineSale: %@ sale1: %@ sale2: %@  lineSale_str: %@",clientName,ta.name,client.priceGroup.name,priceGroup_str,client.lineSale.name,client.lineSale.allSale1,client.lineSale.allSale1,lineSale_str);
         client.name = clientName;
         client.deleted = NO;
         client.ta = ta;
@@ -369,6 +383,11 @@
     LineSale *lineSale = [LineSale newLineSaleInManObjContext:self.managedObjectContext];
     lineSale.name = lineSaleId;
     
+    //записываем в список, для последующего быстрого доступа и поиска
+    [lineSales addObject:lineSale];
+    
+    NSLog(@"lineSale: %@",lineSale.name);
+    
     NSDictionary *lineSaleAllSaleDict = [lineSaleDict objectForKey:@"allSale"];
     if(!lineSaleAllSaleDict){
         lineSale.allSale1 = [NSNumber numberWithFloat:0];
@@ -387,6 +406,22 @@
         else
             lineSale.allSale2 = [NSNumber numberWithFloat: sale2_str.floatValue];
     }
+    
+#warning
+    /************ Проверь, правильно ли работают скидки? ***************
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    *
+    */
+    
+    
     NSObject *lineSaleLinesDict = [lineSaleDict objectForKey:@"item"];
     if( !lineSaleLinesDict )
         return;
@@ -406,8 +441,6 @@
             [self saveManageObjectContext];
         }
     }
-    //записываем в список, для последующего быстрого доступа и поиска
-    [lineSales addObject:lineSale];
 }
 
 - (void) saveLineSaleLineIntoCoreData:(NSDictionary *) lineSaleLineDict lineSale:(LineSale *) lineSale{
@@ -463,6 +496,11 @@
     }
     PriceGroup *priceGroup = [PriceGroup newPriceGroupInManObjContext:self.managedObjectContext];
     priceGroup.name = [priceGroupDict objectForKey:@"_id"];
+    
+    //записываем в список, для последующего быстрого доступа и поиска
+    [priceGroups addObject:priceGroup];
+    //NSLog(@"priceGroup: %@",priceGroup.name);
+    
     NSArray *itemDicts; // PriceGroupLineDicts
     if([[priceGroupDict objectForKey:@"item"] isKindOfClass:[NSArray class]]){
         itemDicts = [priceGroupDict objectForKey:@"item"];
@@ -482,8 +520,6 @@
             n=0;
         }
     }
-    //записываем в список, для последующего быстрого доступа и поиска
-    [priceGroups addObject:priceGroup];
 }
 
 - (void) savePriceGroupLineIntoCoreData:(NSDictionary *) priceGroupLineDict priceGroup:(PriceGroup *) priceGroup {
@@ -509,7 +545,7 @@
     if( ![priceGroupLineDict objectForKey:@"price"] ){
         plusable = [NSNumber numberWithBool:YES];
     }
-    if([[priceGroupLineDict objectForKey:@"price"] intValue] == 1){
+    if([[priceGroupLineDict objectForKey:@"plusable"] intValue] == 1){
         plusable = [NSNumber numberWithBool:YES];
     }
     else{

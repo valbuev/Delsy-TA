@@ -8,6 +8,7 @@
 
 #import "OrderLine+OrderLineCategory.h"
 #import "Item+ItemCategory.h"
+#import "Order+OrderCategory.h"
 
 @implementation OrderLine (OrderLineCategory)
 // Создает и возвращает новую позицию.
@@ -23,5 +24,15 @@
     
     return orderLine;
 }
+
+//-(void)willChangeValueForKey:(NSString *)key{
+//    [super willChangeValueForKey:key];
+//    [self.order willChangeValueForKey:@"orderLines"];
+//}
+//
+//-(void)didChangeValueForKey:(NSString *)key{
+//    [super didChangeValueForKey:key];
+//    [self.order didChangeValueForKey:@"orderLines"];
+//}
 
 @end

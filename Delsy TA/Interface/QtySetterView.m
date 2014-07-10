@@ -76,18 +76,23 @@
         [self.segmentsUnit setSelectedSegmentIndex:0];
         self.segmentsUnit.enabled = NO;
     }
-    if(units.count == 2){
+    else if(units.count == 2){
         [self.segmentsUnit setTitle:((NSNumber *)[unitQtys objectAtIndex:0]).stringValue forSegmentAtIndex:0];
         [self.segmentsUnit setTitle:((NSNumber *)[unitQtys objectAtIndex:1]).stringValue forSegmentAtIndex:1];
-        [self.segmentsUnit setSelectedSegmentIndex:1];
+        if([[units objectAtIndex:0] unitValue] == unitKG)
+            [self.segmentsUnit setSelectedSegmentIndex:1];
+        else
+            [self.segmentsUnit setSelectedSegmentIndex:0];
     }
-    if(units.count == 3){
+    else if(units.count == 3){
         [self.segmentsUnit setTitle:((NSNumber *)[unitQtys objectAtIndex:0]).stringValue forSegmentAtIndex:0];
         [self.segmentsUnit setTitle:((NSNumber *)[unitQtys objectAtIndex:1]).stringValue forSegmentAtIndex:1];
         [self.segmentsUnit insertSegmentWithTitle:((NSNumber *)[unitQtys objectAtIndex:2]).stringValue atIndex:2 animated:NO];
-        [self.segmentsUnit setSelectedSegmentIndex:1];
+        if([[units objectAtIndex:0] unitValue] == unitKG)
+            [self.segmentsUnit setSelectedSegmentIndex:1];
+        else
+            [self.segmentsUnit setSelectedSegmentIndex:0];
     }
-#warning доделать qtysetter. Учесть возможность поштучной продажи
 }
 
 -(void) updateLabelQtyInBaseUnits{

@@ -294,6 +294,8 @@
                 break;
         }
         // Обновляем таблицу с кнопкой и суммой, чтобы отобразить корректно сумму
+        // Пересчитывает сумму заказа
+        [self.order reCalculateAmount];
         [self.sumAndAddPositionTableView reloadData];
     }
 }
@@ -331,6 +333,7 @@
                 break;
         }
         // Обновляем таблицу с кнопкой и суммой, чтобы отобразить корректно сумму
+        [self.order reCalculateAmount];
         [self.sumAndAddPositionTableView reloadData];
     }
 }
@@ -351,6 +354,7 @@
         // Обновляем таблицу, так как она не содержит обновления
         [self.orderTableView reloadData];
         // Обновляем таблицу с кнопкой и суммой, чтобы отобразить корректно сумму
+        [self.order reCalculateAmount];
         [self.sumAndAddPositionTableView reloadData];
     }];
 }

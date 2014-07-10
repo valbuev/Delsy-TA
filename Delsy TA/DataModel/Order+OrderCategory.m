@@ -96,8 +96,16 @@
     float localPrice = [self.client getPriceByItem:item].floatValue;
     orderLine.baseUnitQty = [NSNumber numberWithFloat: localQty * qty.floatValue ];
     orderLine.price = [NSNumber numberWithFloat:localPrice];
-    orderLine.amount = [NSNumber numberWithFloat:(localPrice*localQty)];
+    orderLine.amount = [NSNumber numberWithFloat:(localPrice*localQty*qty.floatValue)];
+}
 
+// Пересчитывает сумму заказа
+-(void) reCalculateAmount{
+    float value = 0;
+    for (OrderLine *line in self.orderLines){
+        value += line.amount.floatValue;
+    }
+    self.amount = [NSNumber numberWithFloat:value];
 }
 
 

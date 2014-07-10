@@ -22,4 +22,7 @@
 //Добавляет позицию в текущий заказ. Если позиция с таким продуктом уже есть, то она заменяется.
 - (void) addItem:(Item *) item qty:(NSNumber *) qty unit:(Unit) unit;
 
+// Пересчитывает сумму заказа
+-(void) reCalculateAmount;
+
 @end

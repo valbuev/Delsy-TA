@@ -19,4 +19,6 @@
 // Ищет LineSale с self.name = name, если находит, то возвращает, иначе, return nil.
 +(LineSale *) getLineSaleByName:(NSString *) name withMOC:(NSManagedObjectContext *) managedObjectContext;
 
++ (NSArray *) getAllLineSales: (NSManagedObjectContext *) context;
+
 @end
