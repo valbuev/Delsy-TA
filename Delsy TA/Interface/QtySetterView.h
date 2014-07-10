@@ -40,9 +40,9 @@
 - (IBAction)btnRemoveClicked:(id)sender;
 - (IBAction)btnOKClicked:(id)sender;
 
-@property (nonatomic,retain) Item *item;
-@property (nonatomic) Unit startWithUnit;
-@property (nonatomic,retain) NSNumber *startWithQty;
+@property (nonatomic,retain) Item * item;
+@property (nonatomic,retain) NSNumber * startWithUnit;
+@property (nonatomic,retain) NSNumber * startWithQty;
 
 @property (nonatomic,weak) id<QtySetterViewDelegate> delegate;
 

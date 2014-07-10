@@ -153,6 +153,8 @@
     
     NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:sectionNum];
     
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
     Item *item = [controller objectAtIndexPath:newIndexPath];
     
     PriceDetailViewTableCell *cell = (PriceDetailViewTableCell *) [self.tableView cellForRowAtIndexPath:indexPath];

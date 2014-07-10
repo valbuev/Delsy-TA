@@ -68,6 +68,7 @@
 		A3BBE147196BDFB400F490EE /* PriceGroupLine+PriceGroupLineCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE146196BDFB400F490EE /* PriceGroupLine+PriceGroupLineCategory.m */; };
 		A3BBE14A196BE0DF00F490EE /* LineSale+LineSaleCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE149196BE0DF00F490EE /* LineSale+LineSaleCategory.m */; };
 		A3BBE14D196BE10300F490EE /* LineSaleLine+LineSaleLineCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE14C196BE10300F490EE /* LineSaleLine+LineSaleLineCategory.m */; };
+		A3BBE151196E755E00F490EE /* OrderInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE150196E755E00F490EE /* OrderInfoView.m */; };
 		A3C04E22195C336A00DAFB32 /* ClientListForNewOrder_View.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */; };
 		A3F96CB1194FEAE000C0C66E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3F96CB0194FEAE000C0C66E /* CoreData.framework */; };
 		A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3F96CB2194FEB8A00C0C66E /* DataModel.xcdatamodeld */; };
@@ -197,6 +198,8 @@
 		A3BBE149196BE0DF00F490EE /* LineSale+LineSaleCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LineSale+LineSaleCategory.m"; path = "DataModel/LineSale+LineSaleCategory.m"; sourceTree = "<group>"; };
 		A3BBE14B196BE10300F490EE /* LineSaleLine+LineSaleLineCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "LineSaleLine+LineSaleLineCategory.h"; path = "DataModel/LineSaleLine+LineSaleLineCategory.h"; sourceTree = "<group>"; };
 		A3BBE14C196BE10300F490EE /* LineSaleLine+LineSaleLineCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "LineSaleLine+LineSaleLineCategory.m"; path = "DataModel/LineSaleLine+LineSaleLineCategory.m"; sourceTree = "<group>"; };
+		A3BBE14F196E755E00F490EE /* OrderInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderInfoView.h; path = Interface/OrderInfoView.h; sourceTree = "<group>"; };
+		A3BBE150196E755E00F490EE /* OrderInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderInfoView.m; path = Interface/OrderInfoView.m; sourceTree = "<group>"; };
 		A3C04E20195C336A00DAFB32 /* ClientListForNewOrder_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientListForNewOrder_View.h; path = Interface/ClientListForNewOrder_View.h; sourceTree = "<group>"; };
 		A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientListForNewOrder_View.m; path = Interface/ClientListForNewOrder_View.m; sourceTree = "<group>"; };
 		A3F96CB0194FEAE000C0C66E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -597,6 +600,7 @@
 		A3ACB9681959481A00D2C77A /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				A3BBE14E196E746B00F490EE /* OrderInfoView */,
 				A34CF11A19655EB800329155 /* QtySetterView */,
 				A34CF1121963DFF500329155 /* Price */,
 				A34CF103196278A300329155 /* NSNumberFormatter */,
@@ -663,6 +667,15 @@
 				A3BBE146196BDFB400F490EE /* PriceGroupLine+PriceGroupLineCategory.m */,
 			);
 			name = PriceGroupLine;
+			sourceTree = "<group>";
+		};
+		A3BBE14E196E746B00F490EE /* OrderInfoView */ = {
+			isa = PBXGroup;
+			children = (
+				A3BBE14F196E755E00F490EE /* OrderInfoView.h */,
+				A3BBE150196E755E00F490EE /* OrderInfoView.m */,
+			);
+			name = OrderInfoView;
 			sourceTree = "<group>";
 		};
 		A3C04E1F195C332800DAFB32 /* ClientListForNewOrder_View */ = {
@@ -813,6 +826,7 @@
 				A35A06801952B12400D99BE0 /* ProductType.m in Sources */,
 				A34CF10E1963C6A300329155 /* PriceMasterView.m in Sources */,
 				A35AB902194EF1D3002BAF0D /* AppDelegate.m in Sources */,
+				A3BBE151196E755E00F490EE /* OrderInfoView.m in Sources */,
 				A3BBE147196BDFB400F490EE /* PriceGroupLine+PriceGroupLineCategory.m in Sources */,
 				A341AFEC195AAAEE001B7168 /* TA.m in Sources */,
 				A35AB8FE194EF1D3002BAF0D /* main.m in Sources */,

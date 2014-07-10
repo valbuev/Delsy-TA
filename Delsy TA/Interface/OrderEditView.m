@@ -19,13 +19,17 @@
 #import "AppDelegate.h"
 #import "PriceSplitView.h"
 #import "LineSale+LineSaleCategory.h"
+#import "QtySetterView.h"
+#import "OrderInfoView.h"
 
 @interface OrderEditView ()
-<PriceViewDelegate>{
+<PriceViewDelegate,QtySetterViewDelegate,UIPopoverControllerDelegate>{
     NSFetchedResultsController *orderController;
     PriceSplitView *priceSplitView;
     Boolean isThatWindowShowing;
 }
+
+@property (nonatomic, retain) UIPopoverController *localPopoverController;
 
 @end
 
@@ -36,6 +40,7 @@
 @synthesize order;
 @synthesize orderTableView;
 @synthesize sumAndAddPositionTableView;
+@synthesize localPopoverController;
 
 #pragma mark initialization and basic view-controller tasks
 
@@ -101,7 +106,10 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    
+    if([segue.identifier isEqualToString:@"Info"]){
+        OrderEditView *orderEditView = (OrderEditView *) segue.destinationViewController;
+        orderEditView.order = self.order;
+    }
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
@@ -226,7 +234,7 @@
 // Если нажата ячейка с суммой, то ничего не делаем. Если нажата ячейка добавления позиции, то показываем PriceView. Если нажата ячейка с "позицией", то показываем popup-QtySetter
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if( tableView == self.orderTableView ){
-#warning fill code which implement showing of popup-QtySetter
+        [self showQtySetterViewForOrderLine:indexPath];
     }
     else{
         if( indexPath.row == 0 ) //sum-cell
@@ -357,6 +365,40 @@
         [self.order reCalculateAmount];
         [self.sumAndAddPositionTableView reloadData];
     }];
+}
+
+#pragma mark QtySetter and popoverController
+
+- (void) showQtySetterViewForOrderLine:(NSIndexPath *) indexPath{
+    
+    OrderLine *orderLine = [orderController objectAtIndexPath:indexPath];
+    Item *item = orderLine.item;
+    
+    OrderLineCell *cell = (OrderLineCell *) [self.orderTableView cellForRowAtIndexPath:indexPath];
+    
+    QtySetterView *qtySetter = [self.storyboard instantiateViewControllerWithIdentifier:@"QtySetter"];
+    qtySetter.item = item;
+    qtySetter.delegate = self;
+    qtySetter.startWithQty = orderLine.qty;
+    qtySetter.startWithUnit = orderLine.unit;
+    
+    self.localPopoverController = [[UIPopoverController alloc] initWithContentViewController:qtySetter];
+    self.localPopoverController.delegate = self;
+    
+    [self.localPopoverController presentPopoverFromRect:cell.labelName.bounds inView:cell.labelName
+                               permittedArrowDirections:UIPopoverArrowDirectionLeft
+                                               animated:NO];
+}
+
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController{
+    [self.localPopoverController dismissPopoverAnimated:YES];
+    return NO;
+}
+
+- (void)qtySetterView:(QtySetterView *)qtySetterView didFinishSettingQty:(NSNumber *)qty unit:(Unit)unit forItem:(Item *)item{
+    [self.localPopoverController dismissPopoverAnimated:YES];
+    [order addItem:item qty:qty unit:unit];
+    [self saveManageObjectContext];
 }
 
 

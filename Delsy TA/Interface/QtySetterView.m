@@ -93,6 +93,19 @@
         else
             [self.segmentsUnit setSelectedSegmentIndex:0];
     }
+    
+    if(self.startWithUnit){
+        for(int i=0;i<units.count;i++){
+            if([(NSNumber *) [units objectAtIndex:i] unitValue] == self.startWithUnit.unitValue){
+                [self.segmentsUnit setSelectedSegmentIndex:i];
+                break;
+            }
+        }
+    }
+    if(self.startWithQty){
+        self.textFieldQty.text = self.startWithQty.stringValue;
+        [self updateLabelQtyInBaseUnits];
+    }
 }
 
 -(void) updateLabelQtyInBaseUnits{

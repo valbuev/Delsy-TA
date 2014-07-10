@@ -108,5 +108,83 @@
     self.amount = [NSNumber numberWithFloat:value];
 }
 
+// Сохраняет Заказ в xml-файл и возвращает его адрес
+- (NSURL *) saveOrder2XMLFile
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *urls = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSURL *documentDirectory = [urls objectAtIndex:0];
+    NSURL *filePath = [documentDirectory URLByAppendingPathComponent:@"mail.xml"];
+    
+    NSString *order_str = [NSString new];
+    order_str = [order_str stringByAppendingString:@"<?xml version=\"1.0\" encoding=\"windows-1251\"?>"];
+    
+    order_str = [order_str stringByAppendingString:@"<import>"];
+    
+    order_str = [order_str stringByAppendingFormat:@"<clientId>%@</clientId>",self.client.cust_account];
+    order_str = [order_str stringByAppendingFormat:@"<clientAddressId>%@</clientAddressId>",self.address.address_id];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd.MM.yyyy"];
+    order_str = [order_str stringByAppendingFormat:@"<deliveryDate>%@</deliveryDate>",[formatter stringFromDate:self.deliveryDate]];
+    
+    
+    order_str = [order_str stringByAppendingString:@"<orders>"];
+    
+    for(OrderLine *orderLine in self.orderLines)
+    {
+        order_str = [order_str stringByAppendingString:@"<order>"];
+        
+        order_str = [order_str stringByAppendingFormat:@"<itemId>%@</itemId>",orderLine.item.itemID];
+        order_str = [order_str stringByAppendingFormat:@"<qty>%@</qty>",orderLine.baseUnitQty.stringValue];
+        
+        order_str = [order_str stringByAppendingString:@"</order>"];
+    }
+    
+    order_str = [order_str stringByAppendingString:@"</orders>"];
+    
+    order_str = [order_str stringByAppendingString:@"</import>"];
+    
+    [order_str writeToURL:filePath atomically:YES encoding:NSWindowsCP1251StringEncoding error:nil];
+    
+    return filePath;
+}
+
+//Сохраняет заказ в удобочитаемом виде в строку. Возвращает эту строку.
+-(NSString *) saveOrder2str
+{
+    NSString *order_str = [NSString new];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale localeWithLocaleIdentifier:@"ru"]];
+    [formatter setDateFormat:@"dd MMMM yyyy, hh:mm:ss"];
+    NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
+    [formatter2 setLocale:[NSLocale localeWithLocaleIdentifier:@"ru"]];
+    [formatter2 setDateFormat:@"dd.MM.yyyy"];
+    order_str = [order_str stringByAppendingFormat:@"\n\tЗаказ на имя \"\"%@\"\", адрес:\"\"%@\"\".\nПринял торговый представитель: %@.\nДата и время принятия заказа: %@ .\nДата поставки: %@.\nСумма: %@ руб.",
+                 self.custName,
+                 self.custAddress,
+                 self.taName,
+                 [formatter stringFromDate:self.date],
+                 [formatter2 stringFromDate:self.deliveryDate],
+                 self.amount.stringValue];
+    
+    order_str = [order_str stringByAppendingString:@"\n   Заказы: \n\n"];
+    
+    for(OrderLine *orderLine in self.orderLines)
+    {
+        order_str = [order_str stringByAppendingString:@"\n"];
+        order_str = [order_str stringByAppendingFormat:@"%@, ",orderLine.item.itemID];
+        order_str = [order_str stringByAppendingFormat:@"%@, ",orderLine.itemName];
+        order_str = [order_str stringByAppendingFormat:@"\n Количество в базовых единицах: %@,",
+                     orderLine.baseUnitQty.stringValue];
+        order_str = [order_str stringByAppendingFormat:@"\n Цена: %@ руб./ед.,",
+                     orderLine.price.stringValue];
+        order_str = [order_str stringByAppendingFormat:@"\n Сумма: %@ руб.",
+                     orderLine.amount.stringValue];
+        order_str = [order_str stringByAppendingFormat:@"\n"];
+    }
+    return order_str;
+}
+
 
 @end
