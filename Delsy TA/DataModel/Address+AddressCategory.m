@@ -107,6 +107,7 @@
         if( array.count == 0 ){
             address = [[Address alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
             address.address_id = addressId;
+            address.deleted = [NSNumber numberWithBool:YES];
         }
         else{
             address = [array objectAtIndex:0];
@@ -116,22 +117,27 @@
 }
 
 // создает и возвращает NSFetchedResultsController для конкретного ТА. Если deleted == nil , то не учитывая свойство deleted. Если не nil, то учитывает. НЕ ЗАПУСКАЕТ ЕГО!!!
-+ (NSFetchedResultsController *) getFetchedResultsControllerForTA: (NSManagedObject *) ta deleted: (NSNumber *) deleted managedObjectContext:(NSManagedObjectContext *) context delegate: (id <NSFetchedResultsControllerDelegate>) delegate{
++ (NSFetchedResultsController *) getFetchedResultsControllerForTA: (NSManagedObject *) ta deleted: (NSNumber *) deleted shouldHaveOrders:(Boolean) shouldHaveOrder managedObjectContext:(NSManagedObjectContext *) context delegate: (id <NSFetchedResultsControllerDelegate>) delegate{
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Address"
                                               inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
     
-    if(deleted)
-    {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(client.ta == %@) AND ( deleted == %@ ) AND ( client.deleted == %@ ) ",ta,deleted,deleted];
+    // *** Predicate
+        NSMutableArray *predicates = [NSMutableArray array];
+        [predicates addObject:[NSPredicate predicateWithFormat:@"client.ta == %@",ta]];
+    
+        if(deleted != nil) {
+            [predicates addObject:[NSPredicate predicateWithFormat:@"( deleted == %d ) AND ( client.deleted == %d ) ",deleted.boolValue,deleted.boolValue]];
+        }
+        if(shouldHaveOrder == YES) {
+            [predicates addObject:[NSPredicate predicateWithFormat:@"orders.@count > 0"]];
+        }
+        
+        NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
         [request setPredicate:predicate];
-    }
-    else{
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(client.ta == %@)",ta];
-        [request setPredicate:predicate];
-    }
+    // *** Predicate
     
     NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"client.name" ascending:YES];
     NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"address" ascending:YES];
@@ -147,22 +153,29 @@
 }
 
 // создает и возвращает NSFetchedResultsController для конкретного ТА. Если deleted == nil , то не учитывая свойство deleted. Если не nil, то учитывает. Использует фильтр по клиентам и адресам в нижнем регистре. НЕ ЗАПУСКАЕТ ЕГО!!!
-+ (NSFetchedResultsController *) getFetchedResultsControllerForTA: (NSManagedObject *) ta deleted: (NSNumber *) deleted filter:(NSString *) filter managedObjectContext:(NSManagedObjectContext *) context delegate: (id <NSFetchedResultsControllerDelegate>) delegate{
++ (NSFetchedResultsController *) getFetchedResultsControllerForTA: (NSManagedObject *) ta deleted: (NSNumber *) deleted shouldHaveOrders:(Boolean) shouldHaveOrder filter:(NSString *) filter managedObjectContext:(NSManagedObjectContext *) context delegate: (id <NSFetchedResultsControllerDelegate>) delegate{
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Address"
                                               inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
     
-    if(deleted)
-    {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(client.ta == %@) AND (address contains[cd] %@ OR client.name contains[cd] %@) AND ( deleted == %@ ) AND ( client.deleted == %@ ) ",ta,filter,filter,deleted,deleted];
+    // *** Predicate
+        NSMutableArray *predicates = [NSMutableArray array];
+        [predicates addObject:[NSPredicate predicateWithFormat:@"client.ta == %@",ta]];
+        //NSLog(@"%@",deleted);
+        if(deleted != nil)
+        {
+            [predicates addObject:[NSPredicate predicateWithFormat:@"( deleted == %d ) AND ( client.deleted == %d ) ",deleted.boolValue,deleted.boolValue]];
+        }
+        if(shouldHaveOrder == YES){
+            [predicates addObject:[NSPredicate predicateWithFormat:@"orders.@count > 0"]];
+        }
+        [predicates addObject:[NSPredicate predicateWithFormat:@"address contains[cd] %@ OR client.name contains[cd] %@",filter,filter]];
+        
+        NSPredicate *predicate = [NSCompoundPredicate andPredicateWithSubpredicates:predicates];
         [request setPredicate:predicate];
-    }
-    else{
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(client.ta == %@) AND (address contains[cd] %@ OR client.name contains[cd] %@)",ta,filter,filter];
-        [request setPredicate:predicate];
-    }
+    // *** Predicate
     
     NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"client.name" ascending:YES];
     NSSortDescriptor *sortDescriptor2 = [[NSSortDescriptor alloc] initWithKey:@"address" ascending:YES];

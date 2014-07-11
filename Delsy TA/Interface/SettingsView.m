@@ -181,6 +181,12 @@
     else if([segue.identifier isEqualToString:@"ClientListForNewOrder"]){
         ClientListForNewOrder_View *clientListView = segue.destinationViewController;
         clientListView.managedObjectContext = self.managedObjectContext;
+        clientListView.clientListViewResult = ClientListViewResult_OpenOrderEditView;
+    }
+    else if([segue.identifier isEqualToString:@"ClientListForOrderList"]){
+        ClientListForNewOrder_View *clientListView = segue.destinationViewController;
+        clientListView.managedObjectContext = self.managedObjectContext;
+        clientListView.clientListViewResult = ClientListViewResult_OpenOrderListView;
     }
 }
 
@@ -191,7 +197,7 @@
         return NO;
     if(
             ( [identifier isEqualToString:@"ClientListForNewOrder"]
-                || [identifier isEqualToString:@"ClientListForWatchHistory"] )
+                || [identifier isEqualToString:@"ClientListForOrderList"] )
                 && !self.appSettings.currentTA
        )
         {

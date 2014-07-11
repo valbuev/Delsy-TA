@@ -18,7 +18,6 @@
 @interface PriceDetailView()
 <QtySetterViewDelegate>
 {
-    Client * client;
 }
 
 @property (nonatomic,retain) UIPopoverController *localPopoverController;
@@ -49,7 +48,6 @@
 {
     [super viewDidLoad];
     section = -1; // нет конкретного типа рыбы, т.е. отображаются все.
-    client = self.order.client;
 }
 
 - (void)didReceiveMemoryWarning
@@ -128,7 +126,7 @@
 - (void) configureCell:(PriceDetailViewTableCell *) cell item:(Item *) item{
     cell.labelName.text = item.name;
     cell.labelUnit.text = [item.unit unitValueToString];
-    cell.labelPrice.text = [[client getPriceByItem:item] floatValueFrac2or0];
+    cell.labelPrice.text = [[self.order.client getPriceByItem:item] floatValueFrac2or0];
     cell.backgroundColor = [item.lineColor lineColor:[UIColor whiteColor]];
     if(item.promo.boolValue == YES)
         cell.labelPrice.textColor = [UIColor redColor];

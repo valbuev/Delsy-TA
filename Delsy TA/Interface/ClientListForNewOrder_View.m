@@ -27,6 +27,8 @@
 
 @synthesize fetchedController = _fetchedController;
 @synthesize fetchedControllerWithFilter;
+@synthesize clientListViewResult;
+@synthesize order;
 
 -(NSFetchedResultsController *)fetchedController{
     if( _fetchedController )
@@ -34,7 +36,18 @@
     
     AppSettings *settings = [AppSettings getInstance:self.managedObjectContext];
     
-    _fetchedController = [Address getFetchedResultsControllerForTA: (NSManagedObject *) settings.currentTA deleted:NO managedObjectContext:self.managedObjectContext delegate:self];
+    // Если далее нужно будет показать список заказов, то показываем и удаленных клиентов, и не удаленных
+    NSNumber * deleted = nil;
+    Boolean shouldHaveOrders = NO;
+    if( self.clientListViewResult != ClientListViewResult_OpenOrderListView ){
+        deleted = [NSNumber numberWithBool:NO];
+    }
+    else {
+        shouldHaveOrders = YES;
+    }
+    NSLog(@"nsfetchedResultsController init in ClientListView: clientListViewResult = %d",self.clientListViewResult);
+    
+    _fetchedController = [Address getFetchedResultsControllerForTA: (NSManagedObject *) settings.currentTA deleted:deleted shouldHaveOrders:shouldHaveOrders managedObjectContext:self.managedObjectContext delegate:self];
     NSError *error;
     [_fetchedController performFetch:&error];
     if(error)
@@ -42,11 +55,11 @@
     return _fetchedController;
 }
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
+// Во время инициализации из сториборда выставляем дефолтные переменные
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    self = [super initWithCoder:aDecoder];
+    if(self){
+        self.clientListViewResult = ClientListViewResult_Default;
     }
     return self;
 }
@@ -88,10 +101,34 @@
     return 0;
 }
 
+- (void) configureAddressCell:(UITableViewCell *) cell atIndexPath:(NSIndexPath *) indexPath address:(Address *) address{
+    if(self.clientListViewResult != ClientListViewResult_OpenOrderListView){
+        cell.textLabel.text =[NSString stringWithFormat:@"%@", address.address];
+    }
+    else {
+        cell.textLabel.text =[NSString stringWithFormat:@"%@", address.address];
+        if(address.deleted.boolValue == YES){
+            cell.textLabel.textColor = [UIColor grayColor];
+        } else {
+            cell.textLabel.textColor = [UIColor blackColor];
+        }
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"(%d)", (int) address.orders.count];
+    }
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"AddressCell";
+    static NSString *cellIdentifierDefault = @"AddressCell";
+    // Для перехода на список заказов клиента используетя другой прототип ячейки
+    static NSString *cellIdentifierOrderList = @"AddressCellForViewingClientOrders";
+    
+    NSString *cellIdentifier;
+    if( self.clientListViewResult != ClientListViewResult_OpenOrderListView )
+        cellIdentifier = cellIdentifierDefault;
+    else
+        cellIdentifier = cellIdentifierOrderList;
+    
     UITableViewCell *cell;
     
     Address *address;
@@ -103,7 +140,8 @@
         cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         address = (Address *) [self.fetchedControllerWithFilter objectAtIndexPath:indexPath];
     }
-    cell.textLabel.text =[NSString stringWithFormat:@"%@", address.address];
+    
+    [self configureAddressCell:cell atIndexPath:indexPath address:address];
     
     return cell;
 }
@@ -144,8 +182,18 @@
 #pragma mark search diaplay controller
 
 - (BOOL)searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchString:(NSString *)searchString{
+    // Если далее нужно будет показать список заказов, то показываем и удаленных клиентов, и не удаленных
+    NSNumber * deleted = nil;
+    Boolean shouldHaveOrders = NO;
+    if( self.clientListViewResult != ClientListViewResult_OpenOrderListView ){
+        deleted = [NSNumber numberWithBool:NO];
+    }
+    else {
+        shouldHaveOrders = YES;
+    }
+    
     AppSettings *settings = [AppSettings getInstance:self.managedObjectContext];
-    self.fetchedControllerWithFilter = [Address getFetchedResultsControllerForTA:(NSManagedObject *)settings.currentTA deleted:NO filter:searchString managedObjectContext:self.managedObjectContext delegate:self];
+    self.fetchedControllerWithFilter = [Address getFetchedResultsControllerForTA:(NSManagedObject *)settings.currentTA deleted:deleted shouldHaveOrders:shouldHaveOrders filter:searchString managedObjectContext:self.managedObjectContext delegate:self];
     NSError *error;
     [self.fetchedControllerWithFilter performFetch:&error];
     if(error)
@@ -161,17 +209,31 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    Address *address;
-    if([self.searchDisplayController isActive]){
-        NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
-        address = [self.fetchedControllerWithFilter objectAtIndexPath:indexPath];
-    } else {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        address = [self.fetchedController objectAtIndexPath:indexPath];
+    if([segue.identifier isEqualToString:@"OrderEditView"]){
+        Address *address;
+        if([self.searchDisplayController isActive]){
+            NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            address = [self.fetchedControllerWithFilter objectAtIndexPath:indexPath];
+        } else {
+            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+            address = [self.fetchedController objectAtIndexPath:indexPath];
+        }
+        OrderEditView *orderEditView = segue.destinationViewController;
+        orderEditView.address = address;
+        orderEditView.context = self.managedObjectContext;
     }
-    OrderEditView *orderEditView = segue.destinationViewController;
-    orderEditView.address = address;
-    orderEditView.context = self.managedObjectContext;
+}
+
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    if([identifier isEqualToString:@"OrderEditView"]
+       && self.clientListViewResult == ClientListViewResult_OpenOrderEditView){
+        return YES;
+    }
+    else if([identifier isEqualToString:@"OrderListView"]
+            && self.clientListViewResult == ClientListViewResult_OpenOrderListView) {
+        return YES;
+    }
+    return NO;
 }
 
 

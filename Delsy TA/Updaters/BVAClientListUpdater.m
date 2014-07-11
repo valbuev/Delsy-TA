@@ -276,17 +276,17 @@
     Address *address = [Address getAddressByAddressId:addressId withMOC:self.managedObjectContext];
     
     //NSLog(@"\nTA: %@\n2 %@ %@ %@",ta.name,custAccount,clientName,clientSale);
-    if(client.deleted){
+    if(client.deleted.boolValue == YES){
 
         client.priceGroup = (PriceGroup *)[self priceGroupFromMutableArrayByName:priceGroup_str];
         client.lineSale = (LineSale *)[self lineSaleFromMutableArrayByName:lineSale_str];
         //NSLog(@"\nclient: %@ ta: %@ \npriceGroup: %@, priceGroup_str: %@\n lineSale: %@ sale1: %@ sale2: %@  lineSale_str: %@",clientName,ta.name,client.priceGroup.name,priceGroup_str,client.lineSale.name,client.lineSale.allSale1,client.lineSale.allSale1,lineSale_str);
         client.name = clientName;
-        client.deleted = NO;
+        client.deleted = [NSNumber numberWithBool:NO];
         client.ta = ta;
     }
     address.address = addressName;
-    address.deleted = NO;
+    address.deleted = [NSNumber numberWithBool:NO];
     address.client = client;
     //NSLog(@"\nTA: %@\n3 %@ %@ %@",ta.name,custAccount,clientName,clientSale);
 }
