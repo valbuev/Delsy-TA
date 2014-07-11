@@ -10,8 +10,21 @@
 
 @class Order;
 
+@protocol DeliveryDateViewDelegate
+
+// письмо было отправлено
+- (void) deliveryDateViewDidSendMail;
+// Не удалось отправить письмо
+- (void) deliveryDateViewDidFailSendingMail;
+
+// Письмо было сохранено
+- (void) deliveryDateViewDidSaveMail;
+
+@end
+
 @interface DeliveryDateView : UIViewController
 
 @property (nonatomic,retain) Order *order;
+@property (nonatomic,weak) id <DeliveryDateViewDelegate> delegate;
 
 @end

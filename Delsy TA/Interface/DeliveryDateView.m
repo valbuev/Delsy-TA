@@ -18,6 +18,7 @@
 
 @implementation DeliveryDateView
 @synthesize DatePicker;
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -75,6 +76,8 @@
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Почта недоступна" message:@"Невозможно отправить письмо!" delegate:nil cancelButtonTitle:@":(" otherButtonTitles:nil];
         [alert show];
+        if(self.delegate)
+            [self.delegate deliveryDateViewDidFailSendingMail];
     }
 }
 
@@ -85,14 +88,20 @@
     if (result == MFMailComposeResultSent) {
         self.order.isSent = [NSNumber numberWithBool:YES];
         [self.order.managedObjectContext save:nil];
+        if(self.delegate)
+            [self.delegate deliveryDateViewDidSendMail];
     }
     else if (result == MFMailComposeResultFailed ){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Неудача!" message:@"Не удалось отправить письмо!" delegate:nil cancelButtonTitle:@":(" otherButtonTitles:nil];
         [alert show];
+        if(self.delegate)
+            [self.delegate deliveryDateViewDidFailSendingMail];
     }
     else if( result == MFMailComposeResultSaved ){
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Сохранено" message:@"Не забудьте отправить письмо!" delegate:nil cancelButtonTitle:@":)" otherButtonTitles:nil];
         [alert show];
+        if(self.delegate)
+            [self.delegate deliveryDateViewDidSaveMail];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }

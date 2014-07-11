@@ -24,7 +24,8 @@
 #import "DeliveryDateView.h"
 
 @interface OrderEditView ()
-<PriceViewDelegate,QtySetterViewDelegate,UIPopoverControllerDelegate>{
+<PriceViewDelegate,QtySetterViewDelegate,UIPopoverControllerDelegate,
+DeliveryDateViewDelegate>{
     NSFetchedResultsController *orderController;
     PriceSplitView *priceSplitView;
     Boolean isThatWindowShowing;
@@ -106,12 +107,15 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"Info"]){
-        OrderEditView *orderEditView = (OrderEditView *) segue.destinationViewController;
-        orderEditView.order = self.order;
+        OrderInfoView *orderInfoView = (OrderInfoView *) segue.destinationViewController;
+        orderInfoView.order = self.order;
     }
     if([segue.identifier isEqualToString:@"Mail"]){
         DeliveryDateView *deliveryDateView = (DeliveryDateView *) segue.destinationViewController;
         deliveryDateView.order = self.order;
+        deliveryDateView.delegate = self;
+        self.localPopoverController = [(UIStoryboardPopoverSegue *) segue popoverController];
+        self.localPopoverController.delegate = self;
     }
 }
 
@@ -393,16 +397,33 @@
                                                animated:NO];
 }
 
-- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController{
-    [self.localPopoverController dismissPopoverAnimated:YES];
-    return NO;
-}
-
 - (void)qtySetterView:(QtySetterView *)qtySetterView didFinishSettingQty:(NSNumber *)qty unit:(Unit)unit forItem:(Item *)item{
     [self.localPopoverController dismissPopoverAnimated:YES];
     [order addItem:item qty:qty unit:unit];
     [self saveManageObjectContext];
 }
+
+#pragma mark DeliveryDateViewDelegating
+
+- (void)deliveryDateViewDidSaveMail {
+    [self.localPopoverController dismissPopoverAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+-(void)deliveryDateViewDidFailSendingMail {
+    
+}
+
+- (void)deliveryDateViewDidSendMail {
+    [self.localPopoverController dismissPopoverAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+// Для QtySetter и DeliveryDateView используется одно и то же свойство для хранения popoverController !!!
+- (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController{
+    self.localPopoverController = nil;
+ return YES;
+ }
 
 
 @end

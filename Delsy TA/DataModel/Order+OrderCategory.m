@@ -106,11 +106,13 @@
         value += line.amount.floatValue;
     }
     self.amount = [NSNumber numberWithFloat:value];
+    [self.managedObjectContext save:nil];
 }
 
 // Сохраняет Заказ в xml-файл и возвращает его адрес
 - (NSURL *) saveOrder2XMLFile
 {
+    [self reCalculateAmount];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *urls = [fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
     NSURL *documentDirectory = [urls objectAtIndex:0];
@@ -152,6 +154,7 @@
 //Сохраняет заказ в удобочитаемом виде в строку. Возвращает эту строку.
 -(NSString *) saveOrder2str
 {
+    [self reCalculateAmount];
     NSString *order_str = [NSString new];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -175,10 +178,10 @@
         order_str = [order_str stringByAppendingString:@"\n"];
         order_str = [order_str stringByAppendingFormat:@"%@, ",orderLine.item.itemID];
         order_str = [order_str stringByAppendingFormat:@"%@, ",orderLine.itemName];
-        order_str = [order_str stringByAppendingFormat:@"\n Количество в базовых единицах: %@,",
-                     orderLine.baseUnitQty.stringValue];
-        order_str = [order_str stringByAppendingFormat:@"\n Цена: %@ руб./ед.,",
-                     orderLine.price.stringValue];
+        order_str = [order_str stringByAppendingFormat:@"\n Количество в базовых единицах: %@ %@,",
+                     orderLine.baseUnitQty.stringValue,[orderLine.item.unit unitValueToString]];
+        order_str = [order_str stringByAppendingFormat:@"\n Цена: %@ руб./%@,",
+                     orderLine.price.stringValue,[orderLine.item.unit unitValueToString]];
         order_str = [order_str stringByAppendingFormat:@"\n Сумма: %@ руб.",
                      orderLine.amount.stringValue];
         order_str = [order_str stringByAppendingFormat:@"\n"];

@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+enum ClientListViewResult {
+    ClientListViewResult_SetForOrderAndClose,
+    ClientListViewResult_OpenOrderEditView,
+    ClientListViewResult_OpenOrderListView
+};
+typedef enum ClientListViewResult ClientListViewResult;
+
 @interface ClientListForNewOrder_View : UITableViewController
 <NSFetchedResultsControllerDelegate, UISearchDisplayDelegate, UISearchBarDelegate>
 

@@ -79,7 +79,7 @@
     else if(units.count == 2){
         [self.segmentsUnit setTitle:((NSNumber *)[unitQtys objectAtIndex:0]).stringValue forSegmentAtIndex:0];
         [self.segmentsUnit setTitle:((NSNumber *)[unitQtys objectAtIndex:1]).stringValue forSegmentAtIndex:1];
-        if([[units objectAtIndex:0] unitValue] == unitKG)
+        if([[units objectAtIndex:0] unitValue] == unitKG && [[units objectAtIndex:1] unitValue] != unitBigBox)
             [self.segmentsUnit setSelectedSegmentIndex:1];
         else
             [self.segmentsUnit setSelectedSegmentIndex:0];

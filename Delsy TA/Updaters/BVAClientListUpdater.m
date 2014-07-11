@@ -386,7 +386,7 @@
     //записываем в список, для последующего быстрого доступа и поиска
     [lineSales addObject:lineSale];
     
-    NSLog(@"lineSale: %@",lineSale.name);
+    //NSLog(@"lineSale: %@",lineSale.name);
     
     NSDictionary *lineSaleAllSaleDict = [lineSaleDict objectForKey:@"allSale"];
     if(!lineSaleAllSaleDict){
@@ -406,21 +406,6 @@
         else
             lineSale.allSale2 = [NSNumber numberWithFloat: sale2_str.floatValue];
     }
-    
-#warning
-    /************ Проверь, правильно ли работают скидки? ***************
-    *
-    *
-    *
-    *
-    *
-    *
-    *
-    *
-    *
-    *
-    */
-    
     
     NSObject *lineSaleLinesDict = [lineSaleDict objectForKey:@"item"];
     if( !lineSaleLinesDict )
