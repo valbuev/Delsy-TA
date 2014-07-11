@@ -148,7 +148,8 @@
                                               initWithFetchRequest:request
                                               managedObjectContext:context
                                               sectionNameKeyPath:@"client.name"
-                                              cacheName:@"ru.bva.DelsyTA.fetchedResultsControllerForClientList"];
+                                              cacheName:nil];
+    controller.delegate = delegate;
     return controller;
 }
 
@@ -186,7 +187,8 @@
                                               initWithFetchRequest:request
                                               managedObjectContext:context
                                               sectionNameKeyPath:@"client.name"
-                                              cacheName:@"ru.bva.DelsyTA.fetchedResultsControllerForClientList"];
+                                              cacheName:nil];
+    controller.delegate = delegate;
     return controller;
 }
 

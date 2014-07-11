@@ -22,6 +22,7 @@
 #import "QtySetterView.h"
 #import "OrderInfoView.h"
 #import "DeliveryDateView.h"
+#import "SettingsView.h"
 
 @interface OrderEditView ()
 <PriceViewDelegate,QtySetterViewDelegate,UIPopoverControllerDelegate,
@@ -46,15 +47,6 @@ DeliveryDateViewDelegate>{
 
 #pragma mark initialization and basic view-controller tasks
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 -(void) saveManageObjectContext{
     if(self.context == nil){
         NSLog(@"OrderEditView.managedObjectContext = nil");
@@ -74,6 +66,9 @@ DeliveryDateViewDelegate>{
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // очищаем стек navigation-контроллера
+    
+    //
     isThatWindowShowing = YES;
     priceSplitView = nil;
     self.navigationItem.title = [NSString stringWithFormat:@"%@ (%@%% %@%%)",address.client.name,[address.client.lineSale.allSale1 floatValueSimpleMaxFrac2],[address.client.lineSale.allSale2 floatValueSimpleMaxFrac2]];
@@ -84,6 +79,7 @@ DeliveryDateViewDelegate>{
     orderController = [order newOrderController];
     orderController.delegate = self;
     [orderController performFetch:nil];
+    [self.orderTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning

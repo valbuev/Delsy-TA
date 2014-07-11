@@ -71,6 +71,8 @@
 		A3BBE151196E755E00F490EE /* OrderInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE150196E755E00F490EE /* OrderInfoView.m */; };
 		A3BBE155196E958200F490EE /* DeliveryDateView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BBE154196E958200F490EE /* DeliveryDateView.m */; };
 		A3BBE157196E9D7C00F490EE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3BBE156196E9D7C00F490EE /* MessageUI.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		A3BFE9DB196FBC01002776F4 /* OrderListView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BFE9DA196FBC01002776F4 /* OrderListView.m */; };
+		A3BFE9DF196FDCC5002776F4 /* OrderPresentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BFE9DE196FDCC5002776F4 /* OrderPresentView.m */; };
 		A3C04E22195C336A00DAFB32 /* ClientListForNewOrder_View.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */; };
 		A3F96CB1194FEAE000C0C66E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3F96CB0194FEAE000C0C66E /* CoreData.framework */; };
 		A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3F96CB2194FEB8A00C0C66E /* DataModel.xcdatamodeld */; };
@@ -205,6 +207,10 @@
 		A3BBE153196E958200F490EE /* DeliveryDateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeliveryDateView.h; path = Interface/DeliveryDateView.h; sourceTree = "<group>"; };
 		A3BBE154196E958200F490EE /* DeliveryDateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeliveryDateView.m; path = Interface/DeliveryDateView.m; sourceTree = "<group>"; };
 		A3BBE156196E9D7C00F490EE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		A3BFE9D9196FBC01002776F4 /* OrderListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderListView.h; path = Interface/OrderListView.h; sourceTree = "<group>"; };
+		A3BFE9DA196FBC01002776F4 /* OrderListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderListView.m; path = Interface/OrderListView.m; sourceTree = "<group>"; };
+		A3BFE9DD196FDCC5002776F4 /* OrderPresentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderPresentView.h; path = Interface/OrderPresentView.h; sourceTree = "<group>"; };
+		A3BFE9DE196FDCC5002776F4 /* OrderPresentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderPresentView.m; path = Interface/OrderPresentView.m; sourceTree = "<group>"; };
 		A3C04E20195C336A00DAFB32 /* ClientListForNewOrder_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientListForNewOrder_View.h; path = Interface/ClientListForNewOrder_View.h; sourceTree = "<group>"; };
 		A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientListForNewOrder_View.m; path = Interface/ClientListForNewOrder_View.m; sourceTree = "<group>"; };
 		A3F96CB0194FEAE000C0C66E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -608,6 +614,8 @@
 		A3ACB9681959481A00D2C77A /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				A3BFE9DC196FDC8F002776F4 /* OrderPresentView */,
+				A3BFE9D8196FBBE5002776F4 /* OrderListView */,
 				A34CF103196278A300329155 /* NSNumberFormatter */,
 				A34CF1121963DFF500329155 /* Price */,
 				A34CF11A19655EB800329155 /* QtySetterView */,
@@ -693,6 +701,24 @@
 				A3BBE154196E958200F490EE /* DeliveryDateView.m */,
 			);
 			name = DeliveryDateView;
+			sourceTree = "<group>";
+		};
+		A3BFE9D8196FBBE5002776F4 /* OrderListView */ = {
+			isa = PBXGroup;
+			children = (
+				A3BFE9D9196FBC01002776F4 /* OrderListView.h */,
+				A3BFE9DA196FBC01002776F4 /* OrderListView.m */,
+			);
+			name = OrderListView;
+			sourceTree = "<group>";
+		};
+		A3BFE9DC196FDC8F002776F4 /* OrderPresentView */ = {
+			isa = PBXGroup;
+			children = (
+				A3BFE9DD196FDCC5002776F4 /* OrderPresentView.h */,
+				A3BFE9DE196FDCC5002776F4 /* OrderPresentView.m */,
+			);
+			name = OrderPresentView;
 			sourceTree = "<group>";
 		};
 		A3C04E1F195C332800DAFB32 /* ClientListForNewOrder_View */ = {
@@ -819,6 +845,7 @@
 				A35A06681952AA7200D99BE0 /* Item.m in Sources */,
 				A35A06B41952CABE00D99BE0 /* TA+TACategory.m in Sources */,
 				A341AFF0195AB932001B7168 /* TAListView.m in Sources */,
+				A3BFE9DF196FDCC5002776F4 /* OrderPresentView.m in Sources */,
 				A35A06A11952C9B100D99BE0 /* Fish+FishCategory.m in Sources */,
 				A35A06B71952CAF500D99BE0 /* Thesis+ThesisCategory.m in Sources */,
 				A35A06861952B12400D99BE0 /* Thesis.m in Sources */,
@@ -828,6 +855,7 @@
 				A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */,
 				A35A067A1952B12400D99BE0 /* Order.m in Sources */,
 				A35A069E1952C99100D99BE0 /* Client+ClientCategory.m in Sources */,
+				A3BFE9DB196FBC01002776F4 /* OrderListView.m in Sources */,
 				A3BBE137196BDE9200F490EE /* LineSaleLine.m in Sources */,
 				A35A06A81952CA3800D99BE0 /* Order+OrderCategory.m in Sources */,
 				A3ACB96C195948A300D2C77A /* SettingsView.m in Sources */,

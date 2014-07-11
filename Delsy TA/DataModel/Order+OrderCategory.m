@@ -62,7 +62,7 @@
                                               initWithFetchRequest:request
                                               managedObjectContext:context
                                               sectionNameKeyPath:@"item.productType.name"
-                                              cacheName:@"ru.bva.DelsyTA.fetchedResultsControllerForOrderForEdit"];
+                                              cacheName:nil];
     
     return controller;
 }
@@ -189,5 +189,31 @@
     return order_str;
 }
 
+// ВОзвращает все заказы выбранного адреса, сортированные по дате (последние вверху)
++(NSArray *) getAllOrdersByAddress:(Address *) address MOC:(NSManagedObjectContext *) context {
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Order" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"address == %@",address];
+    [request setPredicate:predicate];
+    
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
+    [request setSortDescriptors:[NSArray arrayWithObject:sort]];
+    
+    NSArray *results = [context executeFetchRequest:request error:nil];
+    return results;
+}
+
+// Возвращает новый заказ, в котором присутствуют те же позиции, за исключением отсутствующих в прайсе продуктов.
+-(Order *) newOrderUsingThis{
+    Order *newOrder = [Order newOrder:self.managedObjectContext forAddress:self.address];
+    for(OrderLine *line in self.orderLines){
+        [newOrder addItem:line.item qty:[line.qty copy] unit:[line.unit unitValue]];
+    }
+    [newOrder reCalculateAmount];
+    return newOrder;
+}
 
 @end

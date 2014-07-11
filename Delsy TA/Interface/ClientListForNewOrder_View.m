@@ -11,6 +11,7 @@
 #import "Client+ClientCategory.h"
 #import "AppSettings+AppSettingsCategory.h"
 #import "OrderEditView.h"
+#import "OrderListView.h"
 
 @interface ClientListForNewOrder_View (){
     
@@ -45,7 +46,6 @@
     else {
         shouldHaveOrders = YES;
     }
-    NSLog(@"nsfetchedResultsController init in ClientListView: clientListViewResult = %d",self.clientListViewResult);
     
     _fetchedController = [Address getFetchedResultsControllerForTA: (NSManagedObject *) settings.currentTA deleted:deleted shouldHaveOrders:shouldHaveOrders managedObjectContext:self.managedObjectContext delegate:self];
     NSError *error;
@@ -77,14 +77,24 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)dealloc{
+    NSLog(@"dealloc clientListView");
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if(self.tableView == tableView )
+    /*if(self.tableView == tableView )
         return self.fetchedController.sections.count;
     if(self.fetchedControllerWithFilter)
+        return self.fetchedControllerWithFilter.sections.count;*/
+    if(self.searchDisplayController.searchResultsTableView == tableView){
         return self.fetchedControllerWithFilter.sections.count;
+    }
+    else{
+        return self.fetchedController.sections.count;
+    }
     return 0;
 }
 
@@ -153,7 +163,7 @@
         id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedController.sections objectAtIndex:section];
         cell.textLabel.text = [sectionInfo name];
         cell.backgroundColor = [UIColor clearColor];
-        return cell;
+        return cell.contentView;
     }
     else {
         static NSString *cellIdentifier = @"ClientNameCell";
@@ -161,7 +171,7 @@
         id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedControllerWithFilter.sections objectAtIndex:section];
         cell.textLabel.text = [sectionInfo name];
         cell.backgroundColor = [UIColor clearColor];
-        return cell;
+        return cell.contentView;
     }
     return nil;
 }
@@ -199,9 +209,79 @@
     if(error)
         NSLog(@"error with performing fetchedResultsController in ClientListForNewOrder_View \n Error: %@",error.localizedDescription);
     //NSLog(@"creating fetchedresultController with filter: %@",searchString);
-    //[controller.searchResultsTableView reloadData];
+    [controller.searchResultsTableView reloadData];
     return YES;
 }
+
+#pragma mark fetchedResultsController
+/*
+-(void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
+    if(self.clientListViewResult == ClientListViewResult_OpenOrderListView) {
+        if(controller == self.fetchedControllerWithFilter){
+            [self.searchDisplayController.searchResultsTableView beginUpdates];
+        }
+        else {
+            [self.tableView beginUpdates];
+        }
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    if( self.clientListViewResult == ClientListViewResult_OpenOrderListView ){
+        switch(type) {
+            case NSFetchedResultsChangeDelete:
+                if(controller == self.fetchedController){
+                    [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                                  withRowAnimation:UITableViewRowAnimationLeft];
+                }
+                else {
+                    [self.searchDisplayController.searchResultsTableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                                                                       withRowAnimation:UITableViewRowAnimationLeft];
+                }
+                break;
+        }
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    if( self.clientListViewResult == ClientListViewResult_OpenOrderListView ){
+        UITableView *tableView;
+        Address *address;
+        if(controller == self.fetchedController){
+            tableView = self.tableView;
+        }
+        else {
+            tableView = self.searchDisplayController.searchResultsTableView;
+        }
+        switch(type) {
+            case NSFetchedResultsChangeDelete:
+                [tableView deleteRowsAtIndexPaths:@[indexPath]
+                                 withRowAnimation:UITableViewRowAnimationLeft];
+                break;
+            case NSFetchedResultsChangeUpdate:
+                address = [controller objectAtIndexPath:indexPath];
+                [self configureAddressCell: [tableView cellForRowAtIndexPath:indexPath]
+                               atIndexPath:indexPath address:address ];
+                break;
+        }
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    if(self.clientListViewResult == ClientListViewResult_OpenOrderListView) {
+        if(controller == self.fetchedControllerWithFilter){
+            [self.searchDisplayController.searchResultsTableView endUpdates];
+        }
+        else {
+            [self.tableView endUpdates];
+        }
+    }
+}*/
 
 
 #pragma mark - Navigation
@@ -222,12 +302,41 @@
         orderEditView.address = address;
         orderEditView.context = self.managedObjectContext;
     }
+    if([segue.identifier isEqualToString:@"OrderListView"]){
+        Address *address;
+        if([self.searchDisplayController isActive]){
+            NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            address = [self.fetchedControllerWithFilter objectAtIndexPath:indexPath];
+        } else {
+            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+            address = [self.fetchedController objectAtIndexPath:indexPath];
+        }
+        OrderListView *orderListView = segue.destinationViewController;
+        orderListView.address = address;
+        orderListView.context = self.managedObjectContext;
+    }
 }
 
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     if([identifier isEqualToString:@"OrderEditView"]
        && self.clientListViewResult == ClientListViewResult_OpenOrderEditView){
-        return YES;
+        // Делаем все тут, потому что по другому никак не получается очистить стек навигейшн-контроллера, не оставляя в нем navigation-item-ы
+        Address *address;
+        if([self.searchDisplayController isActive]){
+            NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            address = [self.fetchedControllerWithFilter objectAtIndexPath:indexPath];
+        } else {
+            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+            address = [self.fetchedController objectAtIndexPath:indexPath];
+        }
+        OrderEditView *orderEditView = [self.storyboard instantiateViewControllerWithIdentifier:@"OrderEditView"];
+        orderEditView.context = self.managedObjectContext;
+        orderEditView.address = address;
+        UINavigationController *controller = self.navigationController;
+        [controller popToRootViewControllerAnimated:NO];
+        [controller pushViewController:orderEditView animated:YES];
+        
+        return NO;
     }
     else if([identifier isEqualToString:@"OrderListView"]
             && self.clientListViewResult == ClientListViewResult_OpenOrderListView) {

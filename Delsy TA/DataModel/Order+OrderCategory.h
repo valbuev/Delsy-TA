@@ -31,4 +31,10 @@
 // Сохраняет Заказ в xml-файл и возвращает его адрес
 - (NSURL *) saveOrder2XMLFile;
 
+// ВОзвращает все заказы выбранного адреса, сортированные по дате (последние вверху)
++(NSArray *) getAllOrdersByAddress:(Address *) address MOC:(NSManagedObjectContext *) context;
+
+// Возвращает новый заказ, в котором присутствуют те же позиции, за исключением отсутствующих в прайсе продуктов.
+-(Order *) newOrderUsingThis;
+
 @end
