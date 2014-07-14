@@ -2034,6 +2034,128 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Отправка" id="dzs-G3-Y4z">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="rQ9-JN-LQL">
+                                        <rect key="frame" x="0.0" y="419" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rQ9-JN-LQL" id="VXX-RJ-Abk">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Получатель письма с заказом по умолчанию:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDw-N6-5dZ">
+                                                    <rect key="frame" x="20" y="0.0" width="377" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="377" id="Tf6-Qg-NWM"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2W6-RP-JeB">
+                                                    <rect key="frame" x="405" y="7" width="343" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
+                                                    <connections>
+                                                        <action selector="textFieldDefaultRecipientDidEndEditing:" destination="wh8-Lz-zdy" eventType="editingDidEnd" id="swN-2c-8oD"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ZDw-N6-5dZ" firstAttribute="top" secondItem="VXX-RJ-Abk" secondAttribute="top" id="FDn-pg-sVw"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZDw-N6-5dZ" secondAttribute="bottom" id="Gns-V1-x7Q"/>
+                                                <constraint firstItem="ZDw-N6-5dZ" firstAttribute="leading" secondItem="VXX-RJ-Abk" secondAttribute="leading" constant="20" id="QEk-gP-2J8"/>
+                                                <constraint firstItem="2W6-RP-JeB" firstAttribute="top" secondItem="VXX-RJ-Abk" secondAttribute="top" constant="7" id="gBO-y5-GS8"/>
+                                                <constraint firstAttribute="bottom" secondItem="2W6-RP-JeB" secondAttribute="bottom" constant="6" id="kkm-zF-r0a"/>
+                                                <constraint firstAttribute="trailing" secondItem="2W6-RP-JeB" secondAttribute="trailing" constant="20" id="wz5-dI-3hq"/>
+                                                <constraint firstItem="2W6-RP-JeB" firstAttribute="leading" secondItem="ZDw-N6-5dZ" secondAttribute="trailing" constant="8" id="zBv-OR-gcl"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Прочее" id="Ajo-1r-zpY">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wMI-St-2US">
+                                        <rect key="frame" x="0.0" y="511" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wMI-St-2US" id="2GC-EK-Iqc">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL папки с файлами для обновления" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niO-3E-q67">
+                                                    <rect key="frame" x="20" y="0.0" width="326" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="326" id="Ghh-ap-KnB"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wLu-RN-UJj">
+                                                    <rect key="frame" x="354" y="7" width="394" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="done"/>
+                                                    <connections>
+                                                        <action selector="textFieldUpdateFolderURLDidEndEditing:" destination="wh8-Lz-zdy" eventType="editingDidEnd" id="pUK-pn-fup"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="wLu-RN-UJj" firstAttribute="leading" secondItem="niO-3E-q67" secondAttribute="trailing" constant="8" id="Pja-9y-kxQ"/>
+                                                <constraint firstItem="niO-3E-q67" firstAttribute="leading" secondItem="2GC-EK-Iqc" secondAttribute="leading" constant="20" id="Uwt-Er-xyX"/>
+                                                <constraint firstAttribute="bottom" secondItem="wLu-RN-UJj" secondAttribute="bottom" constant="6" id="cOC-Yi-Lns"/>
+                                                <constraint firstAttribute="bottom" secondItem="niO-3E-q67" secondAttribute="bottom" id="jdf-nM-hdQ"/>
+                                                <constraint firstItem="niO-3E-q67" firstAttribute="top" secondItem="2GC-EK-Iqc" secondAttribute="top" id="ohv-jT-qi6"/>
+                                                <constraint firstItem="wLu-RN-UJj" firstAttribute="top" secondItem="2GC-EK-Iqc" secondAttribute="top" constant="7" id="r4b-ys-R3m"/>
+                                                <constraint firstAttribute="trailing" secondItem="wLu-RN-UJj" secondAttribute="trailing" constant="20" id="vYi-k4-O2b"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="FQN-Uj-3rU">
+                                        <rect key="frame" x="0.0" y="555" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FQN-Uj-3rU" id="rFH-8W-YYw">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL папки с фотографиями" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xre-1w-1Vt">
+                                                    <rect key="frame" x="20" y="0.0" width="326" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="326" id="3UN-ea-E2C"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8CN-B2-b81">
+                                                    <rect key="frame" x="354" y="7" width="394" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="done"/>
+                                                    <connections>
+                                                        <action selector="textFieldPhotosFolderURLDidEndEditing:" destination="wh8-Lz-zdy" eventType="editingDidEnd" id="UoF-bU-NSz"/>
+                                                    </connections>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="8CN-B2-b81" firstAttribute="leading" secondItem="Xre-1w-1Vt" secondAttribute="trailing" constant="8" id="9I4-AF-OF6"/>
+                                                <constraint firstItem="Xre-1w-1Vt" firstAttribute="leading" secondItem="rFH-8W-YYw" secondAttribute="leading" constant="20" id="IAS-BE-wTA"/>
+                                                <constraint firstAttribute="bottom" secondItem="Xre-1w-1Vt" secondAttribute="bottom" id="Wvb-De-dvV"/>
+                                                <constraint firstAttribute="trailing" secondItem="8CN-B2-b81" secondAttribute="trailing" constant="20" id="c3I-hJ-rxv"/>
+                                                <constraint firstItem="Xre-1w-1Vt" firstAttribute="top" secondItem="rFH-8W-YYw" secondAttribute="top" id="hPX-Aj-RYn"/>
+                                                <constraint firstItem="8CN-B2-b81" firstAttribute="top" secondItem="rFH-8W-YYw" secondAttribute="top" constant="7" id="iWq-Qb-IcN"/>
+                                                <constraint firstAttribute="bottom" secondItem="8CN-B2-b81" secondAttribute="bottom" constant="6" id="zNE-8p-c9o"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="wh8-Lz-zdy" id="1xf-dB-kRG"/>
@@ -2056,6 +2178,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="labelDataLastUpdate" destination="NOT-cg-58G" id="qjV-97-LcD"/>
                         <outlet property="labelTAName" destination="FsW-9J-DHV" id="d9F-rO-l0x"/>
                         <outlet property="progressViewUpdatingAllPhotos" destination="YEf-PQ-Sgg" id="k43-Zj-Zf9"/>
+                        <outlet property="textFieldDefaultRecipient" destination="2W6-RP-JeB" id="m9N-11-iek"/>
+                        <outlet property="textFieldPhotosFolderURL" destination="8CN-B2-b81" id="EKV-jr-DVe"/>
+                        <outlet property="textFieldUpdateFolderURL" destination="wLu-RN-UJj" id="3Mf-1K-vCt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T5P-My-2CN" userLabel="First Responder" sceneMemberID="firstResponder"/>

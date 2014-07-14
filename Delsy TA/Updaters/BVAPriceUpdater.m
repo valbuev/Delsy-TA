@@ -28,8 +28,8 @@
     lineSaleLines = [NSMutableArray arrayWithArray:[LineSaleLine getAllLineSaleLines:self.managedObjectContext]];
     errors = [NSMutableArray array];
     fileDownloader = [[BVAFileDownloader alloc] init];
-    [fileDownloader initWithUrl:[NSURL URLWithString:@"http://195.112.235.1/Invent/Price.xml"]];
-#warning change url for price
+    NSString *url_str = [NSString stringWithFormat:@"%@Price.xml",[AppSettings getInstance:self.managedObjectContext].updateFolderURL];
+    [fileDownloader initWithUrl:[NSURL URLWithString:url_str]];
     fileDownloader.delegate = self;
     [fileDownloader startDownload];
     if(delegate)

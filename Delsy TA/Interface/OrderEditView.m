@@ -390,7 +390,7 @@ DeliveryDateViewDelegate>{
     
     [self.localPopoverController presentPopoverFromRect:cell.labelName.bounds inView:cell.labelName
                                permittedArrowDirections:UIPopoverArrowDirectionLeft
-                                               animated:NO];
+                                               animated:YES];
 }
 
 - (void)qtySetterView:(QtySetterView *)qtySetterView didFinishSettingQty:(NSNumber *)qty unit:(Unit)unit forItem:(Item *)item{
@@ -417,7 +417,7 @@ DeliveryDateViewDelegate>{
 
 // Для QtySetter и DeliveryDateView используется одно и то же свойство для хранения popoverController !!!
 - (BOOL)popoverControllerShouldDismissPopover:(UIPopoverController *)popoverController{
-    self.localPopoverController = nil;
+    //self.localPopoverController = nil;
  return YES;
  }
 

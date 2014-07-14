@@ -9,6 +9,7 @@
 #import "DeliveryDateView.h"
 #import "Order+OrderCategory.h"
 #import <MessageUI/MessageUI.h>
+#import "AppSettings+AppSettingsCategory.h"
 
 @interface DeliveryDateView () <MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIDatePicker *DatePicker;
@@ -63,7 +64,7 @@
          [NSString stringWithFormat:@"Заказ от %@",
           self.order.custName]];
         
-#warning add default recipient
+        [controller setToRecipients:[NSArray arrayWithObject:[AppSettings getInstance:self.order.managedObjectContext].defaultRecipient ]];
         
         self.order.date = [NSDate date];
         self.order.deliveryDate = self.DatePicker.date;

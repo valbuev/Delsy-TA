@@ -20,7 +20,9 @@
     Boolean isManagedObjectContextUpdating;
 }
 
-// Catalog section
+/********** UI-properties and -actions ************/
+
+// ***** Catalog section
 // кнопки обновления
 @property (weak, nonatomic) IBOutlet UIButton *btnUpdateData;
 @property (weak, nonatomic) IBOutlet UIButton *btnUpdateAllPhotos;
@@ -32,14 +34,37 @@
 // Отображение процесса обновления фотографий
 @property (weak, nonatomic) IBOutlet UIProgressView *progressViewUpdatingAllPhotos;
 
+
+
 - (IBAction)OnBtnUpdateDataClick:(id)sender;
 - (IBAction)OnBtnUpdateAllPhotosClick:(id)sender;
 
-// TA section
+// ***** TA section
 @property (weak, nonatomic) IBOutlet UILabel *labelTAName;
 
-// History section
+// ***** History section
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellRemoveAllHistory;
+
+
+// ***** "Other" and "Sending" sections
+
+// Получатель письма по умолчанию
+@property (weak, nonatomic) IBOutlet UITextField *textFieldDefaultRecipient;
+// URL папки с файлами для обновления
+@property (weak, nonatomic) IBOutlet UITextField *textFieldUpdateFolderURL;
+// URL папки с фотографиями
+@property (weak, nonatomic) IBOutlet UITextField *textFieldPhotosFolderURL;
+
+// Пользователь изменил e-mail получателя по умолчанию
+- (IBAction)textFieldDefaultRecipientDidEndEditing:(id)sender;
+// Пользователь изменил URL папки с файлами для обновления
+- (IBAction)textFieldUpdateFolderURLDidEndEditing:(id)sender;
+// Пользователь изменил URL папки с фотографиями
+- (IBAction)textFieldPhotosFolderURLDidEndEditing:(id)sender;
+
+
+/********** UI-properties and -actions ************/
+
 
 // managedObjectContext
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

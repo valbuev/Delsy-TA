@@ -213,7 +213,7 @@
         [newOrder addItem:line.item qty:[line.qty copy] unit:[line.unit unitValue]];
     }
     [newOrder reCalculateAmount];
-    return newOrder;
+    return newOrder; 
 }
 
 @end

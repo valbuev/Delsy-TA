@@ -36,7 +36,8 @@
 //обновляем сначала ценовые группы и скидки по строке, потом список клиентов
 -(void) startUpdatingClientList{
     clientListDownloader = [[BVAFileDownloader alloc] init];
-    [clientListDownloader initWithUrl:[NSURL URLWithString:@"http://195.112.235.1/Invent/Clients.xml"]];
+    NSString *url_str = [NSString stringWithFormat:@"%@Clients.xml",[AppSettings getInstance:self.managedObjectContext].updateFolderURL];
+    [clientListDownloader initWithUrl:[NSURL URLWithString:url_str]];
     clientListDownloader.delegate = self;
     [clientListDownloader startDownload];
 }
@@ -44,7 +45,8 @@
 //обновляем сначала ценовые группы и скидки по строке, потом список клиентов
 -(void) startUpdatingPriceGroupsAndLineSales{
     PriceGroupsAndLineSalesDownloader = [[BVAFileDownloader alloc] init];
-    [PriceGroupsAndLineSalesDownloader initWithUrl:[NSURL URLWithString:@"http://195.112.235.1/Invent/PriceGroupsAndLineSales.xml"]];
+    NSString *url_str = [NSString stringWithFormat:@"%@PriceGroupsAndLineSales.xml",[AppSettings getInstance:self.managedObjectContext].updateFolderURL];
+    [PriceGroupsAndLineSalesDownloader initWithUrl:[NSURL URLWithString:url_str]];
     PriceGroupsAndLineSalesDownloader.delegate = self;
     [PriceGroupsAndLineSalesDownloader startDownload];
 }

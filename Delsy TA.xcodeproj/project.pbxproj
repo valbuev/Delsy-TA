@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		A341AFDA195A6472001B7168 /* BVAFileDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFD9195A6472001B7168 /* BVAFileDownloader.m */; };
 		A341AFDD195A8596001B7168 /* BVAClientListUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFDC195A8596001B7168 /* BVAClientListUpdater.m */; };
-		A341AFE1195A8B08001B7168 /* BVAClientListParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFE0195A8B08001B7168 /* BVAClientListParser.m */; };
 		A341AFE9195AA4FE001B7168 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFE8195AA4FE001B7168 /* XMLDictionary.m */; };
 		A341AFEC195AAAEE001B7168 /* TA.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFEB195AAAEE001B7168 /* TA.m */; };
 		A341AFF0195AB932001B7168 /* TAListView.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFEF195AB932001B7168 /* TAListView.m */; };
@@ -24,7 +23,6 @@
 		A34CF11D19655EE700329155 /* QtySetterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A34CF11C19655EE700329155 /* QtySetterView.m */; };
 		A35A06681952AA7200D99BE0 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06671952AA7200D99BE0 /* Item.m */; };
 		A35A066B1952B12300D99BE0 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066A1952B12300D99BE0 /* Client.m */; };
-		A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A066D1952B12300D99BE0 /* AppSettings.m */; };
 		A35A06711952B12300D99BE0 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06701952B12300D99BE0 /* Address.m */; };
 		A35A06741952B12300D99BE0 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06731952B12300D99BE0 /* Photo.m */; };
 		A35A067A1952B12400D99BE0 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = A35A06791952B12400D99BE0 /* Order.m */; };
@@ -73,6 +71,7 @@
 		A3BBE157196E9D7C00F490EE /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3BBE156196E9D7C00F490EE /* MessageUI.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A3BFE9DB196FBC01002776F4 /* OrderListView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BFE9DA196FBC01002776F4 /* OrderListView.m */; };
 		A3BFE9DF196FDCC5002776F4 /* OrderPresentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BFE9DE196FDCC5002776F4 /* OrderPresentView.m */; };
+		A3BFE9E219739754002776F4 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BFE9E119739754002776F4 /* AppSettings.m */; };
 		A3C04E22195C336A00DAFB32 /* ClientListForNewOrder_View.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */; };
 		A3F96CB1194FEAE000C0C66E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3F96CB0194FEAE000C0C66E /* CoreData.framework */; };
 		A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3F96CB2194FEB8A00C0C66E /* DataModel.xcdatamodeld */; };
@@ -93,8 +92,6 @@
 		A341AFD9195A6472001B7168 /* BVAFileDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BVAFileDownloader.m; path = Updaters/BVAFileDownloader.m; sourceTree = "<group>"; };
 		A341AFDB195A8596001B7168 /* BVAClientListUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BVAClientListUpdater.h; path = Updaters/BVAClientListUpdater.h; sourceTree = "<group>"; };
 		A341AFDC195A8596001B7168 /* BVAClientListUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BVAClientListUpdater.m; path = Updaters/BVAClientListUpdater.m; sourceTree = "<group>"; };
-		A341AFDF195A8B08001B7168 /* BVAClientListParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BVAClientListParser.h; path = Updaters/BVAClientListParser.h; sourceTree = "<group>"; };
-		A341AFE0195A8B08001B7168 /* BVAClientListParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BVAClientListParser.m; path = Updaters/BVAClientListParser.m; sourceTree = "<group>"; };
 		A341AFE7195AA4FE001B7168 /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
 		A341AFE8195AA4FE001B7168 /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		A341AFEA195AAAEE001B7168 /* TA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TA.h; path = DataModel/TA.h; sourceTree = "<group>"; };
@@ -123,8 +120,6 @@
 		A35A06671952AA7200D99BE0 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = DataModel/Item.m; sourceTree = "<group>"; };
 		A35A06691952B12300D99BE0 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = DataModel/Client.h; sourceTree = "<group>"; };
 		A35A066A1952B12300D99BE0 /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Client.m; path = DataModel/Client.m; sourceTree = "<group>"; };
-		A35A066C1952B12300D99BE0 /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppSettings.h; path = DataModel/AppSettings.h; sourceTree = "<group>"; };
-		A35A066D1952B12300D99BE0 /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppSettings.m; path = DataModel/AppSettings.m; sourceTree = "<group>"; };
 		A35A066F1952B12300D99BE0 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Address.h; path = DataModel/Address.h; sourceTree = "<group>"; };
 		A35A06701952B12300D99BE0 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Address.m; path = DataModel/Address.m; sourceTree = "<group>"; };
 		A35A06721952B12300D99BE0 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Photo.h; path = DataModel/Photo.h; sourceTree = "<group>"; };
@@ -211,6 +206,8 @@
 		A3BFE9DA196FBC01002776F4 /* OrderListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderListView.m; path = Interface/OrderListView.m; sourceTree = "<group>"; };
 		A3BFE9DD196FDCC5002776F4 /* OrderPresentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderPresentView.h; path = Interface/OrderPresentView.h; sourceTree = "<group>"; };
 		A3BFE9DE196FDCC5002776F4 /* OrderPresentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderPresentView.m; path = Interface/OrderPresentView.m; sourceTree = "<group>"; };
+		A3BFE9E019739754002776F4 /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppSettings.h; path = DataModel/AppSettings.h; sourceTree = "<group>"; };
+		A3BFE9E119739754002776F4 /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppSettings.m; path = DataModel/AppSettings.m; sourceTree = "<group>"; };
 		A3C04E20195C336A00DAFB32 /* ClientListForNewOrder_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientListForNewOrder_View.h; path = Interface/ClientListForNewOrder_View.h; sourceTree = "<group>"; };
 		A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientListForNewOrder_View.m; path = Interface/ClientListForNewOrder_View.m; sourceTree = "<group>"; };
 		A3F96CB0194FEAE000C0C66E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -257,7 +254,6 @@
 		A341AFD6195A6302001B7168 /* ClientListUpdater */ = {
 			isa = PBXGroup;
 			children = (
-				A341AFDE195A8AE4001B7168 /* ClientListParser */,
 				A341AFDB195A8596001B7168 /* BVAClientListUpdater.h */,
 				A341AFDC195A8596001B7168 /* BVAClientListUpdater.m */,
 			);
@@ -271,15 +267,6 @@
 				A341AFD9195A6472001B7168 /* BVAFileDownloader.m */,
 			);
 			name = FileDownloader;
-			sourceTree = "<group>";
-		};
-		A341AFDE195A8AE4001B7168 /* ClientListParser */ = {
-			isa = PBXGroup;
-			children = (
-				A341AFDF195A8B08001B7168 /* BVAClientListParser.h */,
-				A341AFE0195A8B08001B7168 /* BVAClientListParser.m */,
-			);
-			name = ClientListParser;
 			sourceTree = "<group>";
 		};
 		A341AFE6195AA4FE001B7168 /* XMLDictionary */ = {
@@ -485,8 +472,8 @@
 		A35A06901952B2CD00D99BE0 /* AppSettings */ = {
 			isa = PBXGroup;
 			children = (
-				A35A066C1952B12300D99BE0 /* AppSettings.h */,
-				A35A066D1952B12300D99BE0 /* AppSettings.m */,
+				A3BFE9E019739754002776F4 /* AppSettings.h */,
+				A3BFE9E119739754002776F4 /* AppSettings.m */,
 				A35A06961952B65100D99BE0 /* AppSettings+AppSettingsCategory.h */,
 				A35A06971952B65100D99BE0 /* AppSettings+AppSettingsCategory.m */,
 			);
@@ -555,7 +542,6 @@
 				A341AFD5195A62EC001B7168 /* Updaters */,
 				A3ACB9681959481A00D2C77A /* Interface */,
 				A3F96CB5194FEB9600C0C66E /* DataModel */,
-				A3F96CB2194FEB8A00C0C66E /* DataModel.xcdatamodeld */,
 				A35AB900194EF1D3002BAF0D /* AppDelegate.h */,
 				A35AB901194EF1D3002BAF0D /* AppDelegate.m */,
 				A35AB909194EF1D3002BAF0D /* Images.xcassets */,
@@ -733,6 +719,7 @@
 		A3F96CB5194FEB9600C0C66E /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				A3F96CB2194FEB8A00C0C66E /* DataModel.xcdatamodeld */,
 				A35A06901952B2CD00D99BE0 /* AppSettings */,
 				A35A06911952B2DD00D99BE0 /* Client */,
 				A35A06871952B14200D99BE0 /* Item */,
@@ -852,7 +839,6 @@
 				A3BBE134196BDE9200F490EE /* PriceGroupLine.m in Sources */,
 				A3AC3A4D19513B25004D1EE1 /* NSNumber+NSNumberUnit.m in Sources */,
 				A3BBE155196E958200F490EE /* DeliveryDateView.m in Sources */,
-				A35A066E1952B12300D99BE0 /* AppSettings.m in Sources */,
 				A35A067A1952B12400D99BE0 /* Order.m in Sources */,
 				A35A069E1952C99100D99BE0 /* Client+ClientCategory.m in Sources */,
 				A3BFE9DB196FBC01002776F4 /* OrderListView.m in Sources */,
@@ -867,6 +853,7 @@
 				A341AFE9195AA4FE001B7168 /* XMLDictionary.m in Sources */,
 				A34CF1021962624800329155 /* OrderEditView.m in Sources */,
 				A35A06981952B65100D99BE0 /* AppSettings+AppSettingsCategory.m in Sources */,
+				A3BFE9E219739754002776F4 /* AppSettings.m in Sources */,
 				A34CF1191965554000329155 /* PriceDetailViewTableCell.m in Sources */,
 				A3BBE144196BDF9B00F490EE /* PriceGroup+PriceGroupCategory.m in Sources */,
 				A35A06801952B12400D99BE0 /* ProductType.m in Sources */,
@@ -895,7 +882,6 @@
 				A34CF0FE195FF75000329155 /* CustomIOS7AlertView.m in Sources */,
 				A3BBE14A196BE0DF00F490EE /* LineSale+LineSaleCategory.m in Sources */,
 				A34CF1111963C6F100329155 /* PriceDetailView.m in Sources */,
-				A341AFE1195A8B08001B7168 /* BVAClientListParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

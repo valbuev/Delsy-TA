@@ -50,9 +50,26 @@
     return _appSettings;
 }
 
+// функция для сохранения изменений в ManagedObjectContext
+-(void) saveManageObjectContext{
+    if(self.managedObjectContext == nil){
+        NSLog(@"OrderEditView.managedObjectContext = nil");
+        abort();
+    }
+    else{
+        NSError *error;
+        [self.managedObjectContext save:&error];
+        if(error){
+            NSLog(@"OrderEditView.managedObjectContext error while saving: %@",error.localizedDescription);
+            abort();
+        }
+    }
+}
+
 #pragma mark buttons's clicks
 // Нажата кнопка обновления Данных,
 // создаем updater для клиентов, отдаем ему контекст, записываемся в делегаты и стартуем обновление
+
 - (IBAction)OnBtnUpdateDataClick:(id)sender{
     // Если сейчас идет обновление, то запрещаем действия
     if(isManagedObjectContextUpdating)
@@ -76,6 +93,27 @@
         return;
 }
 
+// Пользователь изменил e-mail получателя по умолчанию
+- (IBAction)textFieldDefaultRecipientDidEndEditing:(id)sender {
+    UITextField *textField = (UITextField *) sender;
+    self.appSettings.defaultRecipient = [textField.text copy];
+    [self saveManageObjectContext];
+}
+
+// Пользователь изменил URL папки с файлами для обновления
+- (IBAction)textFieldUpdateFolderURLDidEndEditing:(id)sender {
+    UITextField *textField = (UITextField *) sender;
+    self.appSettings.updateFolderURL = [textField.text copy];
+    [self saveManageObjectContext];
+}
+
+// Пользователь изменил URL папки с фотографиями
+- (IBAction)textFieldPhotosFolderURLDidEndEditing:(id)sender {
+    UITextField *textField = (UITextField *) sender;
+    self.appSettings.photosFolderURL = [textField.text copy];
+    [self saveManageObjectContext];
+}
+
 #pragma mark init
 
 // Автогенерированная функция
@@ -96,10 +134,13 @@
     [self setLabelsTexts];
 }
 
-//
+// Вместе с датой и именем агента обновляем адрес получателя по умолчанию и url папок для обновлений
 -(void) setLabelsTexts{
     [self updateLabelDataLastUpdate];
     [self updateLabelTAName];
+    self.textFieldDefaultRecipient.text = [self.appSettings.defaultRecipient copy];
+    self.textFieldPhotosFolderURL.text = [self.appSettings.photosFolderURL copy];
+    self.textFieldUpdateFolderURL.text = [self.appSettings.updateFolderURL copy];
 }
 
 // По выходу производим нужные действия, например, зануляем ссылки, или удаляем обсерверов
@@ -110,6 +151,7 @@
 
 - (void)didReceiveMemoryWarning
 {
+    NSLog(@"did receive Memory Warnig SettingsView");
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -155,7 +197,6 @@
     }];
 }
 
-
 #pragma mark - Table view data source
 
 /**********     Все ячейки статичны, поэтому функции кол-ва секций, ячеек в секции, редактирования ячеек и генерирования ячеек не реализуем     *********/
@@ -165,6 +206,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if(cell != self.cellRemoveAllHistory){
         ;
+#warning remove history
     }
 }
 
@@ -254,6 +296,7 @@
     // останавливаем анимацию
     [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
         [self.activityIndicatorUpdatingData stopAnimating];
+        [self updateLabelDataLastUpdate];
     }];
     [self showCustomIOS7AlertViewWithMessages:errors title:@"Обновление каталога остановлено из-за следующих ошибок:"];
     priceUpdater = nil;
@@ -298,39 +341,41 @@
 // Показываем алерт на основе списка ошибок или сообщений
 -(void) showCustomIOS7AlertViewWithMessages:(NSArray *) messages title:(NSString *) title
 {
-    NSString *text = [NSString string];
-    for(int i=0;i<messages.count;i++)
-    {
-        NSObject *message = [messages objectAtIndex:i];
-        if( [message isMemberOfClass:[NSError class]] )
-            text = [text stringByAppendingFormat:@"\n%@ userInfo: %@",[(NSError *) message localizedDescription],[(NSError *) message userInfo]];
-        else {
-            text = [text stringByAppendingFormat:@"\n%@",message];
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        NSString *text = [NSString string];
+        for(int i=0;i<messages.count;i++)
+        {
+            NSObject *message = [messages objectAtIndex:i];
+            if( [message isMemberOfClass:[NSError class]] )
+                text = [text stringByAppendingFormat:@"\n%@ userInfo: %@",[(NSError *) message localizedDescription],[(NSError *) message userInfo]];
+            else {
+                text = [text stringByAppendingFormat:@"\n%@",message];
+            }
         }
-    }
-    CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] init];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 600, 660)];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 590, 50)];
-    //UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 590, 50)];
-    UILabel *title_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 600, 50)];
-    title_label.text = title;
-    title_label.textAlignment = NSTextAlignmentCenter;
-    title_label.textColor = [UIColor colorWithRed:0.5f green:0.1f blue:0.1f alpha:1.0f];
-    title_label.font = [UIFont systemFontOfSize:22.0f];
-    UIFont *font = [UIFont systemFontOfSize:10.0f];
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, 600, 600)];
-    scrollView.scrollEnabled = YES;
-    [label setFont:font];
-    
-    [view addSubview:title_label];
-    [view addSubview:scrollView];
-    [scrollView addSubview:label];
-    [label setNumberOfLines:0];
-    label.text = text;
-    [label sizeToFit];
-    scrollView.contentSize = [label frame].size;
-    [alertView setContainerView:view];
-    [alertView show];
+        CustomIOS7AlertView *alertView = [[CustomIOS7AlertView alloc] init];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 600, 660)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5, 0, 590, 50)];
+        //UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 590, 50)];
+        UILabel *title_label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 600, 50)];
+        title_label.text = title;
+        title_label.textAlignment = NSTextAlignmentCenter;
+        title_label.textColor = [UIColor colorWithRed:0.5f green:0.1f blue:0.1f alpha:1.0f];
+        title_label.font = [UIFont systemFontOfSize:22.0f];
+        UIFont *font = [UIFont systemFontOfSize:10.0f];
+        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, 600, 600)];
+        scrollView.scrollEnabled = YES;
+        [label setFont:font];
+        
+        [view addSubview:title_label];
+        [view addSubview:scrollView];
+        [scrollView addSubview:label];
+        [label setNumberOfLines:0];
+        label.text = text;
+        [label sizeToFit];
+        scrollView.contentSize = [label frame].size;
+        [alertView setContainerView:view];
+            [alertView show];
+    }];
 }
 
 @end

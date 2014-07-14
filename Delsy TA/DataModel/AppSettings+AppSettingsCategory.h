@@ -12,4 +12,6 @@
 
 + (AppSettings *) getInstance:(NSManagedObjectContext *) context;
 
+#warning lastOrder
+
 @end

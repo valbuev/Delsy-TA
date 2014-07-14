@@ -10,9 +10,13 @@
     <entity name="AppSettings" representedClassName="AppSettings" syncable="YES">
         <attribute name="clientsListDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="clientsListLastUpdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="defaultRecipient" optional="YES" attributeType="String" defaultValueString="@delsy.ru" syncable="YES"/>
+        <attribute name="photosFolderURL" optional="YES" attributeType="String" defaultValueString="http://195.112.235.1/InventPhotos/" syncable="YES"/>
         <attribute name="priceDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="priceLastUpdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="updateFolderURL" optional="YES" attributeType="String" defaultValueString="http://195.112.235.1/Invent/" syncable="YES"/>
         <relationship name="currentTA" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TA" inverseName="settings" inverseEntity="TA" syncable="YES"/>
+        <relationship name="lastOrder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="appSettingsLastOrder" inverseEntity="Order" syncable="YES"/>
     </entity>
     <entity name="Client" representedClassName="Client" syncable="YES">
         <attribute name="cust_account" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
@@ -75,6 +79,7 @@
         <attribute name="isSent" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="taName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="address" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Address" inverseName="orders" inverseEntity="Address" syncable="YES"/>
+        <relationship name="appSettingsLastOrder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AppSettings" inverseName="lastOrder" inverseEntity="AppSettings" syncable="YES"/>
         <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="orders" inverseEntity="Client" syncable="YES"/>
         <relationship name="orderLines" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="OrderLine" inverseName="order" inverseEntity="OrderLine" syncable="YES"/>
         <relationship name="ta" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TA" inverseName="orders" inverseEntity="TA" syncable="YES"/>
@@ -128,13 +133,13 @@
     </entity>
     <elements>
         <element name="Address" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="AppSettings" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="AppSettings" positionX="0" positionY="0" width="128" height="178"/>
         <element name="Client" positionX="0" positionY="0" width="128" height="165"/>
         <element name="Fish" positionX="0" positionY="0" width="128" height="90"/>
         <element name="Item" positionX="0" positionY="0" width="128" height="360"/>
         <element name="LineSale" positionX="0" positionY="0" width="128" height="120"/>
         <element name="LineSaleLine" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="Order" positionX="0" positionY="0" width="128" height="210"/>
+        <element name="Order" positionX="0" positionY="0" width="128" height="225"/>
         <element name="OrderLine" positionX="0" positionY="0" width="128" height="180"/>
         <element name="Photo" positionX="0" positionY="0" width="128" height="120"/>
         <element name="PriceGroup" positionX="0" positionY="0" width="128" height="90"/>

@@ -24,5 +24,6 @@
 @dynamic ta;
 @dynamic priceGroup;
 @dynamic lineSale;
+@dynamic appSettingsLastOrder;
 
 @end

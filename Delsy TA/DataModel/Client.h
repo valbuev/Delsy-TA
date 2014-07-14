@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Address, LineSale, Order, PriceGroup, TA;
+@class Address, LineSale, Order, PriceGroup, TA, AppSettings;
 
 @interface Client : NSManagedObject
 
@@ -21,6 +21,7 @@
 @property (nonatomic, retain) TA *ta;
 @property (nonatomic, retain) PriceGroup *priceGroup;
 @property (nonatomic, retain) LineSale *lineSale;
+@property (nonatomic, retain) AppSettings *appSettingsLastOrder;
 @end
 
 @interface Client (CoreDataGeneratedAccessors)
