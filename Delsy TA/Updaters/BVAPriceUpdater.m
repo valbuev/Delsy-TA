@@ -355,7 +355,7 @@
 
 #pragma mark filling photo's url
 -(void) addPhoto: (NSString *) photoName ForItem: (Item *) item{
-    if(!photoName){
+    if(photoName){
         if(![photoName isEqualToString:@""]){
             for(Photo *photo in item.photos){
                 if([photo.name isEqualToString:photoName])

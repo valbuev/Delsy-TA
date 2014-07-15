@@ -129,6 +129,7 @@
 {
     PresentationView *presentationView = segue.destinationViewController;
     presentationView.item = self.item;
+    presentationView.delegate = self;
 }
 
 - (void)presentationViewShouldBeClosed:(PresentationView *)presentationView{

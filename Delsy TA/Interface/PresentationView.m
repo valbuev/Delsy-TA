@@ -35,11 +35,11 @@
     // Do any additional setup after loading the view.
     if(self.item.photos.count >0){
         for(Photo *photo in item.photos){
-            if(![photo.filepath isEqualToString:@""]){
+            if(![photo.filepath isEqualToString:@""] && photo.filepath != nil){
                 [self.imageView setImage:[UIImage imageWithContentsOfFile:photo.filepath]];
                 break;
             }
-            else if( ![photo.url isEqualToString:@""] ){
+            else if( ![photo.url isEqualToString:@""] && photo.url != nil ){
                 NSLog(@"url: %@",photo.url);
             }
             else {

@@ -55,7 +55,7 @@
 // Удаляем все фотографии: объекты контекста и сами файлы в хранилище
 + (void) removeDeletedPhotosInMOC: (NSManagedObjectContext *) context{
     
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"" inManagedObjectContext:context];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
     
@@ -72,7 +72,7 @@
         // формируем список путей к файлам и удаляем объекты контекста
         NSMutableArray * filePathes = [NSMutableArray array];
         for (Photo *photo in photos){
-            if( ![photo.filepath isEqualToString:@""] )
+            if( ![photo.filepath isEqualToString:@""] && photo.filepath != nil )
                 [filePathes addObject: [photo.filepath copy]];
             [context deleteObject:photo];
         }
