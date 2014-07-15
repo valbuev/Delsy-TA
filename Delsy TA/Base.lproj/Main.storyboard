@@ -768,8 +768,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                             <constraint firstItem="GIb-MF-hd6" firstAttribute="leading" secondItem="AM8-hL-2ap" secondAttribute="leading" constant="20" id="3dg-0o-boz"/>
                             <constraint firstAttribute="trailing" secondItem="VQA-9S-cls" secondAttribute="trailing" constant="20" id="FGa-gg-Clu"/>
                             <constraint firstAttribute="trailing" secondItem="GIb-MF-hd6" secondAttribute="trailing" constant="20" id="bVb-fb-crl"/>
-                            <constraint firstItem="GIb-MF-hd6" firstAttribute="top" secondItem="Hid-h3-HqO" secondAttribute="bottom" id="eIY-CI-lRM"/>
-                            <constraint firstItem="VQA-9S-cls" firstAttribute="top" secondItem="Hid-h3-HqO" secondAttribute="bottom" id="nTk-5J-CrK"/>
+                            <constraint firstItem="GIb-MF-hd6" firstAttribute="top" secondItem="Hid-h3-HqO" secondAttribute="bottom" constant="20" id="eIY-CI-lRM"/>
+                            <constraint firstItem="VQA-9S-cls" firstAttribute="top" secondItem="Hid-h3-HqO" secondAttribute="bottom" constant="20" id="nTk-5J-CrK"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -1941,26 +1941,26 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Все фотографии" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YQ-XG-beE">
-                                                    <rect key="frame" x="20" y="0.0" width="612" height="43"/>
+                                                    <rect key="frame" x="20" y="0.0" width="346" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VWe-Rt-WPf">
-                                                    <rect key="frame" x="668" y="0.0" width="80" height="43"/>
+                                                    <rect key="frame" x="668" y="0.0" width="88" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="jhy-Lz-k7Z"/>
+                                                        <constraint firstAttribute="width" constant="88" id="4oE-Sr-L87"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <state key="normal" title="Обновить">
+                                                    <state key="normal" title="Загрузить">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
                                                         <action selector="OnBtnUpdateAllPhotosClick:" destination="wh8-Lz-zdy" eventType="touchUpInside" id="t7x-bM-dkq"/>
                                                     </connections>
                                                 </button>
-                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YEf-PQ-Sgg">
+                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YEf-PQ-Sgg">
                                                     <rect key="frame" x="0.0" y="41" width="768" height="2"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </progressView>
@@ -1968,20 +1968,39 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <rect key="frame" x="640" y="12" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </activityIndicatorView>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f6C-R6-jyN">
+                                                    <rect key="frame" x="374" y="6" width="51" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </switch>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Не обновлять имеющиеся" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhC-zo-bMT">
+                                                    <rect key="frame" x="431" y="0.0" width="201" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="201" id="6dI-QM-Thv"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="3YQ-XG-beE" firstAttribute="top" secondItem="CKg-O4-Yzb" secondAttribute="top" id="35J-Ws-fNw"/>
+                                                <constraint firstItem="f6C-R6-jyN" firstAttribute="leading" secondItem="3YQ-XG-beE" secondAttribute="trailing" constant="8" id="3mR-iU-dsX"/>
                                                 <constraint firstAttribute="centerY" secondItem="W9n-r1-h87" secondAttribute="centerY" id="8H3-bu-dBb"/>
                                                 <constraint firstItem="VWe-Rt-WPf" firstAttribute="top" secondItem="CKg-O4-Yzb" secondAttribute="top" id="BGO-DK-ddx"/>
                                                 <constraint firstAttribute="bottom" secondItem="3YQ-XG-beE" secondAttribute="bottom" id="MLg-zo-cdw"/>
                                                 <constraint firstItem="3YQ-XG-beE" firstAttribute="leading" secondItem="CKg-O4-Yzb" secondAttribute="leading" constant="20" id="MPa-Gp-Jzr"/>
                                                 <constraint firstAttribute="bottom" secondItem="YEf-PQ-Sgg" secondAttribute="bottom" id="Y35-hI-e5Y"/>
                                                 <constraint firstItem="YEf-PQ-Sgg" firstAttribute="leading" secondItem="CKg-O4-Yzb" secondAttribute="leading" id="cal-4B-yQJ"/>
-                                                <constraint firstItem="W9n-r1-h87" firstAttribute="leading" secondItem="3YQ-XG-beE" secondAttribute="trailing" constant="8" id="ddJ-0a-fB7"/>
+                                                <constraint firstAttribute="bottom" secondItem="FhC-zo-bMT" secondAttribute="bottom" id="fLY-rn-1Ev"/>
+                                                <constraint firstAttribute="trailing" secondItem="VWe-Rt-WPf" secondAttribute="trailing" constant="12" id="fnK-33-3M0"/>
+                                                <constraint firstItem="W9n-r1-h87" firstAttribute="leading" secondItem="FhC-zo-bMT" secondAttribute="trailing" constant="8" id="hdR-CK-6Gw"/>
                                                 <constraint firstItem="VWe-Rt-WPf" firstAttribute="leading" secondItem="W9n-r1-h87" secondAttribute="trailing" constant="8" id="kTU-gf-D4f"/>
+                                                <constraint firstAttribute="centerY" secondItem="f6C-R6-jyN" secondAttribute="centerY" id="lg9-Y3-81n"/>
                                                 <constraint firstAttribute="trailing" secondItem="YEf-PQ-Sgg" secondAttribute="trailing" id="sjv-sY-8cY"/>
                                                 <constraint firstAttribute="bottom" secondItem="VWe-Rt-WPf" secondAttribute="bottom" id="tTo-ps-fwi"/>
-                                                <constraint firstAttribute="trailing" secondItem="VWe-Rt-WPf" secondAttribute="trailing" constant="20" id="yHF-A1-taz"/>
+                                                <constraint firstItem="FhC-zo-bMT" firstAttribute="leading" secondItem="f6C-R6-jyN" secondAttribute="trailing" constant="8" id="uIw-BX-LrT"/>
+                                                <constraint firstItem="FhC-zo-bMT" firstAttribute="top" secondItem="CKg-O4-Yzb" secondAttribute="top" id="uRA-ye-c7d"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -2200,6 +2219,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Настройки" id="pjA-vp-fCs">
+                        <barButtonItem key="backBarButtonItem" title="На главную" id="0Nz-UR-HRL"/>
                         <barButtonItem key="rightBarButtonItem" title="Новый заказ" id="tQT-Sv-Ec8">
                             <connections>
                                 <segue destination="Eup-uy-tKg" kind="push" identifier="ClientListForNewOrder" id="l30-SC-ehx"/>
@@ -2215,6 +2235,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="labelDataLastUpdate" destination="NOT-cg-58G" id="qjV-97-LcD"/>
                         <outlet property="labelTAName" destination="FsW-9J-DHV" id="d9F-rO-l0x"/>
                         <outlet property="progressViewUpdatingAllPhotos" destination="YEf-PQ-Sgg" id="k43-Zj-Zf9"/>
+                        <outlet property="switchNotNeedsUpdateAvailablePhotos" destination="f6C-R6-jyN" id="jhf-go-YVJ"/>
                         <outlet property="textFieldDefaultRecipient" destination="2W6-RP-JeB" id="m9N-11-iek"/>
                         <outlet property="textFieldPhotosFolderURL" destination="8CN-B2-b81" id="EKV-jr-DVe"/>
                         <outlet property="textFieldUpdateFolderURL" destination="wLu-RN-UJj" id="3Mf-1K-vCt"/>

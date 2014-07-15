@@ -19,4 +19,7 @@
 // Удаляем все фотографии: объекты контекста и сами файлы в хранилище
 + (void) removeDeletedPhotosInMOC: (NSManagedObjectContext *) context;
 
+// возвращает все фотографии, имеющие по крайней мере url. Если shouldHaveNotFilePath = YES, то берем только те фотографии, которые не имеют пути к файлу.
++ (NSArray *) getAllPhotos:(Boolean) shouldHaveNotFilePath  MOC:(NSManagedObjectContext *) context;
+
 @end

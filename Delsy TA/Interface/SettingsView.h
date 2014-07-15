@@ -9,14 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "BVAClientListUpdater.h"
 #import "BVAPriceUpdater.h"
+#import "AllPhotosUpdater.h"
 
 @class AppSettings;
 
 @interface SettingsView : UITableViewController
-<BVAClientListUpdaterDelegate, BVAPriceUpdaterDelegate>
+<BVAClientListUpdaterDelegate, BVAPriceUpdaterDelegate,AllPhotosupdaterDelegate>
 {
     BVAClientListUpdater *clientListUpdater;
     BVAPriceUpdater *priceUpdater;
+    AllPhotosUpdater *allPhotosUpdater;
     Boolean isManagedObjectContextUpdating;
 }
 
@@ -33,6 +35,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelDataLastUpdate;
 // Отображение процесса обновления фотографий
 @property (weak, nonatomic) IBOutlet UIProgressView *progressViewUpdatingAllPhotos;
+// НЕобходимо ли обновлять все фотографии или только загрузить отсутствующие.
+@property (weak, nonatomic) IBOutlet UISwitch *switchNotNeedsUpdateAvailablePhotos;
+
 
 
 

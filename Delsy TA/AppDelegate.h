@@ -20,4 +20,7 @@
 
 -(void) setNewRootViewController: (UIViewController *) newRootViewController withAnimation:(UIViewAnimationOptions) options;
 
+// для загрузки всех фотографий
+@property (copy) void (^backgroundSessionCompletionHandler)();
+
 @end

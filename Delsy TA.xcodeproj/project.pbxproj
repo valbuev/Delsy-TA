@@ -73,6 +73,7 @@
 		A3BFE9DF196FDCC5002776F4 /* OrderPresentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BFE9DE196FDCC5002776F4 /* OrderPresentView.m */; };
 		A3BFE9E219739754002776F4 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BFE9E119739754002776F4 /* AppSettings.m */; };
 		A3BFE9E61974C877002776F4 /* PresentationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BFE9E51974C877002776F4 /* PresentationView.m */; };
+		A3BFE9EA1974EE4A002776F4 /* AllPhotosUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BFE9E91974EE4A002776F4 /* AllPhotosUpdater.m */; };
 		A3C04E22195C336A00DAFB32 /* ClientListForNewOrder_View.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */; };
 		A3F96CB1194FEAE000C0C66E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3F96CB0194FEAE000C0C66E /* CoreData.framework */; };
 		A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3F96CB2194FEB8A00C0C66E /* DataModel.xcdatamodeld */; };
@@ -211,6 +212,8 @@
 		A3BFE9E119739754002776F4 /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppSettings.m; path = DataModel/AppSettings.m; sourceTree = "<group>"; };
 		A3BFE9E41974C877002776F4 /* PresentationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PresentationView.h; path = Interface/PresentationView.h; sourceTree = "<group>"; };
 		A3BFE9E51974C877002776F4 /* PresentationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PresentationView.m; path = Interface/PresentationView.m; sourceTree = "<group>"; };
+		A3BFE9E81974EE4A002776F4 /* AllPhotosUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AllPhotosUpdater.h; path = Updaters/AllPhotosUpdater.h; sourceTree = "<group>"; };
+		A3BFE9E91974EE4A002776F4 /* AllPhotosUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AllPhotosUpdater.m; path = Updaters/AllPhotosUpdater.m; sourceTree = "<group>"; };
 		A3C04E20195C336A00DAFB32 /* ClientListForNewOrder_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientListForNewOrder_View.h; path = Interface/ClientListForNewOrder_View.h; sourceTree = "<group>"; };
 		A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientListForNewOrder_View.m; path = Interface/ClientListForNewOrder_View.m; sourceTree = "<group>"; };
 		A3F96CB0194FEAE000C0C66E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -246,6 +249,7 @@
 		A341AFD5195A62EC001B7168 /* Updaters */ = {
 			isa = PBXGroup;
 			children = (
+				A3BFE9E71974E9B8002776F4 /* AllPhotosUpdater */,
 				A39123A6196055150003828B /* PriceUpdater */,
 				A341AFE6195AA4FE001B7168 /* XMLDictionary */,
 				A341AFD7195A632D001B7168 /* FileDownloader */,
@@ -720,6 +724,15 @@
 			name = PresentationView;
 			sourceTree = "<group>";
 		};
+		A3BFE9E71974E9B8002776F4 /* AllPhotosUpdater */ = {
+			isa = PBXGroup;
+			children = (
+				A3BFE9E81974EE4A002776F4 /* AllPhotosUpdater.h */,
+				A3BFE9E91974EE4A002776F4 /* AllPhotosUpdater.m */,
+			);
+			name = AllPhotosUpdater;
+			sourceTree = "<group>";
+		};
 		A3C04E1F195C332800DAFB32 /* ClientListForNewOrder_View */ = {
 			isa = PBXGroup;
 			children = (
@@ -894,6 +907,7 @@
 				A3C04E22195C336A00DAFB32 /* ClientListForNewOrder_View.m in Sources */,
 				A35A06A41952C9F700D99BE0 /* Item+ItemCategory.m in Sources */,
 				A34CF0FE195FF75000329155 /* CustomIOS7AlertView.m in Sources */,
+				A3BFE9EA1974EE4A002776F4 /* AllPhotosUpdater.m in Sources */,
 				A3BBE14A196BE0DF00F490EE /* LineSale+LineSaleCategory.m in Sources */,
 				A34CF1111963C6F100329155 /* PriceDetailView.m in Sources */,
 			);

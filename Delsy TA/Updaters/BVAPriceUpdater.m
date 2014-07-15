@@ -368,6 +368,8 @@
             photo.name = photoName;
             photo.item = item;
             photo.url = [NSString stringWithFormat:@"%@%@",self.appSettings.photosFolderURL,photoName];
+            photo.filepath = @"";
+            photo.deleted = [NSNumber numberWithBool:NO];
         }
     }
 }

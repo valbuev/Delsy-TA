@@ -91,6 +91,19 @@
     // Если сейчас идет обновление, то запрещаем действия
     if(isManagedObjectContextUpdating)
         return;
+    [self updateAllPhotos];
+}
+
+- (void) updateAllPhotos{
+    isManagedObjectContextUpdating = YES;
+    allPhotosUpdater = [[AllPhotosUpdater alloc] init];
+    allPhotosUpdater.context = self.managedObjectContext;
+    allPhotosUpdater.needsUpdateAvailablePhotos = ! self.switchNotNeedsUpdateAvailablePhotos.isOn;
+    allPhotosUpdater.delegate = self;
+    [allPhotosUpdater startDownloading];
+    [self.activityIndicatorAllPhotos startAnimating];
+    [self.progressViewUpdatingAllPhotos setHidden:NO];
+    self.progressViewUpdatingAllPhotos.progress = 0;
 }
 
 // Пользователь изменил e-mail получателя по умолчанию
@@ -376,6 +389,22 @@
         [alertView setContainerView:view];
             [alertView show];
     }];
+}
+
+#pragma mark AllPhotosUpdaterDelegating
+
+-(void)AllPhotosUpdater:(AllPhotosUpdater *)updater didCompleteUpdating:(int)countOfUpdatedPhotos averageCountOfPhotos:(int)countOfPhotos{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.progressViewUpdatingAllPhotos.progress = (double) countOfUpdatedPhotos / (double) countOfPhotos;
+    });
+}
+
+-(void)AllPhotosUpdater:(AllPhotosUpdater *)updater didFinishUpdatingWithErrors:(NSArray *)errors{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.progressViewUpdatingAllPhotos setHidden:YES];
+        [self.activityIndicatorAllPhotos stopAnimating];
+        isManagedObjectContextUpdating = NO;
+    });
 }
 
 @end

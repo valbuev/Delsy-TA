@@ -91,6 +91,27 @@
     }
 }
 
+// возвращает все фотографии, имеющие по крайней мере url. Если shouldHaveNotFilePath = YES, то берем только те фотографии, которые не имеют пути к файлу.
++ (NSArray *) getAllPhotos:(Boolean) shouldHaveNotFilePath  MOC:(NSManagedObjectContext *) context{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+
+    /*NSPredicate *predicate;
+    if(shouldHaveNotFilePath == YES)
+        predicate = [NSPredicate predicateWithFormat:@" (filepath like %@) and NOT (url like %@)",@"",@""];
+    else
+        predicate = [NSPredicate predicateWithFormat:@" NOT (url like %@)",@""];
+    [request setPredicate:predicate];*/
+    
+    NSError *error;
+    NSArray *array = [context executeFetchRequest:request error:&error];
+    if(error){
+        NSLog(@"Error while getting all photos %@",error.localizedDescription);
+    }
+    return array;
+}
+
 
 
 
