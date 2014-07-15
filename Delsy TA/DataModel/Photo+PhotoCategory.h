@@ -16,4 +16,7 @@
 // Создает новый объект photo в managedObjectContext
 +(Photo *) newPhotoInManObjContext:(NSManagedObjectContext *) managedObjectContext;
 
+// Удаляем все фотографии: объекты контекста и сами файлы в хранилище
++ (void) removeDeletedPhotosInMOC: (NSManagedObjectContext *) context;
+
 @end

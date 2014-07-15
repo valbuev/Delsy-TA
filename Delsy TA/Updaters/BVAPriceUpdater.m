@@ -19,16 +19,32 @@
 #import "LineSaleLine+LineSaleLineCategory.h"
 #import "PriceGroupLine+PriceGroupLineCategory.h"
 
+@interface BVAPriceUpdater (){
+    
+}
+
+@property (nonatomic,retain) AppSettings *appSettings;
+
+@end
+
 @implementation BVAPriceUpdater
 @synthesize managedObjectContext;
 @synthesize delegate;
+@synthesize appSettings = _appSettings;
+
+- (AppSettings *)appSettings{
+    if(_appSettings != nil)
+        return _appSettings;
+    _appSettings = [AppSettings getInstance:self.managedObjectContext];
+    return _appSettings;
+}
 
 -(void)startUpdating{
     priceGroupLines = [NSMutableArray arrayWithArray:[PriceGroupLine getAllPriceGroupLines:self.managedObjectContext]];
     lineSaleLines = [NSMutableArray arrayWithArray:[LineSaleLine getAllLineSaleLines:self.managedObjectContext]];
     errors = [NSMutableArray array];
     fileDownloader = [[BVAFileDownloader alloc] init];
-    NSString *url_str = [NSString stringWithFormat:@"%@Price.xml",[AppSettings getInstance:self.managedObjectContext].updateFolderURL];
+    NSString *url_str = [NSString stringWithFormat:@"%@Price.xml",self.appSettings.updateFolderURL];
     [fileDownloader initWithUrl:[NSURL URLWithString:url_str]];
     fileDownloader.delegate = self;
     [fileDownloader startDownload];
@@ -117,15 +133,20 @@
     [self saveProductTypeListIntoCoreData:ProductTypeDicts];
     //NSLog(@"\n%@",ProductTypeDicts);
     
-    AppSettings *appSettings = [AppSettings getInstance:self.managedObjectContext];
-    appSettings.priceLastUpdate = [NSDate date];
+#pragma mark saveManagedObjectContext
+    [self saveManageObjectContext];
+    
+    // Удаляем все фотографии: объекты контекста и сами файлы в хранилище
+    [Photo removeDeletedPhotosInMOC:self.managedObjectContext];
+    
+    // Записываем в Настройки новую дату последнего обновления
+    self.appSettings.priceLastUpdate = [NSDate date];
 #pragma mark saveManagedObjectContext
     [self saveManageObjectContext];
     if(delegate){
         [delegate BVAPriceUpdater:self didFinishUpdatingWithErrors:errors];
     }
     NSLog(@"\n\n\ndone\n\n\n");
-#warning REMOVE ALL photos, marked as deleted!
 }
 
 
@@ -330,10 +351,9 @@
         }
     }
     //NSLog(@"end of updating priceGroups-items references");
-    
-#warning you must delete all photos marked as deleted
 }
 
+#pragma mark filling photo's url
 -(void) addPhoto: (NSString *) photoName ForItem: (Item *) item{
     if(!photoName){
         if(![photoName isEqualToString:@""]){
@@ -347,7 +367,7 @@
             Photo *photo = [Photo newPhotoInManObjContext:self.managedObjectContext];
             photo.name = photoName;
             photo.item = item;
-#warning photo must have an url or a filepath
+            photo.url = [NSString stringWithFormat:@"%@%@",self.appSettings.photosFolderURL,photoName];
         }
     }
 }

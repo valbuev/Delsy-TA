@@ -52,4 +52,50 @@
     return photo;
 }
 
+// Удаляем все фотографии: объекты контекста и сами файлы в хранилище
++ (void) removeDeletedPhotosInMOC: (NSManagedObjectContext *) context{
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted == %d",YES];
+    [request setPredicate:predicate];
+    
+    // получаем список всех фотографий, помеченных, как удаленные
+    NSError *error;
+    NSArray *photos = [context executeFetchRequest:request error:&error];
+    if ( !photos ){
+        NSLog(@"Error while getting Photos-array for remove them: %@", error.localizedDescription);
+    }
+    else{
+        // формируем список путей к файлам и удаляем объекты контекста
+        NSMutableArray * filePathes = [NSMutableArray array];
+        for (Photo *photo in photos){
+            if( ![photo.filepath isEqualToString:@""] )
+                [filePathes addObject: [photo.filepath copy]];
+            [context deleteObject:photo];
+        }
+        // В фоновом потоке удаляем все файлы из списка
+        dispatch_queue_t queue = dispatch_queue_create("ru.bva.DelsyTA", NULL);
+        dispatch_async(queue, ^{
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSError *error;
+            for(NSString *filePath in filePathes){
+                [fileManager removeItemAtPath: filePath error: &error];
+                if( error ){
+                    NSLog(@"Error while removeng photo-file: %@",error.localizedDescription);
+                }
+            }
+        });
+    }
+}
+
+
+
+
+
+
+
+
 @end

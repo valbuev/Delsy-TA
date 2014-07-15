@@ -72,6 +72,7 @@
 		A3BFE9DB196FBC01002776F4 /* OrderListView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BFE9DA196FBC01002776F4 /* OrderListView.m */; };
 		A3BFE9DF196FDCC5002776F4 /* OrderPresentView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BFE9DE196FDCC5002776F4 /* OrderPresentView.m */; };
 		A3BFE9E219739754002776F4 /* AppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BFE9E119739754002776F4 /* AppSettings.m */; };
+		A3BFE9E61974C877002776F4 /* PresentationView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BFE9E51974C877002776F4 /* PresentationView.m */; };
 		A3C04E22195C336A00DAFB32 /* ClientListForNewOrder_View.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */; };
 		A3F96CB1194FEAE000C0C66E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3F96CB0194FEAE000C0C66E /* CoreData.framework */; };
 		A3F96CB4194FEB8A00C0C66E /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3F96CB2194FEB8A00C0C66E /* DataModel.xcdatamodeld */; };
@@ -208,6 +209,8 @@
 		A3BFE9DE196FDCC5002776F4 /* OrderPresentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderPresentView.m; path = Interface/OrderPresentView.m; sourceTree = "<group>"; };
 		A3BFE9E019739754002776F4 /* AppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppSettings.h; path = DataModel/AppSettings.h; sourceTree = "<group>"; };
 		A3BFE9E119739754002776F4 /* AppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppSettings.m; path = DataModel/AppSettings.m; sourceTree = "<group>"; };
+		A3BFE9E41974C877002776F4 /* PresentationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PresentationView.h; path = Interface/PresentationView.h; sourceTree = "<group>"; };
+		A3BFE9E51974C877002776F4 /* PresentationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PresentationView.m; path = Interface/PresentationView.m; sourceTree = "<group>"; };
 		A3C04E20195C336A00DAFB32 /* ClientListForNewOrder_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ClientListForNewOrder_View.h; path = Interface/ClientListForNewOrder_View.h; sourceTree = "<group>"; };
 		A3C04E21195C336A00DAFB32 /* ClientListForNewOrder_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ClientListForNewOrder_View.m; path = Interface/ClientListForNewOrder_View.m; sourceTree = "<group>"; };
 		A3F96CB0194FEAE000C0C66E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -600,6 +603,7 @@
 		A3ACB9681959481A00D2C77A /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				A3BFE9E31974C850002776F4 /* PresentationView */,
 				A3BFE9DC196FDC8F002776F4 /* OrderPresentView */,
 				A3BFE9D8196FBBE5002776F4 /* OrderListView */,
 				A34CF103196278A300329155 /* NSNumberFormatter */,
@@ -705,6 +709,15 @@
 				A3BFE9DE196FDCC5002776F4 /* OrderPresentView.m */,
 			);
 			name = OrderPresentView;
+			sourceTree = "<group>";
+		};
+		A3BFE9E31974C850002776F4 /* PresentationView */ = {
+			isa = PBXGroup;
+			children = (
+				A3BFE9E41974C877002776F4 /* PresentationView.h */,
+				A3BFE9E51974C877002776F4 /* PresentationView.m */,
+			);
+			name = PresentationView;
 			sourceTree = "<group>";
 		};
 		A3C04E1F195C332800DAFB32 /* ClientListForNewOrder_View */ = {
@@ -831,6 +844,7 @@
 				A35A06711952B12300D99BE0 /* Address.m in Sources */,
 				A35A06681952AA7200D99BE0 /* Item.m in Sources */,
 				A35A06B41952CABE00D99BE0 /* TA+TACategory.m in Sources */,
+				A3BFE9E61974C877002776F4 /* PresentationView.m in Sources */,
 				A341AFF0195AB932001B7168 /* TAListView.m in Sources */,
 				A3BFE9DF196FDCC5002776F4 /* OrderPresentView.m in Sources */,
 				A35A06A11952C9B100D99BE0 /* Fish+FishCategory.m in Sources */,

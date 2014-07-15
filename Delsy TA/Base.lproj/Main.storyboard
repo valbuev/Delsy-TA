@@ -729,7 +729,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <!--Presentation-->
         <scene sceneID="0hR-ms-iNN">
             <objects>
-                <viewController id="k55-2u-vWo" userLabel="Presentation" sceneMemberID="viewController">
+                <viewController id="k55-2u-vWo" userLabel="Presentation" customClass="PresentationView" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Hid-h3-HqO"/>
                         <viewControllerLayoutGuide type="bottom" id="x93-OT-S2F"/>
@@ -737,10 +737,46 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <view key="view" contentMode="scaleToFill" id="AM8-hL-2ap">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GIb-MF-hd6">
+                                <rect key="frame" x="20" y="20" width="728" height="524"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="524" id="g4G-0W-aQl"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VQA-9S-cls">
+                                <rect key="frame" x="638" y="20" width="110" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="110" id="QGh-80-5uk"/>
+                                    <constraint firstAttribute="height" constant="100" id="jmS-Uq-D0e"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
+                                <size key="titleShadowOffset" width="2" height="2"/>
+                                <state key="normal" title="X">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.73034566640853882" green="0.73032379150390625" blue="0.73033618927001953" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnXClicked:" destination="k55-2u-vWo" eventType="touchUpInside" id="uRO-mO-XEn"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GIb-MF-hd6" firstAttribute="leading" secondItem="AM8-hL-2ap" secondAttribute="leading" constant="20" id="3dg-0o-boz"/>
+                            <constraint firstAttribute="trailing" secondItem="VQA-9S-cls" secondAttribute="trailing" constant="20" id="FGa-gg-Clu"/>
+                            <constraint firstAttribute="trailing" secondItem="GIb-MF-hd6" secondAttribute="trailing" constant="20" id="bVb-fb-crl"/>
+                            <constraint firstItem="GIb-MF-hd6" firstAttribute="top" secondItem="Hid-h3-HqO" secondAttribute="bottom" id="eIY-CI-lRM"/>
+                            <constraint firstItem="VQA-9S-cls" firstAttribute="top" secondItem="Hid-h3-HqO" secondAttribute="bottom" id="nTk-5J-CrK"/>
+                        </constraints>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="imageView" destination="GIb-MF-hd6" id="c6v-Y7-aXR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fnT-we-9cg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
