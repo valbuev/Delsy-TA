@@ -1904,10 +1904,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nwz-oN-ggg">
-                                                    <rect key="frame" x="668" y="0.0" width="80" height="43"/>
+                                                    <rect key="frame" x="668" y="0.0" width="92" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="UPJ-SK-Ywu"/>
+                                                        <constraint firstAttribute="width" constant="92" id="UPJ-SK-Ywu"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <state key="normal" title="Обновить">
@@ -1940,7 +1940,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="NOT-cg-58G" firstAttribute="top" secondItem="tMn-mq-e4N" secondAttribute="top" id="4b9-EG-cMk"/>
-                                                <constraint firstAttribute="trailing" secondItem="Nwz-oN-ggg" secondAttribute="trailing" constant="20" id="4vj-ML-RZ3"/>
+                                                <constraint firstAttribute="trailing" secondItem="Nwz-oN-ggg" secondAttribute="trailing" constant="8" id="4vj-ML-RZ3"/>
                                                 <constraint firstItem="Nwz-oN-ggg" firstAttribute="top" secondItem="tMn-mq-e4N" secondAttribute="top" id="KdT-VG-HRV"/>
                                                 <constraint firstAttribute="bottom" secondItem="NOT-cg-58G" secondAttribute="bottom" id="McX-25-k9g"/>
                                                 <constraint firstItem="615-dg-8dX" firstAttribute="top" secondItem="tMn-mq-e4N" secondAttribute="top" id="OXf-Th-UyF"/>
@@ -1974,9 +1974,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                         <constraint firstAttribute="width" constant="88" id="4oE-Sr-L87"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <state key="normal" title="Загрузить">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
+                                                    <state key="normal" title="Загрузить"/>
                                                     <connections>
                                                         <action selector="OnBtnUpdateAllPhotosClick:" destination="wh8-Lz-zdy" eventType="touchUpInside" id="t7x-bM-dkq"/>
                                                     </connections>
@@ -2126,11 +2124,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Удалить все" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RC9-8i-DaL">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Удалить всю историю заказов текущего ТА" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RC9-8i-DaL">
                                                     <rect key="frame" x="15" y="0.0" width="738" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>

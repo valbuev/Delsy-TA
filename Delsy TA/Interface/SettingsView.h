@@ -14,7 +14,7 @@
 @class AppSettings;
 
 @interface SettingsView : UITableViewController
-<BVAClientListUpdaterDelegate, BVAPriceUpdaterDelegate,AllPhotosupdaterDelegate>
+<BVAClientListUpdaterDelegate, BVAPriceUpdaterDelegate,AllPhotosupdaterDelegate, UIAlertViewDelegate>
 {
     BVAClientListUpdater *clientListUpdater;
     BVAPriceUpdater *priceUpdater;

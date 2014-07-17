@@ -31,6 +31,8 @@ DeliveryDateViewDelegate>{
     NSFetchedResultsController *orderController;
     PriceSplitView *priceSplitView;
     Boolean isThatWindowShowing;
+    // храним ссылку на последний неотправленный заказ. Если текущий заказ будет отправлен, или его сумма будет равна 0, то в AppSettings снова запишем ссылку из этой переменной.
+    Order *lastNonSentOrder;
 }
 
 @property (nonatomic, retain) UIPopoverController *localPopoverController;
@@ -76,6 +78,7 @@ DeliveryDateViewDelegate>{
     if(!self.order){
         self.order = [Order newOrder:context forAddress:address];
     }
+    lastNonSentOrder = [AppSettings getInstance:self.context].lastOrder;
     self.order.appSettingsLastOrder = [AppSettings getInstance:self.context];
     NSLog(@"OrderEditView viewDidLoad");
     orderController = [order newOrderController];
@@ -122,6 +125,7 @@ DeliveryDateViewDelegate>{
     if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
         if ( self.order.amount.floatValue == 0 ){
             [self.context deleteObject:self.order];
+            [AppSettings getInstance:self.context].lastOrder = lastNonSentOrder;
             [self saveManageObjectContext];
         }
     }
@@ -424,6 +428,10 @@ DeliveryDateViewDelegate>{
 
 - (void)deliveryDateViewDidSendMail {
     [self.localPopoverController dismissPopoverAnimated:YES];
+    // Теперь это не последний неотправленный заказ
+    self.order.appSettingsLastOrder = nil;
+    [AppSettings getInstance:self.context].lastOrder = lastNonSentOrder;
+    [self saveManageObjectContext];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

@@ -37,4 +37,7 @@
 // Возвращает новый заказ, в котором присутствуют те же позиции, за исключением отсутствующих в прайсе продуктов.
 -(Order *) newOrderUsingThis;
 
+// Удаляет все заказы данного агента и возвращает nil, если нет ошибки, или ошибку, если есть.
++ (NSError *) removeAllOrdersForTA:(TA *) ta inMOC:(NSManagedObjectContext *) context;
+
 @end

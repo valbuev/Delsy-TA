@@ -23,6 +23,7 @@
 }
 
 - (void) startDownloading;
+- (void)  stopUpdating;
 
 @property (nonatomic,weak) id <AllPhotosupdaterDelegate> delegate;
 @property (nonatomic,retain) NSManagedObjectContext *context;

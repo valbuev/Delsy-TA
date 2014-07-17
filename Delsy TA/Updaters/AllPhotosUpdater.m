@@ -34,12 +34,21 @@
     dispatch_once(&onceToken, ^{
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfiguration:@"ru.bva.DelsyTA.backgroundSessoinForDownloadingPhotos_"];
         config.HTTPMaximumConnectionsPerHost = 3;
-        //config.timeoutIntervalForRequest = 5;
-        //config.timeoutIntervalForResource = 5;
+        config.allowsCellularAccess = NO;
+        config.timeoutIntervalForRequest = 0;
+        config.timeoutIntervalForResource = 0;
         //[config setAllowsCellularAccess:YES];
         session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
     });
     return session;
+}
+
+- (void)  stopUpdating{
+    [[self backgroundSession] getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks1){
+        for ( NSURLSessionDownloadTask *task in downloadTasks1){
+            [task cancel];
+        }
+    }];
 }
 
 - (void)dealloc{
@@ -53,7 +62,7 @@
     countOfCompletedTasks = 0;
     //mysession = [self backgroundSession];
 
-    for(int i=0;i<10;i++){
+    for(int i=0;i<photos.count;i++){
         Photo *photo = [photos objectAtIndex:i];
         //NSURLSessionDownloadTask *task = [mysession downloadTaskWithURL:[NSURL URLWithString:photo.url]];
         NSURLSessionDownloadTask *task = [[self backgroundSession] downloadTaskWithURL:[NSURL URLWithString:photo.url]];
@@ -63,11 +72,14 @@
     for(NSURLSessionDownloadTask *task in downloadTasks){
         [task resume];
     }
+    if(downloadTasks.count == 0){
+        [errors addObject:@"Обновлять нечего!"];
+        [self.delegate AllPhotosUpdater:self didFinishUpdatingWithErrors:errors];
+    }
 }
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location{
     
-    //NSLog(@"original : %@",[downloadTask.originalRequest.URL lastPathComponent]);
     countOfCompletedTasks++;
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -91,7 +103,11 @@
             Photo *photo = [photos objectAtIndex:index];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"itemname : %@", photo.item.name);
+                //NSLog(@"itemname : %@", photo.item.name);
+                /*if(downloadTask.error)
+                NSLog(@"did finish with error : %@",[downloadTask.originalRequest.URL lastPathComponent]);
+                else
+                    NSLog(@"did finish without error : %@",[downloadTask.originalRequest.URL lastPathComponent]);*/
                 photo.filepath = destinationUrl.path;
                 NSError *error;
                 [self.context save:&error];
@@ -120,8 +136,17 @@
     //NSLog(@"didCompleteWithError");
 
     if(error){
-        [errors addObject:error];
-        NSLog(@"error: %@ - %@", task , error );
+        if ( [error.localizedDescription isEqualToString:@"The Internet connection appears to be offline."] )
+            [errors addObject:@"Wi-Fi не доступен."];
+        else
+            [errors addObject:error];
+        countOfCompletedTasks++;
+        id myDelegate = self.delegate;
+        if(myDelegate != nil){
+            [myDelegate AllPhotosUpdater:self
+                     didCompleteUpdating: countOfCompletedTasks
+                    averageCountOfPhotos: downloadTasks.count];
+        }
     } else {
         //NSLog(@"success: %@", task);
     }

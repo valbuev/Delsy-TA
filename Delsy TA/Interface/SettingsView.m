@@ -93,23 +93,35 @@
 }
 - (IBAction)OnBtnUpdateAllPhotosClick:(id)sender{
     // Если сейчас идет обновление, то запрещаем действия
-    if(isManagedObjectContextUpdating || isAllPhotosUpdating)
+    if(isManagedObjectContextUpdating)
         return;
     [self updateAllPhotos];
 }
 
 - (void) updateAllPhotos{
-    isAllPhotosUpdating = YES;
-    if(!allPhotosUpdater){
-        allPhotosUpdater = [[AllPhotosUpdater alloc] init];
-        allPhotosUpdater.context = self.managedObjectContext;
-        allPhotosUpdater.delegate = self;
+    if(isAllPhotosUpdating == NO){
+        isAllPhotosUpdating = YES;
+        if(!allPhotosUpdater){
+            allPhotosUpdater = [[AllPhotosUpdater alloc] init];
+            allPhotosUpdater.context = self.managedObjectContext;
+            allPhotosUpdater.delegate = self;
+        }
+        allPhotosUpdater.needsUpdateAvailablePhotos = ! self.switchNotNeedsUpdateAvailablePhotos.isOn;
+        //dispatch_async(dispatch_get_main_queue(), ^{
+            [self.btnUpdateAllPhotos setTitle:@"Стоп" forState:UIControlStateNormal];
+            [self.btnUpdateAllPhotos setTitle:@"Стоп" forState:UIControlStateHighlighted];
+            [self.btnUpdateAllPhotos setTitle:@"Стоп" forState:UIControlStateSelected];
+            [self.activityIndicatorAllPhotos startAnimating];
+            [self.progressViewUpdatingAllPhotos setHidden:NO];
+            self.progressViewUpdatingAllPhotos.progress = 0.001;
+        //});
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [allPhotosUpdater startDownloading];
+        });
     }
-    allPhotosUpdater.needsUpdateAvailablePhotos = ! self.switchNotNeedsUpdateAvailablePhotos.isOn;
-    [allPhotosUpdater startDownloading];
-    [self.activityIndicatorAllPhotos startAnimating];
-    [self.progressViewUpdatingAllPhotos setHidden:NO];
-    self.progressViewUpdatingAllPhotos.progress = 0;
+    else{
+        [allPhotosUpdater stopUpdating];
+    }
 }
 
 // Пользователь изменил e-mail получателя по умолчанию
@@ -239,9 +251,29 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if(cell != self.cellRemoveAllHistory){
-        ;
-#warning remove history
+    if(cell == self.cellRemoveAllHistory){
+        if(self.appSettings.currentTA != nil){
+            if(self.appSettings.currentTA.orders.count > 0){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Вы действительно хотите удалить всю историю?!" delegate:self cancelButtonTitle:@"Нет" otherButtonTitles:@"Да", nil];
+                [alert show];
+            }
+            else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"История чиста" delegate:nil cancelButtonTitle:@":)" otherButtonTitles: nil];
+                [alert show];
+            }
+        }
+    }
+}
+
+#pragma mark UIAlertViewDelegating
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex == 1){
+        NSError *error = [Order removeAllOrdersForTA:self.appSettings.currentTA inMOC:self.managedObjectContext];
+        if(error){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"В ходе удаления возникла ошибка: %@",error.localizedDescription] delegate:nil cancelButtonTitle:@":(" otherButtonTitles: nil];
+            [alert show];
+        }
     }
 }
 
@@ -401,8 +433,11 @@
         for(int i=0;i<messages.count;i++)
         {
             NSObject *message = [messages objectAtIndex:i];
-            if( [message isMemberOfClass:[NSError class]] )
-                text = [text stringByAppendingFormat:@"\n%@ userInfo: %@",[(NSError *) message localizedDescription],[(NSError *) message userInfo]];
+            if( [message isMemberOfClass:[NSError class]] ){
+                NSMutableDictionary *userInfo = [[(NSError *) message userInfo] mutableCopy];
+                [userInfo removeObjectsForKeys:[NSArray arrayWithObjects:@"NSURLSessionDownloadTaskResumeData", nil]];
+                text = [text stringByAppendingFormat:@"\n%@ userInfo: %@",[(NSError *) message localizedDescription],userInfo];
+            }
             else {
                 text = [text stringByAppendingFormat:@"\n%@",message];
             }
@@ -448,6 +483,9 @@
             [self.activityIndicatorAllPhotos stopAnimating];
             isAllPhotosUpdating = NO;
             [self showCustomIOS7AlertViewWithMessages:errors title:@"Обновление завершено!"];
+            [self.btnUpdateAllPhotos setTitle:@"Загрузить" forState:UIControlStateNormal];
+            [self.btnUpdateAllPhotos setTitle:@"Загрузить" forState:UIControlStateHighlighted];
+            [self.btnUpdateAllPhotos setTitle:@"Загрузить" forState:UIControlStateSelected];
         }
     });
 }

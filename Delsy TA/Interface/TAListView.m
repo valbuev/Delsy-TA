@@ -87,6 +87,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     AppSettings *appSettings = [AppSettings getInstance:self.managedObjectContext];
     TA *ta = [taList objectAtIndex:indexPath.row];
+    if(appSettings.currentTA != ta){
+        appSettings.lastOrder = nil;
+    }
     appSettings.currentTA = ta;
     [self saveManageObjectContext];
     [self.navigationController popViewControllerAnimated:YES];

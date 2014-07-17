@@ -227,9 +227,28 @@
     return newOrder; 
 }
 
-/*- (void)setIsSent:(NSNumber *)isSent{
-    if(isSent.boolValue == YES)
-        self.appSettingsLastOrder = nil;
-}*/
+// Удаляет все заказы данного агента и возвращает nil, если нет ошибки, или ошибку, если есть.
++ (NSError *) removeAllOrdersForTA:(TA *) ta inMOC:(NSManagedObjectContext *) context{
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Order" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ta == %@",ta];
+    [request setPredicate:predicate];
+    
+    NSError *error;
+    NSArray *orders = [context executeFetchRequest:request error:&error];
+    if(error){
+        return error;
+    }
+    else{
+        for(Order *order in orders){
+            [context deleteObject:order];
+        }
+        [context save:&error];
+        return error;
+    }
+
+}
 
 @end

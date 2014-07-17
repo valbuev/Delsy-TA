@@ -17,6 +17,7 @@
 #import "LineSale+LineSaleCategory.h"
 #import "LineSaleLine+LineSaleLineCategory.h"
 #import "Item+ItemCategory.h"
+#import "Order+OrderCategory.h"
 
 @implementation BVAClientListUpdater
 @synthesize managedObjectContext;
@@ -172,6 +173,10 @@
     if( currentTA )
         if( currentTA.deleted.boolValue == YES )
             appSettings.currentTA = nil;
+    Order *lastOrder = appSettings.lastOrder;
+    if ( lastOrder.client.deleted.boolValue == YES || lastOrder.address.deleted.boolValue == YES || lastOrder.ta.deleted.boolValue == YES ){
+        appSettings.lastOrder = nil;
+    }
     [self saveManageObjectContext];
     
     //NSLog(@"\n\ndone updating Clientlist\n\n");
