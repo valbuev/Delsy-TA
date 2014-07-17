@@ -13,6 +13,9 @@
 #import "TA+TACategory.h"
 #import "CustomIOS7AlertView.h"
 #import "ClientListForNewOrder_View.h"
+#import "OrderEditView.h"
+#import "Order+OrderCategory.h"
+#import "Client+ClientCategory.h"
 
 @interface SettingsView ()
 
@@ -29,6 +32,7 @@
 @synthesize cellRemoveAllHistory;
 @synthesize progressViewUpdatingAllPhotos;
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize cellLastOrder;
 
 // Инициализация свойства managedObjectContext из AppDelegate
 - (NSManagedObjectContext *)managedObjectContext {
@@ -213,6 +217,21 @@
     }];
 }
 
+- (void) updateCellLastOrder{
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^ {
+        if( self.appSettings.lastOrder != nil ){
+            self.cellLastOrder.textLabel.textColor = [UIColor blackColor];
+            self.cellLastOrder.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            self.cellLastOrder.detailTextLabel.text = [self.appSettings.lastOrder.client.name copy];
+        }
+        else{
+            self.cellLastOrder.textLabel.textColor = [UIColor grayColor];
+            self.cellLastOrder.accessoryType = UITableViewCellAccessoryNone;
+            self.cellLastOrder.detailTextLabel.text = @"";
+        }
+    }];
+}
+
 #pragma mark - Table view data source
 
 /**********     Все ячейки статичны, поэтому функции кол-ва секций, ячеек в секции, редактирования ячеек и генерирования ячеек не реализуем     *********/
@@ -246,6 +265,15 @@
         clientListView.managedObjectContext = self.managedObjectContext;
         clientListView.clientListViewResult = ClientListViewResult_OpenOrderListView;
     }
+    // открываем последний неотправленный заказ
+    else if( [segue.identifier isEqualToString:@"OrderEdit"]){
+        OrderEditView* orderEditView = segue.destinationViewController;
+        if( self.appSettings.lastOrder != nil ){
+            orderEditView.order = self.appSettings.lastOrder;
+            orderEditView.address = self.appSettings.lastOrder.address;
+            orderEditView.context = self.managedObjectContext;
+        }
+    }
 }
 
 // Отменяем переход на другие view, если требуется
@@ -261,6 +289,12 @@
         {
             return NO;
         }
+    else if ( [identifier isEqualToString:@"OrderEdit"]){
+        if( self.appSettings.lastOrder == nil )
+                return NO;
+        else if (self.appSettings.lastOrder.isSent.boolValue == YES)
+            return NO;
+    }
     return YES;
 }
 
@@ -331,6 +365,7 @@
     [self.appSettings addObserver:self forKeyPath:@"clientsListLastUpdate" options:NSKeyValueObservingOptionNew context:nil];
     [self.appSettings addObserver:self forKeyPath:@"priceLastUpdate" options:NSKeyValueObservingOptionNew context:nil];
     [self.appSettings addObserver:self forKeyPath:@"currentTA" options:NSKeyValueObservingOptionNew context:nil];
+    [self.appSettings addObserver:self forKeyPath:@"lastOrder" options:NSKeyValueObservingOptionInitial context:nil];
 }
 
 // Убираем "прослушку" за объектом appSettings
@@ -338,6 +373,7 @@
     [self.appSettings removeObserver:self forKeyPath:@"clientsListLastUpdate"];
     [self.appSettings removeObserver:self forKeyPath:@"priceLastUpdate"];
     [self.appSettings removeObserver:self forKeyPath:@"currentTA"];
+    [self.appSettings removeObserver:self forKeyPath:@"lastOrder"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
@@ -349,6 +385,9 @@
     }
     else if([keyPath isEqualToString:@"currentTA"]){
         [self updateLabelTAName];
+    }
+    else if([keyPath isEqualToString:@"lastOrder"]){
+        [self updateCellLastOrder];
     }
 }
 

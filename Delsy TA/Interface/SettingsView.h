@@ -50,6 +50,7 @@
 
 // ***** History section
 @property (weak, nonatomic) IBOutlet UITableViewCell *cellRemoveAllHistory;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellLastOrder;
 
 
 // ***** "Other" and "Sending" sections

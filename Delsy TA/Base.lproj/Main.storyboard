@@ -1894,7 +1894,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="Каталог" id="X0O-i4-0Fp">
+                            <tableViewSection headerTitle="Каталог" id="X0O-i4-0Fp" userLabel="Section - Каталог">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="mML-pX-g6m">
                                         <rect key="frame" x="0.0" y="55" width="768" height="44"/>
@@ -2027,7 +2027,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Торговые представители" id="1Pr-2I-XAq">
+                            <tableViewSection headerTitle="Торговые представители" id="1Pr-2I-XAq" userLabel="Section - Торговые представители">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="LNT-wn-LS8">
                                         <rect key="frame" x="0.0" y="191" width="768" height="44"/>
@@ -2070,10 +2070,37 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="История" id="Zxt-Fa-g7m">
+                            <tableViewSection headerTitle="История" id="Zxt-Fa-g7m" userLabel="Section - История">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="DlH-39-ExI" style="IBUITableViewCellStyleDefault" id="yxk-fa-c8p">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="6ta-q8-h1U" detailTextLabel="eYi-Bo-A5t" style="IBUITableViewCellStyleValue1" id="IDt-uQ-dYq">
                                         <rect key="frame" x="0.0" y="283" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IDt-uQ-dYq" id="JjW-bb-P6e">
+                                            <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Последний неотправленный заказ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6ta-q8-h1U">
+                                                    <rect key="frame" x="15" y="11" width="292" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eYi-Bo-A5t" userLabel="Label - lastOrderClientName">
+                                                    <rect key="frame" x="689" y="12" width="44" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Ua6-2W-b8s" kind="push" identifier="OrderEdit" id="NUG-B8-ZVs"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="DlH-39-ExI" style="IBUITableViewCellStyleDefault" id="yxk-fa-c8p">
+                                        <rect key="frame" x="0.0" y="327" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yxk-fa-c8p" id="U9q-oe-4rO">
                                             <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
@@ -2093,7 +2120,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="RC9-8i-DaL" style="IBUITableViewCellStyleDefault" id="TWQ-cm-kAi">
-                                        <rect key="frame" x="0.0" y="327" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="371" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TWQ-cm-kAi" id="gKd-AE-eLY">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
@@ -2111,10 +2138,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Отправка" id="dzs-G3-Y4z">
+                            <tableViewSection headerTitle="Отправка" id="dzs-G3-Y4z" userLabel=" Section - Отправка">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="rQ9-JN-LQL">
-                                        <rect key="frame" x="0.0" y="419" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="463" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rQ9-JN-LQL" id="VXX-RJ-Abk">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
@@ -2153,10 +2180,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Прочее" id="Ajo-1r-zpY">
+                            <tableViewSection headerTitle="Прочее" id="Ajo-1r-zpY" userLabel="Section - Прочее">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="wMI-St-2US">
-                                        <rect key="frame" x="0.0" y="511" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="555" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wMI-St-2US" id="2GC-EK-Iqc">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
@@ -2194,7 +2221,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="FQN-Uj-3rU">
-                                        <rect key="frame" x="0.0" y="555" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="599" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FQN-Uj-3rU" id="rFH-8W-YYw">
                                             <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
@@ -2252,6 +2279,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="activityIndicatorUpdatingData" destination="4UR-TL-PV3" id="L2h-DI-mzr"/>
                         <outlet property="btnUpdateAllPhotos" destination="VWe-Rt-WPf" id="wWY-Ph-qnc"/>
                         <outlet property="btnUpdateData" destination="Nwz-oN-ggg" id="x07-7e-s5K"/>
+                        <outlet property="cellLastOrder" destination="IDt-uQ-dYq" id="SPd-rd-7Y4"/>
                         <outlet property="cellRemoveAllHistory" destination="TWQ-cm-kAi" id="8EX-lH-U0p"/>
                         <outlet property="labelDataLastUpdate" destination="NOT-cg-58G" id="qjV-97-LcD"/>
                         <outlet property="labelTAName" destination="FsW-9J-DHV" id="d9F-rO-l0x"/>
@@ -2379,8 +2407,8 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="YDa-wy-GTh"/>
+        <segue reference="NUG-B8-ZVs"/>
         <segue reference="716-FJ-7pA"/>
-        <segue reference="ZxC-g1-Tt6"/>
-        <segue reference="q6c-kx-ijC"/>
     </inferredMetricsTieBreakers>
 </document>

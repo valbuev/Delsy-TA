@@ -227,4 +227,9 @@
     return newOrder; 
 }
 
+/*- (void)setIsSent:(NSNumber *)isSent{
+    if(isSent.boolValue == YES)
+        self.appSettingsLastOrder = nil;
+}*/
+
 @end

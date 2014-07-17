@@ -52,9 +52,7 @@
     photos = [Photo getAllPhotos:!self.needsUpdateAvailablePhotos MOC:self.context];
     countOfCompletedTasks = 0;
     //mysession = [self backgroundSession];
-    //for(int i=0;i<photos.count;i++)
-#warning
-    NSLog(@"count of photos: %d",photos.count);
+
     for(int i=0;i<10;i++){
         Photo *photo = [photos objectAtIndex:i];
         //NSURLSessionDownloadTask *task = [mysession downloadTaskWithURL:[NSURL URLWithString:photo.url]];

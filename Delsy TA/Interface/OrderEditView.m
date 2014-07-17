@@ -23,6 +23,7 @@
 #import "OrderInfoView.h"
 #import "DeliveryDateView.h"
 #import "SettingsView.h"
+#import "AppSettings+AppSettingsCategory.h"
 
 @interface OrderEditView ()
 <PriceViewDelegate,QtySetterViewDelegate,UIPopoverControllerDelegate,
@@ -75,6 +76,7 @@ DeliveryDateViewDelegate>{
     if(!self.order){
         self.order = [Order newOrder:context forAddress:address];
     }
+    self.order.appSettingsLastOrder = [AppSettings getInstance:self.context];
     NSLog(@"OrderEditView viewDidLoad");
     orderController = [order newOrderController];
     orderController.delegate = self;
