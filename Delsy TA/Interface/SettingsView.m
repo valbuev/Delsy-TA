@@ -274,6 +274,10 @@
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"В ходе удаления возникла ошибка: %@",error.localizedDescription] delegate:nil cancelButtonTitle:@":(" otherButtonTitles: nil];
             [alert show];
         }
+        else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Удаление завершено" delegate:nil cancelButtonTitle:@":)" otherButtonTitles: nil];
+            [alert show];
+        }
     }
 }
 
