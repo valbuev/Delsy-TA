@@ -145,5 +145,19 @@
     return array;
 }
 
+// Проверяет, есть ли загруженные фотографии
+- (Boolean) haveDownloadedPhotos{
+    NSMutableSet *photos = [self.photos mutableCopy];
+    static NSPredicate *predicate;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        predicate = [NSPredicate predicateWithFormat:@"filepath != nil and filepath != ''"];
+    });
+    [photos filterUsingPredicate:predicate];
+    if(photos.count > 0)
+        return YES;
+    return NO;
+}
+
 
 @end

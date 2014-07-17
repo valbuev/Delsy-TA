@@ -19,9 +19,7 @@
 @end
 
 @interface AllPhotosUpdater : NSObject
-<NSURLSessionDownloadDelegate, NSURLSessionDelegate, NSURLSessionTaskDelegate>
 {
-    
 }
 
 - (void) startDownloading;

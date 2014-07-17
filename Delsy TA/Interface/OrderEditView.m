@@ -115,6 +115,17 @@ DeliveryDateViewDelegate>{
     }
 }
 
+-(void) viewWillDisappear:(BOOL)animated {
+    // Если окно закрывается, то проверяем текущий заказ.
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        if ( self.order.amount.floatValue == 0 ){
+            [self.context deleteObject:self.order];
+            [self saveManageObjectContext];
+        }
+    }
+    [super viewWillDisappear:animated];
+}
+
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     return YES;
 }
@@ -382,8 +393,7 @@ DeliveryDateViewDelegate>{
     QtySetterView *qtySetter = [self.storyboard instantiateViewControllerWithIdentifier:@"QtySetter"];
     qtySetter.item = item;
     qtySetter.delegate = self;
-    qtySetter.startWithQty = orderLine.qty;
-    qtySetter.startWithUnit = orderLine.unit;
+    qtySetter.order = self.order;
     
     self.localPopoverController = [[UIPopoverController alloc] initWithContentViewController:qtySetter];
     self.localPopoverController.delegate = self;

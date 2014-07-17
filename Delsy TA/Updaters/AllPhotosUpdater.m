@@ -12,14 +12,15 @@
 #import "AppDelegate.h"
 
 @interface AllPhotosUpdater()
+<NSURLSessionDownloadDelegate, NSURLSessionDelegate, NSURLSessionTaskDelegate>
 {
     NSMutableArray *downloadTasks;
     NSArray *photos;
     int countOfCompletedTasks;
     NSMutableArray *errors;
-    NSURLSession *mysession;
+    //NSURLSession *mysession;
+    //dispatch_once_t onceToken;
 }
-
 @end
 
 @implementation AllPhotosUpdater
@@ -31,10 +32,10 @@
     static NSURLSession *session = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfiguration:@"ru.bva.DelsyTA.backgroundSessoinForDownloadingPhotos"];
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfiguration:@"ru.bva.DelsyTA.backgroundSessoinForDownloadingPhotos_"];
         config.HTTPMaximumConnectionsPerHost = 3;
-        config.timeoutIntervalForRequest = 5;
-        config.timeoutIntervalForResource = 5;
+        //config.timeoutIntervalForRequest = 5;
+        //config.timeoutIntervalForResource = 5;
         //[config setAllowsCellularAccess:YES];
         session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
     });
@@ -47,17 +48,19 @@
 
 - (void) startDownloading{
     errors = [[NSMutableArray alloc] init];
+    downloadTasks = [[NSMutableArray alloc] init];
     photos = [Photo getAllPhotos:!self.needsUpdateAvailablePhotos MOC:self.context];
     countOfCompletedTasks = 0;
-    mysession = [self backgroundSession];
+    //mysession = [self backgroundSession];
     //for(int i=0;i<photos.count;i++)
 #warning
     NSLog(@"count of photos: %d",photos.count);
-    for(int i=0;i<5;i++){
+    for(int i=0;i<10;i++){
         Photo *photo = [photos objectAtIndex:i];
-        NSURLSessionDownloadTask *task = [mysession downloadTaskWithURL:[NSURL URLWithString:photo.url]];
+        //NSURLSessionDownloadTask *task = [mysession downloadTaskWithURL:[NSURL URLWithString:photo.url]];
+        NSURLSessionDownloadTask *task = [[self backgroundSession] downloadTaskWithURL:[NSURL URLWithString:photo.url]];
         [downloadTasks addObject:task];
-        NSLog(@"position: %d real: %d",[downloadTasks indexOfObject:task],i);
+        //NSLog(@"position: %d real: %d",[downloadTasks indexOfObject:task],i);
     }
     for(NSURLSessionDownloadTask *task in downloadTasks){
         [task resume];
@@ -65,9 +68,8 @@
 }
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"didFinishDownloadingToURL");
-    });
+    
+    //NSLog(@"original : %@",[downloadTask.originalRequest.URL lastPathComponent]);
     countOfCompletedTasks++;
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -81,20 +83,28 @@
     [fileManager removeItemAtURL:destinationUrl error:NULL];
     
     [fileManager copyItemAtURL:location toURL:destinationUrl error:&fileManagerError];
+    //NSLog(@"content \n\n\n\n\n%@\n\n\n\n\n",[NSString stringWithContentsOfURL:destinationUrl encoding:NSStringEncodingConversionAllowLossy error:nil]);
     if(fileManagerError == nil){
-        Photo *photo = [photos objectAtIndex:[downloadTasks indexOfObject:downloadTask]];
-        NSLog(@"itemname : %@", photo.item.name);
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            photo.filepath = destinationUrl.absoluteString;
-            NSError *error;
-            [self.context save:&error];
-            if(error)
-               [errors addObject:error];
-        });
+        NSUInteger index = [downloadTasks indexOfObject:downloadTask];
+        if(index > photos.count - 1){
+            NSLog(@"incorrect index: %d",index);
+        }
+        else{
+            Photo *photo = [photos objectAtIndex:index];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"itemname : %@", photo.item.name);
+                photo.filepath = destinationUrl.path;
+                NSError *error;
+                [self.context save:&error];
+                if(error)
+                    [errors addObject:error];
+            });
+        }
     }
     else{
         [errors addObject:fileManagerError];
+        NSLog(@"fileManagerError: %@",fileManagerError.localizedDescription);
     }
     
     id myDelegate = self.delegate;
@@ -109,24 +119,25 @@
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error{
-    NSLog(@"didCompleteWithError");
+    //NSLog(@"didCompleteWithError");
 
     if(error){
         [errors addObject:error];
         NSLog(@"error: %@ - %@", task , error );
     } else {
-        NSLog(@"success: %@",task);
+        //NSLog(@"success: %@", task);
     }
-    
     [self callCompletionHandlerIfFinished];
 }
 
 - (void) callCompletionHandlerIfFinished{
-    [mysession getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks1){
+    //[mysession getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks1){
+    [[self backgroundSession] getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks1){
         NSUInteger count = dataTasks.count + uploadTasks.count + downloadTasks1.count;
+        //NSLog(@"count of tasks: %d",downloadTasks1.count);
         if (count == 0) {
             // все таски закончены
-            NSLog(@"all tasks ended");
+            //NSLog(@"all tasks ended");
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             if (appDelegate.backgroundSessionCompletionHandler) {
                 void (^completionHandler)() = appDelegate.backgroundSessionCompletionHandler;
@@ -146,11 +157,11 @@
 }
 
 - (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didResumeAtOffset:(int64_t)fileOffset expectedTotalBytes:(int64_t)expectedTotalBytes{
-    
+    //NSLog(@"didResumeAtOffSet : %lld",expectedTotalBytes);
 }
 
 -(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite{
-    NSLog(@"didWriteData");
+    //NSLog(@"didWriteData : %lld %lld %lld",bytesWritten,totalBytesWritten,totalBytesExpectedToWrite);
 }
 
 

@@ -10,6 +10,8 @@
 #import "Item+ItemCategory.h"
 #import "NSNumber+NSNumberUnit.h"
 #import "PresentationView.h"
+#import "Order+OrderCategory.h"
+#import "OrderLine+OrderLineCategory.h"
 
 @interface QtySetterView () <PresentationViewDelegate>
 {
@@ -26,8 +28,10 @@
 @synthesize labelQtyInBaseUnits;
 @synthesize textFieldQty;
 @synthesize segmentsUnit;
-@synthesize startWithUnit;
-@synthesize startWithQty;
+//@synthesize startWithUnit;
+//@synthesize startWithQty;
+@synthesize btnPresentation;
+@synthesize order;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -96,7 +100,7 @@
             [self.segmentsUnit setSelectedSegmentIndex:0];
     }
     
-    if(self.startWithUnit){
+    /*if(self.startWithUnit){
         for(int i=0;i<units.count;i++){
             if([(NSNumber *) [units objectAtIndex:i] unitValue] == self.startWithUnit.unitValue){
                 [self.segmentsUnit setSelectedSegmentIndex:i];
@@ -107,6 +111,36 @@
     if(self.startWithQty){
         self.textFieldQty.text = self.startWithQty.stringValue;
         [self updateLabelQtyInBaseUnits];
+    }*/
+    
+    
+    // Проверяем, если в заказе есть линия с текущим продуктом, то заполняем кол-во и единицы в соответствии с этой линией
+    if(self.order != nil){
+        //NSLog(@"!= nil");
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"item == %@",self.item];
+        NSMutableSet *orderLines = [self.order.orderLines mutableCopy];
+        [orderLines filterUsingPredicate:predicate];
+        if( orderLines.count > 0 ) {
+            //NSLog(@"count != 0");
+            for( OrderLine *orderLine in orderLines ){
+                for(int i=0;i<units.count;i++){
+                    if([(NSNumber *) [units objectAtIndex:i] unitValue] == orderLine.unit.unitValue){
+                        [self.segmentsUnit setSelectedSegmentIndex:i];
+                        break;
+                    }
+                }
+                self.textFieldQty.text = orderLine.qty.stringValue;
+                [self updateLabelQtyInBaseUnits];
+                break;
+            }
+        }
+    }
+    
+    if([self.item haveDownloadedPhotos] == YES){
+        UIImage *image = [UIImage imageNamed:@"PhotosExist.png"];
+        [self.btnPresentation setImage:image forState:UIControlStateHighlighted];
+        [self.btnPresentation setImage:image forState:UIControlStateSelected];
+        [self.btnPresentation setImage:image forState:UIControlStateNormal];
     }
 }
 

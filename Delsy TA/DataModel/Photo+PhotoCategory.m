@@ -97,12 +97,12 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
 
-    /*NSPredicate *predicate;
+    NSPredicate *predicate;
     if(shouldHaveNotFilePath == YES)
-        predicate = [NSPredicate predicateWithFormat:@" (filepath like %@) and NOT (url like %@)",@"",@""];
+        predicate = [NSPredicate predicateWithFormat:@" ((filepath == '') or (filepath = nil)) and ((url != '') and (url != nil))"];
     else
-        predicate = [NSPredicate predicateWithFormat:@" NOT (url like %@)",@""];
-    [request setPredicate:predicate];*/
+        predicate = [NSPredicate predicateWithFormat:@" (url != '') and (url != nil) "];
+    [request setPredicate:predicate];
     
     NSError *error;
     NSArray *array = [context executeFetchRequest:request error:&error];

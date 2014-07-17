@@ -72,7 +72,7 @@
 
 - (IBAction)OnBtnUpdateDataClick:(id)sender{
     // Если сейчас идет обновление, то запрещаем действия
-    if(isManagedObjectContextUpdating)
+    if(isManagedObjectContextUpdating || isAllPhotosUpdating)
         return;
     clientListUpdater = [[BVAClientListUpdater alloc] init];
     clientListUpdater.managedObjectContext = self.managedObjectContext;
@@ -89,17 +89,19 @@
 }
 - (IBAction)OnBtnUpdateAllPhotosClick:(id)sender{
     // Если сейчас идет обновление, то запрещаем действия
-    if(isManagedObjectContextUpdating)
+    if(isManagedObjectContextUpdating || isAllPhotosUpdating)
         return;
     [self updateAllPhotos];
 }
 
 - (void) updateAllPhotos{
-    isManagedObjectContextUpdating = YES;
-    allPhotosUpdater = [[AllPhotosUpdater alloc] init];
-    allPhotosUpdater.context = self.managedObjectContext;
+    isAllPhotosUpdating = YES;
+    if(!allPhotosUpdater){
+        allPhotosUpdater = [[AllPhotosUpdater alloc] init];
+        allPhotosUpdater.context = self.managedObjectContext;
+        allPhotosUpdater.delegate = self;
+    }
     allPhotosUpdater.needsUpdateAvailablePhotos = ! self.switchNotNeedsUpdateAvailablePhotos.isOn;
-    allPhotosUpdater.delegate = self;
     [allPhotosUpdater startDownloading];
     [self.activityIndicatorAllPhotos startAnimating];
     [self.progressViewUpdatingAllPhotos setHidden:NO];
@@ -143,6 +145,7 @@
 {
     [super viewDidLoad];
     isManagedObjectContextUpdating = NO;
+    isAllPhotosUpdating = NO;
     [self addObserversForAppSettings];
     [self setLabelsTexts];
 }
@@ -401,9 +404,12 @@
 
 -(void)AllPhotosUpdater:(AllPhotosUpdater *)updater didFinishUpdatingWithErrors:(NSArray *)errors{
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.progressViewUpdatingAllPhotos setHidden:YES];
-        [self.activityIndicatorAllPhotos stopAnimating];
-        isManagedObjectContextUpdating = NO;
+        if(isAllPhotosUpdating == YES){
+            [self.progressViewUpdatingAllPhotos setHidden:YES];
+            [self.activityIndicatorAllPhotos stopAnimating];
+            isAllPhotosUpdating = NO;
+            [self showCustomIOS7AlertViewWithMessages:errors title:@"Обновление завершено!"];
+        }
     });
 }
 

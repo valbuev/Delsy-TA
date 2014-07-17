@@ -26,4 +26,7 @@
 
 + (NSArray *) getAllItems: (NSManagedObjectContext *) context;
 
+// Проверяет, есть ли загруженные фотографии
+- (Boolean) haveDownloadedPhotos;
+
 @end

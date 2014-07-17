@@ -27,6 +27,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *labelQtyInBaseUnits;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnPresentation;
+
 - (IBAction)btn1click:(id)sender;
 - (IBAction)btn2click:(id)sender;
 - (IBAction)btn3click:(id)sender;
@@ -41,8 +43,9 @@
 - (IBAction)btnOKClicked:(id)sender;
 
 @property (nonatomic,retain) Item * item;
-@property (nonatomic,retain) NSNumber * startWithUnit;
-@property (nonatomic,retain) NSNumber * startWithQty;
+@property (nonatomic,retain) Order * order;
+//@property (nonatomic,retain) NSNumber * startWithUnit;
+//@property (nonatomic,retain) NSNumber * startWithQty;
 
 @property (nonatomic,weak) id<QtySetterViewDelegate> delegate;
 

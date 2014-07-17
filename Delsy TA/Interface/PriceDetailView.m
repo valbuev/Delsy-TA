@@ -103,33 +103,26 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    long sectionNum = indexPath.section;
-    if(self.section != -1){
-        sectionNum = self.section;
-    }
-    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:sectionNum];
+    
+    NSIndexPath *newIndexPath = [self indexPathOfControllerObject:indexPath];
     Item *item = [controller objectAtIndexPath:newIndexPath];
     
     static NSString *cellIdentifier = @"Item";
     PriceDetailViewTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    [self configureCell:cell item:item];
-    
-    // цвет выделения ячейки
-    UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = [UIColor colorWithRed:(180.0/255.0) green:(220.0/255.0) blue:(255.0/255.0) alpha:1.0];
-    bgColorView.layer.masksToBounds = YES;
-    cell.selectedBackgroundView = bgColorView;
+    cell.item = item;
+    cell.order = self.order;
+    [cell configure];
     
     return cell;
 }
 
-- (void) configureCell:(PriceDetailViewTableCell *) cell item:(Item *) item{
-    cell.labelName.text = item.name;
-    cell.labelUnit.text = [item.unit unitValueToString];
-    cell.labelPrice.text = [[self.order.client getPriceByItem:item] floatValueFrac2or0];
-    cell.backgroundColor = [item.lineColor lineColor:[UIColor whiteColor]];
-    if(item.promo.boolValue == YES)
-        cell.labelPrice.textColor = [UIColor redColor];
+- (NSIndexPath *) indexPathOfControllerObject:(NSIndexPath *) indexPathOfTableViewCell{
+    long sectionNum = indexPathOfTableViewCell.section;
+    if(self.section != -1){
+        sectionNum = self.section;
+    }
+    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:indexPathOfTableViewCell.row inSection:sectionNum];
+    return newIndexPath;
 }
 
 
@@ -144,22 +137,16 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    long sectionNum = indexPath.section;
-    if(self.section != -1){
-        sectionNum = self.section;
-    }
-    
-    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:indexPath.row inSection:sectionNum];
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
-    Item *item = [controller objectAtIndexPath:newIndexPath];
     
     PriceDetailViewTableCell *cell = (PriceDetailViewTableCell *) [self.tableView cellForRowAtIndexPath:indexPath];
     
     QtySetterView *qtySetter = [self.storyboard instantiateViewControllerWithIdentifier:@"QtySetter"];
-    qtySetter.item = item;
+    qtySetter.item = cell.item;
     qtySetter.delegate = self;
+    qtySetter.order = self.order;
+    
     
     self.localPopoverController = [[UIPopoverController alloc] initWithContentViewController:qtySetter];
     self.localPopoverController.delegate = self;
@@ -184,16 +171,6 @@
     [order addItem:item qty:qty unit:unit];
     [self saveManageObjectContext];
 }
-
-/*-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section1{
-    int newSection = section1;
-    if(self.section != -1){
-        newSection = self.section;
-    }
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.controller.sections objectAtIndex:newSection];
-    return [sectionInfo name];
-}*/
-
 
 
 @end

@@ -20,6 +20,7 @@
     BVAPriceUpdater *priceUpdater;
     AllPhotosUpdater *allPhotosUpdater;
     Boolean isManagedObjectContextUpdating;
+    Boolean isAllPhotosUpdating;
 }
 
 /********** UI-properties and -actions ************/

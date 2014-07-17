@@ -36,6 +36,8 @@
     if(self.item.photos.count >0){
         for(Photo *photo in item.photos){
             if(![photo.filepath isEqualToString:@""] && photo.filepath != nil){
+                //NSLog(@"filepath: %@",photo.filepath);
+                //NSLog(@"content : %@",[NSString stringWithContentsOfFile:photo.filepath encoding:NSStringEncodingConversionExternalRepresentation error:nil]);
                 [self.imageView setImage:[UIImage imageWithContentsOfFile:photo.filepath]];
                 break;
             }

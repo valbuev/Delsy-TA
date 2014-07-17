@@ -77,6 +77,16 @@
             break;
         }
     }
+    // Если уже есть такая позиция, а количество = 0, то удаляем ее
+    if( orderLine != nil && qty.floatValue == 0){
+        [self.managedObjectContext deleteObject:orderLine];
+        [self reCalculateAmount];
+        return;
+    }
+    // Если такой позиции нет, и количество = 0, то выходим, ничего не делая
+    else if (qty.floatValue == 0){
+        return;
+    }
     if( !orderLine ){
         orderLine = [OrderLine newOrderLine:self.managedObjectContext forItem:item forOrder:self];
     }
@@ -97,6 +107,7 @@
     orderLine.baseUnitQty = [NSNumber numberWithFloat: localQty * qty.floatValue ];
     orderLine.price = [NSNumber numberWithFloat:localPrice];
     orderLine.amount = [NSNumber numberWithFloat:(localPrice*localQty*qty.floatValue)];
+    [self reCalculateAmount];
 }
 
 // Пересчитывает сумму заказа

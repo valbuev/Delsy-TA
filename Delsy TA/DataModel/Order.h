@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Address, Client, TA;
+@class Address, Client, TA, AppSettings;
 
 @interface Order : NSManagedObject
 
@@ -24,6 +24,7 @@
 @property (nonatomic, retain) Client *client;
 @property (nonatomic, retain) NSSet *orderLines;
 @property (nonatomic, retain) TA *ta;
+@property (nonatomic, retain) AppSettings *appSettingsLastOrder;
 @end
 
 @interface Order (CoreDataGeneratedAccessors)

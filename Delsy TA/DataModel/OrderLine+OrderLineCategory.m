@@ -17,8 +17,8 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"OrderLine" inManagedObjectContext:context];
     OrderLine *orderLine = [[OrderLine alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
     
-    orderLine.item = item;
     orderLine.order = order;
+    orderLine.item = item;
     orderLine.itemName = [item.name copy];
     orderLine.promo = [item.promo copy];
     
@@ -34,5 +34,6 @@
 //    [super didChangeValueForKey:key];
 //    [self.order didChangeValueForKey:@"orderLines"];
 //}
+
 
 @end

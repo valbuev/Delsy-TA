@@ -25,5 +25,6 @@
 @dynamic client;
 @dynamic orderLines;
 @dynamic ta;
+@dynamic appSettingsLastOrder;
 
 @end
