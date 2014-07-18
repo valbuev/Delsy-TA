@@ -24,10 +24,11 @@
 #import "DeliveryDateView.h"
 #import "SettingsView.h"
 #import "AppSettings+AppSettingsCategory.h"
+#import "ClientListForNewOrder_View.h"
 
 @interface OrderEditView ()
 <PriceViewDelegate,QtySetterViewDelegate,UIPopoverControllerDelegate,
-DeliveryDateViewDelegate>{
+DeliveryDateViewDelegate, OrderInfoViewDelegate>{
     NSFetchedResultsController *orderController;
     PriceSplitView *priceSplitView;
     Boolean isThatWindowShowing;
@@ -74,17 +75,24 @@ DeliveryDateViewDelegate>{
     //
     isThatWindowShowing = YES;
     priceSplitView = nil;
-    self.navigationItem.title = [NSString stringWithFormat:@"%@ (%@%% %@%%)",address.client.name,[address.client.lineSale.allSale1 floatValueSimpleMaxFrac2],[address.client.lineSale.allSale2 floatValueSimpleMaxFrac2]];
+    // Если не передали существующий заказ, то нужно создать новый
     if(!self.order){
         self.order = [Order newOrder:context forAddress:address];
     }
+    [self setObservingForOrder];
     lastNonSentOrder = [AppSettings getInstance:self.context].lastOrder;
+    if (lastNonSentOrder == self.order) {
+        lastNonSentOrder = nil;
+    }
     self.order.appSettingsLastOrder = [AppSettings getInstance:self.context];
-    NSLog(@"OrderEditView viewDidLoad");
     orderController = [order newOrderController];
     orderController.delegate = self;
     [orderController performFetch:nil];
     [self.orderTableView reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [self saveManageObjectContext];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,6 +101,7 @@ DeliveryDateViewDelegate>{
 }
 
 -(void)dealloc{
+    [self removeObservingForOrder];
     NSLog(@"dealloc OrderEditView");
 }
 
@@ -110,6 +119,9 @@ DeliveryDateViewDelegate>{
     if([segue.identifier isEqualToString:@"Info"]){
         OrderInfoView *orderInfoView = (OrderInfoView *) segue.destinationViewController;
         orderInfoView.order = self.order;
+        orderInfoView.delegate = self;
+        self.localPopoverController = [(UIStoryboardPopoverSegue *) segue popoverController];
+        self.localPopoverController.delegate = self;
     }
     if([segue.identifier isEqualToString:@"Mail"]){
         DeliveryDateView *deliveryDateView = (DeliveryDateView *) segue.destinationViewController;
@@ -263,7 +275,6 @@ DeliveryDateViewDelegate>{
         else if (indexPath.row == 1) // addItem-cell
         {
             [self showPrice];
-            //[self.orderTableView reloadData];
         }
     }
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -324,7 +335,6 @@ DeliveryDateViewDelegate>{
         // Обновляем таблицу с кнопкой и суммой, чтобы отобразить корректно сумму
         // Пересчитывает сумму заказа
         [self.order reCalculateAmount];
-        [self.sumAndAddPositionTableView reloadData];
     }
 }
 
@@ -362,7 +372,6 @@ DeliveryDateViewDelegate>{
         }
         // Обновляем таблицу с кнопкой и суммой, чтобы отобразить корректно сумму
         [self.order reCalculateAmount];
-        [self.sumAndAddPositionTableView reloadData];
     }
 }
 
@@ -383,7 +392,7 @@ DeliveryDateViewDelegate>{
         [self.orderTableView reloadData];
         // Обновляем таблицу с кнопкой и суммой, чтобы отобразить корректно сумму
         [self.order reCalculateAmount];
-        [self.sumAndAddPositionTableView reloadData];
+        //[self.sumAndAddPositionTableView reloadData];
     }];
 }
 
@@ -440,6 +449,48 @@ DeliveryDateViewDelegate>{
     //self.localPopoverController = nil;
  return YES;
  }
+
+#pragma mark OrderInfoViewDelegating
+
+//OrderInfoView просить поменять клиента, удовлетворяем ему:
+- (void)orderInfoViewWantChangeClientForOrder{
+    ClientListForNewOrder_View *clientList = [self.storyboard instantiateViewControllerWithIdentifier:@"ClientList"];
+    clientList.clientListViewResult = ClientListViewResult_SetForOrderAndClose;
+    clientList.order = self.order;
+    clientList.managedObjectContext = self.context;
+    [self.localPopoverController dismissPopoverAnimated:YES];
+    [self.navigationController pushViewController:clientList animated:YES];
+}
+
+#pragma mark observing
+
+- (void) setObservingForOrder{
+    [self.order addObserver:self forKeyPath:@"address" options:NSKeyValueObservingOptionInitial context:nil];
+    [self.order addObserver:self forKeyPath:@"amount" options:NSKeyValueObservingOptionInitial context:nil];
+}
+
+- (void) removeObservingForOrder{
+    [self.order removeObserver:self forKeyPath:@"address"];
+    [self.order removeObserver:self forKeyPath:@"amount"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if([keyPath isEqualToString:@"address"]){
+        [self updateAddressOfOrder];
+    }
+    else if ([keyPath isEqualToString:@"amount"]){
+        [self updateOrderAmount];
+    }
+}
+
+- (void) updateAddressOfOrder{
+    self.address = order.address;
+    self.navigationItem.title = [NSString stringWithFormat:@"%@ (%@%% %@%%)",address.client.name,[address.client.lineSale.allSale1 floatValueSimpleMaxFrac2],[address.client.lineSale.allSale2 floatValueSimpleMaxFrac2]];
+}
+
+- (void) updateOrderAmount{
+    [self.sumAndAddPositionTableView reloadData];
+}
 
 
 @end

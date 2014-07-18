@@ -29,6 +29,9 @@
 @synthesize labelTA_id;
 @synthesize labelTA_name;
 @synthesize order;
+@synthesize delegate;
+@synthesize cellClientAddress;
+@synthesize cellClientName;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -79,5 +82,15 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if(cell == self.cellClientName || self.cellClientAddress == cell){
+        if(self.delegate){
+            [self.delegate orderInfoViewWantChangeClientForOrder];
+        }
+    }
+}
 
 @end

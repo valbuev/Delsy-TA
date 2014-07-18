@@ -40,4 +40,7 @@
 // Удаляет все заказы данного агента и возвращает nil, если нет ошибки, или ошибку, если есть.
 + (NSError *) removeAllOrdersForTA:(TA *) ta inMOC:(NSManagedObjectContext *) context;
 
+// Устанавливаем нового клиента и его адрес. Пересчитываем все, что с этим связано.
+- (void) setNewAddress:(Address *) address;
+
 @end

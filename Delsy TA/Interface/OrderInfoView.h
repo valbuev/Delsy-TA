@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class Order;
+@class Order, OrderInfoView;
+
+@protocol OrderInfoViewDelegate
+
+- (void) orderInfoViewWantChangeClientForOrder;
+
+@end
 
 @interface OrderInfoView : UITableViewController
 
@@ -27,5 +33,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelTA_name;
 
 @property (nonatomic,retain) Order *order;
+
+@property (nonatomic, weak) id <OrderInfoViewDelegate> delegate;
+
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellClientName;
+@property (weak, nonatomic) IBOutlet UITableViewCell *cellClientAddress;
+
 
 @end

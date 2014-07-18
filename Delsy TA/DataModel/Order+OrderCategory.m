@@ -92,6 +92,15 @@
     }
     orderLine.qty = qty;
     orderLine.unit = [NSNumber numberWithUnit:unit];
+    [self fillQtyPriceAndAmountForOrderLine:orderLine];
+    [self reCalculateAmount];
+}
+
+// Заполняет количество в базовых единицах, Цену, Сумму данной позиции.
+- (void) fillQtyPriceAndAmountForOrderLine:(OrderLine *) orderLine{
+    Item *item = orderLine.item;
+    Unit unit = orderLine.unit.unitValue;
+    NSNumber *qty = orderLine.qty;
     float localQty;
     if(unit == unitBox){
         localQty = item.unitsInBox.floatValue;
@@ -107,7 +116,6 @@
     orderLine.baseUnitQty = [NSNumber numberWithFloat: localQty * qty.floatValue ];
     orderLine.price = [NSNumber numberWithFloat:localPrice];
     orderLine.amount = [NSNumber numberWithFloat:(localPrice*localQty*qty.floatValue)];
-    [self reCalculateAmount];
 }
 
 // Пересчитывает сумму заказа
@@ -117,7 +125,7 @@
         value += line.amount.floatValue;
     }
     self.amount = [NSNumber numberWithFloat:value];
-    [self.managedObjectContext save:nil];
+    //[self.managedObjectContext save:nil];
 }
 
 // Сохраняет Заказ в xml-файл и возвращает его адрес
@@ -249,6 +257,20 @@
         return error;
     }
 
+}
+
+// Устанавливаем нового клиента и его адрес. Пересчитываем все, что с этим связано.
+- (void) setNewAddress:(Address *) address{
+    if(self.address == address)
+        return;
+    self.address = address;
+    self.client = address.client;
+    self.custAddress = address.address.copy;
+    self.custName = self.client.name.copy;
+    for(OrderLine *orderLine in self.orderLines){
+        [self fillQtyPriceAndAmountForOrderLine:orderLine];
+    }
+    [self reCalculateAmount];
 }
 
 @end

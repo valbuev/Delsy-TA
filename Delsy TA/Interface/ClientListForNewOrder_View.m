@@ -12,6 +12,7 @@
 #import "AppSettings+AppSettingsCategory.h"
 #import "OrderEditView.h"
 #import "OrderListView.h"
+#import "Order+OrderCategory.h"
 
 @interface ClientListForNewOrder_View (){
     
@@ -63,6 +64,21 @@
     }
     return self;
 }
+
+/*-(void) saveManageObjectContext{
+    if(self.managedObjectContext == nil){
+        NSLog(@"ClientListView.managedObjectContext = nil");
+        abort();
+    }
+    else{
+        NSError *error;
+        [self.managedObjectContext save:&error];
+        if(error){
+            NSLog(@"ClientListView.managedObjectContext error while saving: %@",error.localizedDescription);
+            abort();
+        }
+    }
+}*/
 
 #warning create search section index (like 'a', 'b' and i.e.)
 
@@ -341,6 +357,20 @@
     else if([identifier isEqualToString:@"OrderListView"]
             && self.clientListViewResult == ClientListViewResult_OpenOrderListView) {
         return YES;
+    }
+    else if([identifier isEqualToString:@"OrderEditView"]
+            && self.clientListViewResult == ClientListViewResult_SetForOrderAndClose){
+        Address *address;
+        if([self.searchDisplayController isActive]){
+            NSIndexPath *indexPath = [self.searchDisplayController.searchResultsTableView indexPathForSelectedRow];
+            address = [self.fetchedControllerWithFilter objectAtIndexPath:indexPath];
+        } else {
+            NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+            address = [self.fetchedController objectAtIndexPath:indexPath];
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        [self.order setNewAddress:address];
     }
     return NO;
 }

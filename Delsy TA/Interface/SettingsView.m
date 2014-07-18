@@ -402,6 +402,7 @@
     [self.appSettings addObserver:self forKeyPath:@"priceLastUpdate" options:NSKeyValueObservingOptionNew context:nil];
     [self.appSettings addObserver:self forKeyPath:@"currentTA" options:NSKeyValueObservingOptionNew context:nil];
     [self.appSettings addObserver:self forKeyPath:@"lastOrder" options:NSKeyValueObservingOptionInitial context:nil];
+    [self.appSettings addObserver:self forKeyPath:@"lastOrder.client" options:NSKeyValueObservingOptionInitial context:nil];
 }
 
 // Убираем "прослушку" за объектом appSettings
@@ -410,6 +411,7 @@
     [self.appSettings removeObserver:self forKeyPath:@"priceLastUpdate"];
     [self.appSettings removeObserver:self forKeyPath:@"currentTA"];
     [self.appSettings removeObserver:self forKeyPath:@"lastOrder"];
+    [self.appSettings removeObserver:self forKeyPath:@"lastOrder.client"];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
@@ -423,6 +425,9 @@
         [self updateLabelTAName];
     }
     else if([keyPath isEqualToString:@"lastOrder"]){
+        [self updateCellLastOrder];
+    }
+    else if([keyPath isEqualToString:@"lastOrder.client"]){
         [self updateCellLastOrder];
     }
 }

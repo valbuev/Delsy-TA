@@ -302,6 +302,12 @@
             item.composition = itemComposition;
         }
     }
+    NSString *itemAnnotation = [itemDict objectForKey:@"annotation"];
+    if(itemAnnotation){
+        if(![itemAnnotation isEqualToString:@""]){
+            item.annotation = itemAnnotation;
+        }
+    }
     NSString *photo_main = [itemDict objectForKey:@"photo"];
     [self addPhoto:photo_main ForItem:item];
     NSString *photo_1 = [itemDict objectForKey:@"photo1"];

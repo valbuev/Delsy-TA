@@ -19,7 +19,6 @@
 @interface PresentationView : UIViewController
 
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic, weak) id <PresentationViewDelegate> delegate;
 @property (nonatomic, retain) Item *item;
 
