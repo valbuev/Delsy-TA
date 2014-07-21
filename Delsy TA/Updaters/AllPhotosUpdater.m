@@ -97,7 +97,7 @@
     if(fileManagerError == nil){
         NSUInteger index = [downloadTasks indexOfObject:downloadTask];
         if(index > photos.count - 1){
-            NSLog(@"incorrect index: %d",index);
+            NSLog(@"incorrect index: %d",(int)index);
         }
         else{
             Photo *photo = [photos objectAtIndex:index];
@@ -125,7 +125,7 @@
     if(myDelegate != nil){
         [myDelegate AllPhotosUpdater:self
                  didCompleteUpdating: countOfCompletedTasks
-                averageCountOfPhotos: downloadTasks.count];
+                averageCountOfPhotos: (int) downloadTasks.count];
     }
     else{
         NSLog(@"delegate = nil");
@@ -145,7 +145,7 @@
         if(myDelegate != nil){
             [myDelegate AllPhotosUpdater:self
                      didCompleteUpdating: countOfCompletedTasks
-                    averageCountOfPhotos: downloadTasks.count];
+                    averageCountOfPhotos: (int) downloadTasks.count];
         }
     } else {
         //NSLog(@"success: %@", task);
