@@ -44,7 +44,7 @@
     lineSaleLines = [NSMutableArray arrayWithArray:[LineSaleLine getAllLineSaleLines:self.managedObjectContext]];
     errors = [NSMutableArray array];
     fileDownloader = [[BVAFileDownloader alloc] init];
-    NSString *url_str = [NSString stringWithFormat:@"%@Price.xml",self.appSettings.updateFolderURL];
+    NSString *url_str = [NSString stringWithFormat:@"%@Price_iOS.xml",self.appSettings.updateFolderURL];
     [fileDownloader initWithUrl:[NSURL URLWithString:url_str]];
     fileDownloader.delegate = self;
     [fileDownloader startDownload];

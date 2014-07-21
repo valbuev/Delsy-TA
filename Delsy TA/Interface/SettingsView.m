@@ -445,7 +445,7 @@
             if( [message isMemberOfClass:[NSError class]] ){
                 NSMutableDictionary *userInfo = [[(NSError *) message userInfo] mutableCopy];
                 [userInfo removeObjectsForKeys:[NSArray arrayWithObjects:@"NSURLSessionDownloadTaskResumeData", nil]];
-                text = [text stringByAppendingFormat:@"\n%@ userInfo: %@",[(NSError *) message localizedDescription],userInfo];
+                text = [text stringByAppendingFormat:@"\n%@ userInfo: %@",[(NSError *) message localizedDescription],[userInfo objectForKey:@"info"]];
             }
             else {
                 text = [text stringByAppendingFormat:@"\n%@",message];
