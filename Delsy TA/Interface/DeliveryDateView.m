@@ -72,7 +72,7 @@
         
         [controller setMessageBody:[self.order saveOrder2str] isHTML:NO];
         NSData * attachment = [NSData dataWithContentsOfURL:[self.order saveOrder2XMLFile]];
-        [controller addAttachmentData:attachment mimeType:@"text/xml" fileName:@"order.xml"];
+        [controller addAttachmentData:attachment mimeType:@"text/xml" fileName:[NSString stringWithFormat:@"order_%lli_from_iOS_TA.xml",[@(floor([[NSDate date] timeIntervalSince1970] * 1000)) longLongValue]]];
         if (controller) [self presentViewController:controller animated:YES completion:nil];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Почта недоступна" message:@"Невозможно отправить письмо!" delegate:nil cancelButtonTitle:@":(" otherButtonTitles:nil];

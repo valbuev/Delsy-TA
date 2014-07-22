@@ -85,10 +85,15 @@
     else if(units.count == 2){
         [self.segmentsUnit setTitle:((NSNumber *)[unitQtys objectAtIndex:0]).stringValue forSegmentAtIndex:0];
         [self.segmentsUnit setTitle:((NSNumber *)[unitQtys objectAtIndex:1]).stringValue forSegmentAtIndex:1];
+        // Если весовая и вторая единица - не большая коробка
         if([[units objectAtIndex:0] unitValue] == unitKG && [[units objectAtIndex:1] unitValue] != unitBigBox)
             [self.segmentsUnit setSelectedSegmentIndex:1];
-        else
+        // Если вторая единица - коробка
+        else if ( [[units objectAtIndex:1] unitValue] == unitBigBox )
             [self.segmentsUnit setSelectedSegmentIndex:0];
+        // Если штучная
+        else
+            [self.segmentsUnit setSelectedSegmentIndex:0     ];
     }
     else if(units.count == 3){
         [self.segmentsUnit setTitle:((NSNumber *)[unitQtys objectAtIndex:0]).stringValue forSegmentAtIndex:0];
@@ -97,7 +102,7 @@
         if([[units objectAtIndex:0] unitValue] == unitKG)
             [self.segmentsUnit setSelectedSegmentIndex:1];
         else
-            [self.segmentsUnit setSelectedSegmentIndex:0];
+            [self.segmentsUnit setSelectedSegmentIndex:1];
     }
     
     /*if(self.startWithUnit){
