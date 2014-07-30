@@ -64,7 +64,13 @@
          [NSString stringWithFormat:@"Заказ от %@",
           self.order.custName]];
         
-        [controller setToRecipients:[NSArray arrayWithObject:[AppSettings getInstance:self.order.managedObjectContext].defaultRecipient ]];
+        NSString *defaultRecipient = [AppSettings getInstance:self.order.managedObjectContext].defaultRecipient;
+        if( [defaultRecipient isEqualToString:@""] || [self validateEMailAddress: defaultRecipient] )
+            [controller setToRecipients:[NSArray arrayWithObject: defaultRecipient]];
+        else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Ошибка" message:@"Неправильно задан адрес получателя" delegate:nil cancelButtonTitle:@":(" otherButtonTitles:nil];
+            [alert show];
+        }
         
         self.order.date = [NSDate date];
         self.order.deliveryDate = self.DatePicker.date;
@@ -80,6 +86,13 @@
         if(self.delegate)
             [self.delegate deliveryDateViewDidFailSendingMail];
     }
+}
+
+- (BOOL) validateEMailAddress:(NSString *)address{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest =[NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    BOOL myStringMatchesRegEx=[emailTest evaluateWithObject:address];
+    return myStringMatchesRegEx;
 }
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller
