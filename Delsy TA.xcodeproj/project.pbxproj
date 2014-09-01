@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A31F15AA19B42ADE00C302DF /* cart_delete_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A31F15A319B42ADE00C302DF /* cart_delete_icon.png */; };
+		A31F15AB19B42ADE00C302DF /* eye_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A31F15A419B42ADE00C302DF /* eye_icon.png */; };
+		A31F15AC19B42ADE00C302DF /* internet_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A31F15A519B42ADE00C302DF /* internet_icon.png */; };
+		A31F15AD19B42ADE00C302DF /* mail_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A31F15A619B42ADE00C302DF /* mail_icon.png */; };
+		A31F15AE19B42ADE00C302DF /* man_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A31F15A719B42ADE00C302DF /* man_icon.png */; };
+		A31F15AF19B42ADE00C302DF /* pencil_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A31F15A819B42ADE00C302DF /* pencil_icon.png */; };
+		A31F15B019B42ADE00C302DF /* purse_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A31F15A919B42ADE00C302DF /* purse_icon.png */; };
 		A341AFDA195A6472001B7168 /* BVAFileDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFD9195A6472001B7168 /* BVAFileDownloader.m */; };
 		A341AFDD195A8596001B7168 /* BVAClientListUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFDC195A8596001B7168 /* BVAClientListUpdater.m */; };
 		A341AFE9195AA4FE001B7168 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A341AFE8195AA4FE001B7168 /* XMLDictionary.m */; };
@@ -98,6 +105,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A31F15A319B42ADE00C302DF /* cart_delete_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cart_delete_icon.png; sourceTree = "<group>"; };
+		A31F15A419B42ADE00C302DF /* eye_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye_icon.png; sourceTree = "<group>"; };
+		A31F15A519B42ADE00C302DF /* internet_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = internet_icon.png; sourceTree = "<group>"; };
+		A31F15A619B42ADE00C302DF /* mail_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail_icon.png; sourceTree = "<group>"; };
+		A31F15A719B42ADE00C302DF /* man_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man_icon.png; sourceTree = "<group>"; };
+		A31F15A819B42ADE00C302DF /* pencil_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pencil_icon.png; sourceTree = "<group>"; };
+		A31F15A919B42ADE00C302DF /* purse_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purse_icon.png; sourceTree = "<group>"; };
 		A341AFD8195A6472001B7168 /* BVAFileDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BVAFileDownloader.h; path = Updaters/BVAFileDownloader.h; sourceTree = "<group>"; };
 		A341AFD9195A6472001B7168 /* BVAFileDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BVAFileDownloader.m; path = Updaters/BVAFileDownloader.m; sourceTree = "<group>"; };
 		A341AFDB195A8596001B7168 /* BVAClientListUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BVAClientListUpdater.h; path = Updaters/BVAClientListUpdater.h; sourceTree = "<group>"; };
@@ -753,6 +767,13 @@
 		A3BFE9EB19764FF3002776F4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A31F15A319B42ADE00C302DF /* cart_delete_icon.png */,
+				A31F15A419B42ADE00C302DF /* eye_icon.png */,
+				A31F15A519B42ADE00C302DF /* internet_icon.png */,
+				A31F15A619B42ADE00C302DF /* mail_icon.png */,
+				A31F15A719B42ADE00C302DF /* man_icon.png */,
+				A31F15A819B42ADE00C302DF /* pencil_icon.png */,
+				A31F15A919B42ADE00C302DF /* purse_icon.png */,
 				A3BFEA0019790CD1002776F4 /* no_photo.png */,
 				A3BFE9FE197904E0002776F4 /* RedCloseButton.png */,
 				A3BFE9FC1978E8F8002776F4 /* top_wave.png */,
@@ -835,6 +856,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = bva;
 				TargetAttributes = {
+					A35AB8ED194EF1D3002BAF0D = {
+						DevelopmentTeam = 79LLACG9QW;
+					};
 					A35AB90E194EF1D3002BAF0D = {
 						TestTargetID = A35AB8ED194EF1D3002BAF0D;
 					};
@@ -867,14 +891,21 @@
 				A3BFE9FF197904E0002776F4 /* RedCloseButton.png in Resources */,
 				A3BFE9F51977737C002776F4 /* cart.png in Resources */,
 				A35AB90A194EF1D3002BAF0D /* Images.xcassets in Resources */,
+				A31F15AE19B42ADE00C302DF /* man_icon.png in Resources */,
+				A31F15AA19B42ADE00C302DF /* cart_delete_icon.png in Resources */,
 				A3BFE9F119765CD0002776F4 /* CartGreen.png in Resources */,
 				A3BFE9EE19765033002776F4 /* PhotosDontExist.png in Resources */,
 				A35AB8FC194EF1D3002BAF0D /* InfoPlist.strings in Resources */,
+				A31F15AC19B42ADE00C302DF /* internet_icon.png in Resources */,
 				A3BFE9FB197776CC002776F4 /* cart_yelowCheck.png in Resources */,
+				A31F15B019B42ADE00C302DF /* purse_icon.png in Resources */,
 				A3BFE9FD1978E8F8002776F4 /* top_wave.png in Resources */,
 				A3BFEA0119790CD1002776F4 /* no_photo.png in Resources */,
 				A35AB905194EF1D3002BAF0D /* Main.storyboard in Resources */,
+				A31F15AB19B42ADE00C302DF /* eye_icon.png in Resources */,
 				A3BFE9EF19765033002776F4 /* PhotosExist.png in Resources */,
+				A31F15AD19B42ADE00C302DF /* mail_icon.png in Resources */,
+				A31F15AF19B42ADE00C302DF /* pencil_icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1077,13 +1108,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Valeriy Buev (8W63WAKDQR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Delsy TA/Delsy TA-Prefix.pch";
 				INFOPLIST_FILE = "Delsy TA/Delsy TA-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "21672532-D25D-4CE4-81D1-F43094578E68";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1100,6 +1131,7 @@
 				INFOPLIST_FILE = "Delsy TA/Delsy TA-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
