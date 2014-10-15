@@ -89,9 +89,11 @@ DeliveryDateViewDelegate, OrderInfoViewDelegate>{
     orderController.delegate = self;
     [orderController performFetch:nil];
     [self.orderTableView reloadData];
+    self.sumAndAddPositionTableView.rowHeight = 44.0f;
 }
 
 - (void)viewDidAppear:(BOOL)animated{
+    self.orderTableView.rowHeight = 44.0f;
     [self saveManageObjectContext];
 }
 
@@ -321,16 +323,13 @@ DeliveryDateViewDelegate, OrderInfoViewDelegate>{
            atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
     //Если не в фоне, то показываем изменения
     if( isThatWindowShowing == YES ){
-        switch(type) {
-            case NSFetchedResultsChangeInsert:
-                [self.orderTableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                                   withRowAnimation:UITableViewRowAnimationNone];
-                break;
-                
-            case NSFetchedResultsChangeDelete:
-                [self.orderTableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                                   withRowAnimation:UITableViewRowAnimationLeft];
-                break;
+        if (type == NSFetchedResultsChangeInsert){
+            [self.orderTableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                               withRowAnimation:UITableViewRowAnimationNone];
+        }
+        else if ( type == NSFetchedResultsChangeDelete) {
+            [self.orderTableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
+                               withRowAnimation:UITableViewRowAnimationLeft];
         }
         // Обновляем таблицу с кнопкой и суммой, чтобы отобразить корректно сумму
         // Пересчитывает сумму заказа

@@ -16,6 +16,6 @@
 @dynamic url;
 @dynamic item;
 @dynamic name;
-@dynamic deleted;
+@dynamic is_deleted;
 
 @end

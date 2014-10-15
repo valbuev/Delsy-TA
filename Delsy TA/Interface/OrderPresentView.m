@@ -44,6 +44,7 @@
     orderController = [order newOrderController];
     orderController.delegate = self;
     [orderController performFetch:nil];
+    self.sumAndNewOrderTableView.rowHeight = 44.0f;
     [self.orderTableView reloadData];
     [self.sumAndNewOrderTableView reloadData];
 }
@@ -71,8 +72,8 @@
 }
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     if([identifier isEqualToString:@"OrderEditView"]){
-        if(self.order.client.deleted.boolValue == YES
-           || self.order.address.deleted.boolValue == YES){
+        if(self.order.client.is_deleted.boolValue == YES
+           || self.order.address.is_deleted.boolValue == YES){
             //
             return NO;
         }

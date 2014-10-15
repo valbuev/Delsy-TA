@@ -14,7 +14,7 @@
 @interface Client : NSManagedObject
 
 @property (nonatomic, retain) NSString * cust_account;
-@property (nonatomic, retain) NSNumber * deleted;
+@property (nonatomic, retain) NSNumber * is_deleted;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *addresses;
 @property (nonatomic, retain) NSSet *orders;

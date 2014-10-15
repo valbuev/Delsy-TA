@@ -49,7 +49,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY items.deleted == %@",[NSNumber numberWithBool:NO]];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY items.is_deleted == %@",[NSNumber numberWithBool:NO]];
      [request setPredicate:predicate];
     
     NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];

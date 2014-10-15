@@ -254,7 +254,7 @@
     // Запрашиваем managedObject с itemID = itemID и устанавливаем значения
     //NSLog(@"\nTA: %@\n%@ %@",ta.name,addressId,addressName);
     Item *item = [Item getOrCreateItemByItemID:itemID withMOC:self.managedObjectContext];
-    item.deleted = [NSNumber numberWithBool:NO];
+    item.is_deleted = [NSNumber numberWithBool:NO];
     
     [fish addProductTypesObject:productType];
     item.fish = fish;
@@ -366,7 +366,7 @@
             for(Photo *photo in item.photos){
                 if([photo.name isEqualToString:photoName])
                 {
-                    photo.deleted = NO;
+                    photo.is_deleted = NO;
                     return;
                 }
             }
@@ -375,7 +375,7 @@
             photo.item = item;
             photo.url = [NSString stringWithFormat:@"%@%@",self.appSettings.photosFolderURL,photoName];
             photo.filepath = @"";
-            photo.deleted = [NSNumber numberWithBool:NO];
+            photo.is_deleted = [NSNumber numberWithBool:NO];
         }
     }
 }

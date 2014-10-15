@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C1021" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6251" systemVersion="13F34" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Address" representedClassName="Address" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="address_id" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="is_deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Client" inverseName="addresses" inverseEntity="Client" syncable="YES"/>
         <relationship name="orders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Order" inverseName="address" inverseEntity="Order" syncable="YES"/>
     </entity>
@@ -20,7 +20,7 @@
     </entity>
     <entity name="Client" representedClassName="Client" syncable="YES">
         <attribute name="cust_account" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
-        <attribute name="deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="is_deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="addresses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Address" inverseName="client" inverseEntity="Address" syncable="YES"/>
         <relationship name="lineSale" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LineSale" inverseName="clients" inverseEntity="LineSale" syncable="YES"/>
@@ -36,8 +36,8 @@
     <entity name="Item" representedClassName="Item" syncable="YES">
         <attribute name="annotation" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="composition" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="deleted" optional="YES" attributeType="Boolean" indexed="YES" syncable="YES"/>
         <attribute name="hundredGrammsContains" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="is_deleted" optional="YES" attributeType="Boolean" indexed="YES" syncable="YES"/>
         <attribute name="itemID" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="lineColor" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -96,8 +96,8 @@
         <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="orderLines" inverseEntity="Order" syncable="YES"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES">
-        <attribute name="deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="filepath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="is_deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="photos" inverseEntity="Item" syncable="YES"/>
@@ -120,8 +120,8 @@
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="productType" inverseEntity="Item" syncable="YES"/>
     </entity>
     <entity name="TA" representedClassName="TA" syncable="YES">
-        <attribute name="deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="is_deleted" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="clients" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Client" inverseName="ta" inverseEntity="Client" syncable="YES"/>
         <relationship name="orders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Order" inverseName="ta" inverseEntity="Order" syncable="YES"/>
@@ -132,20 +132,20 @@
         <relationship name="item" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" inverseName="thesises" inverseEntity="Item" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Address" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="AppSettings" positionX="0" positionY="0" width="128" height="178"/>
-        <element name="Client" positionX="0" positionY="0" width="128" height="165"/>
-        <element name="Fish" positionX="0" positionY="0" width="128" height="90"/>
-        <element name="Item" positionX="0" positionY="0" width="128" height="360"/>
-        <element name="LineSale" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="LineSaleLine" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="Order" positionX="0" positionY="0" width="128" height="225"/>
-        <element name="OrderLine" positionX="0" positionY="0" width="128" height="180"/>
-        <element name="Photo" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="PriceGroup" positionX="0" positionY="0" width="128" height="90"/>
-        <element name="PriceGroupLine" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="ProductType" positionX="0" positionY="0" width="128" height="90"/>
-        <element name="TA" positionX="0" positionY="0" width="128" height="135"/>
-        <element name="Thesis" positionX="0" positionY="0" width="128" height="75"/>
+        <element name="Address" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AppSettings" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Client" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Fish" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Item" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="LineSale" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="LineSaleLine" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Order" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="OrderLine" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Photo" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="PriceGroup" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="PriceGroupLine" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ProductType" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="TA" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Thesis" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

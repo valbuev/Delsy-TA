@@ -31,7 +31,7 @@
         return;
     }
     else for(item in ItemList){
-        item.deleted = [NSNumber numberWithBool:deleted];
+        item.is_deleted = [NSNumber numberWithBool:deleted];
         n++;
         if(n==20){
             if(![managedObjectContext save:&error]){
@@ -114,7 +114,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(deleted == %@) AND (productType == %@)",[NSNumber numberWithBool:NO],productType];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(is_deleted == %@) AND (productType == %@)",[NSNumber numberWithBool:NO],productType];
     [request setPredicate:predicate];
     
     NSSortDescriptor *sort1 = [NSSortDescriptor sortDescriptorWithKey:@"fish.name" ascending:YES];

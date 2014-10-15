@@ -10,31 +10,31 @@
 	<string>Delsy TA</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>A04387DE-52B0-4494-A20C-FE4BDA85BEDD</key>
-		<string>https://github.com/valbuev/Delsy-TA.git</string>
+		<key>3962A8DA0C2B04FD753D027D4BE588B88CF7E9DE</key>
+		<string>https://github.com/valbuev/Delsy-TA</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Delsy TA.xcodeproj/project.xcworkspace</string>
+	<string>Delsy TA.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>A04387DE-52B0-4494-A20C-FE4BDA85BEDD</key>
+		<key>3962A8DA0C2B04FD753D027D4BE588B88CF7E9DE</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/valbuev/Delsy-TA.git</string>
+	<string>https://github.com/valbuev/Delsy-TA</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>A04387DE-52B0-4494-A20C-FE4BDA85BEDD</string>
+	<string>3962A8DA0C2B04FD753D027D4BE588B88CF7E9DE</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>A04387DE-52B0-4494-A20C-FE4BDA85BEDD</string>
+			<string>3962A8DA0C2B04FD753D027D4BE588B88CF7E9DE</string>
 			<key>IDESourceControlWCCName</key>
-			<string>Delsy TA</string>
+			<string>Delsy-TA</string>
 		</dict>
 	</array>
 </dict>

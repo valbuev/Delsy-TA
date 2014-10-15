@@ -103,7 +103,6 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     NSIndexPath *newIndexPath = [self indexPathOfControllerObject:indexPath];
     Item *item = [controller objectAtIndexPath:newIndexPath];
     

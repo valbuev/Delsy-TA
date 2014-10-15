@@ -31,7 +31,7 @@
         return;
     }
     else for(photo in photoList){
-        photo.deleted = [NSNumber numberWithBool:deleted];
+        photo.is_deleted = [NSNumber numberWithBool:deleted];
         n++;
         if(n==20){
             if(![managedObjectContext save:&error]){
@@ -59,7 +59,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted == %d",YES];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"is_deleted == %d",YES];
     [request setPredicate:predicate];
     
     // получаем список всех фотографий, помеченных, как удаленные

@@ -171,10 +171,10 @@
     appSettings.clientsListLastUpdate = [NSDate date];
     TA *currentTA = appSettings.currentTA;
     if( currentTA )
-        if( currentTA.deleted.boolValue == YES )
+        if( currentTA.is_deleted.boolValue == YES )
             appSettings.currentTA = nil;
     Order *lastOrder = appSettings.lastOrder;
-    if ( lastOrder.client.deleted.boolValue == YES || lastOrder.address.deleted.boolValue == YES || lastOrder.ta.deleted.boolValue == YES ){
+    if ( lastOrder.client.is_deleted.boolValue == YES || lastOrder.address.is_deleted.boolValue == YES || lastOrder.ta.is_deleted.boolValue == YES ){
         appSettings.lastOrder = nil;
     }
     [self saveManageObjectContext];
@@ -212,7 +212,7 @@
         // Запрашиваем managedObject с id = TAid и устанавливаем значения
         TA *ta = [TA getTAbyID:TAid withMOC:self.managedObjectContext];
         ta.name = TAname;
-        ta.deleted = NO;
+        ta.is_deleted = NO;
         
         // Сохраняем клиентов и адреса текущего ТА
         [self saveAddressListIntoCoreData:addressDicts forTA:ta];
@@ -283,17 +283,17 @@
     Address *address = [Address getAddressByAddressId:addressId withMOC:self.managedObjectContext];
     
     //NSLog(@"\nTA: %@\n2 %@ %@ %@",ta.name,custAccount,clientName,clientSale);
-    if(client.deleted.boolValue == YES){
+    if(client.is_deleted.boolValue == YES){
 
         client.priceGroup = (PriceGroup *)[self priceGroupFromMutableArrayByName:priceGroup_str];
         client.lineSale = (LineSale *)[self lineSaleFromMutableArrayByName:lineSale_str];
         //NSLog(@"\nclient: %@ ta: %@ \npriceGroup: %@, priceGroup_str: %@\n lineSale: %@ sale1: %@ sale2: %@  lineSale_str: %@",clientName,ta.name,client.priceGroup.name,priceGroup_str,client.lineSale.name,client.lineSale.allSale1,client.lineSale.allSale1,lineSale_str);
         client.name = clientName;
-        client.deleted = [NSNumber numberWithBool:NO];
+        client.is_deleted = [NSNumber numberWithBool:NO];
         client.ta = ta;
     }
     address.address = addressName;
-    address.deleted = [NSNumber numberWithBool:NO];
+    address.is_deleted = [NSNumber numberWithBool:NO];
     address.client = client;
     //NSLog(@"\nTA: %@\n3 %@ %@ %@",ta.name,custAccount,clientName,clientSale);
 }

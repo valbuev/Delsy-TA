@@ -35,7 +35,7 @@
         return;
     }
     else for(client in ClientList){
-        client.deleted = [NSNumber numberWithBool:isDeleted];
+        client.is_deleted = [NSNumber numberWithBool:isDeleted];
         n++;
         if(n==20){
             if(![context save:&error]){
@@ -71,7 +71,7 @@
         if( array.count == 0 ){
             client = [[Client alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
             client.cust_account = custAccount;
-            client.deleted = [NSNumber numberWithBool:YES];
+            client.is_deleted = [NSNumber numberWithBool:YES];
         }
         else{
             client = [array objectAtIndex:0];

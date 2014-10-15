@@ -17,7 +17,7 @@
 @implementation Client
 
 @dynamic cust_account;
-@dynamic deleted;
+@dynamic is_deleted;
 @dynamic name;
 @dynamic addresses;
 @dynamic orders;

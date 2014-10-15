@@ -63,7 +63,7 @@
         return;
     }
     else for(ta in TAlist){
-        ta.deleted = [NSNumber numberWithBool:deleted];
+        ta.is_deleted = [NSNumber numberWithBool:deleted];
     }
 }
 
@@ -99,7 +99,7 @@
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     [request setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"deleted = %@",NO];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"is_deleted = %@",NO];
     [request setPredicate:predicate];
     
     NSError *error = nil;

@@ -31,7 +31,7 @@
         return;
     }
     else for(address in Addresslist){
-        address.deleted = [NSNumber numberWithBool:isDeleted];
+        address.is_deleted = [NSNumber numberWithBool:isDeleted];
         n++;
         if(n==20){
             if(![context save:&error]){
@@ -107,7 +107,7 @@
         if( array.count == 0 ){
             address = [[Address alloc] initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
             address.address_id = addressId;
-            address.deleted = [NSNumber numberWithBool:YES];
+            address.is_deleted = [NSNumber numberWithBool:YES];
         }
         else{
             address = [array objectAtIndex:0];
@@ -129,7 +129,7 @@
         [predicates addObject:[NSPredicate predicateWithFormat:@"client.ta == %@",ta]];
     
         if(deleted != nil) {
-            [predicates addObject:[NSPredicate predicateWithFormat:@"( deleted == %d ) AND ( client.deleted == %d ) ",deleted.boolValue,deleted.boolValue]];
+            [predicates addObject:[NSPredicate predicateWithFormat:@"( is_deleted == %d ) AND ( client.is_deleted == %d ) ",deleted.boolValue,deleted.boolValue]];
         }
         if(shouldHaveOrder == YES) {
             [predicates addObject:[NSPredicate predicateWithFormat:@"orders.@count > 0"]];
@@ -167,7 +167,7 @@
         //NSLog(@"%@",deleted);
         if(deleted != nil)
         {
-            [predicates addObject:[NSPredicate predicateWithFormat:@"( deleted == %d ) AND ( client.deleted == %d ) ",deleted.boolValue,deleted.boolValue]];
+            [predicates addObject:[NSPredicate predicateWithFormat:@"( is_deleted == %d ) AND ( client.is_deleted == %d ) ",deleted.boolValue,deleted.boolValue]];
         }
         if(shouldHaveOrder == YES){
             [predicates addObject:[NSPredicate predicateWithFormat:@"orders.@count > 0"]];

@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSString * annotation;
 @property (nonatomic, retain) NSString * composition;
-@property (nonatomic, retain) NSNumber * deleted;
+@property (nonatomic, retain) NSNumber * is_deleted;
 @property (nonatomic, retain) NSString * hundredGrammsContains;
 @property (nonatomic, retain) NSString * itemID;
 @property (nonatomic, retain) NSNumber * lineColor;

@@ -16,7 +16,7 @@
 
 @dynamic id;
 @dynamic name;
-@dynamic deleted;
+@dynamic is_deleted;
 @dynamic clients;
 @dynamic orders;
 @dynamic settings;

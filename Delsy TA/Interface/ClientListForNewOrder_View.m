@@ -133,7 +133,7 @@
     }
     else {
         cell.textLabel.text =[NSString stringWithFormat:@"%@", address.address];
-        if(address.deleted.boolValue == YES){
+        if(address.is_deleted.boolValue == YES){
             cell.textLabel.textColor = [UIColor grayColor];
         } else {
             cell.textLabel.textColor = [UIColor blackColor];
@@ -179,12 +179,15 @@
         id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedController.sections objectAtIndex:section];
         cell.textLabel.text = [sectionInfo name];
         cell.backgroundColor = [UIColor clearColor];
-        return cell.contentView;
+        // начиная с версии ios8, возвращаем именно cell, а не cell.contentView.
+        // почему? хз..
+        return cell;
     }
     else {
         static NSString *cellIdentifier = @"ClientNameCell";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedControllerWithFilter.sections objectAtIndex:section];
+        // тут почему-то не удается получитть ячейку, из-за чего она = nil
         cell.textLabel.text = [sectionInfo name];
         cell.backgroundColor = [UIColor clearColor];
         return cell.contentView;

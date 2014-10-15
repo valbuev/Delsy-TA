@@ -134,7 +134,7 @@
         ProductType *productType = [productTypes objectAtIndex:section];
         [NSFetchedResultsController deleteCacheWithName:@"ru.bva.DelsyTA.fetchRequestForPriceMasterView"];
         [self.controller.fetchRequest setPredicate:
-             [NSPredicate predicateWithFormat:@"(deleted == %@) AND (productType == %@)",
+             [NSPredicate predicateWithFormat:@"(is_deleted == %@) AND (productType == %@)",
               [NSNumber numberWithBool:NO],productType]];
         [self.controller performFetch:nil];
         
@@ -165,6 +165,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    //NSLog(@"working section = %d activesection = %d count =  %d",section,activeSection,self.controller.sections.count);
     if(section == activeSection && isActiveSectionOpened == YES){
         //
         return self.controller.sections.count;
@@ -175,6 +176,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //NSLog(@"working 3");
     static NSString *cellIdentifier = @"Fish";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     

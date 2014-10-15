@@ -27,6 +27,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.maximumPrimaryColumnWidth = 190.0f;
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,7 +38,8 @@
 
 
 // Устанавливаем ширину MasterViewController
-- (void)viewDidLayoutSubviews
+// 14.10.2014 зацикливается, сволочь:(
+/*- (void)viewWillLayoutSubviews
 {
     const CGFloat kMasterViewWidth = 190.0;
     
@@ -60,7 +62,7 @@
         [masterViewController.view setNeedsLayout];
         [detailViewController.view setNeedsLayout];
     }
-}
+}*/
 
 /*
 #pragma mark - Navigation

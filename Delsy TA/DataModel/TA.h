@@ -15,7 +15,7 @@
 
 @property (nonatomic, retain) NSString * id;
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * deleted;
+@property (nonatomic, retain) NSNumber * is_deleted;
 @property (nonatomic, retain) NSSet *clients;
 @property (nonatomic, retain) NSSet *orders;
 @property (nonatomic, retain) AppSettings *settings;

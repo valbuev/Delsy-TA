@@ -18,7 +18,7 @@
 
 @dynamic annotation;
 @dynamic composition;
-@dynamic deleted;
+@dynamic is_deleted;
 @dynamic hundredGrammsContains;
 @dynamic itemID;
 @dynamic lineColor;
