@@ -22,9 +22,11 @@ UIPopoverControllerDelegate>
 
 @property (nonatomic,retain) NSManagedObjectContext *context;
 @property (nonatomic,retain) Order *order;
-@property (nonatomic,weak) NSFetchedResultsController *controller;
-@property (nonatomic) NSInteger section;
+@property (nonatomic, retain) Fish *fish;
+@property (nonatomic, retain) ProductType *productType;
 
 @property (nonatomic,weak) IBOutlet UITableView *tableView;
+
+- (void) reloadData;
 
 @end

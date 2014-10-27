@@ -21,6 +21,7 @@
 }
 
 @property (nonatomic,retain) UIPopoverController *localPopoverController;
+@property (nonatomic,retain) NSFetchedResultsController *controller;
 
 @end
 
@@ -28,26 +29,28 @@
 
 @synthesize context;
 @synthesize order;
-@synthesize controller;
-@synthesize section;
+@synthesize controller = _controller;
+@synthesize fish;
+@synthesize productType;
 @synthesize tableView;
 @synthesize localPopoverController;
 
 #pragma mark initialization and basic ui actions
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+-(NSFetchedResultsController *)controller{
+    if(_controller != nil)
+        return _controller;
+    _controller = [Item getControllerGroupByProducer:self.context
+                                      forProductType:self.productType];
+    [_controller performFetch:nil];
+    NSLog(@"create controller");
+    return _controller;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    section = -1; // нет конкретного типа рыбы, т.е. отображаются все.
+    self.fish = nil; // нет конкретного типа рыбы, т.е. отображаются все.
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,40 +74,30 @@
     }
 }
 
+- (void) reloadData {
+    [NSFetchedResultsController deleteCacheWithName:@"ru.bva.DelsyTA.fetchRequestForPriceDetailView"];
+    [self.controller.fetchRequest setPredicate:[Item predicateForFilterItemsByProdType: self.productType
+                                                                                  fish: self.fish]];
+    [self.controller performFetch:nil];
+    [self.tableView reloadData];
+    NSLog(@"relod data");
+}
+
 #pragma mark uitableViewDelegate, DataSource
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if(self.section == -1) // нет конкретного типа рыбы, т.е. отображаются все.
-    {
-        if(self.controller)
-            return self.controller.sections.count;
-        else
-            return 0;
-    }
-    else{
-        if(self.controller)
-            return 1;
-        else
-            return 0;
-    }
-    
+    return self.controller.sections.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section1{
     id <NSFetchedResultsSectionInfo> sectionInfo;
-    if(self.section == -1) // нет конкретного типа рыбы, т.е. отображаются все.
-    {
-        sectionInfo = [self.controller.sections objectAtIndex:section1];
-    }
-    else{
-        sectionInfo = [self.controller.sections objectAtIndex:self.section];
-    }
+    sectionInfo = [self.controller.sections objectAtIndex:section1];
     return [sectionInfo numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSIndexPath *newIndexPath = [self indexPathOfControllerObject:indexPath];
-    Item *item = [controller objectAtIndexPath:newIndexPath];
+    
+    Item *item = [self.controller objectAtIndexPath:indexPath];
     
     static NSString *cellIdentifier = @"Item";
     PriceDetailViewTableCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
@@ -115,23 +108,18 @@
     return cell;
 }
 
-- (NSIndexPath *) indexPathOfControllerObject:(NSIndexPath *) indexPathOfTableViewCell{
-    long sectionNum = indexPathOfTableViewCell.section;
-    if(self.section != -1){
-        sectionNum = self.section;
-    }
-    NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:indexPathOfTableViewCell.row inSection:sectionNum];
-    return newIndexPath;
-}
-
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section1{
-    if(section1 == 0)
-    return 6;
-    return 3;
+    return 25;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 2;
+}
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    id <NSFetchedResultsSectionInfo> sectionInfo;
+    sectionInfo = [self.controller.sections objectAtIndex:section];
+    return [sectionInfo name];
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

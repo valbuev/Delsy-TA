@@ -67,15 +67,25 @@
     }
 }
 
-/*// Возвращает созданный контроллер. Секции - типы продукта, ячейки - виды рыб. Фильтр - имеется хотся бы один не удаленный товар из этой категории.
-+(NSFetchedResultsController *) getControllerOfFishesWithoutDeletedItemsAndGroupedByProductType: (NSManagedObjectContext *) context{
+/*+(NSArray *) getFishesForProdType:(ProductType *) productType context: (NSManagedObjectContext *) context {
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Fish" inManagedObjectContext:context];
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@""]
+}*/
+
+// Возвращает созданный контроллер. Секции - типы продукта, ячейки - виды рыб. Фильтр - имеется хотся бы один не удаленный товар из этой категории.
+/*+(NSFetchedResultsController *) getControllerOfFishesWithoutDeletedItemsAndGroupedByProductType: (NSManagedObjectContext *) context{
     NSFetchedResultsController *controller;
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Fish" inManagedObjectContext:context];
     
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entity];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY items.deleted == 0"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"ANY items.is_deleted == %@", [NSNumber numberWithBool:NO]];
     [request setPredicate:predicate];
     
     //NSSortDescriptor *sortDescriptor1 = [[NSSortDescriptor alloc] initWithKey:@"productTypes.name" ascending:YES];

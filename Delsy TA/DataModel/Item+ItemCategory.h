@@ -29,4 +29,10 @@
 // Проверяет, есть ли загруженные фотографии
 - (Boolean) haveDownloadedPhotos;
 
+// создает контроллер неудаленных items сгруппированных по производителю и отфильтрованных по типу продукта
++(NSFetchedResultsController *) getControllerGroupByProducer:(NSManagedObjectContext *) context forProductType:(ProductType *) productType ;
+
+// создает предикат, предназначенный для фильтрации продуктов по типу продукта и по типу рыбы
++ (NSPredicate *) predicateForFilterItemsByProdType:(ProductType *) prodType fish:(Fish *) fish ;
+
 @end

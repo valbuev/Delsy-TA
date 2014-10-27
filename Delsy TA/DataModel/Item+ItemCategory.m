@@ -159,5 +159,36 @@
     return NO;
 }
 
+// создает контроллер неудаленных items сгруппированных по производителю и отфильтрованных по типу продукта
++(NSFetchedResultsController *) getControllerGroupByProducer:(NSManagedObjectContext *) context forProductType:(ProductType *) productType {
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Item" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entity];
+    
+    NSPredicate *predicate = [Item predicateForFilterItemsByProdType: productType fish: nil];
+    [request setPredicate:predicate];
+    
+    NSSortDescriptor *sort1 = [NSSortDescriptor sortDescriptorWithKey:@"producer" ascending:YES];
+    NSSortDescriptor *sort2 = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    [request setSortDescriptors:[NSArray arrayWithObjects:sort1,sort2, nil]];
+    
+    NSFetchedResultsController *controller =
+    [[NSFetchedResultsController alloc]
+     initWithFetchRequest:request
+     managedObjectContext:context
+     sectionNameKeyPath:@"producer"
+     cacheName:@"ru.bva.DelsyTA.fetchRequestForPriceDetailView"];
+    
+    return controller;
+}
+
+// создает предикат, предназначенный для фильтрации продуктов по типу продукта и по типу рыбы
++ (NSPredicate *) predicateForFilterItemsByProdType:(ProductType *) prodType fish:(Fish *) fish {
+    if( fish != nil )
+        return [NSPredicate predicateWithFormat:@"(is_deleted == %@) AND (productType == %@) and (fish == %@)",[NSNumber numberWithBool:NO],prodType,fish];
+    else
+        return [NSPredicate predicateWithFormat:@"(is_deleted == %@) AND (productType == %@)",[NSNumber numberWithBool:NO],prodType];
+}
+
 
 @end

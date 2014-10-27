@@ -14,7 +14,9 @@
 #import "Item+ItemCategory.h"
 
 
-@interface PriceMasterView (){
+@interface PriceMasterView ()
+<NSFetchedResultsControllerDelegate>
+{
     //NSFetchedResultsController *controller;
     NSArray *productTypes;
     NSInteger activeSection;
@@ -22,6 +24,8 @@
 }
 
 @property (nonatomic,retain) NSFetchedResultsController *controller;
+
+@property (nonatomic, retain) NSFetchedResultsController *prodTypesAndFishes;
 
 @end
 
@@ -31,8 +35,13 @@
 @synthesize mainNavigationController;
 @synthesize priceDetailView;
 @synthesize controller = _controller;
+@synthesize prodTypesAndFishes = _prodTypesAndFishes;
 
 #pragma mark initialization and basic viewcontroller functions
+
+- (NSFetchedResultsController *) prodTypesAndFishes {
+    return _prodTypesAndFishes;
+}
 
 -(NSFetchedResultsController *)controller{
     if(_controller != nil)
@@ -41,8 +50,8 @@
     _controller = [Item getControllerGroupByFish:self.context forProductType:productType];
     //_controller.delegate = self;
     [_controller performFetch:nil];
-    self.priceDetailView.section = -1;
-    self.priceDetailView.controller = _controller;
+    self.priceDetailView.productType = productType;
+    [self.priceDetailView reloadData];
     return _controller;
 }
 
@@ -54,15 +63,6 @@
     if(self.delegate){
         [self.delegate priceViewWillFinishShowing];
     }
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
 }
 
 - (void)viewDidLoad
@@ -97,9 +97,9 @@
     if(section == activeSection){
         if(isActiveSectionOpened == YES){
             isActiveSectionOpened = NO;
-            if(self.priceDetailView.section != -1){
-                self.priceDetailView.section = -1;
-                [self.priceDetailView.tableView reloadData];
+            if(self.priceDetailView.fish != nil){
+                self.priceDetailView.fish = nil;
+                [self.priceDetailView reloadData];
             }
             NSMutableArray *array = [NSMutableArray array];
             for(int i=0;i<self.controller.sections.count;i++){
@@ -138,13 +138,15 @@
               [NSNumber numberWithBool:NO],productType]];
         [self.controller performFetch:nil];
         
+        self.priceDetailView.productType = productType;
+        self.priceDetailView.fish = nil;
+        [self.priceDetailView reloadData];
+        
 //        NSMutableArray *array = [NSMutableArray array];
 //        for(int i=0;i<self.controller.sections.count;i++){
 //            [array addObject:[NSIndexPath indexPathForRow:i inSection:section]];
 //        }
 //        [self.tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationRight];
-        self.priceDetailView.section = -1;
-        [self.priceDetailView.tableView reloadData];
         [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:activeSection]
                       withRowAnimation:UITableViewRowAnimationRight];
     }
@@ -241,8 +243,9 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    self.priceDetailView.section = indexPath.row;
-    [self.priceDetailView.tableView reloadData];
+    Item *firstItemInSection = [self.controller objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:indexPath.row]];
+    self.priceDetailView.fish = firstItemInSection.fish;
+    [self.priceDetailView reloadData];
 }
 
 /*

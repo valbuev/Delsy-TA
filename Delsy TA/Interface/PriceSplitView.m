@@ -28,6 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.maximumPrimaryColumnWidth = 190.0f;
+    
 }
 
 - (void)didReceiveMemoryWarning
