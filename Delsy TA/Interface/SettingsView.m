@@ -445,7 +445,7 @@
             if( [message isMemberOfClass:[NSError class]] ){
                 NSMutableDictionary *userInfo = [[(NSError *) message userInfo] mutableCopy];
                 [userInfo removeObjectsForKeys:[NSArray arrayWithObjects:@"NSURLSessionDownloadTaskResumeData", nil]];
-                text = [text stringByAppendingFormat:@"\n%@ userInfo: %@",[(NSError *) message localizedDescription],[userInfo objectForKey:@"info"]];
+                text = [text stringByAppendingFormat:@"\n%@",[userInfo objectForKey:@"info"]];
             }
             else {
                 text = [text stringByAppendingFormat:@"\n%@",message];
@@ -460,7 +460,7 @@
         title_label.textAlignment = NSTextAlignmentCenter;
         title_label.textColor = [UIColor colorWithRed:0.5f green:0.1f blue:0.1f alpha:1.0f];
         title_label.font = [UIFont systemFontOfSize:22.0f];
-        UIFont *font = [UIFont systemFontOfSize:10.0f];
+        UIFont *font = [UIFont systemFontOfSize:15.0f];
         UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, 600, 600)];
         scrollView.scrollEnabled = YES;
         [label setFont:font];

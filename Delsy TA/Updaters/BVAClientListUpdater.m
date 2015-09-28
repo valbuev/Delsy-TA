@@ -143,7 +143,6 @@
         [self saveErrorAndSayDelegateAboutError:error];
         return;
     }
-    
     // Помечаем все ТА-managedObject-ы как deleted
     [TA setAllTADeleted:YES InManagedObjectContext:self.managedObjectContext];
     
@@ -482,8 +481,8 @@
         return;
     }
     if([priceGroupDict objectForKey:@"item"] == nil){
-        [errors addObject:[NSError errorWithDomain:@"savePriceGroupIntoCoreData" code:9997
-                                          userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"priceGroup-tag dont contain items"] forKey:@"info"]]];
+//        [errors addObject:[NSError errorWithDomain:@"savePriceGroupIntoCoreData" code:9997
+//                                          userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"priceGroup-tag dont contain items"] forKey:@"info"]]];
         return;
     }
     PriceGroup *priceGroup = [PriceGroup newPriceGroupInManObjContext:self.managedObjectContext];

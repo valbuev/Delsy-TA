@@ -234,6 +234,7 @@
     NSNumber *itemUnitsInBox = [NSNumber numberWithFloat:[[itemDict objectForKey:@"_unitsInBox"] floatValue] ];
     NSNumber *itemUnitsInBigBox = [NSNumber numberWithFloat:[[itemDict objectForKey:@"_unitsInBigBox"] floatValue] ];
     NSString *fishName = [itemDict objectForKey:@"_fishType"];
+    NSLog(@"1");
     // Если какие-либо значения не верны, переходим к следующему Item
     if( [itemName isEqualToString:@""]
        || [itemID isEqualToString:@""]
@@ -243,7 +244,12 @@
        || !(itemUnitsInBox.floatValue >0)
        || !(itemUnitsInBigBox.floatValue >0)
        || [fishName isEqualToString:@""] ){
-        [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9997
+        if([fishName isEqualToString:@""]){
+            [errors addObject:[NSError errorWithDomain:@"ВНИМАНИЕ !!!" code:9997 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"Скажите менеджеру, чтобы завел новый тип рыбы для этого товара: Имя: %@ itemID: %@",itemName,itemID] forKey:@"info"]]];
+//            [errors addObject:[NSError errorWithDomain:@"errorWithParsing" code:9997 userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"Скажите менеджеру, чтобы завел новый тип рыбы для этого товара: Имя: %@ itemID: %@",itemName,itemID] forKey:@"info"]]];
+        }
+        else
+            [errors addObject:[NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9997
                                           userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"<item> tag contain any wrong values: itemName:%@ itemID:%@ itemPrice:%@ itemUnit:%@ itemUnitsInBox:%@ itemUnitsInBigBox:%@ fishName:%@",itemName,itemID,itemPrice,itemUnit,itemUnitsInBox,itemUnitsInBigBox,fishName] forKey:@"info"]]];
         return;
     }
