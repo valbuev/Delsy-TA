@@ -101,8 +101,12 @@
                 plusable = priceGroupLine.plusable.boolValue;
                 break;
             }
+            if( !set.count && [item.producer isEqualToString: @"Рыбак"]){ // если нет спец цены по этому товару для этого клиента, И производитель продукта - рыбак, то скидку НЕ ДЕЛАЕМ
+                return item.price;
+            }
         }
     }
+    
     if(plusable){
         if(self.lineSale){
             NSMutableSet *lineSaleLines = [self.lineSale.lineSaleLines mutableCopy];

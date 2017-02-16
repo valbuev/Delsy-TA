@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CFD0F3B1E4C64750062059C /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CFD0F3A1E4C64750062059C /* ExternalAccessory.framework */; };
 		A31F15AA19B42ADE00C302DF /* cart_delete_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A31F15A319B42ADE00C302DF /* cart_delete_icon.png */; };
 		A31F15AB19B42ADE00C302DF /* eye_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A31F15A419B42ADE00C302DF /* eye_icon.png */; };
 		A31F15AC19B42ADE00C302DF /* internet_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = A31F15A519B42ADE00C302DF /* internet_icon.png */; };
@@ -105,6 +106,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3C4FE54C1E4C390100054D65 /* Delsy TA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Delsy TA.entitlements"; sourceTree = "<group>"; };
+		3CFD0F3A1E4C64750062059C /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		A31F15A319B42ADE00C302DF /* cart_delete_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cart_delete_icon.png; sourceTree = "<group>"; };
 		A31F15A419B42ADE00C302DF /* eye_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye_icon.png; sourceTree = "<group>"; };
 		A31F15A519B42ADE00C302DF /* internet_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = internet_icon.png; sourceTree = "<group>"; };
@@ -255,6 +258,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CFD0F3B1E4C64750062059C /* ExternalAccessory.framework in Frameworks */,
 				A3BBE157196E9D7C00F490EE /* MessageUI.framework in Frameworks */,
 				A3F96CB1194FEAE000C0C66E /* CoreData.framework in Frameworks */,
 				A35AB8F4194EF1D3002BAF0D /* CoreGraphics.framework in Frameworks */,
@@ -563,6 +567,7 @@
 		A35AB8F0194EF1D3002BAF0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3CFD0F3A1E4C64750062059C /* ExternalAccessory.framework */,
 				A3BBE156196E9D7C00F490EE /* MessageUI.framework */,
 				A3F96CB0194FEAE000C0C66E /* CoreData.framework */,
 				A35AB8F1194EF1D3002BAF0D /* Foundation.framework */,
@@ -576,6 +581,7 @@
 		A35AB8F7194EF1D3002BAF0D /* Delsy TA */ = {
 			isa = PBXGroup;
 			children = (
+				3C4FE54C1E4C390100054D65 /* Delsy TA.entitlements */,
 				A341AFD5195A62EC001B7168 /* Updaters */,
 				A3ACB9681959481A00D2C77A /* Interface */,
 				A3F96CB5194FEB9600C0C66E /* DataModel */,
@@ -858,6 +864,23 @@
 				TargetAttributes = {
 					A35AB8ED194EF1D3002BAF0D = {
 						DevelopmentTeam = 79LLACG9QW;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.GameCenter = {
+								enabled = 0;
+							};
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.WAC = {
+								enabled = 1;
+							};
+						};
 					};
 					A35AB90E194EF1D3002BAF0D = {
 						TestTargetID = A35AB8ED194EF1D3002BAF0D;
@@ -1107,13 +1130,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Valeriy Buev (79LLACG9QW)";
+				CODE_SIGN_ENTITLEMENTS = "Delsy TA/Delsy TA.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Valeriy Buev (8W63WAKDQR)";
+				DEVELOPMENT_TEAM = 79LLACG9QW;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Delsy TA/Delsy TA-Prefix.pch";
 				INFOPLIST_FILE = "Delsy TA/Delsy TA-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "24912d3f-4c91-461b-a808-792b000c2bbd";
+				PROVISIONING_PROFILE = "9831124a-901b-43d7-84a0-1e85b08bd032";
+				PROVISIONING_PROFILE_SPECIFIER = "Delsy TA";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1123,6 +1149,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = "Delsy TA/Delsy TA.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Valeriy Buev (79LLACG9QW)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Delsy TA/Delsy TA-Prefix.pch";

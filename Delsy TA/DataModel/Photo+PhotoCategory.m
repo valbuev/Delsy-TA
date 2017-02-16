@@ -103,6 +103,7 @@
     else
         predicate = [NSPredicate predicateWithFormat:@" (url != '') and (url != nil) "];
     [request setPredicate:predicate];
+    [request setFetchLimit:15]; // ограничение количества скачиваемых фотографий (для теста)
     
     NSError *error;
     NSArray *array = [context executeFetchRequest:request error:&error];

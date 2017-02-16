@@ -32,7 +32,8 @@
     static NSURLSession *session = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfiguration:@"ru.bva.DelsyTA.backgroundSessoinForDownloadingPhotos_"];
+        //NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfiguration:@"ru.bva.DelsyTA.backgroundSessoinForDownloadingPhotos_"];
+        NSURLSessionConfiguration *config = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:@"ru.bva.DelsyTA.backgroundSessoinForDownloadingPhotos_"];
         config.HTTPMaximumConnectionsPerHost = 3;
         config.allowsCellularAccess = NO;
         config.timeoutIntervalForRequest = 0;
@@ -157,10 +158,10 @@
     //[mysession getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks1){
     [[self backgroundSession] getTasksWithCompletionHandler:^(NSArray *dataTasks, NSArray *uploadTasks, NSArray *downloadTasks1){
         NSUInteger count = dataTasks.count + uploadTasks.count + downloadTasks1.count;
-        //NSLog(@"count of tasks: %d",downloadTasks1.count);
-        if (count == 0) {
+        NSLog(@"count of tasks: %u",(unsigned int)downloadTasks1.count);
+        if (count == 1) {
             // все таски закончены
-            //NSLog(@"all tasks ended");
+            NSLog(@"all tasks ended");
             AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
             if (appDelegate.backgroundSessionCompletionHandler) {
                 void (^completionHandler)() = appDelegate.backgroundSessionCompletionHandler;

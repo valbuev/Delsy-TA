@@ -131,7 +131,7 @@
 -(void) saveParsedClientsDictionaryIntoCoreData{
     //NSLog(@"\n\nstart updating Clientlist\n\n");
     NSError *error = [NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9999
-                                     userInfo:[NSDictionary dictionaryWithObject:@"Incorrect data" forKey:@"info"]];
+                                     userInfo:[NSDictionary dictionaryWithObject:@"Incorrect data TA" forKey:@"info"]];
     if(![parseResults.allKeys containsObject:@"TA"]){
         [self saveErrorAndSayDelegateAboutError:error];
         return;
@@ -329,7 +329,7 @@
 -(void) saveParsedPriceGroupsAndLineSalesDictionaryIntoCoreData{
     //NSLog(@"saveParsedPriceGroupsAndLineSalesDictionaryIntoCoreData");
     NSError *error = [NSError errorWithDomain:@"saveParsedDictionaryIntoCoreData" code:9999
-                                     userInfo:[NSDictionary dictionaryWithObject:@"Incorrect data" forKey:@"info"]];
+                                     userInfo:[NSDictionary dictionaryWithObject:@"Incorrect data PriceGroups" forKey:@"info"]];
     if(![parseResults.allKeys containsObject:@"PriceGroups"]){
         [self saveErrorAndSayDelegateAboutError:error];
         return;
