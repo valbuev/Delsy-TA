@@ -26,5 +26,6 @@
 
 - (IBAction)btnAddOrderLine:(id)sender;
 - (IBAction)btnMailClicked:(id)sender;
+- (IBAction)switchOrderOrReturnChanged:(id)sender;
 
 @end

@@ -157,6 +157,8 @@
             UILabel *sumLabel = (UILabel *) [cell.contentView viewWithTag:1];
             NSNumber *amount = self.order.amount;
             sumLabel.text = [NSString stringWithFormat:@"%@ руб.", [amount floatValueSimpleMaxFrac2]];
+            UISwitch *orderOrReturn = (UISwitch *) [cell.contentView viewWithTag:2];
+            [orderOrReturn setOn:[self.order.isReturn boolValue] animated:NO];
         }
         else { // AddItem
             cell = [tableView dequeueReusableCellWithIdentifier: cellIdAddItem forIndexPath: indexPath];

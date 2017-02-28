@@ -15,6 +15,7 @@
 @implementation Order
 
 @dynamic amount;
+@dynamic isReturn;
 @dynamic custAddress;
 @dynamic custName;
 @dynamic date;

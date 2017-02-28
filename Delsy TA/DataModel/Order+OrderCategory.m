@@ -142,6 +142,9 @@
     
     order_str = [order_str stringByAppendingString:@"<import>"];
     
+    // отмечаем, не возврат ли это
+    order_str = [order_str stringByAppendingFormat:@"<isreturn>%d</isreturn>",[self.isReturn boolValue]];
+    
     order_str = [order_str stringByAppendingFormat:@"<clientId>%@</clientId>",self.client.cust_account];
     order_str = [order_str stringByAppendingFormat:@"<clientAddressId>%@</clientAddressId>",self.address.address_id];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -182,15 +185,26 @@
     NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];
     [formatter2 setLocale:[NSLocale localeWithLocaleIdentifier:@"ru"]];
     [formatter2 setDateFormat:@"dd.MM.yyyy"];
-    order_str = [order_str stringByAppendingFormat:@"\n\tЗаказ на имя \"\"%@\"\", адрес:\"\"%@\"\".\nПринял торговый представитель: %@.\nДата и время принятия заказа: %@ .\nДата поставки: %@.\nСумма: %@ руб.",
-                 self.custName,
-                 self.custAddress,
-                 self.taName,
-                 [formatter stringFromDate:self.date],
-                 [formatter2 stringFromDate:self.deliveryDate],
-                 self.amount.stringValue];
     
-    order_str = [order_str stringByAppendingString:@"\n   Заказы: \n\n"];
+    //если возврат, то пишем по-другому
+    if ([self.isReturn boolValue]){
+        order_str = [order_str stringByAppendingFormat:@"\n\tВозврат от \"\"%@\"\", адрес:\"\"%@\"\".\nПринял торговый представитель: %@.\nДата и время принятия возврата: %@ .\nСумма: %@ руб.",
+                     self.custName,
+                     self.custAddress,
+                     self.taName,
+                     [formatter stringFromDate:self.date],
+                     self.amount.stringValue];
+        order_str = [order_str stringByAppendingString:@"\n   Возвраты: \n\n"];
+    } else {
+        order_str = [order_str stringByAppendingFormat:@"\n\tЗаказ на имя \"\"%@\"\", адрес:\"\"%@\"\".\nПринял торговый представитель: %@.\nДата и время принятия заказа: %@ .\nДата поставки: %@.\nСумма: %@ руб.",
+                     self.custName,
+                     self.custAddress,
+                     self.taName,
+                     [formatter stringFromDate:self.date],
+                     [formatter2 stringFromDate:self.deliveryDate],
+                     self.amount.stringValue];
+        order_str = [order_str stringByAppendingString:@"\n   Заказы: \n\n"];
+    }
     
     for(OrderLine *orderLine in self.orderLines)
     {
@@ -231,6 +245,7 @@
     for(OrderLine *line in self.orderLines){
         [newOrder addItem:line.item qty:[line.qty copy] unit:[line.unit unitValue]];
     }
+    [newOrder setIsReturn:[self.isReturn copy]];
     [newOrder reCalculateAmount];
     return newOrder; 
 }
@@ -272,5 +287,10 @@
     }
     [self reCalculateAmount];
 }
+
+// Меняем статус заказа на возврат или обратно
+//- (void) setIsReturn:(NSNumber *)isReturn {
+//    self.isReturn = isReturn;
+//}
 
 @end

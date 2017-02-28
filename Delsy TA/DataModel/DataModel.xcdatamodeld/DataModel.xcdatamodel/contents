@@ -76,6 +76,7 @@
         <attribute name="custName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="deliveryDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isReturn" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="isSent" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="taName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="address" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Address" inverseName="orders" inverseEntity="Address" syncable="YES"/>
@@ -139,7 +140,7 @@
         <element name="Item" positionX="0" positionY="0" width="128" height="360"/>
         <element name="LineSale" positionX="0" positionY="0" width="128" height="120"/>
         <element name="LineSaleLine" positionX="0" positionY="0" width="128" height="120"/>
-        <element name="Order" positionX="0" positionY="0" width="128" height="225"/>
+        <element name="Order" positionX="0" positionY="0" width="128" height="240"/>
         <element name="OrderLine" positionX="0" positionY="0" width="128" height="180"/>
         <element name="Photo" positionX="0" positionY="0" width="128" height="120"/>
         <element name="PriceGroup" positionX="0" positionY="0" width="128" height="90"/>

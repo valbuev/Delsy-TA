@@ -60,9 +60,16 @@
         
         MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
         controller.mailComposeDelegate = self;
-        [controller setSubject:
-         [NSString stringWithFormat:@"Заказ от %@",
-          self.order.custName]];
+        
+        if([self.order.isReturn boolValue]){
+            [controller setSubject:
+             [NSString stringWithFormat:@"Возврат от %@",
+              self.order.custName]];
+        } else {
+            [controller setSubject:
+             [NSString stringWithFormat:@"Заказ от %@",
+              self.order.custName]];
+        }
         
         NSString *defaultRecipient = [AppSettings getInstance:self.order.managedObjectContext].defaultRecipient;
         if( [defaultRecipient isEqualToString:@""] || [self validateEMailAddress: defaultRecipient] )

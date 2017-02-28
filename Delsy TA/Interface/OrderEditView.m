@@ -150,6 +150,12 @@ DeliveryDateViewDelegate, OrderInfoViewDelegate>{
     return YES;
 }
 
+// меняем статус заказа на Возврат/Заказ
+- (IBAction)switchOrderOrReturnChanged:(id)sender {
+    UISwitch *orderOrReturn = (UISwitch *) sender;
+    [self.order setIsReturn:[NSNumber numberWithBool:[orderOrReturn isOn]]];
+}
+
 
 // Показываем Прайс. Передаем в контроллеры нужные переменные
 - (void) showPrice{
@@ -244,6 +250,9 @@ DeliveryDateViewDelegate, OrderInfoViewDelegate>{
             UILabel *sumLabel = (UILabel *) [cell.contentView viewWithTag:1];
             NSNumber *amount = self.order.amount;
             sumLabel.text = [NSString stringWithFormat:@"%@ руб.", [amount floatValueSimpleMaxFrac2]];
+            UISwitch *orderOrReturn = (UISwitch *) [cell.contentView viewWithTag:2];
+            [orderOrReturn setOn:[self.order.isReturn boolValue] animated:NO];
+            //NSLog(@"cell has been updated");
         }
         else { // AddItem
             cell = [tableView dequeueReusableCellWithIdentifier: cellIdAddItem forIndexPath: indexPath];

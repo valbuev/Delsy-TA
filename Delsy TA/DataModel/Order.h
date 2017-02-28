@@ -14,6 +14,7 @@
 @interface Order : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * amount;
+@property (nonatomic, retain) NSNumber * isReturn;
 @property (nonatomic, retain) NSString * custAddress;
 @property (nonatomic, retain) NSString * custName;
 @property (nonatomic, retain) NSDate * date;

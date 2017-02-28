@@ -43,4 +43,7 @@
 // Устанавливаем нового клиента и его адрес. Пересчитываем все, что с этим связано.
 - (void) setNewAddress:(Address *) address;
 
+// Меняем статус заказа на возврат или обратно
+//- (void) setIsReturn:(NSNumber *)isReturn;
+
 @end

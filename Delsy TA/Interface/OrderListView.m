@@ -78,8 +78,14 @@
     if(order.isSent.boolValue == YES)
         isSent = @"(отправлено)";
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:order.date],isSent ];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ руб.",
-                                 order.amount];
+    // если возврат, то показываем это
+    if([order.isReturn boolValue]){
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ руб., ВОЗВРАТ",
+                                     order.amount];
+    } else {
+        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ руб.",
+                                     order.amount];
+    }
     
     
     return cell;
